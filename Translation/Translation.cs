@@ -17,6 +17,24 @@ namespace Cs2Sil.Translation
         {
             Code = csharpCode;
         }
+        public TranslationResult TranslateNode(SyntaxNode node, TranslationContext context)
+        {
+            switch(node.Kind())
+            {
+                case SyntaxKind.UsingDirective:
+                    Console.WriteLine("Using Directive.");
+                    break;
+                default:
+                    foreach(var child in node.ChildNodes())
+                    {
+                        Console.WriteLine("Entering " + child.Kind());
+                        TranslationResult result = TranslateNode(child, 
+                            new TranslationContext());
+                    }
+                    break;
+            }
+            return new TranslationResult();
+        }
         public TranslationResult Translate()
         {
             SyntaxTree tree = CSharpSyntaxTree.ParseText(Code);
@@ -24,6 +42,8 @@ namespace Cs2Sil.Translation
             var compilation = CSharpCompilation.Create("translated_assembly")
                                     .AddSyntaxTrees(tree)
                                     ;
+            return TranslateNode(root, new TranslationContext());
+
             return new TranslationResult();
         }
     }
