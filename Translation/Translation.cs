@@ -43,8 +43,6 @@ namespace Cs2Sil.Translation
                                     .AddSyntaxTrees(tree)
                                     ;
             return TranslateNode(root, new TranslationContext());
-
-            return new TranslationResult();
         }
     }
 }
