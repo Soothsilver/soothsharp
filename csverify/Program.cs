@@ -27,10 +27,16 @@ namespace Cs2Sil.StandaloneVerifier
                 TranslationProcess translation = new TranslationProcess(csharpCode);
                 TranslationResult result = translation.Translate();
                 Console.WriteLine(result.WasTranslationSuccessful ? "Successfully translated." : $"Translation failed with {result.Errors.Count} errors.");
-                foreach(Error error in result.Errors)
+                Console.WriteLine("Resultant Silver code: ");
+                Console.WriteLine("=======================");
+                Console.WriteLine(result.GetSilverCodeAsString());
+                foreach (Error error in result.Errors)
                 {
                     Console.WriteLine(error.ToString());
                 }
+                Console.WriteLine();
+                Console.WriteLine("Press any key to exit...");
+                Console.ReadKey();
             }
             catch (System.IO.IOException)
             {

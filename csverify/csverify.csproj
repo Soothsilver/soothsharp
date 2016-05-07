@@ -53,9 +53,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Translation\Translation.csproj">
-      <Project>{458f22b6-599d-4ab5-89ed-4f9fbcf2bc9d}</Project>
-      <Name>Translation</Name>
+    <ProjectReference Include="..\Sharpsilver.Contracts\Sharpsilver.Contracts.csproj">
+      <Project>{b2ff4360-c774-41ce-98fc-60494f6efc60}</Project>
+      <Name>Sharpsilver.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Translation2\Translation2.csproj">
+      <Project>{89df81ed-eee0-499d-ae23-d687fc5cadd3}</Project>
+      <Name>Translation2</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

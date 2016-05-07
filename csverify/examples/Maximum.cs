@@ -1,17 +1,39 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Sharpsilver.Contracts;
 
-namespace Cs2Sil.Verified.Examples
+namespace Sharpsilver.Examples.SimpleExample
 {
-    public static partial class Math
+    class ExampleProgram
     {
-        public static int Maximum(int a, int b)
+        [Verified]
+        static int Maximum(int a, int b)
         {
+            
+
+            Contract.Ensures(a >= b ? a == Contract.IntegerResult : b == Contract.IntegerResult);
+            Contract.Ensures(true);
+
+
             if (a >= b)
                 return a;
             else
-            {
                 return b;
+        }
+
+        
+
+        static void Main(string[] args)
+        {
+            switch(2)
+            {
+                case 2:
+                    break;
             }
+            Console.WriteLine("Maximum of 2 and 5 is: " + Maximum(2, 5));
         }
     }
 }
