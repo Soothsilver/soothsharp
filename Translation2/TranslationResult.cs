@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 
-namespace Cs2Sil.Translation
+namespace Sharpsilver.Translation
 {
     public class TranslationResult
     {
@@ -35,10 +35,10 @@ namespace Cs2Sil.Translation
             return result;
         }
 
-        internal static TranslationResult Error(string code, string text, SyntaxNode node)
+        internal static TranslationResult Error(SyntaxNode node, SharpsilverDiagnostic diagnostic, params Object[] diagnosticArguments)
         {
             TranslationResult r = new TranslationResult();
-            r.Errors.Add(new Translation.Error(code, text, node));
+            r.Errors.Add(new Translation.Error(diagnostic, node,diagnosticArguments));
             return r;
         }
 

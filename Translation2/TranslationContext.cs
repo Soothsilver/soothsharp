@@ -1,4 +1,4 @@
-﻿namespace Cs2Sil.Translation
+﻿namespace Sharpsilver.Translation
 {
     public class TranslationContext
     {

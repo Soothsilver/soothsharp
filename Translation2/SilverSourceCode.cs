@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cs2Sil.Translation
+namespace Sharpsilver.Translation
 {
     public class SilverSourceCode
     {

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Translation2
+namespace Sharpsilver.StandaloneVerifier
 {
-    public class Class1
+    enum ErrorCode
     {
+        SUCCESS = 0,
+        ERROR = 1
     }
 }

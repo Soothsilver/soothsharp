@@ -5,29 +5,39 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 
-namespace Cs2Sil.Translation
+namespace Sharpsilver.Translation
 {
     public class Error
     {
-        public string Caption;
-        public string ErrorCode;
-        public string CsharpFilename;
-        public int CsharpColumn;
-        public int CsharpLine;
-        
-        private SyntaxNode node;
-
-        public Error(string code, string text, SyntaxNode node)
+        public SharpsilverDiagnostic Diagnostic;
+        public object[] DiagnosticArguments;
+        public SyntaxNode Node;
+        public int CsharpColumn
         {
-            this.ErrorCode = code;
-            this.Caption = text;
-            this.node = node;
+            get
+            {
+                return Node.GetLocation().GetLineSpan().StartLinePosition.Character + 1;
+            }
+        }
+        public int CsharpLine
+        {
+            get
+            {
+                return Node.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
+            }
+        }
+
+
+        public Error(SharpsilverDiagnostic diagnostic, SyntaxNode node, params object[] diagnosticArguments)
+        {
+            this.Diagnostic = diagnostic;
+            this.DiagnosticArguments = diagnosticArguments;
+            this.Node = node;
         }
 
         public override string ToString()
         {
-            return ErrorCode + ": " + Caption + " (line " + 
-                (node.GetLocation().GetLineSpan().StartLinePosition.Line + 1) + ")";
+            return CsharpLine + ":" + CsharpColumn + "; " + Diagnostic.ErrorCode + ": " + String.Format(Diagnostic.Caption, DiagnosticArguments);
         }
     }
 }

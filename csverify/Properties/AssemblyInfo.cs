@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("verify")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Sharpsilver Standalone Verifier")]
+[assembly: AssemblyDescription("Translates a given C# source file into Silver and then verifies it for correctness.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("verify")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("Petr Hudeček")]
+[assembly: AssemblyProduct("Sharpsilver")]
+[assembly: AssemblyCopyright("Copyright © 2016 Petr Hudeček")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
