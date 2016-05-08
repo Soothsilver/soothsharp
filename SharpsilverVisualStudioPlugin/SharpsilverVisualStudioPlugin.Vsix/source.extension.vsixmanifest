@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="SharpsilverVisualStudioPlugin..f213f4d2-1b2c-4411-808e-72f28b798870" Version="1.0" Language="en-US" Publisher="Hala 2016"/>
-    <DisplayName>SharpsilverVisualStudioPlugin</DisplayName>
-    <Description xml:space="preserve">This is a sample diagnostic extension for the .NET Compiler Platform ("Roslyn").</Description>
+    <Identity Id="SharpsilverVisualStudioPlugin..f213f4d2-1b2c-4411-808e-72f28b798870" Version="1.0" Language="en-US" Publisher="Petr Hudeček"/>
+    <DisplayName>Sharpsilver for Visual Studio</DisplayName>
+    <Description xml:space="preserve">Provides a CSharp to Silver translation service for Visual Studio. When enabled, code diagnostics alert you about code that cannot be verified via the Viper project and it also provides a button to verify your code by passing the generated code to Silicon.</Description>
   </Metadata>
   <Installation>
     <InstallationTarget Version="[14.0,]" Id="Microsoft.VisualStudio.Pro" />
@@ -14,5 +14,6 @@
   <Assets>
     <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="VSPluginV2" Path="|VSPluginV2|" />
     <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="VSPluginV2" Path="|VSPluginV2|" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="Sharpsilver.Translation" Path="|Sharpsilver.Translation|" AssemblyName="|Sharpsilver.Translation;AssemblyName|" />
   </Assets>
 </PackageManifest>

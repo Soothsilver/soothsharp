@@ -11,7 +11,7 @@ namespace Sharpsilver.Translation
     {
         public List<SilverSourceCode> SilverCode = new List<SilverSourceCode>();
         public bool WasTranslationSuccessful;
-        public List<Error> Errors = new List<Error>();
+        public List<Error> ReportedDiagnostics = new List<Error>();
 
         public TranslationResult(SilverSourceCode result)
         {
@@ -28,7 +28,7 @@ namespace Sharpsilver.Translation
             TranslationResult result = new TranslationResult();
             foreach(TranslationResult sub in results)
             {
-                result.Errors.AddRange(sub.Errors);
+                result.ReportedDiagnostics.AddRange(sub.ReportedDiagnostics);
                 result.SilverCode.AddRange(sub.SilverCode);
             }
             result.WasTranslationSuccessful = results.TrueForAll(sub => sub.WasTranslationSuccessful);
@@ -38,7 +38,7 @@ namespace Sharpsilver.Translation
         internal static TranslationResult Error(SyntaxNode node, SharpsilverDiagnostic diagnostic, params Object[] diagnosticArguments)
         {
             TranslationResult r = new TranslationResult();
-            r.Errors.Add(new Translation.Error(diagnostic, node,diagnosticArguments));
+            r.ReportedDiagnostics.Add(new Translation.Error(diagnostic, node,diagnosticArguments));
             return r;
         }
 

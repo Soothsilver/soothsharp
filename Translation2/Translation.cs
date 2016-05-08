@@ -11,10 +11,8 @@ namespace Sharpsilver.Translation
 {
     public class TranslationProcess
     {
-        string Code;
-        public TranslationProcess(string csharpCode)
+        public TranslationProcess()
         {
-            Code = csharpCode;
         }
         public TranslationResult TranslateNode(SyntaxNode node, TranslationContext context)
         {
@@ -40,9 +38,15 @@ namespace Sharpsilver.Translation
                     return TranslationResult.Error(node, Diagnostics.SSIL101, node.Kind());
             }
         }
-        public TranslationResult Translate()
+
+        public TranslationResult TranslateCode(string csharpCode)
         {
-            SyntaxTree tree = CSharpSyntaxTree.ParseText(Code);
+            SyntaxTree tree = CSharpSyntaxTree.ParseText(csharpCode);
+            return TranslateTree(tree);
+        }
+
+        public TranslationResult TranslateTree(SyntaxTree tree)
+        {
             var root = (CompilationUnitSyntax)tree.GetRoot();
             var compilation = CSharpCompilation.Create("translated_assembly")
                                     .AddSyntaxTrees(tree)
