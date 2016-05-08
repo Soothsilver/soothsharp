@@ -14,7 +14,7 @@ namespace Sharpsilver.Translation
         public SilverSourceCode(string silvercode, SyntaxNode sourceNode)
         {
             SourceNode = sourceNode;
-            SourceLines = silvercode.Split('\n').ToList();
+            SourceLines = silvercode.Split(new char[] { '\n' }, StringSplitOptions.None).ToList();
         }
 
         public string GetSilverCode()

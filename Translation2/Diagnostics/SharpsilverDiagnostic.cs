@@ -34,11 +34,17 @@ namespace Sharpsilver.Translation
     }
     public class Diagnostics
     {
-        public static SharpsilverDiagnostic SSIL101 =
+        public static SharpsilverDiagnostic SSIL101_UnknownNode =
             SharpsilverDiagnostic.Create(
                 "SSIL101",
                 "The Sharpsilver translator does not support elements of the syntax kind '{0}'.",
-                "A syntax node of this kind cannot be translated by the Sharpsilver translator because the feature it provides is unavailable in Silver or because it is difficult to translate. If you can use a less advanced construct, please do so. Otherwise, you may mark the enclosing method or class with the [Unverified] attribute.",
+                "A syntax node of this kind cannot be translated by the Sharpsilver translator because the feature it provides is unavailable in Silver, or because it is difficult to translate. If you can use a less advanced construct, please do so.",
+                DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL102_UnexpectedNode =
+            SharpsilverDiagnostic.Create(
+                "SSIL102",
+                "An element of the syntax kind '{0}' is not expected at this code location.",
+                "While the Sharpsilver translator might otherwise be able to handle this kind of C# nodes, this is not a place where it is able to do so. There may be an error in your C# syntax (check compiler errors) or you may be using C# features that the translator does not understand.",
                 DiagnosticSeverity.Error);
 
         public static IEnumerable<SharpsilverDiagnostic> GetAllDiagnostics()

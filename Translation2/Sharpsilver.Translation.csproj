@@ -101,6 +101,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractSyntaxTrees\CommonUtils.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\ClassSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\NamespaceSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Sharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\CompilationUnitSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\SinglelineCommentSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\UnexpectedSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\UnknownSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\UsingDirectiveSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\SequenceSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Silvernode.cs" />
     <Compile Include="Diagnostics\DiagnosticSeverity.cs" />
     <Compile Include="Diagnostics\SharpsilverDiagnostic.cs" />
     <Compile Include="Error.cs" />
@@ -109,6 +120,7 @@
     <Compile Include="Translation.cs" />
     <Compile Include="TranslationContext.cs" />
     <Compile Include="TranslationResult.cs" />
+    <Compile Include="AbstractSyntaxTrees\RoslynToSharpnode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -117,9 +129,7 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Translators\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

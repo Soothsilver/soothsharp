@@ -7,6 +7,7 @@ using Sharpsilver.Contracts;
 
 namespace Sharpsilver.Examples.SimpleExample
 {
+    [Verified]
     class ExampleProgram
     {
         [Verified]
@@ -28,3 +29,4 @@ namespace Sharpsilver.Examples.SimpleExample
         }
     }
 }
+
