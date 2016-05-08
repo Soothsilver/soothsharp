@@ -16,6 +16,6 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             OriginalNode = originalNode;
         }
 
-        public abstract TranslationResult Translate(TranslationContext translationContext);
+        public abstract TranslationResult Translate(TranslationContext context);
     }
 }

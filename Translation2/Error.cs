@@ -37,7 +37,7 @@ namespace Sharpsilver.Translation
 
         public override string ToString()
         {
-            return CsharpLine + ":" + CsharpColumn + "; " + Diagnostic.ErrorCode + ": " + String.Format(Diagnostic.Caption, DiagnosticArguments);
+            return CsharpLine + ":" + CsharpColumn + " " + Diagnostic.ErrorCode + ": " + String.Format(Diagnostic.Caption, DiagnosticArguments);
         }
     }
 }

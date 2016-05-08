@@ -12,7 +12,7 @@ namespace Sharpsilver.Translation.Translators
 {
     public class RoslynToSharpnode
     {
-        public static Sharpnode Map(SyntaxNode node)
+        public static Sharpnode Map(SyntaxNode node, Sharpnode parent = null)
         {
             switch(node.Kind())
             {

@@ -20,12 +20,22 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpsilverVisualStudioPlugin.Test", "SharpsilverVisualStudioPlugin\SharpsilverVisualStudioPlugin.Test\SharpsilverVisualStudioPlugin.Test.csproj", "{998F9557-2FC8-4019-ABBC-025663FAA94A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpsilverVisualStudioPlugin.Vsix", "SharpsilverVisualStudioPlugin\SharpsilverVisualStudioPlugin.Vsix\SharpsilverVisualStudioPlugin.Vsix.csproj", "{D8A79F6F-A0F5-4F57-AB27-01A8BAF36DEC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B2FF4360-C774-41CE-98FC-60494F6EFC60} = {B2FF4360-C774-41CE-98FC-60494F6EFC60}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visual Studio Plugin", "Visual Studio Plugin", "{39E42E76-D407-46FE-8EF7-FDB25ABC9E7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSPluginV2", "VSPluginV2\VSPluginV2.csproj", "{2FB8FCA9-89E2-4B72-AD19-6C1BADDEBC62}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B2FF4360-C774-41CE-98FC-60494F6EFC60} = {B2FF4360-C774-41CE-98FC-60494F6EFC60}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Translation", "Translation2\Sharpsilver.Translation.csproj", "{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B2FF4360-C774-41CE-98FC-60494F6EFC60} = {B2FF4360-C774-41CE-98FC-60494F6EFC60}
+		{147C9EB3-8E37-49F0-B9C1-C6B2E7D4660F} = {147C9EB3-8E37-49F0-B9C1-C6B2E7D4660F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

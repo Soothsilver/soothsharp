@@ -46,6 +46,18 @@ namespace Sharpsilver.Translation
                 "An element of the syntax kind '{0}' is not expected at this code location.",
                 "While the Sharpsilver translator might otherwise be able to handle this kind of C# nodes, this is not a place where it is able to do so. There may be an error in your C# syntax (check compiler errors) or you may be using C# features that the translator does not understand.",
                 DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL103_ExceptionConstructingCSharp =
+            SharpsilverDiagnostic.Create(
+                "SSIL103",
+                "An exception ('{0}') occured during the construction of the C# abstract syntax tree.",
+                "While this is an internal error of the translator, it mostly occurs when there is a C# syntax or semantic error in your code. Try to fix any other compiler errors and maybe this issue will be resolved.",
+                DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL104_ExceptionConstructingSilver =
+            SharpsilverDiagnostic.Create(
+                "SSIL104",
+                "An exception ('{0}') occured during the construction of the Silver abstract syntax tree.",
+                "While this is an internal error of the translator, it mostly occurs when there is a C# syntax or semantic error in your code. Try to fix any other compiler errors and maybe this issue will be resolved.",
+                DiagnosticSeverity.Error);
 
         public static IEnumerable<SharpsilverDiagnostic> GetAllDiagnostics()
         {

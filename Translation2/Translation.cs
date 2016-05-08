@@ -29,14 +29,33 @@ namespace Sharpsilver.Translation
         public TranslationResult TranslateTree(SyntaxTree tree)
         {
             var root = (CompilationUnitSyntax)tree.GetRoot();
+            var mscorlib = MetadataReference.CreateFromFile(typeof(System.Attribute).Assembly.Location);
             Compilation = CSharpCompilation.Create("translated_assembly")
                                     .AddSyntaxTrees(tree)
+                                    .AddReferences(mscorlib)
+                                    .AddReferences(MetadataReference.CreateFromFile("Sharpsilver.Contracts.dll"))
                                     ;
             SemanticModel = Compilation.GetSemanticModel(tree, true);
 
-            Sharpnode cSharpTree = RoslynToSharpnode.Map(root);
-            TranslationResult translationResult = cSharpTree.Translate(TranslationContext.StartNew(this));
-            return translationResult;
+            Sharpnode cSharpTree;
+            try
+            {
+                cSharpTree = RoslynToSharpnode.Map(root);
+            }
+            catch (Exception ex)
+            {
+                return TranslationResult.Error(null, Diagnostics.SSIL103_ExceptionConstructingCSharp, ex.GetType().ToString());
+            }
+            try
+            {
+                TranslationResult translationResult = cSharpTree.Translate(TranslationContext.StartNew(this));
+                return translationResult;
+            }
+            catch (Exception ex)
+            {
+
+                return TranslationResult.Error(null, Diagnostics.SSIL104_ExceptionConstructingSilver, ex.GetType().ToString());
+            }
         }
     }
 }

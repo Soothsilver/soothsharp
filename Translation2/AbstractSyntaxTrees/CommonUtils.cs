@@ -17,7 +17,10 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees
             foreach(var incoming in results)
             {
                 result.ReportedDiagnostics.AddRange(incoming.ReportedDiagnostics);
-                sequence.List.Add(incoming.SilverSourceTree);
+                if (incoming.SilverSourceTree != null)
+                {
+                    sequence.List.Add(incoming.SilverSourceTree);
+                }
             }
             result.SilverSourceTree = sequence;
             result.WasTranslationSuccessful = results.All(rs => rs.WasTranslationSuccessful);
