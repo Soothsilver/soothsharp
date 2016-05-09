@@ -31,6 +31,10 @@ namespace Sharpsilver.Translation
 
         public string GetSilverCodeAsString()
         {
+            if (SilverSourceTree == null)
+            {
+                return "/*[! ERROR !]*/";
+            }
             return SilverSourceTree.ToString();
         }
     }

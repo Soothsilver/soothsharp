@@ -16,6 +16,37 @@ namespace Sharpsilver.Translation.Translators
         {
             switch(node.Kind())
             {
+                // Supported declarations:
+                case SyntaxKind.MethodDeclaration:
+                    return new MethodSharpnode(node as MethodDeclarationSyntax, parent as ClassSharpnode);
+
+                // Declarations that are not supported (yet)
+                case SyntaxKind.AddAccessorDeclaration:
+                case SyntaxKind.AnonymousObjectMemberDeclarator:
+                case SyntaxKind.CatchDeclaration:
+                case SyntaxKind.ConstructorDeclaration:
+                case SyntaxKind.ConversionOperatorDeclaration:
+                // Handled elsewhere: case SyntaxKind.ClassDeclaration:
+                case SyntaxKind.DelegateDeclaration:
+                case SyntaxKind.DestructorDeclaration:
+                case SyntaxKind.EnumDeclaration:
+                case SyntaxKind.EnumMemberDeclaration:
+                case SyntaxKind.EventDeclaration:
+                case SyntaxKind.EventFieldDeclaration:
+                case SyntaxKind.GetAccessorDeclaration:
+                case SyntaxKind.IndexerDeclaration:
+                case SyntaxKind.InterfaceDeclaration:
+                // Handled elsewhere: case SyntaxKind.NamespaceDeclaration:
+                case SyntaxKind.OperatorDeclaration:
+                case SyntaxKind.PropertyDeclaration:
+                case SyntaxKind.RemoveAccessorDeclaration:
+                case SyntaxKind.SetAccessorDeclaration:
+                case SyntaxKind.StructDeclaration:
+                case SyntaxKind.UnknownAccessorDeclaration:
+                case SyntaxKind.VariableDeclaration:
+                    return new UnknownSharpnode(node);
+                case SyntaxKind.FieldDeclaration:
+                    return new DiagnosticSharpnode(node, Diagnostics.SSIL105_FeatureNotYetSupported, "fields");
                 case SyntaxKind.CompilationUnit:
                     return new CompilationUnitSharpnode(node as CompilationUnitSyntax);
                 default:

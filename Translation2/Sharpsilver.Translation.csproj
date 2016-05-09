@@ -102,10 +102,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractSyntaxTrees\CommonUtils.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\BlockSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\MethodSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\ClassSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\NamespaceSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\ParameterSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Sharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\CompilationUnitSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\DiagnosticSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\TypeSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\SinglelineCommentSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\UnexpectedSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\UnknownSharpnode.cs" />

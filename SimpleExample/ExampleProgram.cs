@@ -4,7 +4,7 @@ using Sharpsilver.Contracts;
 namespace Sharpsilver.Examples.SimpleExample
 {
     [Verified]
-    class ExampleProgram
+    static class ExampleProgram
     {
         [Verified]
         static int Maximum(int a, int b)
@@ -12,6 +12,7 @@ namespace Sharpsilver.Examples.SimpleExample
             Contract.Ensures(a >= b ? a == Contract.IntegerResult : b == Contract.IntegerResult);
             Contract.Ensures(true);
 
+           
 
             if (a >= b)
                 return a;

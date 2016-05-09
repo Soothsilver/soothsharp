@@ -31,6 +31,10 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             {
                 return TranslationResult.Silvernode(new SinglelineCommentSilvernode($"Class {ClassSymbol.Name} skipped because it was marked [Unverified].", OriginalNode));
             }
+            if (!ClassSymbol.IsStatic)
+            {
+                return TranslationResult.Error(OriginalNode, Diagnostics.SSIL105_FeatureNotYetSupported, "non-static classes");
+            }
 
             return CommonUtils.CombineResults(Children.Select(child => child.Translate(context)));
 

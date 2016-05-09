@@ -45,6 +45,7 @@
     <Compile Include="Contract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnverifiedAttribute.cs" />
+    <Compile Include="SilvernameAttribute.cs" />
     <Compile Include="VerifiedAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

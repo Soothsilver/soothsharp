@@ -19,13 +19,14 @@ namespace Sharpsilver.Examples.SimpleExample
             return -uglyNegativeNumber;
         }
 
+        [Silvername("abs")]
         [Verified]
         public static int Abs(int value)
         {
             Contract.Ensures(Contract.IntegerResult > 0);
             Contract.Ensures(value >= 0 ? Contract.IntegerResult == value : true);
             Contract.Ensures(value < 0 ? Contract.IntegerResult == -value : true);
-
+            
             if (value < 0) return -value; else return value;
         }
     }
