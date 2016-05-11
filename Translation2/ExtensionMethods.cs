@@ -12,11 +12,17 @@ namespace Sharpsilver.Translation
     {
         public static readonly SymbolDisplayFormat QUALIFIED_NAME_DISPLAY_FORMAT =
             new SymbolDisplayFormat(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces, 
+                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType);
 
-        public static string GetQualifiedName(this INamedTypeSymbol symbol)
+        public static string GetQualifiedName(this ISymbol symbol)
         {
             return symbol.ToDisplayString(QUALIFIED_NAME_DISPLAY_FORMAT);            
+        }
+        public static string AscendTab(this string input)
+        {
+            string[] lines = input.Split('\n'); // TODO fix block
+            return String.Join("\n", lines.Select(line => "\t" + line));
         }
     }
 }

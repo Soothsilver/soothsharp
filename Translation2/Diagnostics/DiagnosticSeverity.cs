@@ -15,10 +15,6 @@ namespace Sharpsilver.Translation
         /// <summary>
         /// The translation won't work but we can run the rest of it anyway.
         /// </summary>
-        Error,
-        /// <summary>
-        /// The translation must be stopped immediately upon reaching this error and the verifier must not be launched.
-        /// </summary>
-        UnrecoverableError
+        Error
     }
 }

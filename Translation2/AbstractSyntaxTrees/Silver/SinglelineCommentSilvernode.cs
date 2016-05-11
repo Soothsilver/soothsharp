@@ -14,7 +14,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 
         public override string ToString()
         {
-            return "// " + Comment + "\n";
+            return "// " + Comment + "";
         }
     }
 }

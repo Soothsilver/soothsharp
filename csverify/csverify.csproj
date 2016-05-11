@@ -70,9 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons\csverify1.ico" />
-    <Content Include="examples\Maximum.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Compile Include="Csverify.cs" />
     <Compile Include="ErrorCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

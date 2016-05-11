@@ -7,11 +7,55 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
+using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions;
+using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements;
 
 namespace Sharpsilver.Translation.Translators
 {
     public class RoslynToSharpnode
     {
+        public static StatementSharpnode MapStatement(StatementSyntax statement)
+        {
+            switch(statement.Kind())
+            {
+                case SyntaxKind.IfStatement:
+                    return new IfStatementSharpnode(statement as IfStatementSyntax);
+                case SyntaxKind.ExpressionStatement:
+                    return new ExpressionStatementSharpnode(statement as ExpressionStatementSyntax);
+                case SyntaxKind.ReturnStatement:
+                    return new ReturnStatementSharpnode(statement as ReturnStatementSyntax);
+                default:
+                    return new UnknownStatementSharpnode(statement);
+            }
+        }
+
+        internal static ExpressionSharpnode MapExpression(ExpressionSyntax expression)
+        {
+            
+            switch(expression.Kind())
+            {
+                case SyntaxKind.LessThanOrEqualExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, "<=");
+                case SyntaxKind.GreaterThanOrEqualExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, ">=");
+                case SyntaxKind.EqualsExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, "==");
+                case SyntaxKind.InvocationExpression:
+                    return new InvocationExpressionSharpnode(expression as InvocationExpressionSyntax);
+                case SyntaxKind.TrueLiteralExpression:
+                    return new LiteralExpressionSharpnode(expression as LiteralExpressionSyntax, true);
+                case SyntaxKind.FalseLiteralExpression:
+                    return new LiteralExpressionSharpnode(expression as LiteralExpressionSyntax, false);
+                case SyntaxKind.IdentifierName:
+                case SyntaxKind.SimpleMemberAccessExpression:
+                    return new IdentifierExpressionSharpnode(expression as ExpressionSyntax);
+                case SyntaxKind.ConditionalExpression:
+                    return new ConditionalExpressionSharpnode(expression as ConditionalExpressionSyntax);
+                default:
+                    return new UnknownExpressionSharpnode(expression);
+            }
+        }
+
         public static Sharpnode Map(SyntaxNode node, Sharpnode parent = null)
         {
             switch(node.Kind())

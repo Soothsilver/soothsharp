@@ -85,10 +85,11 @@ namespace Sharpsilver.StandaloneVerifier
                     Console.WriteLine("The first argument must be a C# file.");
                     return ErrorCode.ERROR;
                 }
+                if (Verbose) Console.WriteLine("- Reading file from disk.");
                 string csharpCode = System.IO.File.ReadAllText(csharpFilename);
 
                 var translation = new TranslationProcess();
-                var result = translation.TranslateCode(csharpCode);
+                var result = translation.TranslateCode(csharpCode, Verbose);
 
                 Console.WriteLine(
                     result.WasTranslationSuccessful ? "Successfully translated." : $"Translation failed with {result.ReportedDiagnostics.Count} errors."

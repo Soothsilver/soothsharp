@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Sharpsilver.Contracts;
 
-namespace Sharpsilver.Examples.SimpleExample
+namespace Sharpsilver.Examples
 {
     class Beautifier
     {

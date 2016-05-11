@@ -15,29 +15,36 @@ namespace Sharpsilver.Translation
     {
         public CSharpCompilation Compilation;
         public SemanticModel SemanticModel;
+        public IdentifierTranslator IdentifierTranslator = new IdentifierTranslator();
+        public ContractsTranslator ContractsTranslator;
 
         public TranslationProcess()
         {
+            ContractsTranslator =   new ContractsTranslator(this);
         }
-        public TranslationResult TranslateCode(string csharpCode)
+        public TranslationResult TranslateCode(string csharpCode, bool writeProgressToConsole = false)
         {
+            if (writeProgressToConsole) Console.WriteLine("- Syntax analysis begins.");
             SyntaxTree tree = CSharpSyntaxTree.ParseText(csharpCode);
-            return TranslateTree(tree);
+            return TranslateTree(tree, writeProgressToConsole);
         }
 
 
-        public TranslationResult TranslateTree(SyntaxTree tree)
+        public TranslationResult TranslateTree(SyntaxTree tree, bool writeProgressToConsole = false)
         {
             var root = (CompilationUnitSyntax)tree.GetRoot();
             var mscorlib = MetadataReference.CreateFromFile(typeof(System.Attribute).Assembly.Location);
+            if (writeProgressToConsole) Console.WriteLine("- Compiling.");
             Compilation = CSharpCompilation.Create("translated_assembly")
                                     .AddSyntaxTrees(tree)
                                     .AddReferences(mscorlib)
                                     .AddReferences(MetadataReference.CreateFromFile("Sharpsilver.Contracts.dll"))
                                     ;
+            if (writeProgressToConsole) Console.WriteLine("- Creating semantic model.");
             SemanticModel = Compilation.GetSemanticModel(tree, true);
 
             Sharpnode cSharpTree;
+            if (writeProgressToConsole) Console.WriteLine("- Mapping to sharpnodes.");
             try
             {
                 cSharpTree = RoslynToSharpnode.Map(root);
@@ -46,6 +53,7 @@ namespace Sharpsilver.Translation
             {
                 return TranslationResult.Error(null, Diagnostics.SSIL103_ExceptionConstructingCSharp, ex.GetType().ToString());
             }
+            if (writeProgressToConsole) Console.WriteLine("- Translating.");
             try
             {
                 TranslationResult translationResult = cSharpTree.Translate(TranslationContext.StartNew(this));
@@ -57,5 +65,6 @@ namespace Sharpsilver.Translation
                 return TranslationResult.Error(null, Diagnostics.SSIL104_ExceptionConstructingSilver, ex.GetType().ToString());
             }
         }
+        
     }
 }

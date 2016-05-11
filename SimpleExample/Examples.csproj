@@ -7,8 +7,8 @@
     <ProjectGuid>{147C9EB3-8E37-49F0-B9C1-C6B2E7D4660F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sharpsilver.Examples.SimpleExample</RootNamespace>
-    <AssemblyName>SimpleExample</AssemblyName>
+    <RootNamespace>Sharpsilver.Examples</RootNamespace>
+    <AssemblyName>Examples</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

@@ -64,6 +64,12 @@ namespace Sharpsilver.Translation
                 "This feature ({0}) is not yet supported.",
                 "As the C#-to-Silver translation project is developed, we plan to allow this feature to be used in verifiable C# class files. For now, however, it is unsupported and won't work.",
                 DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL106_TypeNotSupported =
+            SharpsilverDiagnostic.Create(
+                "SSIL106",
+                "The type {0} is not supported in Silver.",
+                "The Silver language can only use a 32-bit integer, a boolean and reference objects. Other value types besides these three cannot be translated.",
+                DiagnosticSeverity.Error);
 
         public static IEnumerable<SharpsilverDiagnostic> GetAllDiagnostics()
         {

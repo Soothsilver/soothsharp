@@ -7,18 +7,17 @@ using System.Threading.Tasks;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
-    public class SequenceSilvernode : Silvernode
+    class GotoSilvernode : Silvernode
     {
-        public SequenceSilvernode(SyntaxNode node, params Silvernode[] nodes) : base(node)
+        public string Label;
+        public GotoSilvernode(string text, SyntaxNode original) : base(original)
         {
-            List.AddRange(nodes);
+            Label = text;
         }
 
         public override string ToString()
         {
-            return String.Join("\n", List.Select(sn => sn.ToString()));
+            return "goto " + Label;
         }
-
-        public List<Silvernode> List = new List<Silvernode>();
     }
 }
