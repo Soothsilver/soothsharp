@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Contracts", "Sh
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{EC3FF5BE-7E39-48C2-80DD-744E507A0403}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleExample", "SimpleExample\SimpleExample.csproj", "{147C9EB3-8E37-49F0-B9C1-C6B2E7D4660F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "SimpleExample\Examples.csproj", "{147C9EB3-8E37-49F0-B9C1-C6B2E7D4660F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverLanguageService", "SilverLanguageService\SilverLanguageService.csproj", "{7D69751C-9462-48D1-B728-9B20B0BDF74B}"
 EndProject

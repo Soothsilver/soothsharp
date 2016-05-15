@@ -1,17 +1,16 @@
 ﻿using System;
 using Sharpsilver.Contracts;
 
-namespace Sharpsilver.Examples.SimpleExample
+namespace Sharpsilver.Examples
 {
     [Verified]
-    class ExampleProgram
+    static class ExampleProgram
     {
         [Verified]
-        static int Maximum(int a, int b)
+        static System.Int32 Maximum(int a, int b)
         {
             Contract.Ensures(a >= b ? a == Contract.IntegerResult : b == Contract.IntegerResult);
-            Contract.Ensures(true);
-
+            Contract.Ensures(true); // <- just testing           
 
             if (a >= b)
                 return a;
@@ -19,19 +18,10 @@ namespace Sharpsilver.Examples.SimpleExample
                 return b;
         }
 
+        [Unverified]
         static void Main(string[] args)
         {
             Console.WriteLine("Maximum of 2 and 5 is: " + Maximum(2, 5));
-        }
-    }
-
-    [Unverified]
-    class DifficultProgram
-    {
-        static int propa { get; }
-        static int a()
-        {
-            return 4;
         }
     }
 }

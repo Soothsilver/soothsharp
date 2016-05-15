@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis;
+using System;
 
 namespace Sharpsilver.Translation
 {
@@ -8,6 +9,13 @@ namespace Sharpsilver.Translation
         public bool IsPure { get; set; }
         public bool UnderVerifiedAttribute { get; set; }
 
+        public SemanticModel Semantics
+        {
+            get
+            {
+                return Process.SemanticModel;
+            }
+        }
 
 
         private TranslationContext(TranslationProcess process)

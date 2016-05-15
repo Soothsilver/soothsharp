@@ -27,9 +27,13 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
 
             var attributes = ClassSymbol.GetAttributes();
             
-            if (attributes.Any(attribute => attribute.AttributeClass.GetQualifiedName() == ContractsLinks.UNVERIFIED_ATTRIBUTE))
+            if (attributes.Any(attribute => attribute.AttributeClass.GetQualifiedName() == ContractsTranslator.UNVERIFIED_ATTRIBUTE))
             {
-                return TranslationResult.Silvernode(new SinglelineCommentSilvernode($"Class {ClassSymbol.Name} skipped because it was marked [Unverified].", OriginalNode));
+                return TranslationResult.Silvernode(new SinglelineCommentSilvernode($"Class {ClassSymbol.GetQualifiedName()} skipped because it was marked [Unverified].", OriginalNode));
+            }
+            if (!ClassSymbol.IsStatic)
+            {
+                return TranslationResult.Error(OriginalNode, Diagnostics.SSIL105_FeatureNotYetSupported, "non-static classes");
             }
 
             return CommonUtils.CombineResults(Children.Select(child => child.Translate(context)));

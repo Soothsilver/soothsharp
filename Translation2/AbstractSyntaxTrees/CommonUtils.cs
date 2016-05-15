@@ -23,8 +23,12 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees
                 }
             }
             result.SilverSourceTree = sequence;
-            result.WasTranslationSuccessful = results.All(rs => rs.WasTranslationSuccessful);
             return result;
+        }
+
+        internal static IEnumerable<Error> CombineErrors(params TranslationResult[] results)
+        {
+           return results.SelectMany((result) => result.ReportedDiagnostics);
         }
     }
 }

@@ -53,5 +53,14 @@ namespace Sharpsilver.Contracts
         {
 
         }
+
+        /// <summary>
+        /// Adds an assumption into a method body. The verifier will assume the specified condition to be true at this point.
+        /// </summary>
+        /// <param name="assumption">The condition that the verifier will assume to be true without proving it.</param>
+        public static void Assume(bool assumption)
+        {
+
+        }
     }
 }

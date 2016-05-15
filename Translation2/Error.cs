@@ -16,6 +16,7 @@ namespace Sharpsilver.Translation
         {
             get
             {
+                if (Node == null) return 0;
                 return Node.GetLocation().GetLineSpan().StartLinePosition.Character + 1;
             }
         }
@@ -23,6 +24,7 @@ namespace Sharpsilver.Translation
         {
             get
             {
+                if (Node == null) return 0;
                 return Node.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
             }
         }

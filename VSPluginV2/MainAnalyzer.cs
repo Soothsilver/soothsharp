@@ -40,7 +40,6 @@ namespace Sharpsilver.VisualStudioPlugin
         {
             switch (severity)
             {
-                case Translation.DiagnosticSeverity.UnrecoverableError: return Microsoft.CodeAnalysis.DiagnosticSeverity.Error;
                 case Translation.DiagnosticSeverity.Error: return Microsoft.CodeAnalysis.DiagnosticSeverity.Error;
                 case Translation.DiagnosticSeverity.Warning: return Microsoft.CodeAnalysis.DiagnosticSeverity.Warning;
                 default: throw new NotImplementedException("This diagnostic severity could not be handled.");
@@ -74,9 +73,18 @@ namespace Sharpsilver.VisualStudioPlugin
             var result = translationProcess.TranslateTree(treeContext.Tree);
             foreach(var diagnostic in result.ReportedDiagnostics)
             {
-                treeContext.ReportDiagnostic(Diagnostic.Create(
-                    Rules[diagnostic.Diagnostic.ErrorCode], diagnostic.Node.GetLocation(), diagnostic.DiagnosticArguments)
-                    );
+                if (diagnostic.Node != null)
+                {
+                    treeContext.ReportDiagnostic(Diagnostic.Create(
+                        Rules[diagnostic.Diagnostic.ErrorCode], diagnostic.Node.GetLocation(), diagnostic.DiagnosticArguments)
+                        );
+                }
+                else
+                {
+                    treeContext.ReportDiagnostic(Diagnostic.Create(
+                        Rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
+                        );
+                }
             }
 
         }
