@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System;
+using Microsoft.CodeAnalysis;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
@@ -10,6 +11,11 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
         {
             Identifier = identifier;
             Type = type;
+        }
+
+        public override string ToString()
+        {
+            throw new Exception("This ToString() method should never be called.");
         }
     }
 }

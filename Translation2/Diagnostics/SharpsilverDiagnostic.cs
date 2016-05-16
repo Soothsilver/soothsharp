@@ -70,6 +70,26 @@ namespace Sharpsilver.Translation
                 "The type {0} is not supported in Silver.",
                 "The Silver language can only use a 32-bit integer, a boolean and reference objects. Other value types besides these three cannot be translated.",
                 DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL107_ThisExpressionCannotBeStatement =
+            SharpsilverDiagnostic.Create(
+                "SSIL106",
+                "This expression cannot form an expression statement in Silver.",
+                "The Silver language does not support this expression as a standalone expression in a statement, even if C# supported it.",
+                DiagnosticSeverity.Error);
+
+        public static SharpsilverDiagnostic SSIL301_InternalLocalizedError =
+            SharpsilverDiagnostic.Create(
+                "SSIL301",
+                "The transcompiler encountered an internal error ({0}) while parsing this.",
+                "Try to remove the infringing C# code fragment. You may be forced to make do without that C# feature. You can also submit this as a bug report as this error should never be displayed to the user normally.",
+                DiagnosticSeverity.Error);
+
+        public static SharpsilverDiagnostic SSIL302_InternalError =
+            SharpsilverDiagnostic.Create(
+                "SSIL302",
+                "The transcompiler encountered an internal error ({0}).",
+                "Try to undo your most recent change to the code as it may be triggering this error. You may be forced to make do without that C# feature. You can also submit this as a bug report as this error should never be displayed to the user normally.",
+                DiagnosticSeverity.Error);
 
         public static IEnumerable<SharpsilverDiagnostic> GetAllDiagnostics()
         {

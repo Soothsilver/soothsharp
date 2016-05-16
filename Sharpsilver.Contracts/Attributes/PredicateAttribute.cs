@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 namespace Sharpsilver.Contracts
 {
     /// <summary>
-    /// The annnotated method is pure and should be translated as a Silver pure function.
+    /// The annotated method should be translated as a Silver predicate.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    class PureAttribute : Attribute
+    public class PredicateAttribute : Attribute
     {
-
     }
 }

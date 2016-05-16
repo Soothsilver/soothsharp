@@ -23,7 +23,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
             StatementsSilvernode statements = new StatementsSilvernode(OriginalNode);
             var expr = Expression.Translate(context);
             var errors = new List<Error>();
-            errors.AddRange(expr.ReportedDiagnostics);
+            errors.AddRange(expr.Errors);
             statements.Add(
                 new AssignmentSilvernode(
                     new TextSilvernode(Constants.SILVER_RETURN_VARIABLE_NAME, OriginalNode),

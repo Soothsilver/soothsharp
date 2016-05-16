@@ -92,15 +92,15 @@ namespace Sharpsilver.StandaloneVerifier
                 var result = translation.TranslateCode(csharpCode, Verbose);
 
                 Console.WriteLine(
-                    result.WasTranslationSuccessful ? "Successfully translated." : $"Translation failed with {result.ReportedDiagnostics.Count} errors."
+                    result.WasTranslationSuccessful ? "Successfully translated." : $"Translation failed with {result.Errors.Count} errors."
                     );
                 Console.WriteLine();
                 Console.WriteLine("Resultant Silver code: ");
                 Console.WriteLine("=======================");
                 Console.WriteLine(result.GetSilverCodeAsString());
                 Console.WriteLine("=======================");
-                Console.WriteLine($"Errors: {result.ReportedDiagnostics.Count}.");
-                foreach (Error error in result.ReportedDiagnostics)
+                Console.WriteLine($"Errors: {result.Errors.Count}.");
+                foreach (Error error in result.Errors)
                 {
                     Console.WriteLine(error.ToString());
                     if (Verbose)

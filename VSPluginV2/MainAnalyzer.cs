@@ -71,7 +71,7 @@ namespace Sharpsilver.VisualStudioPlugin
         {
             var translationProcess = new TranslationProcess();
             var result = translationProcess.TranslateTree(treeContext.Tree);
-            foreach(var diagnostic in result.ReportedDiagnostics)
+            foreach(var diagnostic in result.Errors)
             {
                 if (diagnostic.Node != null)
                 {

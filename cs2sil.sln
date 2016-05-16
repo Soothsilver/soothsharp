@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Translation", "
 		{147C9EB3-8E37-49F0-B9C1-C6B2E7D4660F} = {147C9EB3-8E37-49F0-B9C1-C6B2E7D4660F}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.TranslationTests", "Sharpsilver.TranslationTests\Sharpsilver.TranslationTests.csproj", "{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,14 @@ Global
 		{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}.Release|x86.ActiveCfg = Release|Any CPU
 		{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}.Release|x86.Build.0 = Release|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Debug|x86.Build.0 = Debug|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Release|x86.ActiveCfg = Release|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

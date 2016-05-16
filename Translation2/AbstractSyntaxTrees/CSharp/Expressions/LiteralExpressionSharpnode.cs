@@ -10,7 +10,14 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
         private LiteralExpressionSyntax literalExpressionSyntax;
         private LiteralKind Kind;
         private bool booleanValue;
+        private int integerValue;
 
+        public LiteralExpressionSharpnode(LiteralExpressionSyntax literalExpressionSyntax, int literalValue) : base(literalExpressionSyntax)
+        {
+            this.integerValue = literalValue;
+            this.Kind = LiteralKind.Int32;
+            this.literalExpressionSyntax = literalExpressionSyntax;
+        }
         public LiteralExpressionSharpnode(LiteralExpressionSyntax literalExpressionSyntax, bool literalValue) : base(literalExpressionSyntax)
         {
             this.literalExpressionSyntax = literalExpressionSyntax;
@@ -28,6 +35,9 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
                         sn = new TextSilvernode("true", OriginalNode);
                     else
                         sn = new TextSilvernode("false", OriginalNode);
+                    break;
+                case LiteralKind.Int32:
+                    sn = new TextSilvernode(integerValue.ToString(), OriginalNode);
                     break;
             }
             if (sn != null)

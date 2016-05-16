@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
-    class EnsuresSilvernode : Silvernode
+    class EnsuresSilvernode : VerificationConditionSilvernode
     {
         public Silvernode Postcondition;
 
@@ -16,10 +16,14 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
             Postcondition = postcondition;
         }
 
-        public override bool IsVerificationCondition()
+        public override int CompareTo(VerificationConditionSilvernode other)
         {
-            return true;
+            if (other.GetType() == typeof(EnsuresSilvernode))
+                return 0;
+            else
+                return 1;
         }
+        
         public override string ToString()
         {
             return "ensures (" + Postcondition + ")";

@@ -14,7 +14,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
         }
         public override TranslationResult Translate(TranslationContext translationContext)
         {
-            return TranslationResult.Silvernode(new SinglelineCommentSilvernode("Using directive removed.", uds));
+            return TranslationResult.Silvernode(new EmptySilvernode(uds));
         }
     }
 }

@@ -52,7 +52,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                 var symbol = method.Parameters[i];
                 var rrs = sharpnode.Translate(context, symbol);
                 SilverParameters.Add(rrs.SilverSourceTree as ParameterSilvernode);
-                r.ReportedDiagnostics.AddRange(rrs.ReportedDiagnostics);
+                r.Errors.AddRange(rrs.Errors);
             }
             var innerStatements = body.SilverSourceTree as BlockSilvernode;
             innerStatements.Add(new LabelSilvernode(Constants.SILVER_METHOD_END_LABEL, null));
@@ -61,14 +61,19 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                     methodDeclarationSyntax, // method
                     new IdentifierSilvernode(methodDeclarationSyntax.Identifier, identifier), // name
                     SilverParameters,
-                    new TypeSilvernode(methodDeclarationSyntax.ReturnType,                    TypeTranslator.TranslateType(method.ReturnType, methodDeclarationSyntax.ReturnType, out diagnostic)), // return type
-                    // TODO add diagnostic to error if any
+                    new TypeSilvernode(
+                        methodDeclarationSyntax.ReturnType,                    
+                        TypeTranslator.TranslateType(
+                            method.ReturnType,
+                            methodDeclarationSyntax.ReturnType, 
+                            out diagnostic)
+                        ), // return type
                     body.VerificationConditions, // verification conditions 
                     innerStatements // code
                 );
             r.SilverSourceTree = methodSilvernode;
-            r.ReportedDiagnostics.AddRange(body.ReportedDiagnostics);
-            if (diagnostic != null) r.ReportedDiagnostics.Add(diagnostic);
+            r.Errors.AddRange(body.Errors);
+            if (diagnostic != null) r.Errors.Add(diagnostic);
             return r;
         }
     }

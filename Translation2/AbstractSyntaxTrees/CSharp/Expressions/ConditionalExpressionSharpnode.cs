@@ -23,13 +23,13 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
             var errors = new List<Error>();
             var cres = Condition.Translate(context);
             var a = cres.SilverSourceTree;
-            errors.AddRange(cres.ReportedDiagnostics);
+            errors.AddRange(cres.Errors);
             var trueres = WhenTrue.Translate(context);
             var b = trueres.SilverSourceTree;
-            errors.AddRange(trueres.ReportedDiagnostics);
+            errors.AddRange(trueres.Errors);
             var falseres = WhenFalse.Translate(context);
             var c = falseres.SilverSourceTree;
-            errors.AddRange(falseres.ReportedDiagnostics);
+            errors.AddRange(falseres.Errors);
             return TranslationResult.Silvernode(new ConditionalExpressionSilvernode(
                 a,
                 b,

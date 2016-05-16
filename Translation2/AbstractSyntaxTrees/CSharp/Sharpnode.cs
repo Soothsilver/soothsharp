@@ -9,7 +9,10 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
 {
     public abstract class Sharpnode
     {
-        public SyntaxNode OriginalNode;
+        /// <summary>
+        /// Gets the Roslyn syntax node that corresponds to this sharpnode.
+        /// </summary>
+        public SyntaxNode OriginalNode { get; private set; }
 
         protected Sharpnode(SyntaxNode originalNode)
         {

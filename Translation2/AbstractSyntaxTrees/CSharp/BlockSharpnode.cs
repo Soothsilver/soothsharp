@@ -23,7 +23,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
         public override TranslationResult Translate(TranslationContext context)
         {
             List<Silvernode> statements = new List<Silvernode>();
-            List<Silvernode> verificationConditions = new List<Silvernode>();
+            List<VerificationConditionSilvernode> verificationConditions = new List<VerificationConditionSilvernode>();
             List<Error> diagnostics = new List<Error>();
             foreach(var statement in Statements)
             {
@@ -32,7 +32,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                 {
                     if (statementResult.SilverSourceTree.IsVerificationCondition())
                     {
-                        verificationConditions.Add(statementResult.SilverSourceTree);
+                        verificationConditions.Add(statementResult.SilverSourceTree as VerificationConditionSilvernode);
                         // TODO trigger warning if father is not method
                     }
                     else
@@ -40,13 +40,14 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                         statements.Add(statementResult.SilverSourceTree);
                     }
                 }
-                diagnostics.AddRange(statementResult.ReportedDiagnostics);
+                diagnostics.AddRange(statementResult.Errors);
             }
             BlockSilvernode block = new BlockSilvernode(BlockSyntax, statements);
             TranslationResult r = new TranslationResult();
             r.SilverSourceTree = block;
+            verificationConditions.Sort();
             r.VerificationConditions = verificationConditions;
-            r.ReportedDiagnostics = diagnostics;
+            r.Errors = diagnostics;
             return r;
         }
     }

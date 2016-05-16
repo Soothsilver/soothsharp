@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
@@ -6,9 +7,9 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
     internal class TypeSilvernode : Silvernode
     {
         private TypeSyntax returnType;
-        private string silverType;
+        private SilverType silverType;
 
-        public TypeSilvernode(TypeSyntax typeSyntax, string silverType) : base(typeSyntax)
+        public TypeSilvernode(TypeSyntax typeSyntax, SilverType silverType) : base(typeSyntax)
         {
             this.returnType = typeSyntax;
             this.silverType = silverType;
@@ -16,7 +17,12 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 
         public override string ToString()
         {
-            return silverType;
+            return TypeTranslator.SilverTypeToString(silverType);
+        }
+
+        public bool RepresentsVoid()
+        {
+            return silverType == SilverType.Void;
         }
     }
 }

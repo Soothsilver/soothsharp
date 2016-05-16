@@ -34,21 +34,58 @@ namespace Sharpsilver.Translation.Translators
             
             switch(expression.Kind())
             {
+                // Relational operators
                 case SyntaxKind.LessThanOrEqualExpression:
                     return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, "<=");
+                case SyntaxKind.LessThanExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, "<");
                 case SyntaxKind.GreaterThanOrEqualExpression:
                     return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, ">=");
+                case SyntaxKind.GreaterThanExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, ">");
                 case SyntaxKind.EqualsExpression:
                     return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, "==");
+
+                // Arithmetical operators
+                case SyntaxKind.AddExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax,
+                        "+");
+                case SyntaxKind.SubtractExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax,
+                        "-");
+                case SyntaxKind.MultiplyExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax,
+                        "*");
+                case SyntaxKind.DivideExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax,
+                        "/");
+
+                // Unary operators
+                case SyntaxKind.UnaryMinusExpression:
+                    return new PrefixUnaryExpressionSharpnode(expression as PrefixUnaryExpressionSyntax, "-");
+
+                    // TODO unary plus
+                    // TODO modulo
+
+                // Invocation
                 case SyntaxKind.InvocationExpression:
                     return new InvocationExpressionSharpnode(expression as InvocationExpressionSyntax);
+
+                // Literals
                 case SyntaxKind.TrueLiteralExpression:
                     return new LiteralExpressionSharpnode(expression as LiteralExpressionSyntax, true);
                 case SyntaxKind.FalseLiteralExpression:
                     return new LiteralExpressionSharpnode(expression as LiteralExpressionSyntax, false);
+                case SyntaxKind.NumericLiteralExpression: 
+                    return new LiteralExpressionSharpnode(expression as LiteralExpressionSyntax, 
+                        (int)((expression as LiteralExpressionSyntax).Token.Value));
+
+                // Variables
                 case SyntaxKind.IdentifierName:
                 case SyntaxKind.SimpleMemberAccessExpression:
                     return new IdentifierExpressionSharpnode(expression as ExpressionSyntax);
+
+                // Others
                 case SyntaxKind.ConditionalExpression:
                     return new ConditionalExpressionSharpnode(expression as ConditionalExpressionSyntax);
                 default:

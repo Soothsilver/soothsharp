@@ -24,10 +24,10 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             var thenResult = Then.Translate(context);
             var elseResult = Else != null ? Else.Translate(context) : null;
             var errors = new List<Error>();
-            errors.AddRange(conditionResult.ReportedDiagnostics);
-            errors.AddRange(thenResult.ReportedDiagnostics);
+            errors.AddRange(conditionResult.Errors);
+            errors.AddRange(thenResult.Errors);
             if (elseResult != null)
-                errors.AddRange(elseResult.ReportedDiagnostics);
+                errors.AddRange(elseResult.Errors);
             return TranslationResult.Silvernode(new IfSilvernode(
                 OriginalNode,
                 conditionResult.SilverSourceTree,

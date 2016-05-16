@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sharpsilver.Contracts.Internals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,40 @@ namespace Sharpsilver.Contracts
     public static class Contract
     {
         /// <summary>
-        /// Within contracts, represents the return value of a function or a method, if it is of the type System.Int32.
+        /// Within contracts, represents the return value of a function or a method, if it is of the type System.Int32. This is a shortcut for Result&lt;int&gt;().
+        /// </summary>       
+        [WithinContractsOnly]
+        public static int IntegerResult
+        {
+            [WithinContractsOnly]
+            get
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Within contracts, represents the return value of a method. Can only be used in method postconditions.
         /// </summary>
-        public static int IntegerResult { get; } = 0;
+        /// <typeparam name="T">Return type of the method.</typeparam>
+        /// <returns>Value returned by the method.</returns>
+        [WithinContractsOnly]
+        public static T Result<T>()
+        {
+            return default(T);
+        }
+
+        /// <summary>
+        /// The argument must be a variable. Within contracts, represents the value of the variable at the start of the method.
+        /// </summary>
+        /// <typeparam name="T">Type of the variable.</typeparam>
+        /// <param name="value">Variable whose value at start of method should be returned.</param>
+        /// <returns>Value of the variable as it was at start of method.</returns>
+        [WithinContractsOnly]
+        public static T Old<T>(T value)
+        {
+            return default(T);
+        }
 
         /// <summary>
         /// Adds a proof obligation: The verifier must ensure that the specified postcondition is true when this method returns.
@@ -43,6 +75,16 @@ namespace Sharpsilver.Contracts
         /// <param name="precondition">The condition that will hold whenever this method is entered.</param>
         public static void Requires(bool precondition)
         {
+        }
+
+        /// <summary>
+        /// Specifies an invariant for the enclosing loop.
+        /// TODO Write when does the verifier check that the invariant holds (at start or end of each iteration?)
+        /// </summary>
+        /// <param name="invariant">The condition that must hold TODO when</param>
+        public static void Invariant(bool invariant)
+        {
+
         }
 
         /// <summary>

@@ -37,5 +37,17 @@ namespace Sharpsilver.Translation
             RegisteredIdentifiers.Add(newIdentifier);
             return newIdentifier;
         }
+
+        public string GetMethodIdentifierAtCallsite(IMethodSymbol method)
+        {
+            // TODO fix "string" to "Identifier".
+            string newIdentifier = Silverize(method.ContainingType.GetQualifiedName() + "." + method.Name);
+            return newIdentifier;
+        }
+
+        public string RegisterNewUniqueIdentifier()
+        {
+            return "_id";
+        }
     }
 }

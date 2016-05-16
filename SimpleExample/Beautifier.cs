@@ -14,7 +14,8 @@ namespace Sharpsilver.Examples
         {
             Contract.Requires(uglyNegativeNumber < 0);
             Contract.Ensures(Contract.IntegerResult > 0);
-
+            
+         
             if (uglyNegativeNumber > -10) return 42;
             return -uglyNegativeNumber;
         }

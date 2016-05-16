@@ -30,5 +30,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
         {
             OriginalTrivia = originalTrivia;
         }
+
+        public abstract override string ToString();
     }
 }

@@ -16,7 +16,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees
             SequenceSilvernode sequence = new SequenceSilvernode(parent);
             foreach(var incoming in results)
             {
-                result.ReportedDiagnostics.AddRange(incoming.ReportedDiagnostics);
+                result.Errors.AddRange(incoming.Errors);
                 if (incoming.SilverSourceTree != null)
                 {
                     sequence.List.Add(incoming.SilverSourceTree);
@@ -28,7 +28,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees
 
         internal static IEnumerable<Error> CombineErrors(params TranslationResult[] results)
         {
-           return results.SelectMany((result) => result.ReportedDiagnostics);
+           return results.SelectMany((result) => result.Errors);
         }
     }
 }

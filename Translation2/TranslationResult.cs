@@ -17,19 +17,19 @@ namespace Sharpsilver.Translation
         {
             get
             {
-                return !ReportedDiagnostics.Any(err => err.Diagnostic.Severity == DiagnosticSeverity.Error);
+                return !Errors.Any(err => err.Diagnostic.Severity == DiagnosticSeverity.Error);
             }
         }
-        public List<Error> ReportedDiagnostics = new List<Error>();
+        public List<Error> Errors = new List<Error>();
 
         // For methods and loops.
-        public List<Silvernode> VerificationConditions = new List<Silvernode>();
+        public List<VerificationConditionSilvernode> VerificationConditions = new List<VerificationConditionSilvernode>();
 
         public static TranslationResult Error(SyntaxNode node, SharpsilverDiagnostic diagnostic, params Object[] diagnosticArguments)
         {
             TranslationResult r = new TranslationResult();
             r.SilverSourceTree = new ErrorSilvernode(node);
-            r.ReportedDiagnostics.Add(new Translation.Error(diagnostic, node,diagnosticArguments));
+            r.Errors.Add(new Translation.Error(diagnostic, node,diagnosticArguments));
             return r;
         }
         public static TranslationResult Silvernode(Silvernode node, IEnumerable<Error> errors = null)
@@ -38,7 +38,7 @@ namespace Sharpsilver.Translation
             result.SilverSourceTree = node;
             if (errors != null)
             {
-                result.ReportedDiagnostics.AddRange(errors);
+                result.Errors.AddRange(errors);
             }
             return result;
         }

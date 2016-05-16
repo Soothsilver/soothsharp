@@ -12,13 +12,13 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
         private MethodDeclarationSyntax methodDeclarationSyntax;
         private BlockSilvernode block;
         private TypeSilvernode returnType;
-        private List<Silvernode> verificationConditions;
+        private List<VerificationConditionSilvernode> verificationConditions;
         private List<ParameterSilvernode> Parameters = new List<ParameterSilvernode>();
         public MethodSilvernode(MethodDeclarationSyntax methodDeclarationSyntax,
             IdentifierSilvernode identifierSilvernode, 
             List<ParameterSilvernode> parameters,
             TypeSilvernode returnType, 
-            List<Silvernode> verificationConditions,
+            List<VerificationConditionSilvernode> verificationConditions,
             BlockSilvernode block)
             : base(methodDeclarationSyntax)
         {
@@ -31,15 +31,21 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
         }
         public override string ToString()
         {
-            string parametersString = string.Join(", ", Parameters.Select(p => p.Identifier + " : " + p.Type)); 
+            string parametersString = string.Join(", ", Parameters.Select(p => p.Identifier + " : " + p.Type));
+            string returnsBlock = "";
+            if (!returnType.RepresentsVoid())
+            {
+                returnsBlock = " returns ("
+                    + Constants.SILVER_RETURN_VARIABLE_NAME + " : " + returnType
+                    + ")";
+            }
             // TODO handle identifiers better
 
             return "method " + identifierSilvernode
                 + " ("
                 + parametersString
-                + ") returns ("
-                + Constants.SILVER_RETURN_VARIABLE_NAME + " : " + returnType
                 + ")"
+                + returnsBlock
                 + (verificationConditions.Any() ? "\n" + VerificationConditionsToString() + "\n" : " ")
                 + block.ToString();
         }

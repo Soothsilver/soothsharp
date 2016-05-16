@@ -16,7 +16,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 
         public override string ToString()
         {
-            return String.Join("\n", List.Select(sn => sn.ToString()));
+            return String.Join("\n", List.Select(sn => sn.ToString()).Where(sn => !String.IsNullOrEmpty(sn)));
         }
 
         public List<Silvernode> List = new List<Silvernode>();
