@@ -21,11 +21,11 @@ namespace Sharpsilver.Translation
             SymbolInfo symbol = context.Semantics.GetSymbolInfo(IdentifierName);
             if (symbol.Symbol.GetQualifiedName() == ContractsTranslator.CONTRACT_INT_RESULT)
             {
-                return TranslationResult.Silvernode(
+                return TranslationResult.FromSilvernode(
                                 new TextSilvernode(Constants.SILVER_RETURN_VARIABLE_NAME, IdentifierName)
                                 );
             }
-            return TranslationResult.Silvernode(
+            return TranslationResult.FromSilvernode(
                 new TextSilvernode(symbol.Symbol.Name, IdentifierName)
                 );
         }

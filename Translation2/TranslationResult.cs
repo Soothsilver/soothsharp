@@ -12,12 +12,12 @@ namespace Sharpsilver.Translation
     public class TranslationResult
     {
         // Universal
-        public Silvernode SilverSourceTree;
+        public Silvernode Silvernode;
         public bool WasTranslationSuccessful
         {
             get
             {
-                return !Errors.Any(err => err.Diagnostic.Severity == DiagnosticSeverity.Error);
+                return Errors.All(err => err.Diagnostic.Severity != DiagnosticSeverity.Error);
             }
         }
         public List<Error> Errors = new List<Error>();
@@ -28,14 +28,14 @@ namespace Sharpsilver.Translation
         public static TranslationResult Error(SyntaxNode node, SharpsilverDiagnostic diagnostic, params Object[] diagnosticArguments)
         {
             TranslationResult r = new TranslationResult();
-            r.SilverSourceTree = new ErrorSilvernode(node);
+            r.Silvernode = new ErrorSilvernode(node);
             r.Errors.Add(new Translation.Error(diagnostic, node,diagnosticArguments));
             return r;
         }
-        public static TranslationResult Silvernode(Silvernode node, IEnumerable<Error> errors = null)
+        public static TranslationResult FromSilvernode(Silvernode node, IEnumerable<Error> errors = null)
         {
             TranslationResult result = new TranslationResult();
-            result.SilverSourceTree = node;
+            result.Silvernode = node;
             if (errors != null)
             {
                 result.Errors.AddRange(errors);
@@ -45,11 +45,11 @@ namespace Sharpsilver.Translation
 
         public string GetSilverCodeAsString()
         {
-            if (SilverSourceTree == null)
+            if (Silvernode == null)
             {
                 return "/*[! ERROR !]*/";
             }
-            return SilverSourceTree.ToString();
+            return Silvernode.ToString();
         }
     }
 }

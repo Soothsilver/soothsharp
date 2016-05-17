@@ -45,7 +45,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             foreach(var argument in Arguments)
             {
                 var result = argument.Translate(context);
-                expressions.Add(result.SilverSourceTree);
+                expressions.Add(result.Silvernode);
                 errors.AddRange(result.Errors);
             }
 
@@ -60,7 +60,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                     st,
                     OriginalNode
                 );
-            return TranslationResult.Silvernode(
+            return TranslationResult.FromSilvernode(
                 invocationSilvernode,
                 errors
                 );
@@ -74,16 +74,18 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             switch(methodName)
             {
                 case ContractsTranslator.CONTRACT_ENSURES:
-                    result = new EnsuresSilvernode(conditionResult.SilverSourceTree, OriginalNode);
+                    result = new EnsuresSilvernode(conditionResult.Silvernode, OriginalNode);
                     break;
                 case ContractsTranslator.CONTRACT_REQUIRES:
-                    result = new RequiresSilvernode(conditionResult.SilverSourceTree, OriginalNode);
+                    result = new RequiresSilvernode(conditionResult.Silvernode, OriginalNode);
                     break;
                 case ContractsTranslator.CONTRACT_INVARIANT:
+                    result = new InvariantSilvernode(conditionResult.Silvernode, OriginalNode);
+                    break;
                 default:
                     return TranslationResult.Error(OriginalNode, Diagnostics.SSIL301_InternalLocalizedError, "unknown kind of verification condition");
             }
-            return TranslationResult.Silvernode(result, conditionResult.Errors);
+            return TranslationResult.FromSilvernode(result, conditionResult.Errors);
         }
     }
 }

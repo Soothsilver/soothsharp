@@ -41,7 +41,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
                     break;
             }
             if (sn != null)
-                return TranslationResult.Silvernode(sn);
+                return TranslationResult.FromSilvernode(sn);
             else
                 return TranslationResult.Error(OriginalNode, Diagnostics.SSIL101_UnknownNode, OriginalNode.Kind());
         }

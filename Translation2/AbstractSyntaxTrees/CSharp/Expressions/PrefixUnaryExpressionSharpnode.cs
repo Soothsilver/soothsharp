@@ -19,7 +19,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
         public override TranslationResult Translate(TranslationContext context)
         {
             var left = Expression.Translate(context);
-            return TranslationResult.Silvernode(new PrefixUnaryExpressionSilvernode(Operator, left.SilverSourceTree, OriginalNode), left.Errors);
+            return TranslationResult.FromSilvernode(new PrefixUnaryExpressionSilvernode(Operator, left.Silvernode, OriginalNode), left.Errors);
         }
     }
 }

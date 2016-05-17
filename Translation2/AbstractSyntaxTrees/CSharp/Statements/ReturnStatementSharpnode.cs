@@ -27,13 +27,13 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
             statements.Add(
                 new AssignmentSilvernode(
                     new TextSilvernode(Constants.SILVER_RETURN_VARIABLE_NAME, OriginalNode),
-                    expr.SilverSourceTree,
+                    expr.Silvernode,
                     OriginalNode
                 ));
             statements.Add(
                 new GotoSilvernode(Constants.SILVER_METHOD_END_LABEL, OriginalNode)
             );
-            return TranslationResult.Silvernode(statements, errors);
+            return TranslationResult.FromSilvernode(statements, errors);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             var attributes = method.GetAttributes();
             if (attributes.Any(attribute => attribute.AttributeClass.GetQualifiedName() == ContractsTranslator.UNVERIFIED_ATTRIBUTE))
             {
-                return TranslationResult.Silvernode(new SinglelineCommentSilvernode($"Method {method.GetQualifiedName()} skipped because it was marked [Unverified].", OriginalNode));
+                return TranslationResult.FromSilvernode(new SinglelineCommentSilvernode($"Method {method.GetQualifiedName()} skipped because it was marked [Unverified].", OriginalNode));
             }
 
             var SilverParameters = new List<ParameterSilvernode>();
@@ -53,10 +53,10 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                 ParameterSharpnode sharpnode = Parameters[i];
                 var symbol = method.Parameters[i];
                 var rrs = sharpnode.Translate(context, symbol);
-                SilverParameters.Add(rrs.SilverSourceTree as ParameterSilvernode);
+                SilverParameters.Add(rrs.Silvernode as ParameterSilvernode);
                 r.Errors.AddRange(rrs.Errors);
             }
-            var innerStatements = body.SilverSourceTree as BlockSilvernode;
+            var innerStatements = body.Silvernode as BlockSilvernode;
             innerStatements.Add(new LabelSilvernode(Constants.SILVER_METHOD_END_LABEL, null));
             var methodSilvernode = 
                 new MethodSilvernode(
@@ -73,7 +73,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                     body.VerificationConditions, // verification conditions 
                     innerStatements // code
                 );
-            r.SilverSourceTree = methodSilvernode;
+            r.Silvernode = methodSilvernode;
             r.Errors.AddRange(body.Errors);
             if (diagnostic != null) r.Errors.Add(diagnostic);
             return r;

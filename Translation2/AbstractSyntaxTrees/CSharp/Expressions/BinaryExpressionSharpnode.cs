@@ -23,7 +23,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
             var left = Left.Translate(context);
             var right = Right.Translate(context);
             IEnumerable<Error> errors = CommonUtils.CombineErrors(left, right);
-            return TranslationResult.Silvernode(new BinaryExpressionSilvernode(left.SilverSourceTree, Operator, right.SilverSourceTree, OriginalNode), errors);
+            return TranslationResult.FromSilvernode(new BinaryExpressionSilvernode(left.Silvernode, Operator, right.Silvernode, OriginalNode), errors);
         }
     }
 }

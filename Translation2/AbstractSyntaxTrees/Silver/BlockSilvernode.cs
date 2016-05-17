@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
-    internal class BlockSilvernode : Silvernode
+    public class BlockSilvernode : Silvernode
     {
         private BlockSyntax blockSyntax;
         private List<Silvernode> Statements;
@@ -25,6 +25,11 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
                 + string.Join("\n", Statements.Select(stmt => stmt.ToString().AscendTab()))
                 + "\n}"
                 ;
+        }
+
+        public override BlockSilvernode EncloseInBlockIfNotAlready()
+        {
+            return this;
         }
     }
 }

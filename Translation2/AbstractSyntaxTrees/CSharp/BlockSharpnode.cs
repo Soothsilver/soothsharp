@@ -28,23 +28,23 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             foreach(var statement in Statements)
             {
                 var statementResult = statement.Translate(context);
-                if (statementResult.SilverSourceTree != null)
+                if (statementResult.Silvernode != null)
                 {
-                    if (statementResult.SilverSourceTree.IsVerificationCondition())
+                    if (statementResult.Silvernode.IsVerificationCondition())
                     {
-                        verificationConditions.Add(statementResult.SilverSourceTree as VerificationConditionSilvernode);
+                        verificationConditions.Add(statementResult.Silvernode as VerificationConditionSilvernode);
                         // TODO trigger warning if father is not method
                     }
                     else
                     {
-                        statements.Add(statementResult.SilverSourceTree);
+                        statements.Add(statementResult.Silvernode);
                     }
                 }
                 diagnostics.AddRange(statementResult.Errors);
             }
             BlockSilvernode block = new BlockSilvernode(BlockSyntax, statements);
             TranslationResult r = new TranslationResult();
-            r.SilverSourceTree = block;
+            r.Silvernode = block;
             verificationConditions.Sort();
             r.VerificationConditions = verificationConditions;
             r.Errors = diagnostics;

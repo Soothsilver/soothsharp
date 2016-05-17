@@ -14,7 +14,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
         }
         public override TranslationResult Translate(TranslationContext translationContext)
         {
-            return TranslationResult.Silvernode(new EmptySilvernode(uds));
+            return TranslationResult.FromSilvernode(new EmptySilvernode(uds));
         }
     }
 }

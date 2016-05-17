@@ -32,5 +32,10 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
         }
 
         public abstract override string ToString();
+
+        public virtual BlockSilvernode EncloseInBlockIfNotAlready()
+        {
+            return new BlockSilvernode(null, new List<Silvernode> {this});
+        }
     }
 }

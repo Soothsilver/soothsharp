@@ -23,14 +23,14 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
         public override TranslationResult Translate(TranslationContext context)
         {
             var exResult = Expression.Translate(context);
-            if (exResult.SilverSourceTree.IsVerificationCondition())
+            if (exResult.Silvernode.IsVerificationCondition())
             {
                 return exResult;
             }
-            if (exResult.SilverSourceTree is CallSilvernode)
+            if (exResult.Silvernode is CallSilvernode)
             {
                 // It is a method call -- and the result is ignored.
-                CallSilvernode call = (exResult.SilverSourceTree) as CallSilvernode;
+                CallSilvernode call = (exResult.Silvernode) as CallSilvernode;
                 if (call.Type != SilverType.Void)
                 {
                     var tempVar = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();
@@ -39,11 +39,11 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                         new AssignmentSilvernode(new TextSilvernode(tempVar.ToString(), null),
                             call, null)
                         );
-                    return TranslationResult.Silvernode(sequence, exResult.Errors);
+                    return TranslationResult.FromSilvernode(sequence, exResult.Errors);
                 }
                 else
                 {
-                    return TranslationResult.Silvernode(call, exResult.Errors);
+                    return TranslationResult.FromSilvernode(call, exResult.Errors);
                 }
 
             }

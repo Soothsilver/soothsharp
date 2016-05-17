@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using System.Collections.Generic;
 
 namespace Sharpsilver.Translation
@@ -19,15 +20,18 @@ namespace Sharpsilver.Translation
         {
             var conditionResult = Condition.Translate(context);
             var statementResult = Statement.Translate(context);
+            var statementBlock = statementResult.Silvernode.EncloseInBlockIfNotAlready();
             var errors = new List<Error>();
             errors.AddRange(conditionResult.Errors);
             errors.AddRange(statementResult.Errors);
-            return TranslationResult.Silvernode(
+            return TranslationResult.FromSilvernode(
                 new WhileSilvernode(
-                    conditionResult.SilverSourceTree,
-                    statementResult.SilverSourceTree,
+                    conditionResult.Silvernode,
+                    statementResult.VerificationConditions,
+                    statementBlock,
                     OriginalNode
-                    )
+                    ),
+                errors
                 );
         }
     }

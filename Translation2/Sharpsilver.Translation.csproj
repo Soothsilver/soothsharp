@@ -113,6 +113,7 @@
     <Compile Include="AbstractSyntaxTrees\Silver\Expressions\CallSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Expressions\ExpressionSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\LocalVariableDeclarationSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\InvariantSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\RequiresSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\UnaryExpressionSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\BinaryExpressionSilvernode.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="AbstractSyntaxTrees\Silver\SequenceSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Silvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\VerificationConditionSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\WhileSilvernode.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\IdentifierExpressionSharpnode.cs" />
     <Compile Include="SilverType.cs" />

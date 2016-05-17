@@ -17,12 +17,12 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees
             foreach(var incoming in results)
             {
                 result.Errors.AddRange(incoming.Errors);
-                if (incoming.SilverSourceTree != null)
+                if (incoming.Silvernode != null)
                 {
-                    sequence.List.Add(incoming.SilverSourceTree);
+                    sequence.List.Add(incoming.Silvernode);
                 }
             }
-            result.SilverSourceTree = sequence;
+            result.Silvernode = sequence;
             return result;
         }
 

@@ -34,7 +34,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                 new TypeSilvernode(Type.TypeSyntax, TypeTranslator.TranslateType(symbol.Type, Type.TypeSyntax, out err)), OriginalNode);
             var errlist = new List<Error>();
             if (err != null) errlist.Add(err);
-            return TranslationResult.Silvernode(ps, errlist);
+            return TranslationResult.FromSilvernode(ps, errlist);
         }
     }
 }
