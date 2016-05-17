@@ -5,6 +5,7 @@ using Sharpsilver.Translation.Exceptions;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
+using Sharpsilver.Translation.Translators;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
 {

@@ -10,7 +10,7 @@ using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements;
 
-namespace Sharpsilver.Translation.Translators
+namespace Sharpsilver.Translation
 {
     public class RoslynToSharpnode
     {
@@ -18,6 +18,10 @@ namespace Sharpsilver.Translation.Translators
         {
             switch(statement.Kind())
             {
+                case SyntaxKind.WhileStatement:
+                    return new WhileStatementSharpnode(statement as WhileStatementSyntax);
+                case SyntaxKind.DoStatement:
+                    return new DoStatementSharpnode(statement as DoStatementSyntax);
                 case SyntaxKind.IfStatement:
                     return new IfStatementSharpnode(statement as IfStatementSyntax);
                 case SyntaxKind.ExpressionStatement:

@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.Translators;
+using Sharpsilver.Translation;
 using System.Collections.Generic;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions

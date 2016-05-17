@@ -106,6 +106,7 @@
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\PrefixUnaryExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\ConditionalExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\LiteralExpressionSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Statements\DoStatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\AssignmentSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\ReturnStatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\EmptySilvernode.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="TranslationResult.cs" />
     <Compile Include="RoslynToSharpnode.cs" />
     <Compile Include="Translators\TypeTranslator.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Statements\WhileStatementSharpnode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

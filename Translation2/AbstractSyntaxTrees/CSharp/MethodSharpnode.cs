@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using System.Collections.Generic;
 using System.Linq;
+using Sharpsilver.Translation;
 using Sharpsilver.Translation.Translators;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
@@ -36,6 +37,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             var identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(method);
             var innerContext = context;
             var body = Body.Translate(innerContext);
+            
             Error diagnostic;
 
             var attributes = method.GetAttributes();

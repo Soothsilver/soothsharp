@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharpsilver.Translation
+namespace Sharpsilver.Translation.Translators
 {
     public class ContractsTranslator
     {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Sharpsilver.Translation
+namespace Sharpsilver.Translation.Translators
 {
     static class TypeTranslator
     {

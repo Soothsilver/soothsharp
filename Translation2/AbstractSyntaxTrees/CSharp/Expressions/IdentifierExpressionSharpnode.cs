@@ -4,8 +4,9 @@ using Microsoft.CodeAnalysis.CSharp;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
 using Microsoft.CodeAnalysis;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Translators;
 
-namespace Sharpsilver.Translation.Translators
+namespace Sharpsilver.Translation
 {
     internal class IdentifierExpressionSharpnode : ExpressionSharpnode
     {
