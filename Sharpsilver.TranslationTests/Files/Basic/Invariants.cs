@@ -16,8 +16,8 @@ namespace Sharpsilver.TranslationTests.Files
             {
                 AlternativeNameForContract.Invariant(s == i * (i + 1) / 2);
                 AlternativeNameForContract.Invariant(i <= n);
-                i += 1; 
-                s += i;
+                i = i + 1; // TODO make this +=
+                s = s + i; // TODO make this +=
             }
             return s;
         }

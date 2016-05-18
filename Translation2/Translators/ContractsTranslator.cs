@@ -9,11 +9,12 @@ namespace Sharpsilver.Translation.Translators
 {
     public class ContractsTranslator
     {
+        // TODO use nameof() here.
         private const string CONTRACTS_NAMESPACE = "Sharpsilver.Contracts.";
         private const string CONTRACTS_CLASS = CONTRACTS_NAMESPACE + "Contract.";
         public const string CONTRACT_ENSURES = CONTRACTS_CLASS + "Ensures";
         public const string CONTRACT_REQUIRES = CONTRACTS_CLASS + "Requires";
-        public const string CONTRACT_INVARIANT = CONTRACTS_CLASS + "LoopInvariant";
+        public const string CONTRACT_INVARIANT = CONTRACTS_CLASS + "Invariant";
         public const string CONTRACT_ASSERT = CONTRACTS_CLASS + "Assert";
         public const string CONTRACT_ASSUME = CONTRACTS_CLASS + "Assume";
         public const string CONTRACT_INT_RESULT = CONTRACTS_CLASS + "IntegerResult";

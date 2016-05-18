@@ -103,13 +103,17 @@
   <ItemGroup>
     <Compile Include="AbstractSyntaxTrees\CommonUtils.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\BlockSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\SimpleAssignmentExpressionSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\ParenthesizedExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\PrefixUnaryExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\ConditionalExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\LiteralExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\DoStatementSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Statements\LocalDeclarationSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\AssignmentSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\ReturnStatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\EmptySilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Expressions\ParenthesizedExpressionSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Expressions\CallSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Expressions\ExpressionSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\LocalVariableDeclarationSilvernode.cs" />

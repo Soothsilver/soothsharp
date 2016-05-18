@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation;
+using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
@@ -27,7 +28,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             {
                 return exResult;
             }
-            if (exResult.Silvernode is CallSilvernode)
+            else if (exResult.Silvernode is CallSilvernode)
             {
                 // It is a method call -- and the result is ignored.
                 CallSilvernode call = (exResult.Silvernode) as CallSilvernode;
@@ -45,8 +46,12 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                 {
                     return TranslationResult.FromSilvernode(call, exResult.Errors);
                 }
-
             }
+            else if (exResult.Silvernode is BinaryExpressionSilvernode)
+            {
+                return TranslationResult.FromSilvernode(exResult.Silvernode, exResult.Errors);
+            }
+
             return TranslationResult.Error(Expression.OriginalNode, Diagnostics.SSIL107_ThisExpressionCannotBeStatement);
         }
     }

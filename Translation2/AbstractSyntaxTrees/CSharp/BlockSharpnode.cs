@@ -9,15 +9,15 @@ using Sharpsilver.Translation;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
 {
-    internal class BlockSharpnode : Sharpnode
+    internal class BlockSharpnode : StatementSharpnode
     {
         public BlockSyntax BlockSyntax;
-        public List<StatementSharpnode> Statements = new List<StatementSharpnode>();
+        public List<StatementSharpnode> Statements;
 
         public BlockSharpnode(BlockSyntax originalNode) : base(originalNode)
         {
             BlockSyntax = originalNode;
-            Statements = originalNode.Statements.Select(stmt => RoslynToSharpnode.MapStatement(stmt)).ToList();
+            Statements = originalNode.Statements.Select(RoslynToSharpnode.MapStatement).ToList();
         }
 
         public override TranslationResult Translate(TranslationContext context)

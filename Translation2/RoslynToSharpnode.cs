@@ -28,6 +28,10 @@ namespace Sharpsilver.Translation
                     return new ExpressionStatementSharpnode(statement as ExpressionStatementSyntax);
                 case SyntaxKind.ReturnStatement:
                     return new ReturnStatementSharpnode(statement as ReturnStatementSyntax);
+                case SyntaxKind.Block:
+                    return new BlockSharpnode(statement as BlockSyntax);
+                case SyntaxKind.LocalDeclarationStatement:
+                    return new LocalDeclarationSharpnode(statement as LocalDeclarationStatementSyntax);
                 default:
                     return new UnknownStatementSharpnode(statement);
             }
@@ -62,15 +66,18 @@ namespace Sharpsilver.Translation
                         "*");
                 case SyntaxKind.DivideExpression:
                     return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax,
-                        "/");
+                        "\\"); // In Silver, integer division is "\", not "/" ("/" is used for fractional permissions).
 
                 // Unary operators
                 case SyntaxKind.UnaryMinusExpression:
                     return new PrefixUnaryExpressionSharpnode(expression as PrefixUnaryExpressionSyntax, "-");
 
-                    // TODO unary plus
-                    // TODO modulo
+                // TODO unary plus
+                // TODO modulo
 
+                // Assignment
+                case SyntaxKind.SimpleAssignmentExpression:
+                    return new SimpleAssignmentExpressionSharpnode(expression as AssignmentExpressionSyntax);
                 // Invocation
                 case SyntaxKind.InvocationExpression:
                     return new InvocationExpressionSharpnode(expression as InvocationExpressionSyntax);
@@ -92,6 +99,8 @@ namespace Sharpsilver.Translation
                 // Others
                 case SyntaxKind.ConditionalExpression:
                     return new ConditionalExpressionSharpnode(expression as ConditionalExpressionSyntax);
+                case SyntaxKind.ParenthesizedExpression:
+                    return new ParenthesizedExpressionSharpnode(expression as ParenthesizedExpressionSyntax);
                 default:
                     return new UnknownExpressionSharpnode(expression);
             }
