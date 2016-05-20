@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Sharpsilver Standalone Verifier")]
 [assembly: AssemblyDescription("Translates a given C# source file into Silver and then verifies it for correctness.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Petr Hudeček")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Sharpsilver")]
 [assembly: AssemblyCopyright("Copyright © 2016 Petr Hudeček")]
 [assembly: AssemblyTrademark("")]

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Sharpsilver.TranslationTests
+namespace Sharpsilver.Translation.Tests
 {
     public class TranslationTest
     {

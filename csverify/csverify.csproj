@@ -59,6 +59,10 @@
       <HintPath>..\packages\Mono.Options.4.4.0.0\lib\net4-client\Mono.Options.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MoreLinq, Version=1.4.18916.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -69,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SiliconRunner.cs" />
     <Content Include="icons\csverify1.ico" />
     <Compile Include="Csverify.cs" />
     <Compile Include="ErrorCode.cs" />

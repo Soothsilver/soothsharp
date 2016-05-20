@@ -4,7 +4,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using TestHelper;
-using SharpsilverVisualStudioPlugin;
 
 namespace Sharpsilver.VisualStudioPlugin.Test
 {
@@ -71,12 +70,12 @@ namespace Sharpsilver.VisualStudioPlugin.Test
 
         protected override CodeFixProvider GetCSharpCodeFixProvider()
         {
-            return new SharpsilverVisualStudioPluginCodeFixProvider();
+            //return new SharpsilverVisualStudioPluginCodeFixProvider();
         }
 
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
-            return new SharpsilverVisualStudioPluginAnalyzer();
+            //  return new SharpsilverVisualStudioPluginAnalyzer();
         }
     }
 }

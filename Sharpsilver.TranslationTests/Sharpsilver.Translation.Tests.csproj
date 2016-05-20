@@ -8,8 +8,8 @@
     <ProjectGuid>{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sharpsilver.TranslationTests</RootNamespace>
-    <AssemblyName>Sharpsilver.TranslationTests</AssemblyName>
+    <RootNamespace>Sharpsilver.Translation.Tests</RootNamespace>
+    <AssemblyName>Sharpsilver.Translation.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
