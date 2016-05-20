@@ -52,10 +52,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Translation2\Sharpsilver.Translation.csproj">
+    <ProjectReference Include="..\..\..\Sharpsilver.Translation\Sharpsilver.Translation.csproj">
       <Project>{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}</Project>
       <Name>Sharpsilver.Translation</Name>
- <!-->     <IncludeOutputGroupsInVSIX>VSIXContainerProjectOutputGroup%3bBuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <!-->     <IncludeOutputGroupsInVSIX>VSIXContainerProjectOutputGroup%3bBuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     -->
     </ProjectReference>

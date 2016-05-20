@@ -58,7 +58,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sharpsilver.Contracts\Sharpsilver.Contracts.csproj">
+    <ProjectReference Include="..\..\Sharpsilver.Contracts\Sharpsilver.Contracts.csproj">
       <Project>{b2ff4360-c774-41ce-98fc-60494f6efc60}</Project>
       <Name>Sharpsilver.Contracts</Name>
     </ProjectReference>

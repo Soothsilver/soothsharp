@@ -88,7 +88,7 @@
       <Project>{b2ff4360-c774-41ce-98fc-60494f6efc60}</Project>
       <Name>Sharpsilver.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Translation2\Sharpsilver.Translation.csproj">
+    <ProjectReference Include="..\Sharpsilver.Translation\Sharpsilver.Translation.csproj">
       <Project>{89df81ed-eee0-499d-ae23-d687fc5cadd3}</Project>
       <Name>Sharpsilver.Translation</Name>
     </ProjectReference>
