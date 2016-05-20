@@ -57,7 +57,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                 r.Errors.AddRange(rrs.Errors);
             }
             var innerStatements = body.Silvernode as BlockSilvernode;
-            innerStatements.Add(new LabelSilvernode(Constants.SILVER_METHOD_END_LABEL, null));
+            innerStatements.Add(new LabelSilvernode(Constants.SilverMethodEndLabel, null));
             var methodSilvernode = 
                 new MethodSilvernode(
                     methodDeclarationSyntax, // method

@@ -8,9 +8,8 @@ namespace Sharpsilver.Translation
 {
     static class Constants
     {
-        public const string SILVER_RETURN_VARIABLE_NAME = "res";
-        public const string SILVER_ERROR_STRING = "!ERROR!";
-        public const string SILVER_METHOD_END_LABEL = "end";
-        public const string SYSTEM_VOID = "System.Void"; 
+        public const string SilverReturnVariableName = "res";
+        public const string SilverErrorString = "!ERROR!";
+        public const string SilverMethodEndLabel = "end";
     }
 }

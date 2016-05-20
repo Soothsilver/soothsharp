@@ -52,9 +52,9 @@ namespace Sharpsilver.Translation.Translators
             {
                 case SilverType.Bool: return "Bool";
                 case SilverType.Int: return "Int";
-                case SilverType.Void: return Constants.SILVER_ERROR_STRING;
+                case SilverType.Void: return Constants.SilverErrorString;
                 default:
-                    return Constants.SILVER_ERROR_STRING;
+                    return Constants.SilverErrorString;
             }
         }
 

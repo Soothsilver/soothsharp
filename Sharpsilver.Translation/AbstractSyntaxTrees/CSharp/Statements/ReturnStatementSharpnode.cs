@@ -26,12 +26,12 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
             errors.AddRange(expr.Errors);
             statements.Add(
                 new AssignmentSilvernode(
-                    new TextSilvernode(Constants.SILVER_RETURN_VARIABLE_NAME, OriginalNode),
+                    new TextSilvernode(Constants.SilverReturnVariableName, OriginalNode),
                     expr.Silvernode,
                     OriginalNode
                 ));
             statements.Add(
-                new GotoSilvernode(Constants.SILVER_METHOD_END_LABEL, OriginalNode)
+                new GotoSilvernode(Constants.SilverMethodEndLabel, OriginalNode)
             );
             return TranslationResult.FromSilvernode(statements, errors);
         }

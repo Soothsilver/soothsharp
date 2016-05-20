@@ -22,7 +22,7 @@ namespace Sharpsilver.Translation
             if (symbol.Symbol.GetQualifiedName() == ContractsTranslator.CONTRACT_INT_RESULT)
             {
                 return TranslationResult.FromSilvernode(
-                                new TextSilvernode(Constants.SILVER_RETURN_VARIABLE_NAME, IdentifierName)
+                                new TextSilvernode(Constants.SilverReturnVariableName, IdentifierName)
                                 );
             }
             return TranslationResult.FromSilvernode(

@@ -22,6 +22,8 @@ namespace Sharpsilver.Translation
                     return new WhileStatementSharpnode(statement as WhileStatementSyntax);
                 case SyntaxKind.DoStatement:
                     return new DoStatementSharpnode(statement as DoStatementSyntax);
+                case SyntaxKind.ForStatement:
+                    return new ForStatementSharpnode(statement as ForStatementSyntax);
                 case SyntaxKind.IfStatement:
                     return new IfStatementSharpnode(statement as IfStatementSyntax);
                 case SyntaxKind.ExpressionStatement:
@@ -32,6 +34,28 @@ namespace Sharpsilver.Translation
                     return new BlockSharpnode(statement as BlockSyntax);
                 case SyntaxKind.LocalDeclarationStatement:
                     return new LocalDeclarationSharpnode(statement as LocalDeclarationStatementSyntax);
+                case SyntaxKind.YieldBreakStatement:
+                case SyntaxKind.YieldReturnStatement:
+                    return new UnknownStatementSharpnode(statement, "iterator functions");
+                case SyntaxKind.FixedStatement:
+                case SyntaxKind.UnsafeStatement:
+                    return new UnknownStatementSharpnode(statement, "unsafe code");
+                case SyntaxKind.BreakStatement:
+                case SyntaxKind.CheckedStatement:
+                case SyntaxKind.ContinueStatement:
+                case SyntaxKind.EmptyStatement:
+                case SyntaxKind.ForEachStatement:
+                case SyntaxKind.GlobalStatement:
+                case SyntaxKind.GotoCaseStatement:
+                case SyntaxKind.GotoDefaultStatement:
+                case SyntaxKind.GotoStatement:
+                case SyntaxKind.LabeledStatement:
+                case SyntaxKind.LockStatement:
+                case SyntaxKind.SwitchStatement:
+                case SyntaxKind.ThrowStatement:
+                case SyntaxKind.TryStatement:
+                case SyntaxKind.UncheckedStatement:
+                case SyntaxKind.UsingStatement:
                 default:
                     return new UnknownStatementSharpnode(statement);
             }

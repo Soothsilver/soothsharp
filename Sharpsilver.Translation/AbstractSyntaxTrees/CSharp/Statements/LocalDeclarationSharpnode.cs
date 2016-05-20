@@ -14,10 +14,22 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
     {
         public List<SimpleLocalDeclarationSharpnode> Declarations = new List<SimpleLocalDeclarationSharpnode>();
 
+      
+
+        public LocalDeclarationSharpnode(VariableDeclarationSyntax stmt) : base(null)
+        {
+            init(stmt);
+        }
+
         public LocalDeclarationSharpnode(LocalDeclarationStatementSyntax stmt) : base(stmt)
         {
-            var typeSyntax = stmt.Declaration.Type;
-            foreach (var variable in stmt.Declaration.Variables)
+            init(stmt.Declaration);
+        }
+
+        private void init(VariableDeclarationSyntax syntax)
+        {
+            var typeSyntax = syntax.Type;
+            foreach (var variable in syntax.Variables)
             {
                 SyntaxToken identifier = variable.Identifier;
                 ExpressionSharpnode initialValue = null;

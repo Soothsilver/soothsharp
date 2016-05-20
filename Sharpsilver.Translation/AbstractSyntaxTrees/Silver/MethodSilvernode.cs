@@ -36,7 +36,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
             if (!returnType.RepresentsVoid())
             {
                 returnsBlock = " returns ("
-                    + Constants.SILVER_RETURN_VARIABLE_NAME + " : " + returnType
+                    + Constants.SilverReturnVariableName + " : " + returnType
                     + ")";
             }
             // TODO handle identifiers better

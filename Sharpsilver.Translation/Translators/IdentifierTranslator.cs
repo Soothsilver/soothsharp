@@ -12,7 +12,7 @@ namespace Sharpsilver.Translation.Translators
     {
         private List<string> RegisteredIdentifiers = new List<string>
         {
-            Constants.SILVER_RETURN_VARIABLE_NAME
+            Constants.SilverReturnVariableName
         };  
 
         private string Silverize(string identifier)

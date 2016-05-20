@@ -106,7 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractSyntaxTrees\CommonUtils.cs" />
-    <Compile Include="AbstractSyntaxTrees\CSharp\BlockSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Statements\BlockSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\SimpleAssignmentExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\ParenthesizedExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\PrefixUnaryExpressionSharpnode.cs" />
@@ -114,6 +114,7 @@
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\LiteralExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\DoStatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\LocalDeclarationSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Statements\ForStatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\AssignmentSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\ReturnStatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\EmptySilvernode.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="AbstractSyntaxTrees\Silver\WhileSilvernode.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\IdentifierExpressionSharpnode.cs" />
+    <Compile Include="Diagnostics\Diagnostics.cs" />
     <Compile Include="SilverType.cs" />
     <Compile Include="Translators\ContractsTranslator.cs" />
     <Compile Include="Diagnostics\DiagnosticSeverity.cs" />
@@ -174,7 +176,6 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Translators\IdentifierTranslator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SilverSourceCode.cs" />
     <Compile Include="TranslationProcess.cs" />
     <Compile Include="TranslationContext.cs" />
     <Compile Include="TranslationResult.cs" />

@@ -7,6 +7,9 @@ using Microsoft.CodeAnalysis;
 
 namespace Sharpsilver.Translation
 {
+    /// <summary>
+    /// Represents a squiggly-type error that occured as a result of translation or verification. It is not necessarily an error, it might just as well be a warning.
+    /// </summary>
     public class Error
     {
         public SharpsilverDiagnostic Diagnostic;
@@ -28,7 +31,6 @@ namespace Sharpsilver.Translation
                 return Node.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
             }
         }
-
 
         public Error(SharpsilverDiagnostic diagnostic, SyntaxNode node, params object[] diagnosticArguments)
         {

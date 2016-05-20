@@ -13,7 +13,7 @@ namespace Sharpsilver.Contracts
     public static class Contract
     {
         /// <summary>
-        /// Within contracts, represents the return value of a function or a method, if it is of the type System.Int32. This is a shortcut for Result&lt;int&gt;().
+        /// Within contracts, represents the return value of a function or a method, if it is of the type System.Int32. This is a shortcut for <see cref="Contract.Result{Int32}"/> with <see cref="int"/> as the type parameter.
         /// </summary>       
         [WithinContractsOnly]
         public static int IntegerResult
