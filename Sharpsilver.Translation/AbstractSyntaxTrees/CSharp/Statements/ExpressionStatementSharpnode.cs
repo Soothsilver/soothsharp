@@ -51,6 +51,10 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             {
                 return TranslationResult.FromSilvernode(exResult.Silvernode, exResult.Errors);
             }
+            else if (exResult.Silvernode is AssignmentSilvernode)
+            {
+                return TranslationResult.FromSilvernode(exResult.Silvernode, exResult.Errors);
+            }
 
             return TranslationResult.Error(Expression.OriginalNode, Diagnostics.SSIL107_ThisExpressionCannotBeStatement);
         }

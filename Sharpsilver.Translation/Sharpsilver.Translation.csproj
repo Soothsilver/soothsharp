@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractSyntaxTrees\CommonUtils.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\IncrementExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\BlockSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\SimpleAssignmentExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\ParenthesizedExpressionSharpnode.cs" />

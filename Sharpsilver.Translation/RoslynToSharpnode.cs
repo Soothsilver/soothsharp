@@ -77,6 +77,8 @@ namespace Sharpsilver.Translation
                     return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, ">");
                 case SyntaxKind.EqualsExpression:
                     return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, "==");
+                case SyntaxKind.NotEqualsExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, "!=");
 
                 // Arithmetical operators
                 case SyntaxKind.AddExpression:
@@ -95,7 +97,18 @@ namespace Sharpsilver.Translation
                 // Unary operators
                 case SyntaxKind.UnaryMinusExpression:
                     return new PrefixUnaryExpressionSharpnode(expression as PrefixUnaryExpressionSyntax, "-");
-
+                case SyntaxKind.PostIncrementExpression:
+                    return new IncrementExpressionSharpnode(expression as PostfixUnaryExpressionSyntax,
+                        IncrementExpressionDirection.Increment);
+                case SyntaxKind.PostDecrementExpression:
+                    return new IncrementExpressionSharpnode(expression as PostfixUnaryExpressionSyntax,
+                        IncrementExpressionDirection.Decrement);
+                case SyntaxKind.PreIncrementExpression:
+                    return new IncrementExpressionSharpnode(expression as PrefixUnaryExpressionSyntax,
+                        IncrementExpressionDirection.Increment);
+                case SyntaxKind.PreDecrementExpression:
+                    return new IncrementExpressionSharpnode(expression as PrefixUnaryExpressionSyntax,
+                        IncrementExpressionDirection.Decrement);
                 // TODO unary plus
                 // TODO modulo
 

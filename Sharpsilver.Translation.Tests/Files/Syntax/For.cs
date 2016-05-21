@@ -16,11 +16,13 @@ namespace Sharpsilver.TranslationTests.Files
             Contract.Ensures(Contract.IntegerResult == 10);
 
             int j = 0;
-            for (int i = 0; i < 10; i = i + 1)
+            for (int i = 0; i < 10; i++)
             {
                 Contract.Invariant(i <= 10);
                 Contract.Invariant(i == j);
-                j = j + 1;
+                i--;
+                ++i;
+                j++;
             }
             return j;
         }
