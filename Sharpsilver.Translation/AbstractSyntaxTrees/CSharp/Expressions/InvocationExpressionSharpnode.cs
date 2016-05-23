@@ -39,7 +39,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             }
 
             // Get identifier and evaluate arguments
-            string identifier = context.Process.IdentifierTranslator.GetMethodIdentifierAtCallsite(method.Symbol as IMethodSymbol);
+            var identifier = context.Process.IdentifierTranslator.GetIdentifierReference(method.Symbol as IMethodSymbol);
             var expressions = new List<Silvernode>();
             var errors = new List<Error>();
             foreach(var argument in Arguments)

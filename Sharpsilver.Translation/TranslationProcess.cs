@@ -35,15 +35,20 @@ namespace Sharpsilver.Translation
         {
             var root = (CompilationUnitSyntax)tree.GetRoot();
             var mscorlib = MetadataReference.CreateFromFile(typeof(System.Attribute).Assembly.Location);
+
+            // 1. Prepare compilation object.
             if (writeProgressToConsole) Console.WriteLine("- Compiling.");
             Compilation = CSharpCompilation.Create("translated_assembly")
                                     .AddSyntaxTrees(tree)
                                     .AddReferences(mscorlib)
                                     .AddReferences(MetadataReference.CreateFromFile("Sharpsilver.Contracts.dll"))
                                     ;
+
+            // 2. Prepare semantic analysis.
             if (writeProgressToConsole) Console.WriteLine("- Creating semantic model.");
             SemanticModel = Compilation.GetSemanticModel(tree, true);
 
+            // 3. Convert to Sharpnode intermediate representation.
             Sharpnode cSharpTree;
             if (writeProgressToConsole) Console.WriteLine("- Mapping to sharpnodes.");
             try
@@ -54,17 +59,23 @@ namespace Sharpsilver.Translation
             {
                 return TranslationResult.Error(null, Diagnostics.SSIL103_ExceptionConstructingCSharp, ex.GetType().ToString());
             }
+
+            // 4. Convert to Silver intermediate representation.
             if (writeProgressToConsole) Console.WriteLine("- Translating.");
+            TranslationResult translationResult;
             try
             {
-                TranslationResult translationResult = cSharpTree.Translate(TranslationContext.StartNew(this));
-                return translationResult;
+                translationResult = cSharpTree.Translate(TranslationContext.StartNew(this));
             }
             catch (Exception ex)
             {
 
                 return TranslationResult.Error(null, Diagnostics.SSIL104_ExceptionConstructingSilver, ex.GetType().ToString());
             }
+
+            // 5. Assign names to identifiers
+            IdentifierTranslator.AssignTrueNames();
+            return translationResult;
         }
         
     }

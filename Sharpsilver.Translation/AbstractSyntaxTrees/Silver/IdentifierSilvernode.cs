@@ -5,17 +5,26 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
     internal class IdentifierSilvernode : Silvernode
     {
         private SyntaxToken identifierToken;
-        private string silverIdentifier;
+        private Identifier silverIdentifier;
+        private IdentifierReference silverIdentifierReference;
 
-        public IdentifierSilvernode(SyntaxToken identifierToken, string silverIdentifier) : base(identifierToken)
+        public IdentifierSilvernode(SyntaxToken identifierToken, Identifier silverIdentifier) : base(identifierToken)
         {
             this.identifierToken = identifierToken;
             this.silverIdentifier = silverIdentifier;
         }
+        public IdentifierSilvernode(SyntaxToken identifierToken, IdentifierReference silverIdentifier) : base(identifierToken)
+        {
+            this.identifierToken = identifierToken;
+            this.silverIdentifierReference = silverIdentifier;
+        }
 
         public override string ToString()
         {
-            return silverIdentifier;
+            if (silverIdentifier != null)
+                return silverIdentifier.ToString();
+            else
+                return silverIdentifierReference.ToString();
         }
     }
 }

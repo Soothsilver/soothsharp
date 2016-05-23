@@ -6,9 +6,9 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
     internal class AssignmentSilvernode : Silvernode
     {
         private Silvernode right;
-        private TextSilvernode left;
+        private Silvernode left;
 
-        public AssignmentSilvernode(TextSilvernode left, Silvernode right, SyntaxNode originalNode) : base(originalNode)
+        public AssignmentSilvernode(Silvernode left, Silvernode right, SyntaxNode originalNode) : base(originalNode)
         {
             this.left = left;
             this.right = right;

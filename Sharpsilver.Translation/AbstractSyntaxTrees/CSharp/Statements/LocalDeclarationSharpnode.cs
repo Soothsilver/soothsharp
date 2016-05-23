@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using Sharpsilver.Translation.Translators;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
 {
@@ -14,19 +15,16 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
     {
         public List<SimpleLocalDeclarationSharpnode> Declarations = new List<SimpleLocalDeclarationSharpnode>();
 
-      
-
         public LocalDeclarationSharpnode(VariableDeclarationSyntax stmt) : base(null)
         {
-            init(stmt);
+            Init(stmt);
         }
-
         public LocalDeclarationSharpnode(LocalDeclarationStatementSyntax stmt) : base(stmt)
         {
-            init(stmt.Declaration);
+            Init(stmt.Declaration);
         }
 
-        private void init(VariableDeclarationSyntax syntax)
+        private void Init(VariableDeclarationSyntax syntax)
         {
             var typeSyntax = syntax.Type;
             foreach (var variable in syntax.Variables)
@@ -39,7 +37,6 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
                 }
                 SimpleLocalDeclarationSharpnode declaration =
                     new SimpleLocalDeclarationSharpnode(
-                        identifier,
                         typeSyntax,
                         initialValue,
                         variable)
@@ -68,25 +65,30 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
 
     internal class SimpleLocalDeclarationSharpnode : Sharpnode
     {
-        private SyntaxToken identifier;
-        private ExpressionSharpnode initialValue;
-        private TypeSyntax typeSyntax;
+        private readonly ExpressionSharpnode initialValue;
+        private readonly TypeSyntax typeSyntax;
+        private readonly VariableDeclaratorSyntax variable;
 
-        public SimpleLocalDeclarationSharpnode(SyntaxToken identifier, TypeSyntax typeSyntax, ExpressionSharpnode initialValue, VariableDeclaratorSyntax variable) : base(variable)
+        public SimpleLocalDeclarationSharpnode(
+            TypeSyntax typeSyntax, 
+            ExpressionSharpnode initialValue,
+            VariableDeclaratorSyntax variable) : base(variable)
         {
-            this.identifier = identifier;
+            this.variable = variable;
             this.typeSyntax = typeSyntax;
             this.initialValue = initialValue;
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            // TODO improve
-            // TODO FIX!
+            // TODO add things when classes are added etc.
+            var symbol = context.Semantics.GetDeclaredSymbol(variable);
+            var identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(symbol);
+
             Error err;
             List<Error> errors = new List<Error>();
-            TextSilvernode intro =
-                    new TextSilvernode("var " + identifier.Text + " : " +
+            VarStatementSilvernode intro =
+                    new VarStatementSilvernode(identifier, 
                                        TypeTranslator.TranslateTypeToString(
                                            context.Semantics.GetSymbolInfo(typeSyntax).Symbol as ITypeSymbol, typeSyntax,
                                            out err), OriginalNode);
@@ -95,9 +97,11 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
             {
                 return TranslationResult.FromSilvernode(intro, errors);
             }
+
+            // Add assignment if there is an initial value.
             var res = initialValue.Translate(context);
             AssignmentSilvernode assignmentSilvernode =
-                new AssignmentSilvernode(new TextSilvernode(identifier.Text, OriginalNode), res.Silvernode, OriginalNode);
+                new AssignmentSilvernode(new IdentifierSilvernode(variable.Identifier, identifier), res.Silvernode, OriginalNode);
             errors.AddRange(res.Errors);
             return TranslationResult.FromSilvernode(new SequenceSilvernode(OriginalNode,
                 intro,

@@ -122,6 +122,7 @@
     <Compile Include="AbstractSyntaxTrees\Silver\Expressions\ParenthesizedExpressionSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Expressions\CallSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Expressions\ExpressionSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\VarStatementSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\LocalVariableDeclarationSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\InvariantSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\RequiresSilvernode.cs" />
@@ -168,6 +169,8 @@
     <Compile Include="Constants.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\IdentifierExpressionSharpnode.cs" />
     <Compile Include="Diagnostics\Diagnostics.cs" />
+    <Compile Include="IdentifierReference.cs" />
+    <Compile Include="Identifier.cs" />
     <Compile Include="SilverType.cs" />
     <Compile Include="Translators\ContractsTranslator.cs" />
     <Compile Include="Diagnostics\DiagnosticSeverity.cs" />

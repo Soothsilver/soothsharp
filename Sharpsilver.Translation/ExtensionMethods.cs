@@ -15,17 +15,31 @@ namespace Sharpsilver.Translation
     {
         public static readonly SymbolDisplayFormat QualifiedNameDisplayFormat =
             new SymbolDisplayFormat(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces, 
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType);
+    
+        public static readonly SymbolDisplayFormat WithoutNamespacesNameDisplayFormat =
+            new SymbolDisplayFormat(
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
                 memberOptions: SymbolDisplayMemberOptions.IncludeContainingType);
 
         /// <summary>
-        /// Gets the fully qualified name of the C# symbol (for example, System.Int32).
+        /// Gets the fully qualified name of the C# symbol that includes namespaces (for example, System.Int32) .
         /// </summary>
         /// <param name="symbol">The symbol to get the name of.</param>
         /// <returns>The fully qualified name of the symbol.</returns>
         public static string GetQualifiedName(this ISymbol symbol)
         {
-            return symbol.ToDisplayString(QualifiedNameDisplayFormat);            
+            return symbol.ToDisplayString(QualifiedNameDisplayFormat);
+        } 
+        /// <summary>
+        /// Gets a partially qualified name of the C# symbol that does not include namespaces (for example, Int32) .
+        /// </summary>
+        /// <param name="symbol">The symbol to get the name of.</param>
+        /// <returns>The fully qualified name of the symbol.</returns>
+        public static string GetNameWithoutNamespaces(this ISymbol symbol)
+        {
+            return symbol.ToDisplayString(WithoutNamespacesNameDisplayFormat);
         }
         /// <summary>
         /// Increases line indent by one tab to the right for all lines in the input.
