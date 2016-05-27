@@ -57,7 +57,7 @@ namespace Sharpsilver.Translation
             }
             catch (Exception ex)
             {
-                return TranslationResult.Error(null, Diagnostics.SSIL103_ExceptionConstructingCSharp, ex.GetType().ToString());
+                return TranslationResult.Error(null, Diagnostics.SSIL103_ExceptionConstructingCSharp, ex.ToString());
             }
 
             // 4. Convert to Silver intermediate representation.
@@ -70,7 +70,7 @@ namespace Sharpsilver.Translation
             catch (Exception ex)
             {
 
-                return TranslationResult.Error(null, Diagnostics.SSIL104_ExceptionConstructingSilver, ex.GetType().ToString());
+                return TranslationResult.Error(null, Diagnostics.SSIL104_ExceptionConstructingSilver, ex.ToString());
             }
 
             // 5. Assign names to identifiers

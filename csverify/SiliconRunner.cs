@@ -13,7 +13,6 @@ namespace Sharpsilver.StandaloneVerifier
         {
             string filename = System.IO.Path.GetTempFileName();
             System.IO.File.WriteAllText(filename, silvercode);
-
             try
             {
                 Process p = new Process();

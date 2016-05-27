@@ -6,19 +6,19 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
     class ParenthesizedExpressionSilvernode : ExpressionSilvernode
     {
-        private ExpressionSilvernode Expression;
+        private readonly ExpressionSilvernode expression;
 
         public ParenthesizedExpressionSilvernode(
             ExpressionSilvernode silvernode,
             SyntaxNode originalNode) : 
-            base(originalNode, silvernode.Type)
+            base(originalNode, silvernode?.Type ?? SilverType.Error)
         {
-            this.Expression = silvernode;
+            expression = silvernode;
         }
 
         public override string ToString()
         {
-            return "(" + Expression + ")";
+            return "(" + expression + ")";
         }
     }
 }

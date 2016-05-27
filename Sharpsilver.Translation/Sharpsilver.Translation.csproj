@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractSyntaxTrees\CommonUtils.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\DiagnosticExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\IncrementExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\BlockSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\SimpleAssignmentExpressionSharpnode.cs" />
@@ -166,6 +167,10 @@
     <Compile Include="AbstractSyntaxTrees\Silver\Silvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\VerificationConditionSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\WhileSilvernode.cs" />
+    <Compile Include="BackendInterface\Verifier.cs" />
+    <Compile Include="BackendInterface\IBackend.cs" />
+    <Compile Include="BackendInterface\SiliconBackend.cs" />
+    <Compile Include="BackendInterface\VerificationResult.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\IdentifierExpressionSharpnode.cs" />
     <Compile Include="Diagnostics\Diagnostics.cs" />

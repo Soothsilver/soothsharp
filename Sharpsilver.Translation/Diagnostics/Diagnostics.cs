@@ -6,6 +6,7 @@ namespace Sharpsilver.Translation
 {
     public class Diagnostics
     {
+        // *********************************** 100 Translation Errors 
         public static SharpsilverDiagnostic SSIL101_UnknownNode =
             SharpsilverDiagnostic.Create(
                 "SSIL101",
@@ -44,7 +45,7 @@ namespace Sharpsilver.Translation
                 DiagnosticSeverity.Error);
         public static SharpsilverDiagnostic SSIL107_ThisExpressionCannotBeStatement =
             SharpsilverDiagnostic.Create(
-                "SSIL106",
+                "SSIL107",
                 "This expression cannot form an expression statement in Silver.",
                 "The Silver language does not support this expression as a standalone expression in a statement, even if C# supported it.",
                 DiagnosticSeverity.Error);
@@ -54,7 +55,29 @@ namespace Sharpsilver.Translation
               "This feature ({0}) is not supported.",
               "This feature of C# is not supported by the translator, and will probably never be supported. Could you please try to replace it with less advanced C# features?",
               DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL109_FeatureNotSupportedBecauseSilver =
+          SharpsilverDiagnostic.Create(
+              "SSIL109",
+              "This feature ({0}) is not supported by Silver.",
+              "This feature of C# cannot be meaningfully represented in Silver.",
+              DiagnosticSeverity.Error);
 
+        // ****************************** 200 Backend Verifier Errors
+        public static SharpsilverDiagnostic SSIL201_BackendNotFound =
+            SharpsilverDiagnostic.Create(
+                "SSIL201",
+                "Back-end ({0}) not found.",
+                "The back-end chosen to verify the translated Silver code was not found in PATH nor in the local directory and so the code was not verified.",
+                DiagnosticSeverity.Warning);
+
+        public static SharpsilverDiagnostic SSIL202_BackendUnknownLine =
+            SharpsilverDiagnostic.Create(
+                "SSIL202",
+                "Backend: {0}",
+                "This line was returned by the backend but Sharpsilver does not recognize it.",
+                DiagnosticSeverity.Warning);
+
+        // ****************************** 300 Internal Errors
         public static SharpsilverDiagnostic SSIL301_InternalLocalizedError =
             SharpsilverDiagnostic.Create(
                 "SSIL301",

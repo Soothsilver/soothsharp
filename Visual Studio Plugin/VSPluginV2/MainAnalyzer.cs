@@ -8,18 +8,19 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Sharpsilver.Translation;
+using Sharpsilver.Translation.BackendInterface;
 
 namespace Sharpsilver.VisualStudioPlugin
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class SharpsilverVisualStudioPluginAnalyzer : DiagnosticAnalyzer
     {
-        private Dictionary<string, DiagnosticDescriptor> Rules = null;
+        private Dictionary<string, DiagnosticDescriptor> rules;
         private IEnumerable<DiagnosticDescriptor> GetRules()
         {
             var diagnostics = Sharpsilver.Translation.Diagnostics.GetAllDiagnostics().ToList();
-            bool firstTime = Rules == null;
-            if (firstTime) Rules = new Dictionary<string, DiagnosticDescriptor>();
+            bool firstTime = rules == null;
+            if (firstTime) rules = new Dictionary<string, DiagnosticDescriptor>();
             foreach (var diagnostic in diagnostics)
             {
                 DiagnosticDescriptor dd = new DiagnosticDescriptor(
@@ -31,7 +32,7 @@ namespace Sharpsilver.VisualStudioPlugin
                     true,
                     description: diagnostic.Details);
                 if (firstTime)
-                Rules.Add(diagnostic.ErrorCode, dd);
+                rules.Add(diagnostic.ErrorCode, dd);
                 yield return dd;
             }
         }
@@ -42,32 +43,56 @@ namespace Sharpsilver.VisualStudioPlugin
             {
                 case Translation.DiagnosticSeverity.Error: return Microsoft.CodeAnalysis.DiagnosticSeverity.Error;
                 case Translation.DiagnosticSeverity.Warning: return Microsoft.CodeAnalysis.DiagnosticSeverity.Warning;
-                default: throw new NotImplementedException("This diagnostic severity could not be handled.");
+                default: throw new Exception("This diagnostic severity could not be handled.");
             }
         }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-        {
-            get {
-                return ImmutableArray.Create(GetRules().ToArray());
-            }
-        }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(GetRules().ToArray());
 
         public override void Initialize(AnalysisContext context)
         {
-            // TODO: Consider registering other actions that act on syntax instead of or in addition to symbols
-            // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Analyzer%20Actions%20Semantics.md for more information
+            // Consider registering other actions that act on syntax instead of or in addition to symbols
+            // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Analyzer%20Actions%20Semantics.md for more
 
-            context.RegisterSyntaxTreeAction(wholeTreeAnalysis);
+            context.RegisterSyntaxTreeAction(WholeTreeTranslationAnalysis);
+            //context.RegisterSyntaxTreeAction(WholeTreeVerificationAnalysis);
 
-            context.RegisterSyntaxNodeAction(CC, ImmutableArray.Create(SyntaxKind.SwitchStatement));
             /*    context.RegisterSyntaxNodeAction((snac) => {
 
                 }, ImmutableArray.Create(SyntaxKind.SwitchKeyword));
                 */
         }
 
-        private void wholeTreeAnalysis(SyntaxTreeAnalysisContext treeContext)
+        private void WholeTreeVerificationAnalysis(SyntaxTreeAnalysisContext treeContext)
+        {
+            if (treeContext.Tree.GetText().ToString().Length < 10)
+            {
+                return;
+            }
+            var translationProcess = new TranslationProcess();
+            var result = translationProcess.TranslateTree(treeContext.Tree);
+            if (!result.WasTranslationSuccessful) return; // translation errors are handled by the other method
+
+            var verifier = new SiliconBackend();
+            var verificationResult = verifier.Verify(result.Silvernode);
+            foreach (var diagnostic in verificationResult.Errors)
+            {
+                if (diagnostic.Node != null)
+                {
+                    treeContext.ReportDiagnostic(Diagnostic.Create(
+                        rules[diagnostic.Diagnostic.ErrorCode], diagnostic.Node.GetLocation(), diagnostic.DiagnosticArguments)
+                        );
+                }
+                else
+                {
+                    treeContext.ReportDiagnostic(Diagnostic.Create(
+                        rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
+                        );
+                }
+            }
+        }
+
+        private void WholeTreeTranslationAnalysis(SyntaxTreeAnalysisContext treeContext)
         {
             var translationProcess = new TranslationProcess();
             var result = translationProcess.TranslateTree(treeContext.Tree);
@@ -76,37 +101,17 @@ namespace Sharpsilver.VisualStudioPlugin
                 if (diagnostic.Node != null)
                 {
                     treeContext.ReportDiagnostic(Diagnostic.Create(
-                        Rules[diagnostic.Diagnostic.ErrorCode], diagnostic.Node.GetLocation(), diagnostic.DiagnosticArguments)
+                        rules[diagnostic.Diagnostic.ErrorCode], diagnostic.Node.GetLocation(), diagnostic.DiagnosticArguments)
                         );
                 }
                 else
                 {
                     treeContext.ReportDiagnostic(Diagnostic.Create(
-                        Rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
+                        rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
                         );
                 }
             }
 
         }
-
-        private void CC(SyntaxNodeAnalysisContext obj)
-        {
-           obj.ReportDiagnostic(Diagnostic.Create(SupportedDiagnostics[0], obj.Node.GetLocation()));
-        }
-        /*
-        private static void AnalyzeSymbol(SymbolAnalysisContext context)
-        {
-            // TODO: Replace the following code with your own analysis, generating Diagnostic objects for any issues you find
-            var namedTypeSymbol = (INamedTypeSymbol)context.Symbol;
-
-            // Find just those named type symbols with names containing lowercase letters.
-            if (namedTypeSymbol.Name.ToCharArray().Any(char.IsLower))
-            {
-                // For all such symbols, produce a diagnostic.
-                var diagnostic = Diagnostic.Create(Rule, namedTypeSymbol.Locations[0], namedTypeSymbol.Name);
-
-                context.ReportDiagnostic(diagnostic);
-            }
-        }*/
     }
 }

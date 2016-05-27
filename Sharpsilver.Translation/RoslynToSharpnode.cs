@@ -124,9 +124,19 @@ namespace Sharpsilver.Translation
                     return new LiteralExpressionSharpnode(expression as LiteralExpressionSyntax, true);
                 case SyntaxKind.FalseLiteralExpression:
                     return new LiteralExpressionSharpnode(expression as LiteralExpressionSyntax, false);
-                case SyntaxKind.NumericLiteralExpression: 
-                    return new LiteralExpressionSharpnode(expression as LiteralExpressionSyntax, 
-                        (int)((expression as LiteralExpressionSyntax).Token.Value));
+                case SyntaxKind.NumericLiteralExpression:
+                    object value = (((LiteralExpressionSyntax) expression).Token.Value);
+                    if (value is int)
+                    {
+                        return new LiteralExpressionSharpnode(expression as LiteralExpressionSyntax, (int) value);
+                    }
+                    if (value is float)
+                    {
+                        return new DiagnosticExpressionSharpnode(expression as LiteralExpressionSyntax,
+                            Diagnostics.SSIL108_FeatureNotSupported, "floating-point numbers");
+                    }
+                    return new UnknownExpressionSharpnode(expression);
+
 
                 // Variables
                 case SyntaxKind.IdentifierName:

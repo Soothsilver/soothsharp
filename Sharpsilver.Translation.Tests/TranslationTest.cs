@@ -11,7 +11,7 @@ namespace Sharpsilver.Translation.Tests
     public class TranslationTest
     {
         [Theory()]
-        [InlineData("Files\\Simple.cs")]
+        [MemberData("GetTestFiles")]
         public void TranslationToSilverOk(string filename)
         { 
             string dir = AppDomain.CurrentDomain.BaseDirectory;
@@ -21,7 +21,17 @@ namespace Sharpsilver.Translation.Tests
             var translation = new TranslationProcess();
             var result = translation.TranslateCode(csharpCode, false);
             
-                Assert.True(result.WasTranslationSuccessful, String.Join("\n", result.Errors));
+                Assert.True(result.WasTranslationSuccessful, string.Join("\n", result.Errors));
+        }
+
+        public static IEnumerable<object[]> GetTestFiles()
+        {
+            foreach (
+                var filename in
+                    System.IO.Directory.EnumerateFiles("Files", "*.cs", System.IO.SearchOption.AllDirectories))
+            {
+                yield return new object[] {  filename };
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Sharpsilver.Translation;
 using Mono.Options;
+using Sharpsilver.Translation.BackendInterface;
 
 namespace Sharpsilver.StandaloneVerifier
 {
@@ -139,8 +140,20 @@ namespace Sharpsilver.StandaloneVerifier
                     Console.WriteLine("=======================");
                     if (result.WasTranslationSuccessful)
                     {
-                        SiliconRunner silicon = new SiliconRunner();
-                        silicon.Run(silvercode);
+                        SiliconBackend backend = new SiliconBackend();
+                        var verificationResult = backend.Verify(result.Silvernode);
+                        Console.WriteLine(verificationResult.OriginalOutput);
+                        Console.WriteLine("=======================");
+                        Console.WriteLine($"Errors: {verificationResult.Errors.Count}.");
+                        foreach (Error error in verificationResult.Errors)
+                        {
+                            Console.WriteLine(error.ToString());
+                            if (Verbose)
+                            {
+                                Console.WriteLine("Details: " + error.Diagnostic.Details);
+                                Console.WriteLine();
+                            }
+                        }
                     }
                     else
                     {
