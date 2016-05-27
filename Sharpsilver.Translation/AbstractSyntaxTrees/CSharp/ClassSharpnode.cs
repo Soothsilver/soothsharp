@@ -28,7 +28,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
 
             var attributes = ClassSymbol.GetAttributes();
             
-            if (attributes.Any(attribute => attribute.AttributeClass.GetQualifiedName() == ContractsTranslator.UNVERIFIED_ATTRIBUTE))
+            if (attributes.Any(attribute => attribute.AttributeClass.GetQualifiedName() == ContractsTranslator.UnverifiedAttribute))
             {
                 return TranslationResult.FromSilvernode(new SinglelineCommentSilvernode($"Class {ClassSymbol.GetQualifiedName()} skipped because it was marked [Unverified].", OriginalNode));
             }

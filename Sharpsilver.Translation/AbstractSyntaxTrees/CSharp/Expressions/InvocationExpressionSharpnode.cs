@@ -32,9 +32,9 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             // Verification conditions
             switch(methodName)
             {
-                case ContractsTranslator.CONTRACT_ENSURES:
-                case ContractsTranslator.CONTRACT_REQUIRES:
-                case ContractsTranslator.CONTRACT_INVARIANT:
+                case ContractsTranslator.ContractEnsures:
+                case ContractsTranslator.ContractRequires:
+                case ContractsTranslator.ContractInvariant:
                     return TranslateAsVerificationCondition(methodName, context);
             }
 
@@ -73,13 +73,13 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             Silvernode result = null;
             switch(methodName)
             {
-                case ContractsTranslator.CONTRACT_ENSURES:
+                case ContractsTranslator.ContractEnsures:
                     result = new EnsuresSilvernode(conditionResult.Silvernode, OriginalNode);
                     break;
-                case ContractsTranslator.CONTRACT_REQUIRES:
+                case ContractsTranslator.ContractRequires:
                     result = new RequiresSilvernode(conditionResult.Silvernode, OriginalNode);
                     break;
-                case ContractsTranslator.CONTRACT_INVARIANT:
+                case ContractsTranslator.ContractInvariant:
                     result = new InvariantSilvernode(conditionResult.Silvernode, OriginalNode);
                     break;
                 default:

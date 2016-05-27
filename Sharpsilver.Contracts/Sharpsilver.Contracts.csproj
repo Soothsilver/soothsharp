@@ -52,7 +52,11 @@
     <Compile Include="Attributes\SilvernameAttribute.cs" />
     <Compile Include="Attributes\VerifiedAttribute.cs" />
     <Compile Include="StaticExtension.cs" />
+    <Compile Include="Verified\VerifiedArray.cs" />
+    <Compile Include="Verified\VerifiedGraph.cs" />
+    <Compile Include="Verified\VerifiedHeap.cs" />
     <Compile Include="Verified\VerifiedMath.cs" />
+    <Compile Include="Verified\VerifiedSortedArrayList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

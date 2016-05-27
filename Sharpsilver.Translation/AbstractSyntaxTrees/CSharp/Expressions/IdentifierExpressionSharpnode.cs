@@ -19,7 +19,7 @@ namespace Sharpsilver.Translation
         public override TranslationResult Translate(TranslationContext context)
         {
             SymbolInfo symbol = context.Semantics.GetSymbolInfo(IdentifierName);
-            if (symbol.Symbol.GetQualifiedName() == ContractsTranslator.CONTRACT_INT_RESULT)
+            if (symbol.Symbol.GetQualifiedName() == ContractsTranslator.ContractIntResult)
             {
                 return TranslationResult.FromSilvernode(
                                 new TextSilvernode(Constants.SilverReturnVariableName, IdentifierName)

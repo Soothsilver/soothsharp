@@ -68,6 +68,7 @@
     <Compile Include="Files\Basic\Simple.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Files\Mathematical\Theorems.cs" />
     <Compile Include="Files\Syntax\For.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
