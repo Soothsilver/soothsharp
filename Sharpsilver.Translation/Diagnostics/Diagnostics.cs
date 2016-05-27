@@ -77,6 +77,13 @@ namespace Sharpsilver.Translation
                 "This line was returned by the backend but Sharpsilver does not recognize it.",
                 DiagnosticSeverity.Warning);
 
+        public static SharpsilverDiagnostic SSIL203_ParseError =
+            SharpsilverDiagnostic.Create(
+                "SSIL203",
+                "Silver parse error: {0}",
+                "This C# code was transformed into a Silver segment that does not conform to Silver grammar and therefore the code could not be verified. This should not ordinarily happen and indicates an error in the Sharpsilver transcompiler.",
+                DiagnosticSeverity.Warning);
+
         // ****************************** 300 Internal Errors
         public static SharpsilverDiagnostic SSIL301_InternalLocalizedError =
             SharpsilverDiagnostic.Create(

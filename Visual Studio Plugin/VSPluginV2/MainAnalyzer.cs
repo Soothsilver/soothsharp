@@ -55,7 +55,7 @@ namespace Sharpsilver.VisualStudioPlugin
             // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Analyzer%20Actions%20Semantics.md for more
 
             context.RegisterSyntaxTreeAction(WholeTreeTranslationAnalysis);
-            //context.RegisterSyntaxTreeAction(WholeTreeVerificationAnalysis);
+            context.RegisterSyntaxTreeAction(WholeTreeVerificationAnalysis);
 
             /*    context.RegisterSyntaxNodeAction((snac) => {
 
@@ -72,7 +72,7 @@ namespace Sharpsilver.VisualStudioPlugin
             var translationProcess = new TranslationProcess();
             var result = translationProcess.TranslateTree(treeContext.Tree);
             if (!result.WasTranslationSuccessful) return; // translation errors are handled by the other method
-
+            if (result.Silvernode.ToString().Trim() == "") return;
             var verifier = new SiliconBackend();
             var verificationResult = verifier.Verify(result.Silvernode);
             foreach (var diagnostic in verificationResult.Errors)

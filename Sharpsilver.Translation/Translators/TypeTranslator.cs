@@ -34,10 +34,15 @@ namespace Sharpsilver.Translation.Translators
                     return SilverType.Bool;
                 case "System.Single":
                 case "System.Double":
+                case "System.Decimal":
+                case "System.Char":
+                case "System.Byte":
+                case "System.Int16":
+                case "System.UInt16":
+                case "System.UInt32":
                 case "System.Int64":
-                    // TODO others
-                    // throw error
-                    error =  new Error(Diagnostics.SSIL106_TypeNotSupported, where, typeSymbol.GetQualifiedName());
+                case "System.UInt64":
+                     error = new Error(Diagnostics.SSIL106_TypeNotSupported, where, typeSymbol.GetQualifiedName());
                     return SilverType.Error;
                 case "System.Void":
                     return SilverType.Void;

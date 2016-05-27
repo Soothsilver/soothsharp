@@ -22,5 +22,6 @@ namespace Sharpsilver.Contracts
         {
             return !condition || result;
         }
+        
     }
 }

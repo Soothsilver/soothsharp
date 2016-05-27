@@ -79,6 +79,10 @@ namespace Sharpsilver.Translation
                     return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, "==");
                 case SyntaxKind.NotEqualsExpression:
                     return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, "!=");
+                case SyntaxKind.LogicalOrExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, "||");
+                case SyntaxKind.LogicalAndExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax, "&&");
 
                 // Arithmetical operators
                 case SyntaxKind.AddExpression:
@@ -93,10 +97,19 @@ namespace Sharpsilver.Translation
                 case SyntaxKind.DivideExpression:
                     return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax,
                         "\\"); // In Silver, integer division is "\", not "/" ("/" is used for fractional permissions).
+                case SyntaxKind.ModuloExpression:
+                    return new BinaryExpressionSharpnode(expression as BinaryExpressionSyntax,
+                        "%");
 
                 // Unary operators
                 case SyntaxKind.UnaryMinusExpression:
                     return new PrefixUnaryExpressionSharpnode(expression as PrefixUnaryExpressionSyntax, "-");
+                case SyntaxKind.UnaryPlusExpression:
+                    return new PrefixUnaryExpressionSharpnode(expression as PrefixUnaryExpressionSyntax, "+");
+                case SyntaxKind.LogicalNotExpression:
+                    return new PrefixUnaryExpressionSharpnode(expression as PrefixUnaryExpressionSyntax, "!");
+
+                // Increment operators
                 case SyntaxKind.PostIncrementExpression:
                     return new IncrementExpressionSharpnode(expression as PostfixUnaryExpressionSyntax,
                         IncrementExpressionDirection.Increment);
@@ -133,7 +146,12 @@ namespace Sharpsilver.Translation
                     if (value is float)
                     {
                         return new DiagnosticExpressionSharpnode(expression as LiteralExpressionSyntax,
-                            Diagnostics.SSIL108_FeatureNotSupported, "floating-point numbers");
+                            Diagnostics.SSIL109_FeatureNotSupportedBecauseSilver, "floating-point numbers");
+                    }
+                    if (value is double)
+                    {
+                        return new DiagnosticExpressionSharpnode(expression as LiteralExpressionSyntax,
+                            Diagnostics.SSIL109_FeatureNotSupportedBecauseSilver, "double-precision numbers");
                     }
                     return new UnknownExpressionSharpnode(expression);
 
