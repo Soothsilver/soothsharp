@@ -61,6 +61,12 @@ namespace Sharpsilver.Translation
               "This feature ({0}) is not supported by Silver.",
               "This feature of C# cannot be meaningfully represented in Silver.",
               DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL110_InvalidSyntax =
+          SharpsilverDiagnostic.Create(
+              "SSIL110",
+              "Syntax is invalid ({0}).",
+              "This feature of C# cannot be meaningfully represented in Silver.",
+              DiagnosticSeverity.Error);
 
         // ****************************** 200 Backend Verifier Errors
         public static SharpsilverDiagnostic SSIL201_BackendNotFound =

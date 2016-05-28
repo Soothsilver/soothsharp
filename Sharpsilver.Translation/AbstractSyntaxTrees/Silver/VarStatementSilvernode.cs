@@ -5,10 +5,10 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
     public class VarStatementSilvernode : Silvernode
     {
-        private Identifier identifier;
+        private IdentifierDeclaration identifier;
         private string type;
 
-        public VarStatementSilvernode(Identifier identifier, string v, SyntaxNode originalNode) : base(originalNode)
+        public VarStatementSilvernode(IdentifierDeclaration identifier, string v, SyntaxNode originalNode) : base(originalNode)
         {
             this.identifier = identifier;
             this.type = v;

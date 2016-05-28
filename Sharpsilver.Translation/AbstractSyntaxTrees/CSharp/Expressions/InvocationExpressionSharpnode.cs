@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using System.Collections.Generic;
 using Sharpsilver.Translation;
+using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions;
 using Sharpsilver.Translation.Translators;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
@@ -36,6 +37,8 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                 case ContractsTranslator.ContractRequires:
                 case ContractsTranslator.ContractInvariant:
                     return TranslateAsVerificationCondition(methodName, context);
+                case ContractsTranslator.Implication:
+                    return TranslateAsImplication(context);
             }
 
             // Get identifier and evaluate arguments
@@ -64,6 +67,33 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                 invocationSilvernode,
                 errors
                 );
+        }
+
+        private TranslationResult TranslateAsImplication(TranslationContext context)
+        {
+            if (MethodGroup is MemberAccessExpressionSyntax)
+            {
+                MemberAccessExpressionSyntax memberAccess = MethodGroup as MemberAccessExpressionSyntax;
+                var leftExpression = RoslynToSharpnode.MapExpression(memberAccess.Expression);
+                var leftExpressionResult = leftExpression.Translate(context);
+                var rightExpressionResult = Arguments[0].Translate(context.ForcePure());
+                Silvernode implies = new BinaryExpressionSilvernode(
+                    leftExpressionResult.Silvernode,
+                    "==>",
+                    rightExpressionResult.Silvernode,
+                    OriginalNode
+                    );
+                var errors = new List<Error>();
+                errors.AddRange(leftExpressionResult.Errors);
+                errors.AddRange(rightExpressionResult.Errors);
+                return TranslationResult.FromSilvernode(implies, errors);
+            }
+            else
+            {
+                return TranslationResult.Error(OriginalNode, Diagnostics.SSIL110_InvalidSyntax,
+                    "member access expression expected");
+            }
+
         }
 
         private TranslationResult TranslateAsVerificationCondition(string methodName, TranslationContext context)

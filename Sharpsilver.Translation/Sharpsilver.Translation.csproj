@@ -115,6 +115,9 @@
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\ConditionalExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\LiteralExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\DoStatementSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Statements\EmptyStatementSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Statements\GotoStatementSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Statements\LabeledStatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\LocalDeclarationSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\ForStatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\AssignmentSilvernode.cs" />
@@ -174,8 +177,9 @@
     <Compile Include="Constants.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\IdentifierExpressionSharpnode.cs" />
     <Compile Include="Diagnostics\Diagnostics.cs" />
-    <Compile Include="IdentifierReference.cs" />
     <Compile Include="Identifier.cs" />
+    <Compile Include="IdentifierReference.cs" />
+    <Compile Include="IdentifierDeclaration.cs" />
     <Compile Include="SilverType.cs" />
     <Compile Include="Translators\ContractsTranslator.cs" />
     <Compile Include="Diagnostics\DiagnosticSeverity.cs" />

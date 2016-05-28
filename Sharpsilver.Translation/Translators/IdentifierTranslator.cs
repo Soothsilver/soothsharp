@@ -13,7 +13,7 @@ namespace Sharpsilver.Translation.Translators
     /// </summary>
     public class IdentifierTranslator
     {
-        private Dictionary<ISymbol, Identifier> registeredGlobalSymbols = new Dictionary<ISymbol, Identifier>();
+        private Dictionary<ISymbol, IdentifierDeclaration> registeredGlobalSymbols = new Dictionary<ISymbol, IdentifierDeclaration>();
         private Dictionary<ISymbol, IdentifierReference> references = new Dictionary<ISymbol, IdentifierReference>();
 
         private List<string> usedSilverIdentifiers = new List<string>
@@ -33,9 +33,9 @@ namespace Sharpsilver.Translation.Translators
             return new string(updatedArray);
         }
 
-        public Identifier RegisterAndGetIdentifier(ISymbol method)
+        public IdentifierDeclaration RegisterAndGetIdentifier(ISymbol method)
         {
-            Identifier identifier = new Identifier(method, this);
+            IdentifierDeclaration identifier = new IdentifierDeclaration(method, this);
             registeredGlobalSymbols.Add(method, identifier);
             return identifier;
         }

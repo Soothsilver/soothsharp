@@ -11,9 +11,16 @@ namespace Sharpsilver.Translation
     internal class IdentifierExpressionSharpnode : ExpressionSharpnode
     {
         public ExpressionSyntax IdentifierName;
+
         public IdentifierExpressionSharpnode(ExpressionSyntax syntax) : base(syntax)
         {
             IdentifierName = syntax;
+        }
+
+        public ISymbol GetIdentifierSymbol(TranslationContext context)
+        {
+            SymbolInfo symbol = context.Semantics.GetSymbolInfo(IdentifierName);
+            return symbol.Symbol;
         }
 
         public override TranslationResult Translate(TranslationContext context)

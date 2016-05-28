@@ -9,7 +9,13 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
     class GotoSilvernode : Silvernode
     {
+        public Identifier Identifier;
         public string Label;
+        public GotoSilvernode(Identifier identifier, SyntaxNode original) : base(original)
+        {
+            Identifier = identifier;
+        }
+
         public GotoSilvernode(string text, SyntaxNode original) : base(original)
         {
             Label = text;
@@ -17,7 +23,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 
         public override string ToString()
         {
-            return "goto " + Label;
+            return "goto " + (Identifier?.ToString() ?? Label);
         }
     }
 }

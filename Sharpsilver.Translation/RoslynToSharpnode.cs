@@ -34,6 +34,12 @@ namespace Sharpsilver.Translation
                     return new BlockSharpnode(statement as BlockSyntax);
                 case SyntaxKind.LocalDeclarationStatement:
                     return new LocalDeclarationSharpnode(statement as LocalDeclarationStatementSyntax);
+                case SyntaxKind.EmptyStatement:
+                    return new EmptyStatementSharpnode(statement as EmptyStatementSyntax);
+                case SyntaxKind.GotoStatement:
+                    return new GotoStatementSharpnode(statement as GotoStatementSyntax);
+                case SyntaxKind.LabeledStatement:
+                    return new LabeledStatementSharpnode(statement as LabeledStatementSyntax);
                 case SyntaxKind.YieldBreakStatement:
                 case SyntaxKind.YieldReturnStatement:
                     return new UnknownStatementSharpnode(statement, "iterator functions");
@@ -43,13 +49,10 @@ namespace Sharpsilver.Translation
                 case SyntaxKind.BreakStatement:
                 case SyntaxKind.CheckedStatement:
                 case SyntaxKind.ContinueStatement:
-                case SyntaxKind.EmptyStatement:
                 case SyntaxKind.ForEachStatement:
                 case SyntaxKind.GlobalStatement:
                 case SyntaxKind.GotoCaseStatement:
                 case SyntaxKind.GotoDefaultStatement:
-                case SyntaxKind.GotoStatement:
-                case SyntaxKind.LabeledStatement:
                 case SyntaxKind.LockStatement:
                 case SyntaxKind.SwitchStatement:
                 case SyntaxKind.ThrowStatement:
@@ -122,8 +125,6 @@ namespace Sharpsilver.Translation
                 case SyntaxKind.PreDecrementExpression:
                     return new IncrementExpressionSharpnode(expression as PrefixUnaryExpressionSyntax,
                         IncrementExpressionDirection.Decrement);
-                // TODO unary plus
-                // TODO modulo
 
                 // Assignment
                 case SyntaxKind.SimpleAssignmentExpression:

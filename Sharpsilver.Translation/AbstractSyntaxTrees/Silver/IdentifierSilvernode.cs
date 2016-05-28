@@ -5,10 +5,10 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
     internal class IdentifierSilvernode : Silvernode
     {
         private SyntaxToken identifierToken;
-        private Identifier silverIdentifier;
+        private IdentifierDeclaration silverIdentifier;
         private IdentifierReference silverIdentifierReference;
 
-        public IdentifierSilvernode(SyntaxToken identifierToken, Identifier silverIdentifier) : base(identifierToken)
+        public IdentifierSilvernode(SyntaxToken identifierToken, IdentifierDeclaration silverIdentifier) : base(identifierToken)
         {
             this.identifierToken = identifierToken;
             this.silverIdentifier = silverIdentifier;

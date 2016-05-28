@@ -10,15 +10,19 @@ namespace Sharpsilver.Translation.Translators
 {
     public class ContractsTranslator
     {
-        // TODO use nameof() here.
-        private const string ContractsNamespace = nameof(Sharpsilver) + "." + nameof(Sharpsilver.Contracts) + ".";
-        private const string ContractsClass = ContractsNamespace + nameof(Sharpsilver.Contracts.Contract) + ".";
+        private const string ContractsNamespace = 
+            nameof(Sharpsilver) + "." + 
+            nameof(Sharpsilver.Contracts) + ".";
+        private const string ContractsClass = 
+            ContractsNamespace + 
+            nameof(Sharpsilver.Contracts.Contract) + ".";
         public const string ContractEnsures = ContractsClass + nameof(Contract.Ensures);
         public const string ContractRequires = ContractsClass + nameof(Contract.Requires);
         public const string ContractInvariant = ContractsClass + nameof(Contract.Invariant);
         public const string ContractAssert = ContractsClass + nameof(Contract.Assert);
         public const string ContractAssume = ContractsClass + nameof(Contract.Assume);
         public const string ContractIntResult = ContractsClass + nameof(Contract.IntegerResult);
+        public const string Implication = "System.Boolean." + nameof(StaticExtension.Implies);
 
 
         public const string SilvernameAttribute = ContractsNamespace + nameof(Sharpsilver.Contracts.SilvernameAttribute);

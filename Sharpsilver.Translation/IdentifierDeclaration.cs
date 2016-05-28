@@ -8,14 +8,14 @@ using Sharpsilver.Translation.Translators;
 
 namespace Sharpsilver.Translation
 {
-    public class IdentifierReference : Identifier
+    public class IdentifierDeclaration : Identifier
     {
         private IdentifierTranslator identifierTranslator;
-        private ISymbol method;
+        public ISymbol Symbol;
 
-        public IdentifierReference(ISymbol method, IdentifierTranslator identifierTranslator)
+        public IdentifierDeclaration(ISymbol symbol, IdentifierTranslator identifierTranslator)
         {
-            this.method = method;
+            this.Symbol = symbol;
             this.identifierTranslator = identifierTranslator;
         }
 

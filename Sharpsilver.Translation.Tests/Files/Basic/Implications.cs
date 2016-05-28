@@ -12,13 +12,13 @@ namespace Sharpsilver.TranslationTests.Files
     [Verified]
     static class Implications
     {
-        static void impl(bool a)
+        static void Impl(bool a)
         {
             Requires(a.Implies(true));
               
-            bool b = a.Implies(m());
+            bool b = a.Implies(M());
         }
-        static Boolean m()
+        static Boolean M()
         {
             return true;
         }

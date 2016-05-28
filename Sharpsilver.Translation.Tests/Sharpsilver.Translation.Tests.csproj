@@ -70,6 +70,7 @@
     <Compile Include="Files\Basic\Simple.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Files\Classes\List.cs" />
     <Compile Include="Files\Issues\NullReferenceException1.cs" />
     <Compile Include="Files\Mathematical\Theorems.cs" />
     <Compile Include="Files\Syntax\For.cs">

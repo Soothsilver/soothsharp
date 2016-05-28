@@ -78,10 +78,9 @@ namespace Sharpsilver.Contracts
         }
 
         /// <summary>
-        /// Specifies an invariant for the enclosing loop.
-        /// TODO Write when does the verifier check that the invariant holds (at start or end of each iteration?)
+        /// Specifies an invariant for the enclosing loop. The verifier must prove that the invariant holds before the condition is tested (i.e. at entry) and then after each iteration.
         /// </summary>
-        /// <param name="invariant">The condition that must hold TODO when</param>
+        /// <param name="invariant">The condition that must hold at entry and after each iteration.</param>
         public static void Invariant(bool invariant)
         {
 
