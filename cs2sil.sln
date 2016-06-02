@@ -9,35 +9,38 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Contracts", "Sh
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{EC3FF5BE-7E39-48C2-80DD-744E507A0403}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "SimpleExample\Examples.csproj", "{147C9EB3-8E37-49F0-B9C1-C6B2E7D4660F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\SimpleExample\Examples.csproj", "{147C9EB3-8E37-49F0-B9C1-C6B2E7D4660F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverLanguageService", "SilverLanguageService\SilverLanguageService.csproj", "{7D69751C-9462-48D1-B728-9B20B0BDF74B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverLanguageService", "Silver\SilverLanguageService\SilverLanguageService.csproj", "{7D69751C-9462-48D1-B728-9B20B0BDF74B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silver", "Silver", "{748D1CF4-39D8-44E6-BA25-D5F121171AAC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Irony", "Silver\Irony\Irony.csproj", "{D81F5C91-D7DB-46E5-BC99-49488FB6814C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpsilverVisualStudioPlugin.Test", "SharpsilverVisualStudioPlugin\SharpsilverVisualStudioPlugin.Test\SharpsilverVisualStudioPlugin.Test.csproj", "{998F9557-2FC8-4019-ABBC-025663FAA94A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpsilverVisualStudioPlugin.Vsix", "SharpsilverVisualStudioPlugin\SharpsilverVisualStudioPlugin.Vsix\SharpsilverVisualStudioPlugin.Vsix.csproj", "{D8A79F6F-A0F5-4F57-AB27-01A8BAF36DEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpsilverVisualStudioPlugin.Vsix", "Visual Studio Plugin\SharpsilverVisualStudioPlugin\SharpsilverVisualStudioPlugin.Vsix\SharpsilverVisualStudioPlugin.Vsix.csproj", "{D8A79F6F-A0F5-4F57-AB27-01A8BAF36DEC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B2FF4360-C774-41CE-98FC-60494F6EFC60} = {B2FF4360-C774-41CE-98FC-60494F6EFC60}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visual Studio Plugin", "Visual Studio Plugin", "{39E42E76-D407-46FE-8EF7-FDB25ABC9E7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSPluginV2", "VSPluginV2\VSPluginV2.csproj", "{2FB8FCA9-89E2-4B72-AD19-6C1BADDEBC62}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSPluginV2", "Visual Studio Plugin\VSPluginV2\VSPluginV2.csproj", "{2FB8FCA9-89E2-4B72-AD19-6C1BADDEBC62}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B2FF4360-C774-41CE-98FC-60494F6EFC60} = {B2FF4360-C774-41CE-98FC-60494F6EFC60}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Translation", "Translation2\Sharpsilver.Translation.csproj", "{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Translation", "Sharpsilver.Translation\Sharpsilver.Translation.csproj", "{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B2FF4360-C774-41CE-98FC-60494F6EFC60} = {B2FF4360-C774-41CE-98FC-60494F6EFC60}
 		{147C9EB3-8E37-49F0-B9C1-C6B2E7D4660F} = {147C9EB3-8E37-49F0-B9C1-C6B2E7D4660F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverVisualStudioPlugin", "SilverVisualStudioPlugin\SilverVisualStudioPlugin.csproj", "{E586B1B6-DA34-42ED-9294-BB725FBCBF49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Translation.Tests", "Sharpsilver.Translation.Tests\Sharpsilver.Translation.Tests.csproj", "{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2578FD01-0944-4C21-A863-9D01272ED5F8}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,14 +90,6 @@ Global
 		{D81F5C91-D7DB-46E5-BC99-49488FB6814C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D81F5C91-D7DB-46E5-BC99-49488FB6814C}.Release|x86.ActiveCfg = Release|Any CPU
 		{D81F5C91-D7DB-46E5-BC99-49488FB6814C}.Release|x86.Build.0 = Release|Any CPU
-		{998F9557-2FC8-4019-ABBC-025663FAA94A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{998F9557-2FC8-4019-ABBC-025663FAA94A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{998F9557-2FC8-4019-ABBC-025663FAA94A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{998F9557-2FC8-4019-ABBC-025663FAA94A}.Debug|x86.Build.0 = Debug|Any CPU
-		{998F9557-2FC8-4019-ABBC-025663FAA94A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{998F9557-2FC8-4019-ABBC-025663FAA94A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{998F9557-2FC8-4019-ABBC-025663FAA94A}.Release|x86.ActiveCfg = Release|Any CPU
-		{998F9557-2FC8-4019-ABBC-025663FAA94A}.Release|x86.Build.0 = Release|Any CPU
 		{D8A79F6F-A0F5-4F57-AB27-01A8BAF36DEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D8A79F6F-A0F5-4F57-AB27-01A8BAF36DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8A79F6F-A0F5-4F57-AB27-01A8BAF36DEC}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -119,14 +114,14 @@ Global
 		{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}.Release|x86.ActiveCfg = Release|Any CPU
 		{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}.Release|x86.Build.0 = Release|Any CPU
-		{E586B1B6-DA34-42ED-9294-BB725FBCBF49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E586B1B6-DA34-42ED-9294-BB725FBCBF49}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E586B1B6-DA34-42ED-9294-BB725FBCBF49}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E586B1B6-DA34-42ED-9294-BB725FBCBF49}.Debug|x86.Build.0 = Debug|Any CPU
-		{E586B1B6-DA34-42ED-9294-BB725FBCBF49}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E586B1B6-DA34-42ED-9294-BB725FBCBF49}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E586B1B6-DA34-42ED-9294-BB725FBCBF49}.Release|x86.ActiveCfg = Release|Any CPU
-		{E586B1B6-DA34-42ED-9294-BB725FBCBF49}.Release|x86.Build.0 = Release|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Debug|x86.Build.0 = Debug|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Release|x86.ActiveCfg = Release|Any CPU
+		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,9 +130,7 @@ Global
 		{147C9EB3-8E37-49F0-B9C1-C6B2E7D4660F} = {EC3FF5BE-7E39-48C2-80DD-744E507A0403}
 		{7D69751C-9462-48D1-B728-9B20B0BDF74B} = {748D1CF4-39D8-44E6-BA25-D5F121171AAC}
 		{D81F5C91-D7DB-46E5-BC99-49488FB6814C} = {748D1CF4-39D8-44E6-BA25-D5F121171AAC}
-		{998F9557-2FC8-4019-ABBC-025663FAA94A} = {39E42E76-D407-46FE-8EF7-FDB25ABC9E7C}
 		{D8A79F6F-A0F5-4F57-AB27-01A8BAF36DEC} = {39E42E76-D407-46FE-8EF7-FDB25ABC9E7C}
 		{2FB8FCA9-89E2-4B72-AD19-6C1BADDEBC62} = {39E42E76-D407-46FE-8EF7-FDB25ABC9E7C}
-		{E586B1B6-DA34-42ED-9294-BB725FBCBF49} = {748D1CF4-39D8-44E6-BA25-D5F121171AAC}
 	EndGlobalSection
 EndGlobal

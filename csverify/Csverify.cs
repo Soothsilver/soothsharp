@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Sharpsilver.Translation;
 using Mono.Options;
+using Sharpsilver.Translation.BackendInterface;
 
 namespace Sharpsilver.StandaloneVerifier
 {
     class Csverify
     {
-        static bool Verbose = false;
-        static bool WaitAfterwards = false; 
+        private static bool Verbose;
+        private static bool WaitAfterwards;
+        static bool OnlyAnnotated = false;
+        static bool UseSilicon = true;
+        static string outputSilverFile = null;
+
         static string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         static string header = System.AppDomain.CurrentDomain.FriendlyName + " " + version + "\n" + "Verifies C# code files for correctness with respect to specified verification conditions.";
 
@@ -31,6 +33,9 @@ namespace Sharpsilver.StandaloneVerifier
                 .Add("r|reference=", "Adds the {ASSEMBLY.DLL} file as a reference when doing semantic analysis on the code. mscorlib and Sharpsiler.Contracts are added automatically.", filename => references.Add(filename))
                 .Add("a|assume=", "Translates the file {CLASS.CS} to Silver and prepends it to the main generated file, but its methods and functions won't be verified - their postconditions will be assumed to be true. ", filename => assumedFiles.Add(filename))   
                 .Add("w|wait", "When the program finishes, it will wait for the user to press any key before terminating.", option => WaitAfterwards = option != null)
+                .Add("O|only-annotated", "Only transcompile classes that have the [Verified] attribute, and static methods that have the [Verified] attribute even if their containing classes don't have the [Verified] attribute." , option => OnlyAnnotated = option != null)
+                .Add("o|output-file=", "Print the resulting Silver code into the {OUTPUT.SIL} file.", filename => outputSilverFile = filename)
+                .Add("s|silicon", "Use the Silicon backend to verify the Silver code. Silicon is the default verified. Usethe  \"-s-\" option to disable Silicon verification.", option => UseSilicon = option != null)
                 ;
             try
             {
@@ -59,7 +64,6 @@ namespace Sharpsilver.StandaloneVerifier
                 Console.WriteLine("You must specify at least 1 file to verify.");
                 return (int)ErrorCode.ERROR;
             }
-            string csharpFilename = args[0];
             return (int)RunVerification(verifiedFiles, assumedFiles, references);
         }
 
@@ -67,16 +71,20 @@ namespace Sharpsilver.StandaloneVerifier
         {
             Console.WriteLine(header);
             Console.WriteLine();
-            Console.WriteLine("Usage: " + System.AppDomain.CurrentDomain.FriendlyName + " [OPTIONS] file1.cs [file2.cs ...]");
+            Console.WriteLine("Usage: " + AppDomain.CurrentDomain.FriendlyName + " [OPTIONS] file1.cs [file2.cs ...]");
             Console.WriteLine();
             Console.WriteLine("Options:");
             optionSet.WriteOptionDescriptions(Console.Out);
         }
 
-        private static ErrorCode RunVerification(List<string> verifiedFiles, List<string> assumedFiles, List<string> references)
+        private static ErrorCode RunVerification(
+            List<string> verifiedFiles,
+            List<string> assumedFiles,
+            List<string> references)
         {
+            // TODO verify multiple codefiles
             string csharpFilename = verifiedFiles[0];
-            Console.WriteLine($"Sharpsilver Standalone Verifier will now verify '{csharpFilename}'.");
+            Console.WriteLine($"Csverify will now verify '{csharpFilename}'.");
             Console.WriteLine();
             try
             {
@@ -92,15 +100,16 @@ namespace Sharpsilver.StandaloneVerifier
                 var result = translation.TranslateCode(csharpCode, Verbose);
 
                 Console.WriteLine(
-                    result.WasTranslationSuccessful ? "Successfully translated." : $"Translation failed with {result.ReportedDiagnostics.Count} errors."
+                    result.WasTranslationSuccessful ? "Successfully translated." : $"Translation failed with {result.Errors.Count} errors."
                     );
                 Console.WriteLine();
                 Console.WriteLine("Resultant Silver code: ");
                 Console.WriteLine("=======================");
-                Console.WriteLine(result.GetSilverCodeAsString());
+                string silvercode = result.GetSilverCodeAsString();
+                Console.WriteLine(silvercode);
                 Console.WriteLine("=======================");
-                Console.WriteLine($"Errors: {result.ReportedDiagnostics.Count}.");
-                foreach (Error error in result.ReportedDiagnostics)
+                Console.WriteLine($"Errors: {result.Errors.Count}.");
+                foreach (Error error in result.Errors)
                 {
                     Console.WriteLine(error.ToString());
                     if (Verbose)
@@ -108,6 +117,49 @@ namespace Sharpsilver.StandaloneVerifier
                         Console.WriteLine("Details: " + error.Diagnostic.Details);
                         Console.WriteLine();
                     }
+                }
+                // Write output to file
+                if (outputSilverFile != null)
+                {
+                    Console.WriteLine("=======================");
+                    try
+                    {
+                        System.IO.File.WriteAllText(outputSilverFile, silvercode);
+                        Console.WriteLine($"Silver code written to {outputSilverFile}.");
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine(
+                            $"Error - Silver code could not be written to {outputSilverFile}. Check that you have write permissions to that location and that the directory leading up to it exists.");
+                        return ErrorCode.ERROR;
+                    }
+                }
+                // Run verifier
+                if (UseSilicon)
+                {
+                    Console.WriteLine("=======================");
+                    if (result.WasTranslationSuccessful)
+                    {
+                        SiliconBackend backend = new SiliconBackend();
+                        var verificationResult = backend.Verify(result.Silvernode);
+                        Console.WriteLine(verificationResult.OriginalOutput);
+                        Console.WriteLine("=======================");
+                        Console.WriteLine($"Errors: {verificationResult.Errors.Count}.");
+                        foreach (Error error in verificationResult.Errors)
+                        {
+                            Console.WriteLine(error.ToString());
+                            if (Verbose)
+                            {
+                                Console.WriteLine("Details: " + error.Diagnostic.Details);
+                                Console.WriteLine();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("The translation was not successful so Silicon will not be run.");
+                    }
+
                 }
                 if (WaitAfterwards)
                 {

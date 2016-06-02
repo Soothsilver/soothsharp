@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sharpsilver.Contracts</RootNamespace>
     <AssemblyName>Sharpsilver.Contracts</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -42,18 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\PredicateAttribute.cs" />
     <Compile Include="Contract.cs" />
+    <Compile Include="Internals\WithinContractsOnlyAttribute.cs" />
+    <Compile Include="Permission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PureAttribute.cs" />
-    <Compile Include="UnverifiedAttribute.cs" />
-    <Compile Include="SilvernameAttribute.cs" />
-    <Compile Include="VerifiedAttribute.cs" />
+    <Compile Include="Attributes\PureAttribute.cs" />
+    <Compile Include="Attributes\UnverifiedAttribute.cs" />
+    <Compile Include="Attributes\SilvernameAttribute.cs" />
+    <Compile Include="Attributes\VerifiedAttribute.cs" />
+    <Compile Include="StaticExtension.cs" />
+    <Compile Include="Verified\VerifiedArray.cs" />
+    <Compile Include="Verified\VerifiedGraph.cs" />
+    <Compile Include="Verified\VerifiedHeap.cs" />
     <Compile Include="Verified\VerifiedMath.cs" />
+    <Compile Include="Verified\VerifiedSortedArrayList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)\$(TargetFileName)" "$(SolutionDir)\csverify\bin\Debug"
-copy "$(TargetDir)\$(TargetFileName)" "$(SolutionDir)\SharpsilverVisualStudioPlugin\SharpsilverVisualStudioPlugin.Vsix\bin\Debug"</PostBuildEvent>
+copy "$(TargetDir)\$(TargetFileName)" "$(SolutionDir)\Visual Studio Plugin\SharpsilverVisualStudioPlugin\SharpsilverVisualStudioPlugin.Vsix\bin\Debug"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
