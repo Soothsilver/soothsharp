@@ -3,13 +3,17 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation;
 using System.Collections.Generic;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
 {
     public class IncrementExpressionSharpnode : ExpressionSharpnode
     {
         private IncrementExpressionDirection Direction;
+#pragma warning disable 414
+        // TODO make this work
         private IncrementExpressionOrder Order;
+#pragma warning restore 414
         private ExpressionSharpnode Expression;
 
         public IncrementExpressionSharpnode(PrefixUnaryExpressionSyntax syntax, IncrementExpressionDirection direction) : base(syntax)

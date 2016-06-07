@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using System.Collections.Generic;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
@@ -11,24 +12,24 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
         private Silvernode elseBranch;
 
         public IfSilvernode(SyntaxNode originalNode,
-            Silvernode translationResult1,
-            Silvernode then,
-            Silvernode elseBranch)
+            Silvernode condition,
+            StatementSilvernode then,
+            StatementSilvernode elseBranch)
             : base(originalNode)
         {
             OriginalNode = originalNode;
-            this.condition = translationResult1;
+            this.condition = condition;
             this.then = then;
             this.elseBranch = elseBranch;
             // TODO do this for Sharpnodes, rather.
             // TODO (elsewhere) issue a warning when verification conditions are not top-level
             if (!(this.then is BlockSilvernode))
             {
-                this.then = new BlockSilvernode(null, new List<Silvernode> { then });
+                this.then = new BlockSilvernode(null, new List<StatementSilvernode> { then });
             }
             if (this.elseBranch != null && !(this.elseBranch is BlockSilvernode))
             {
-                this.elseBranch = new BlockSilvernode(null, new List<Silvernode> { elseBranch });
+                this.elseBranch = new BlockSilvernode(null, new List<StatementSilvernode> { elseBranch });
             }
         }
 

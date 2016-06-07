@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
 {

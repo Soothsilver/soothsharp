@@ -13,14 +13,71 @@ namespace Sharpsilver.Translation.Translators
     /// </summary>
     public class IdentifierTranslator
     {
-        private Dictionary<ISymbol, IdentifierDeclaration> registeredGlobalSymbols = new Dictionary<ISymbol, IdentifierDeclaration>();
-        private Dictionary<ISymbol, IdentifierReference> references = new Dictionary<ISymbol, IdentifierReference>();
+        private static string[] SilverKeywords = new[]
+        {
+            "import",
+            "domain",
+            "unique",
+            "function",
+            "axiom",
+            "field",
+            "requires",
+            "ensures",
+            "invariant",
+            "predicate",
+            "returns",
+            "new",
+            "var",
+            "assert",
+            "assume",
+            "inhale",
+            "exhale",
+            "fold",
+            "unfold",
+            "goto",
+            "if",
+            "elsif",
+            "else",
+            "fresh",
+            "constraining",
+            "union",
+            "intersection",
+            "setminus",
+            "in",
+            "subset",
+            "true",
+            "false",
+            "null",
+            "result",
+            "old",
+            "none",
+            "write",
+            "epsilon",
+            "wildcard",
+            "perm",
+            "unfolding",
+            "forall",
+            "exists",
+            "Seq",
+            "Set",
+            "Multiset",
+            "acc",
+            "Int",
+            "Bool",
+            "Perm",
+            "Ref"
+        };
+        private readonly Dictionary<ISymbol, IdentifierDeclaration> registeredGlobalSymbols =
+            new Dictionary<ISymbol, IdentifierDeclaration>();
+        private readonly Dictionary<ISymbol, IdentifierReference> references = new Dictionary<ISymbol, IdentifierReference>();
 
-        private List<string> usedSilverIdentifiers = new List<string>
+        private readonly List<string> usedSilverIdentifiers = new List<string>
         {
             Constants.SilverMethodEndLabel,
-            Constants.SilverReturnVariableName
-        };
+            Constants.SilverReturnVariableName,
+            ""
+        }.Union(SilverKeywords).ToList();
+
         // TODO register local symbols, later on, when import mechanisms and local syntax in Silver are more clear to me
 
         private string silverize(string identifier)
@@ -62,6 +119,10 @@ namespace Sharpsilver.Translation.Translators
             {
                 ISymbol symbol = kvp.Value.Symbol;
                 string baseSilverName = silverize(symbol.GetNameWithoutNamespaces());
+                if (kvp.Key is IParameterSymbol)
+                {
+                    baseSilverName = symbol.GetSimpleName();
+                }
                 string silverName = baseSilverName;
                 int i = 2;
                 while (usedSilverIdentifiers.Contains(silverName))

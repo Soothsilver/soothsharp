@@ -90,6 +90,13 @@ namespace Sharpsilver.Translation
                 "This C# code was transformed into a Silver segment that does not conform to Silver grammar and therefore the code could not be verified. This should not ordinarily happen and indicates an error in the Sharpsilver transcompiler.",
                 DiagnosticSeverity.Warning);
 
+        public static SharpsilverDiagnostic SSIL204_OtherLocalizedError =
+        SharpsilverDiagnostic.Create(
+            "SSIL204",
+            "{0}",
+            "",
+            DiagnosticSeverity.Warning);
+
         // ****************************** 300 Internal Errors
         public static SharpsilverDiagnostic SSIL301_InternalLocalizedError =
             SharpsilverDiagnostic.Create(

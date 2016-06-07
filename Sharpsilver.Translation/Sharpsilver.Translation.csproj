@@ -120,14 +120,19 @@
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\LabeledStatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\LocalDeclarationSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\ForStatementSharpnode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\AssignmentSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Intermediate\CollectedType.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Statements\AssignmentSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\ReturnStatementSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\ComplexSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\EmptySilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Expressions\ParenthesizedExpressionSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Expressions\CallSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Expressions\ExpressionSilvernode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\VarStatementSilvernode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\LocalVariableDeclarationSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\HighlevelSequenceSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Simple\NewlineSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Statements\StatementSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Statements\VarStatementSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Statements\LocalVariableDeclarationSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\InvariantSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\RequiresSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\UnaryExpressionSilvernode.cs" />
@@ -139,37 +144,36 @@
     <Compile Include="AbstractSyntaxTrees\Silver\ConditionalExpressionSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\EnsuresSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\ErrorSilvernode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\ExpressionStatementSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Statements\ExpressionStatementSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\UnknownExpressionSharpnode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\IfSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Statements\IfSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\StatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\UnknownStatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\IfStatementSharpnode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\BlockSilvernode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\GotoSilvernode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\LabelSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Statements\BlockSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Statements\GotoSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Statements\LabelSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\MethodSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\ParameterSilvernode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\StatementsSilvernode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\TextSilvernode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\TypeSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Simple\TextSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Simple\TypeSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\IdentifierSilvernode.cs" />
-    <Compile Include="AbstractSyntaxTrees\CSharp\MethodSharpnode.cs" />
-    <Compile Include="AbstractSyntaxTrees\CSharp\ClassSharpnode.cs" />
-    <Compile Include="AbstractSyntaxTrees\CSharp\NamespaceSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Highlevel\MethodSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Highlevel\ClassSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Highlevel\NamespaceSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\ParameterSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Sharpnode.cs" />
-    <Compile Include="AbstractSyntaxTrees\CSharp\CompilationUnitSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Highlevel\CompilationUnitSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\DiagnosticSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\TypeSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\SinglelineCommentSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\UnexpectedSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\UnknownSharpnode.cs" />
-    <Compile Include="AbstractSyntaxTrees\CSharp\UsingDirectiveSharpnode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\SequenceSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Statements\SequenceSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Silvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\VerificationConditionSilvernode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\WhileSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Statements\WhileSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Spansize.cs" />
     <Compile Include="BackendInterface\Verifier.cs" />
     <Compile Include="BackendInterface\IBackend.cs" />
     <Compile Include="BackendInterface\SiliconBackend.cs" />
@@ -209,6 +213,7 @@
       <Name>Sharpsilver.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

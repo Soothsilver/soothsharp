@@ -3,6 +3,7 @@ using Sharpsilver.Translation;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using System.Collections.Generic;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
 {
@@ -38,20 +39,20 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
         {
             var conditionResult = Condition.Translate(context);
             var statementResult = Statement.Translate(context);
-            var statementBlock = statementResult.Silvernode.EncloseInBlockIfNotAlready();
+            var statementBlock = ((StatementSilvernode) statementResult.Silvernode).EncloseInBlockIfNotAlready();
           
             var errors = new List<Error>();
             errors.AddRange(conditionResult.Errors);
             foreach (var incrementor in Incrementors)
             {
                 var incrementorResult = incrementor.Translate(context);
-                statementBlock.Add(incrementorResult.Silvernode);
+                statementBlock.Add(incrementorResult.Silvernode as StatementSilvernode);
                 errors.AddRange(incrementorResult.Errors);
             }
             errors.AddRange(statementResult.Errors);
             // TODO declaration, initializers, incrementors
 
-            Silvernode whileNode =
+            WhileSilvernode whileNode =
                 new WhileSilvernode(
                     conditionResult.Silvernode,
                     statementResult.VerificationConditions,
@@ -63,7 +64,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             {
                 var initializerResult = initializer.Translate(context);
                 errors.AddRange(initializerResult.Errors);
-                sequence.List.Add(initializerResult.Silvernode);
+                sequence.List.Add(initializerResult.Silvernode as StatementSilvernode);
             }
             sequence.List.Add(whileNode);
             return TranslationResult.FromSilvernode(sequence, errors);

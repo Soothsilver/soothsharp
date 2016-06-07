@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using Microsoft.CodeAnalysis.CSharp;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
 {
@@ -27,7 +28,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
             var statementResult = Statement.Translate(context);
             SequenceSilvernode seq = new SequenceSilvernode(OriginalNode, 
                 new LabelSilvernode(identifier, OriginalNode),
-                statementResult.Silvernode
+                statementResult.Silvernode as StatementSilvernode
                 );
             return TranslationResult.FromSilvernode(seq, statementResult.Errors);
         }

@@ -8,6 +8,14 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
         private IdentifierDeclaration silverIdentifier;
         private IdentifierReference silverIdentifierReference;
 
+        public IdentifierSilvernode(Identifier identifier) : base(null)
+        {
+            if (identifier is IdentifierDeclaration)
+                silverIdentifier = identifier as IdentifierDeclaration;
+            else
+                silverIdentifierReference = identifier as IdentifierReference;
+        }
+
         public IdentifierSilvernode(SyntaxToken identifierToken, IdentifierDeclaration silverIdentifier) : base(identifierToken)
         {
             this.identifierToken = identifierToken;

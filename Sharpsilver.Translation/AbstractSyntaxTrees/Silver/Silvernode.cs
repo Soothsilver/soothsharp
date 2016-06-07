@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MoreLinq;
 using System.Threading.Tasks;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
@@ -12,6 +14,24 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
         public SyntaxNode OriginalNode;
         public SyntaxToken OriginalToken;
         public SyntaxTrivia OriginalTrivia;
+        protected int ColumnOffset;
+        protected virtual IEnumerable<Silvernode> Children => new Silvernode[0];
+
+        public Silvernode GetSilvernodeFromOffset(int offset)
+        {
+            int curoffset = offset;
+            foreach (var child in Children)
+            {
+                if (child.Size > curoffset)
+                {
+                    return child.GetSilvernodeFromOffset(curoffset);
+                }
+                curoffset -= child.Size;
+            }
+            return this;
+        }
+
+        protected int Size => ToString().Length;
 
         public virtual bool IsVerificationCondition()
         {
@@ -33,9 +53,19 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 
         public abstract override string ToString();
 
-        public virtual BlockSilvernode EncloseInBlockIfNotAlready()
+   
+
+        public virtual void Postprocess()
         {
-            return new BlockSilvernode(null, new List<Silvernode> {this});
+            foreach (var child in Children)
+            {
+                child.Postprocess();
+            }
+        }
+
+        public static implicit operator Silvernode(string s)
+        {
+            return new TextSilvernode(s);
         }
     }
 }

@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using System.Linq;
+using MoreLinq;
 using System;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
-    internal class MethodSilvernode : Silvernode
+    internal class MethodSilvernode : ComplexSilvernode
     {
         private IdentifierSilvernode identifierSilvernode;
-        private MethodDeclarationSyntax methodDeclarationSyntax;
         private BlockSilvernode block;
         private TypeSilvernode returnType;
         private List<VerificationConditionSilvernode> verificationConditions;
-        private List<ParameterSilvernode> Parameters = new List<ParameterSilvernode>();
+        private List<ParameterSilvernode> parameters;
         public MethodSilvernode(MethodDeclarationSyntax methodDeclarationSyntax,
             IdentifierSilvernode identifierSilvernode, 
             List<ParameterSilvernode> parameters,
@@ -22,38 +22,57 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
             BlockSilvernode block)
             : base(methodDeclarationSyntax)
         {
-            this.methodDeclarationSyntax = methodDeclarationSyntax;
             this.identifierSilvernode = identifierSilvernode;
             this.returnType = returnType;
             this.verificationConditions = verificationConditions;
             this.block = block;
-            this.Parameters = parameters;
+            this.parameters = parameters;
         }
-        public override string ToString()
+        protected override IEnumerable<Silvernode> Children
         {
-            string parametersString = string.Join(", ", Parameters.Select(p => p.Identifier + " : " + p.Type));
-            string returnsBlock = "";
-            if (!returnType.RepresentsVoid())
+            get
             {
-                returnsBlock = " returns ("
-                    + Constants.SilverReturnVariableName + " : " + returnType
-                    + ")";
+                var children = new List<Silvernode>();
+                children.AddRange(new Silvernode[]
+                {
+                    new TextSilvernode("method "),
+                    identifierSilvernode,
+                    new TextSilvernode(" (")
+                });
+                //  parametersSilvernodes,
+                children.AddRange(parameters.WithSeparator<Silvernode>(new TextSilvernode(", ")));
+                children.Add(new TextSilvernode(")"));
+
+                if (!returnType.RepresentsVoid())
+                {
+                    children.AddRange(new Silvernode[]
+                    {
+                        " returns (",
+                        Constants.SilverReturnVariableName,
+                        " : ",
+                        returnType,
+                        ")"
+                    });
+                }
+                if (verificationConditions.Any())
+                {
+                    children.Add("\n");
+                    children.AddRange(verificationConditions.WithSeparator<Silvernode>("\n").SelectMany(
+                        condition =>
+                        {
+                            if (condition is TextSilvernode) return new Silvernode[] {condition};
+                            return new Silvernode[] {"\t", condition};
+                        }
+                        ));
+                    children.Add("\n");
+                }
+                else
+                {
+                    children.Add(" ");
+                }
+                children.Add(block);
+                return children;
             }
-            // TODO handle identifiers better
-
-            return "method " + identifierSilvernode
-                + " ("
-                + parametersString
-                + ")"
-                + returnsBlock
-                + (verificationConditions.Any() ? "\n" + VerificationConditionsToString() + "\n" : " ")
-                + block.ToString();
-        }
-
-        private string VerificationConditionsToString()
-        {
-            string conditions = String.Join("\n", verificationConditions.Select(cond => "\t" + cond.ToString()));
-            return conditions;
         }
     }
 }

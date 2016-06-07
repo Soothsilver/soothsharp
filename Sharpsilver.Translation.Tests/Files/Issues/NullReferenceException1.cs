@@ -20,7 +20,9 @@ namespace sharpsilTesting
             Contract.Ensures(false);
             Contract.Ensures(a == Contract.IntegerResult == (a > b && a > c));
 
+#pragma warning disable 219
             float f = 2.0f;
+#pragma warning restore 219
 
 
             switch (true)

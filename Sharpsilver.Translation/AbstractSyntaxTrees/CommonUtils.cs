@@ -10,10 +10,10 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees
 {
     class CommonUtils
     {
-        public static TranslationResult CombineResults(IEnumerable<TranslationResult> results, SyntaxNode parent = null)
+        public static TranslationResult GetHighlevelSequence(IEnumerable<TranslationResult> results, SyntaxNode parent = null)
         {
             TranslationResult result = new TranslationResult();
-            SequenceSilvernode sequence = new SequenceSilvernode(parent);
+            HighlevelSequenceSilvernode sequence = new HighlevelSequenceSilvernode(parent);
             foreach(var incoming in results)
             {
                 result.Errors.AddRange(incoming.Errors);

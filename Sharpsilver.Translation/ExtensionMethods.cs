@@ -20,8 +20,16 @@ namespace Sharpsilver.Translation
     
         public static readonly SymbolDisplayFormat WithoutNamespacesNameDisplayFormat =
             new SymbolDisplayFormat(
+               
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
                 memberOptions: SymbolDisplayMemberOptions.IncludeContainingType);
+
+        public static readonly SymbolDisplayFormat SimpleSymbolFormat =
+            new SymbolDisplayFormat(
+                parameterOptions: SymbolDisplayParameterOptions.IncludeName,
+                localOptions: SymbolDisplayLocalOptions.None,
+                memberOptions: SymbolDisplayMemberOptions.None
+                );
 
         /// <summary>
         /// Gets the fully qualified name of the C# symbol that includes namespaces (for example, System.Int32) .
@@ -41,6 +49,10 @@ namespace Sharpsilver.Translation
         {
             return symbol.ToDisplayString(WithoutNamespacesNameDisplayFormat);
         }
+        public static string GetSimpleName(this ISymbol symbol)
+        {
+            return symbol.ToDisplayString(SimpleSymbolFormat);
+        }
         /// <summary>
         /// Increases line indent by one tab to the right for all lines in the input.
         /// </summary>
@@ -50,6 +62,21 @@ namespace Sharpsilver.Translation
         {
             string[] lines = input.Split('\n'); 
             return String.Join("\n", lines.Select(line => "\t" + line));
+        }
+
+        public static IEnumerable<T> WithSeparator<T>(this IEnumerable<T> sequence, T separator)
+        {
+            int i = 0;
+            int count = sequence.Count();
+            foreach (var t in sequence)
+            {
+                yield return t;
+                if (i != count - 1)
+                {
+                    yield return separator;
+                }
+                i++;
+            }
         }
     }
 }

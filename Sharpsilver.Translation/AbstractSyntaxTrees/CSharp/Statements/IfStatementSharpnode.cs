@@ -3,6 +3,7 @@ using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using Sharpsilver.Translation;
 using System.Collections.Generic;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
 {
@@ -31,8 +32,8 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
             return TranslationResult.FromSilvernode(new IfSilvernode(
                 OriginalNode,
                 conditionResult.Silvernode,
-                thenResult.Silvernode,
-                elseResult.Silvernode),
+                thenResult.Silvernode as StatementSilvernode,
+                elseResult.Silvernode as StatementSilvernode),
                 errors);
         }
     }

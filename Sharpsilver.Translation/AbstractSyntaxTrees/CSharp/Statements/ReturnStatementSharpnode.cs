@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using System.Collections.Generic;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
 {
@@ -20,17 +21,17 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            StatementsSilvernode statements = new StatementsSilvernode(OriginalNode);
+            SequenceSilvernode statements = new SequenceSilvernode(OriginalNode);
             var expr = Expression.Translate(context);
             var errors = new List<Error>();
             errors.AddRange(expr.Errors);
-            statements.Add(
+            statements.List.Add(
                 new AssignmentSilvernode(
                     new TextSilvernode(Constants.SilverReturnVariableName, OriginalNode),
                     expr.Silvernode,
                     OriginalNode
                 ));
-            statements.Add(
+            statements.List.Add(
                 new GotoSilvernode(Constants.SilverMethodEndLabel, OriginalNode)
             );
             return TranslationResult.FromSilvernode(statements, errors);

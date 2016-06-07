@@ -1,13 +1,10 @@
-﻿using Microsoft.CodeAnalysis;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
+namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements
 {
-    class GotoSilvernode : Silvernode
+    class GotoSilvernode : StatementSilvernode
     {
         public Identifier Identifier;
         public string Label;
@@ -20,10 +17,13 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
         {
             Label = text;
         }
-
-        public override string ToString()
+        protected override IEnumerable<Silvernode> Children
         {
-            return "goto " + (Identifier?.ToString() ?? Label);
+            get
+            {
+                yield return "goto ";
+                yield return (Identifier?.ToString() ?? Label);
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using System.Collections.Generic;
 using System.Linq;
 using Sharpsilver.Translation;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
 {
@@ -22,7 +23,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            List<Silvernode> statements = new List<Silvernode>();
+            List<StatementSilvernode> statements = new List<StatementSilvernode>();
             List<VerificationConditionSilvernode> verificationConditions = new List<VerificationConditionSilvernode>();
             List<Error> diagnostics = new List<Error>();
             foreach(var statement in Statements)
@@ -37,14 +38,19 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                     }
                     else
                     {
-                        statements.Add(statementResult.Silvernode);
+                        if (!(statementResult.Silvernode is StatementSilvernode))
+                        {
+                            throw new Exception(statementResult.Silvernode + " (" + statementResult.Silvernode.GetType() +
+                                                ") is not a statement silvernode.");
+                        }
+                        statements.Add((StatementSilvernode)statementResult.Silvernode);
+                        // TODO trigger nice error if failure
                     }
                 }
                 diagnostics.AddRange(statementResult.Errors);
             }
             BlockSilvernode block = new BlockSilvernode(BlockSyntax, statements);
-            TranslationResult r = new TranslationResult();
-            r.Silvernode = block;
+            TranslationResult r = new TranslationResult {Silvernode = block};
             verificationConditions.Sort();
             r.VerificationConditions = verificationConditions;
             r.Errors = diagnostics;

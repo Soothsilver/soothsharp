@@ -1,21 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
-    internal class ParameterSilvernode : Silvernode
+    internal class ParameterSilvernode : ComplexSilvernode
     {
         public TypeSilvernode Type;
-        public string Identifier;
-        public ParameterSilvernode(string identifier, TypeSilvernode type, SyntaxNode node) : base(node)
+        public Identifier Identifier;
+        public ParameterSilvernode(Identifier identifier, TypeSilvernode type, SyntaxNode node) : base(node)
         {
             Identifier = identifier;
             Type = type;
         }
 
-        public override string ToString()
+        protected override IEnumerable<Silvernode> Children
         {
-            throw new Exception("This ToString() method should never be called.");
+            get
+            {
+                yield return new IdentifierSilvernode(Identifier);
+                yield return " : ";
+                yield return Type;
+            }
         }
     }
 }

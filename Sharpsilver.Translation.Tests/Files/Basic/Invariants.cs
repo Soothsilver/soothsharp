@@ -1,14 +1,15 @@
 ﻿//SUCCEEDS
+
 using Sharpsilver.Contracts;
 using AlternativeNameForContract = Sharpsilver.Contracts.Contract;
 
-namespace Sharpsilver.TranslationTests.Files
+namespace Sharpsilver.Translation.Tests.Files.Basic
 {
     static class Invariants
     {
-        public static int sum(int n)
+        public static int Sum(int n)
         {
-            Sharpsilver.Contracts.Contract.Requires(n > 0);
+            Contract.Requires(n > 0);
             Contract.Ensures(AlternativeNameForContract.IntegerResult == n * (n + 1) / 2);
             int i = 0;
             int s = 0;
@@ -16,9 +17,11 @@ namespace Sharpsilver.TranslationTests.Files
             {
                 AlternativeNameForContract.Invariant(s == i * (i + 1) / 2);
                 AlternativeNameForContract.Invariant(i <= n);
+                goto endresult;
                 i++;
-                s++;
+                s = s + i;
             }
+            endresult:
             return s;
         }
     }

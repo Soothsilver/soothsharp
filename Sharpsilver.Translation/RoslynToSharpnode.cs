@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions;
+using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements;
 
 namespace Sharpsilver.Translation
@@ -174,21 +175,22 @@ namespace Sharpsilver.Translation
             }
         }
 
-        public static Sharpnode Map(SyntaxNode node, Sharpnode parent = null)
+        public static Sharpnode MapClassMember(MemberDeclarationSyntax node)
         {
             switch(node.Kind())
             {
                 // Supported declarations:
                 case SyntaxKind.MethodDeclaration:
-                    return new MethodSharpnode(node as MethodDeclarationSyntax, parent as ClassSharpnode);
+                    return new MethodSharpnode(node as MethodDeclarationSyntax);
 
                 // Declarations that are not supported (yet)
+                case SyntaxKind.FieldDeclaration:
+                    return new DiagnosticSharpnode(node, Diagnostics.SSIL105_FeatureNotYetSupported, "fields");
                 case SyntaxKind.AddAccessorDeclaration:
                 case SyntaxKind.AnonymousObjectMemberDeclarator:
                 case SyntaxKind.CatchDeclaration:
                 case SyntaxKind.ConstructorDeclaration:
                 case SyntaxKind.ConversionOperatorDeclaration:
-                // Handled elsewhere: case SyntaxKind.ClassDeclaration:
                 case SyntaxKind.DelegateDeclaration:
                 case SyntaxKind.DestructorDeclaration:
                 case SyntaxKind.EnumDeclaration:
@@ -198,19 +200,12 @@ namespace Sharpsilver.Translation
                 case SyntaxKind.GetAccessorDeclaration:
                 case SyntaxKind.IndexerDeclaration:
                 case SyntaxKind.InterfaceDeclaration:
-                // Handled elsewhere: case SyntaxKind.NamespaceDeclaration:
                 case SyntaxKind.OperatorDeclaration:
                 case SyntaxKind.PropertyDeclaration:
                 case SyntaxKind.RemoveAccessorDeclaration:
-                case SyntaxKind.SetAccessorDeclaration:
                 case SyntaxKind.StructDeclaration:
                 case SyntaxKind.UnknownAccessorDeclaration:
-                case SyntaxKind.VariableDeclaration:
                     return new UnknownSharpnode(node);
-                case SyntaxKind.FieldDeclaration:
-                    return new DiagnosticSharpnode(node, Diagnostics.SSIL105_FeatureNotYetSupported, "fields");
-                case SyntaxKind.CompilationUnit:
-                    return new CompilationUnitSharpnode(node as CompilationUnitSyntax);
                 default:
                     return new UnknownSharpnode(node);
             }

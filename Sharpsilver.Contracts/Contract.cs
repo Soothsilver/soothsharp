@@ -101,7 +101,26 @@ namespace Sharpsilver.Contracts
         /// <param name="assumption">The condition that the verifier will assume to be true without proving it.</param>
         public static void Assume(bool assumption)
         {
+        }
 
+        public static void Inhale(bool expression)
+        {
+
+        }
+        public static void Exhale(bool expression)
+        {
+
+        }
+
+        /// <summary>
+        /// Represents the permission to access the specified field. TODO
+        /// </summary>
+        /// <typeparam name="T">TODO</typeparam>
+        /// <param name="field">TODO</param>
+        /// <returns>TODO</returns>
+        public static bool Acc<T>(T field)
+        {
+            return true;
         }
     }
 }

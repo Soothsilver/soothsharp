@@ -30,7 +30,9 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
         public TranslationResult Translate(TranslationContext context, IParameterSymbol symbol)
         {
             Error err;
-            ParameterSilvernode ps = new ParameterSilvernode(Identifier,
+            ISymbol parameterSymbol = context.Semantics.GetDeclaredSymbol(ParameterSyntax);
+            Identifier identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(parameterSymbol);
+            ParameterSilvernode ps = new ParameterSilvernode(identifier,
                 new TypeSilvernode(Type.TypeSyntax, TypeTranslator.TranslateType(symbol.Type, Type.TypeSyntax, out err)), OriginalNode);
             var errlist = new List<Error>();
             if (err != null) errlist.Add(err);

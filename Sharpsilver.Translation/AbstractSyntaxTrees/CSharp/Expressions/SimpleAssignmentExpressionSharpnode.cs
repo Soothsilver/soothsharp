@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation;
 using System.Collections.Generic;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
 {
@@ -21,7 +22,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
             var left = Left.Translate(context);
             var right = Right.Translate(context);
             IEnumerable<Error> errors = CommonUtils.CombineErrors(left, right);
-            return TranslationResult.FromSilvernode(new BinaryExpressionSilvernode(left.Silvernode, ":=", right.Silvernode, OriginalNode), errors);
+            return TranslationResult.FromSilvernode(new AssignmentSilvernode(left.Silvernode, right.Silvernode, OriginalNode), errors);
         }
     }
 }

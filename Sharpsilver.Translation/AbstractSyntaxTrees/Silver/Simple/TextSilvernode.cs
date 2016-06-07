@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
-    class TextSilvernode : Silvernode
+    public class TextSilvernode : Silvernode
     {
         private string text;
-        public TextSilvernode(string text, SyntaxNode originalNode) : base(originalNode)
+        public TextSilvernode(string text, SyntaxNode originalNode = null) : base(originalNode)
         {
             this.text = text;
         }

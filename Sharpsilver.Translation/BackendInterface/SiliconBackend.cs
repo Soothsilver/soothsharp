@@ -14,8 +14,8 @@ namespace Sharpsilver.Translation.BackendInterface
     public class SiliconBackend : IBackend
     {
         private static List<Regex> harmlessLines = new List<Regex>();
-        private static Regex regexParseError = new Regex(@"Parse error: (.*) \(([^@]*@[^)]*)\)");
-        private static Regex regexCodePosition = new Regex(@"([^@]+)@([0-9]+)\.([0-9]+)");
+        private static Regex regexParseError = new Regex(@"Parse error: (.*) (\([^@]*@[^)]*\))");
+        private static Regex regexCodePosition = new Regex(@"\(([^@]+)@([0-9]+)\.([0-9]+)\)");
         static SiliconBackend()
         {
             harmlessLines.Add(new Regex("Silicon finished in .* seconds."));
@@ -23,6 +23,7 @@ namespace Sharpsilver.Translation.BackendInterface
             harmlessLines.Add(new Regex(@"\(c\) Copyright ETH Zurich .*"));
             harmlessLines.Add(new Regex("Silicon 1.1-SNAPSHOT .*"));
             harmlessLines.Add(new Regex("No errors detected."));
+            harmlessLines.Add(new Regex("No errors found."));
             harmlessLines.Add(new Regex("The following errors were found:"));
         }
 
@@ -49,9 +50,26 @@ namespace Sharpsilver.Translation.BackendInterface
                         continue;
                     }
                 }
-                errors.Add(new Error(Diagnostics.SSIL202_BackendUnknownLine, null, line));
-
-               nextline: ;
+                else
+                {
+                    var matches = regexCodePosition.Matches(line);
+                    if (matches.Count > 0)
+                    {
+                        var errorText = line.Trim();
+                        foreach (Match m in matches)
+                        {
+                            var codePosition = m.Value;
+                            errors.Add(new Error(Diagnostics.SSIL204_OtherLocalizedError,
+                                getSyntaxNodeFromCodePosition(codePosition, originalCode),
+                                errorText));
+                        }
+                    }
+                    else
+                    {
+                        errors.Add(new Error(Diagnostics.SSIL202_BackendUnknownLine, null, line.Trim()));
+                    }
+                }
+                nextline: ;
             }
 
             return errors;
@@ -68,7 +86,17 @@ namespace Sharpsilver.Translation.BackendInterface
                 int line = int.Parse(lineString);
                 int column = int.Parse(columnString);
                 // tut, tut, here we must do something smart.
-                return null;
+                string silvercode = originalCode.ToString();
+                string[] lines = silvercode.Split('\n');
+                int position = 0;
+                for (int i = 0; i < line-1; i++)
+                {
+                    position += lines[i].Length + 1;
+                }
+                position += column-1;
+                Silvernode silvernode = originalCode.GetSilvernodeFromOffset(position);
+
+                return silvernode.OriginalNode;
             }
             else
             {
@@ -96,7 +124,7 @@ namespace Sharpsilver.Translation.BackendInterface
                     .FirstOrDefault(File.Exists);
                 if (exePath == null) exePath = "silicon.bat";
                 p.StartInfo.FileName = exePath;
-                p.StartInfo.Arguments = filename;
+                p.StartInfo.Arguments = "\"" +  filename + "\"";
                 p.Start();
 
                 string output = p.StandardOutput.ReadToEnd();

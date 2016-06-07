@@ -1,38 +1,32 @@
-﻿using System;
-using Microsoft.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
-using System.Collections.Generic;
-using System.Linq;
-using Sharpsilver.Translation;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 using Sharpsilver.Translation.Translators;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
+namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel
 {
     internal class MethodSharpnode : Sharpnode
     {
         private MethodDeclarationSyntax methodDeclarationSyntax;
-        private ClassSharpnode parent;
-        private string name;
 
         public TypeSharpnode ReturnType;
-        public List<ParameterSharpnode> Parameters = new List<ParameterSharpnode>();
+        public List<ParameterSharpnode> Parameters;
         public BlockSharpnode Body;
 
-        public MethodSharpnode(MethodDeclarationSyntax method, ClassSharpnode parent) : base(method)
+        public MethodSharpnode(MethodDeclarationSyntax method) : base(method)
         {
-            this.methodDeclarationSyntax = method;
-            this.parent = parent;
-            this.name = method.Identifier.Text;
-            this.Parameters = method.ParameterList.Parameters.Select(parameterSyntax => new ParameterSharpnode(parameterSyntax)).ToList();
-            this.ReturnType = new TypeSharpnode(method.ReturnType);
-            this.Body = new BlockSharpnode(method.Body);
+            methodDeclarationSyntax = method;
+            Parameters = method.ParameterList.Parameters.Select(parameterSyntax => new ParameterSharpnode(parameterSyntax)).ToList();
+            ReturnType = new TypeSharpnode(method.ReturnType);
+            Body = new BlockSharpnode(method.Body);
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            TranslationResult result = new TranslationResult();
             var method = context.Process.SemanticModel.GetDeclaredSymbol(methodDeclarationSyntax);
             var identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(method);
             var innerContext = context;
@@ -46,23 +40,24 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                 return TranslationResult.FromSilvernode(new SinglelineCommentSilvernode($"Method {method.GetQualifiedName()} skipped because it was marked [Unverified].", OriginalNode));
             }
 
-            var SilverParameters = new List<ParameterSilvernode>();
+            var silverParameters = new List<ParameterSilvernode>();
             TranslationResult r = new TranslationResult();
             for (int i = 0; i < Parameters.Count; i++)
             {
                 ParameterSharpnode sharpnode = Parameters[i];
                 var symbol = method.Parameters[i];
                 var rrs = sharpnode.Translate(context, symbol);
-                SilverParameters.Add(rrs.Silvernode as ParameterSilvernode);
+                silverParameters.Add(rrs.Silvernode as ParameterSilvernode);
                 r.Errors.AddRange(rrs.Errors);
             }
             var innerStatements = body.Silvernode as BlockSilvernode;
+            Debug.Assert(innerStatements != null, "innerStatements != null");
             innerStatements.Add(new LabelSilvernode(Constants.SilverMethodEndLabel, null));
             var methodSilvernode = 
                 new MethodSilvernode(
                     methodDeclarationSyntax, // method
                     new IdentifierSilvernode(methodDeclarationSyntax.Identifier, identifier), // name
-                    SilverParameters,
+                    silverParameters,
                     new TypeSilvernode(
                         methodDeclarationSyntax.ReturnType,                    
                         TypeTranslator.TranslateType(

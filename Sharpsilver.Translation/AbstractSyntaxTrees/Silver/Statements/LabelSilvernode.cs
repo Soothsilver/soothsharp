@@ -1,13 +1,9 @@
-﻿using Microsoft.CodeAnalysis;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
+namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements
 {
-    class LabelSilvernode : Silvernode
+    class LabelSilvernode : StatementSilvernode
     {
         public IdentifierDeclaration Identifier;
         public string Label;
@@ -22,9 +18,13 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
             Label = text;
         }
 
-        public override string ToString()
+        protected override IEnumerable<Silvernode> Children
         {
-            return "label " + (Identifier?.ToString() ?? Label);
+            get
+            {
+                yield return "label ";
+                yield return (Identifier?.ToString() ?? Label);
+            }
         }
     }
 }

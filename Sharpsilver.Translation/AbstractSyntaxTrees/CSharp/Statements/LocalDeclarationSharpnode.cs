@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using Sharpsilver.Translation.Translators;
 using Microsoft.CodeAnalysis.CSharp;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
 {
@@ -47,14 +48,14 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            List<Silvernode> statements = new List<Silvernode>();
+            List<StatementSilvernode> statements = new List<StatementSilvernode>();
             List<Error> diagnostics = new List<Error>();
             foreach (var declaration in Declarations)
             {
                 var statementResult = declaration.Translate(context);
                 if (statementResult.Silvernode != null)
                 {
-                    statements.Add(statementResult.Silvernode);
+                    statements.Add(statementResult.Silvernode as StatementSilvernode);
                 }
                 diagnostics.AddRange(statementResult.Errors);
             }

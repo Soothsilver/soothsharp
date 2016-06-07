@@ -12,7 +12,7 @@ namespace Sharpsilver.Translation
     {
         private IdentifierTranslator identifierTranslator;
         public ISymbol Symbol;
-
+         
         public IdentifierDeclaration(ISymbol symbol, IdentifierTranslator identifierTranslator)
         {
             this.Symbol = symbol;

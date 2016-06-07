@@ -2,6 +2,7 @@
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using System.Collections.Generic;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation
 {
@@ -20,7 +21,7 @@ namespace Sharpsilver.Translation
         {
             var conditionResult = Condition.Translate(context);
             var statementResult = Statement.Translate(context);
-            var statementBlock = statementResult.Silvernode.EncloseInBlockIfNotAlready();
+            var statementBlock = ((StatementSilvernode)statementResult.Silvernode).EncloseInBlockIfNotAlready();
             var errors = new List<Error>();
             errors.AddRange(conditionResult.Errors);
             errors.AddRange(statementResult.Errors);

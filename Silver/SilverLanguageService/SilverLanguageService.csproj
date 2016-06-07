@@ -129,7 +129,7 @@
     <None Include="Key.snk" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Silver\Irony\Irony.csproj">
+    <ProjectReference Include="..\Irony\Irony.csproj">
       <Project>{d81f5c91-d7db-46e5-bc99-49488fb6814c}</Project>
       <Name>Irony</Name>
     </ProjectReference>

@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
+using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel;
 using Sharpsilver.Translation.Translators;
 
 namespace Sharpsilver.Translation
@@ -53,7 +54,7 @@ namespace Sharpsilver.Translation
             if (writeProgressToConsole) Console.WriteLine("- Mapping to sharpnodes.");
             try
             {
-                cSharpTree = RoslynToSharpnode.Map(root);
+                cSharpTree = new CompilationUnitSharpnode(tree.GetRoot() as CompilationUnitSyntax);
             }
             catch (Exception ex)
             {
@@ -75,6 +76,9 @@ namespace Sharpsilver.Translation
 
             // 5. Assign names to identifiers
             IdentifierTranslator.AssignTrueNames();
+
+            // 6. Postprocessing.
+            translationResult.Silvernode.Postprocess();
             return translationResult;
         }
         
