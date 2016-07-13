@@ -20,8 +20,9 @@ namespace Sharpsilver.Translation.Tests.Files.Basic
                 goto endresult;
                 i++;
                 s = s + i;
-            }
             endresult:
+                goto endresult;
+            }
             return s;
         }
     }

@@ -70,11 +70,15 @@
     <Compile Include="Files\Basic\Simple.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Files\Classes\List.cs" />
+    <Compile Include="Files\Classes\Sub\List.cs" />
     <Compile Include="Files\Issues\SimplePostCondition.cs" />
     <Compile Include="Files\Issues\NullReferenceException1.cs" />
     <Compile Include="Files\Mathematical\Theorems.cs" />
     <Compile Include="Files\Syntax\For.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="SystemTest.cs" />
+    <Compile Include="Systemwide\scala2silver\basic\Simple.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="TranslationTest.cs" />
@@ -97,10 +101,13 @@
       <Name>Sharpsilver.Translation</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y /S /E $(ProjectDir)Files $(SolutionDir)csverify\bin\Debug\Files
-xcopy /Y /S /E $(ProjectDir)Files $(ProjectDir)\bin\Debug\Files</PostBuildEvent>
+xcopy /Y /S /E $(ProjectDir)Files $(ProjectDir)\bin\Debug\Files
+xcopy /Y /S /E $(ProjectDir)Systemwide $(SolutionDir)csverify\bin\Debug\Systemwide
+xcopy /Y /S /E $(ProjectDir)Systemwide $(ProjectDir)\bin\Debug\Systemwide</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

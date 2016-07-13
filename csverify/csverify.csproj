@@ -73,7 +73,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SiliconRunner.cs" />
     <Content Include="icons\csverify1.ico" />
     <Compile Include="Csverify.cs" />
     <Compile Include="ErrorCode.cs" />

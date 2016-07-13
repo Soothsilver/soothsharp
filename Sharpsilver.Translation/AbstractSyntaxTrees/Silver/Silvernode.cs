@@ -17,18 +17,26 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
         protected int ColumnOffset;
         protected virtual IEnumerable<Silvernode> Children => new Silvernode[0];
 
-        public Silvernode GetSilvernodeFromOffset(int offset)
+        public SyntaxNode GetSyntaxNodeFromOffset(int offset)
         {
             int curoffset = offset;
             foreach (var child in Children)
             {
                 if (child.Size > curoffset)
                 {
-                    return child.GetSilvernodeFromOffset(curoffset);
+                    SyntaxNode childNode =  child.GetSyntaxNodeFromOffset(curoffset);
+                    if (childNode == null)
+                    {
+                        return this.OriginalNode;
+                    }
+                    else
+                    {
+                        return childNode;
+                    }
                 }
                 curoffset -= child.Size;
             }
-            return this;
+            return this.OriginalNode;
         }
 
         protected int Size => ToString().Length;

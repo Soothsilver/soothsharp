@@ -48,7 +48,6 @@ namespace Sharpsilver.Translation
                 case SyntaxKind.UnsafeStatement:
                     return new UnknownStatementSharpnode(statement, "unsafe code");
                 case SyntaxKind.BreakStatement:
-                case SyntaxKind.CheckedStatement:
                 case SyntaxKind.ContinueStatement:
                 case SyntaxKind.ForEachStatement:
                 case SyntaxKind.GlobalStatement:
@@ -56,10 +55,14 @@ namespace Sharpsilver.Translation
                 case SyntaxKind.GotoDefaultStatement:
                 case SyntaxKind.LockStatement:
                 case SyntaxKind.SwitchStatement:
+                case SyntaxKind.UsingStatement:
+                    return new UnknownStatementSharpnode(statement);
                 case SyntaxKind.ThrowStatement:
                 case SyntaxKind.TryStatement:
+                    return new UnknownStatementSharpnode(statement, "exceptions");
+                case SyntaxKind.CheckedStatement:
                 case SyntaxKind.UncheckedStatement:
-                case SyntaxKind.UsingStatement:
+                    return new UnknownStatementSharpnode(statement, "checked statements");
                 default:
                     return new UnknownStatementSharpnode(statement);
             }

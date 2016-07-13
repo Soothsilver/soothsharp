@@ -11,9 +11,10 @@ using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 
 namespace Sharpsilver.Translation.BackendInterface
 {
-    public class SiliconBackend : IBackend
+    public class CarbonBackend : IBackend
     {
-    
+        
+
         public VerificationResult Verify(Silvernode silvernode)
         {
             string silvercode = silvernode.ToString();
@@ -30,9 +31,9 @@ namespace Sharpsilver.Translation.BackendInterface
                 Debug.Assert(enviromentPath != null, "enviromentPath != null");
                 var paths = enviromentPath.Split(';');
                 var exePath = paths
-                    .Select(x => Path.Combine(x, "silicon.bat"))
+                    .Select(x => Path.Combine(x, "carbon.bat"))
                     .FirstOrDefault(File.Exists);
-                if (exePath == null) exePath = "silicon.bat";
+                if (exePath == null) exePath = "carbon.bat";
                 p.StartInfo.FileName = exePath;
                 p.StartInfo.Arguments = "\"" +  filename + "\"";
                 p.Start();
@@ -45,7 +46,7 @@ namespace Sharpsilver.Translation.BackendInterface
             }
             catch (Exception)
             {
-               return VerificationResult.Error(new Error(Diagnostics.SSIL201_BackendNotFound, null, "silicon.bat"));
+               return VerificationResult.Error(new Error(Diagnostics.SSIL201_BackendNotFound, null, "carbon.bat"));
             }
         }
     }

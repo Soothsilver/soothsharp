@@ -26,10 +26,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements
             HowManyTabsAfterEachNewline = tablevel;
             foreach (var child in Children)
             {
-                if (child is StatementSilvernode)
-                {
-                    ((StatementSilvernode) child).Postprocess(tablevel);
-                }
+                (child as StatementSilvernode)?.Postprocess(tablevel);
             }
         }
 

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel;
 using Sharpsilver.Translation.Translators;
@@ -61,7 +56,9 @@ namespace Sharpsilver.Translation
                 return TranslationResult.Error(null, Diagnostics.SSIL103_ExceptionConstructingCSharp, ex.ToString());
             }
 
-            // 4. Convert to Silver intermediate representation.
+            // 4. Collect types.
+
+            // 5. Convert to Silver intermediate representation.
             if (writeProgressToConsole) Console.WriteLine("- Translating.");
             TranslationResult translationResult;
             try
@@ -74,10 +71,10 @@ namespace Sharpsilver.Translation
                 return TranslationResult.Error(null, Diagnostics.SSIL104_ExceptionConstructingSilver, ex.ToString());
             }
 
-            // 5. Assign names to identifiers
+            // 6. Assign names to identifiers
             IdentifierTranslator.AssignTrueNames();
 
-            // 6. Postprocessing.
+            // 7. Postprocessing.
             translationResult.Silvernode.Postprocess();
             return translationResult;
         }

@@ -10,10 +10,11 @@ namespace Sharpsilver.Translation.Tests
 {
     public class TranslationTest
     {
-        [Theory()]
-        [MemberData("GetTestFiles")]
+      //  [Theory()]
+        [MemberData(nameof(GetTestFiles))]
         public void TranslationToSilverOk(string filename)
         { 
+
             string dir = AppDomain.CurrentDomain.BaseDirectory;
             string fullFilename = System.IO.Path.Combine(dir, filename);
             string csharpCode = System.IO.File.ReadAllText(fullFilename);

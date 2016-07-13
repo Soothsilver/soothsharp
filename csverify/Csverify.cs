@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Sharpsilver.Translation;
 using Mono.Options;
 using Sharpsilver.Translation.BackendInterface;
@@ -11,7 +12,8 @@ namespace Sharpsilver.StandaloneVerifier
         private static bool Verbose;
         private static bool WaitAfterwards;
         static bool OnlyAnnotated = false;
-        static bool UseSilicon = true;
+        static bool UseSilicon = false;
+        static bool UseCarbon = true;
         static string outputSilverFile = null;
 
         static string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -35,7 +37,8 @@ namespace Sharpsilver.StandaloneVerifier
                 .Add("w|wait", "When the program finishes, it will wait for the user to press any key before terminating.", option => WaitAfterwards = option != null)
                 .Add("O|only-annotated", "Only transcompile classes that have the [Verified] attribute, and static methods that have the [Verified] attribute even if their containing classes don't have the [Verified] attribute." , option => OnlyAnnotated = option != null)
                 .Add("o|output-file=", "Print the resulting Silver code into the {OUTPUT.SIL} file.", filename => outputSilverFile = filename)
-                .Add("s|silicon", "Use the Silicon backend to verify the Silver code. Silicon is the default verified. Usethe  \"-s-\" option to disable Silicon verification.", option => UseSilicon = option != null)
+                .Add("s|silicon", "Use the Silicon backend to verify the Silver code. Use the  \"-s-\" option to disable Silicon verification.", option => UseSilicon = option != null)
+                .Add("c|carbon", "Use the Carbon backend to verify the Silver code. Use the  \"-c-\" option to disable Carbon verification.", option => UseCarbon = option != null)
                 ;
             try
             {
@@ -75,6 +78,8 @@ namespace Sharpsilver.StandaloneVerifier
             Console.WriteLine();
             Console.WriteLine("Options:");
             optionSet.WriteOptionDescriptions(Console.Out);
+            Console.WriteLine();
+            Console.WriteLine("By default, the Carbon backend is used.");
         }
 
         private static ErrorCode RunVerification(
@@ -135,12 +140,15 @@ namespace Sharpsilver.StandaloneVerifier
                     }
                 }
                 // Run verifier
-                if (UseSilicon)
+                if (UseSilicon || UseCarbon)
                 {
                     Console.WriteLine("=======================");
                     if (result.WasTranslationSuccessful)
                     {
-                        SiliconBackend backend = new SiliconBackend();
+                        IBackend backend;
+                        if (UseSilicon) backend = new SiliconBackend();
+                        else backend = new CarbonBackend();
+
                         var verificationResult = backend.Verify(result.Silvernode);
                         Console.WriteLine(verificationResult.OriginalOutput);
                         Console.WriteLine("=======================");
@@ -157,9 +165,8 @@ namespace Sharpsilver.StandaloneVerifier
                     }
                     else
                     {
-                        Console.WriteLine("The translation was not successful so Silicon will not be run.");
+                        Console.WriteLine("The translation was not successful so a backend will not be run.");
                     }
-
                 }
                 if (WaitAfterwards)
                 {

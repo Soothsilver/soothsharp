@@ -174,6 +174,8 @@
     <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\VerificationConditionSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Statements\WhileSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Spansize.cs" />
+    <Compile Include="BackendInterface\BackendUtils.cs" />
+    <Compile Include="BackendInterface\CarbonBackend.cs" />
     <Compile Include="BackendInterface\Verifier.cs" />
     <Compile Include="BackendInterface\IBackend.cs" />
     <Compile Include="BackendInterface\SiliconBackend.cs" />
