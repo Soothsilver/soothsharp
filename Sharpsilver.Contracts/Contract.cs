@@ -122,5 +122,16 @@ namespace Sharpsilver.Contracts
         {
             return true;
         }
+
+        /// <summary>
+        /// Represents a read-only epsilon permission to access the specified field. TODO
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="field"></param>
+        /// <returns></returns>
+        public static bool Read<T>(T field)
+        {
+            return true;
+        }
     }
 }

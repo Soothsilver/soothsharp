@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -133,6 +132,19 @@ namespace Sharpsilver.Translation
                 // Assignment
                 case SyntaxKind.SimpleAssignmentExpression:
                     return new SimpleAssignmentExpressionSharpnode(expression as AssignmentExpressionSyntax);
+
+                // Compound assignment
+                case SyntaxKind.AddAssignmentExpression:
+                    return new CompoundAssignmentExpressionSharpnode(expression as AssignmentExpressionSyntax, "+");
+                case SyntaxKind.SubtractAssignmentExpression:
+                    return new CompoundAssignmentExpressionSharpnode(expression as AssignmentExpressionSyntax, "-");
+                case SyntaxKind.MultiplyAssignmentExpression:
+                    return new CompoundAssignmentExpressionSharpnode(expression as AssignmentExpressionSyntax, "*");
+                case SyntaxKind.DivideAssignmentExpression:
+                    return new CompoundAssignmentExpressionSharpnode(expression as AssignmentExpressionSyntax, "/");
+                case SyntaxKind.ModuloAssignmentExpression:
+                    return new CompoundAssignmentExpressionSharpnode(expression as AssignmentExpressionSyntax, "\\");
+
                 // Invocation
                 case SyntaxKind.InvocationExpression:
                     return new InvocationExpressionSharpnode(expression as InvocationExpressionSyntax);

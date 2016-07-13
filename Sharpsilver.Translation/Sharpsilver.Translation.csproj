@@ -130,13 +130,14 @@
     <Compile Include="AbstractSyntaxTrees\Silver\Expressions\ExpressionSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\HighlevelSequenceSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Simple\NewlineSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Statements\ErrorStatementSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Statements\StatementSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Statements\VarStatementSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Statements\LocalVariableDeclarationSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\InvariantSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\VerificationConditions\RequiresSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\UnaryExpressionSilvernode.cs" />
-    <Compile Include="AbstractSyntaxTrees\Silver\BinaryExpressionSilvernode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\Expressions\BinaryExpressionSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\InvocationExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\BinaryExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\ExpressionSharpnode.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="BackendInterface\IBackend.cs" />
     <Compile Include="BackendInterface\SiliconBackend.cs" />
     <Compile Include="BackendInterface\VerificationResult.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\CompoundAssignmentExpressionSharpnode.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\IdentifierExpressionSharpnode.cs" />
     <Compile Include="Diagnostics\Diagnostics.cs" />

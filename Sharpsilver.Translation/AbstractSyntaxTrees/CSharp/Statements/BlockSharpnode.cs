@@ -40,11 +40,12 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
                     {
                         if (!(statementResult.Silvernode is StatementSilvernode))
                         {
-                            throw new Exception(statementResult.Silvernode + " (" + statementResult.Silvernode.GetType() +
-                                                ") is not a statement silvernode.");
+                            diagnostics.Add(new Error(Diagnostics.SSIL111_NonStatement, statement.OriginalNode, statementResult.Silvernode.ToString()));
                         }
-                        statements.Add((StatementSilvernode)statementResult.Silvernode);
-                        // TODO trigger nice error if failure
+                        else
+                        {
+                            statements.Add((StatementSilvernode) statementResult.Silvernode);
+                        }
                     }
                 }
                 diagnostics.AddRange(statementResult.Errors);

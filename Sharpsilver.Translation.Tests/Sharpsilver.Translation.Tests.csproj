@@ -78,6 +78,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="SystemTest.cs" />
+    <Compile Include="Systemwide\scala2silver\basic\Fields.cs" />
+    <Compile Include="Systemwide\scala2silver\basic\Implications.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Systemwide\scala2silver\basic\Invariants.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Systemwide\scala2silver\basic\Simple.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
