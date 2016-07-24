@@ -25,6 +25,8 @@ namespace Sharpsilver.Contracts
             }
         }
 
+  
+
         /// <summary>
         /// Within contracts, represents the return value of a method. Can only be used in method postconditions.
         /// </summary>
@@ -130,6 +132,16 @@ namespace Sharpsilver.Contracts
         /// <param name="field"></param>
         /// <returns></returns>
         public static bool Read<T>(T field)
+        {
+            return true;
+        }
+        /// <summary>
+        /// Represents a full write permission to access the specified field.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="field"></param>
+        /// <returns></returns>
+        public static bool Write<T>(T field)
         {
             return true;
         }

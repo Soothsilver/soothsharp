@@ -50,22 +50,22 @@ namespace Sharpsilver.StandaloneVerifier
                 Console.WriteLine("Error: {0}", ex.Message);
                 Console.WriteLine();
                 WriteHelp(optionset);
-                return (int)ErrorCode.ERROR;
+                return (int)ErrorCode.Error;
             }
             if (showVersion)
             {
                 Console.WriteLine(header);
-                return (int)ErrorCode.SUCCESS;
+                return (int)ErrorCode.Success;
             }
             if (showHelp || args.Length == 0)
             {
                 WriteHelp(optionset);
-                return (int)ErrorCode.SUCCESS;
+                return (int)ErrorCode.Success;
             }
             if (verifiedFiles.Count < 1)
             {
                 Console.WriteLine("You must specify at least 1 file to verify.");
-                return (int)ErrorCode.ERROR;
+                return (int)ErrorCode.Error;
             }
             return (int)RunVerification(verifiedFiles, assumedFiles, references);
         }
@@ -96,7 +96,7 @@ namespace Sharpsilver.StandaloneVerifier
                 if (!System.IO.File.Exists(csharpFilename))
                 {
                     Console.WriteLine("The first argument must be a C# file.");
-                    return ErrorCode.ERROR;
+                    return ErrorCode.Error;
                 }
                 if (Verbose) Console.WriteLine("- Reading file from disk.");
                 string csharpCode = System.IO.File.ReadAllText(csharpFilename);
@@ -136,7 +136,7 @@ namespace Sharpsilver.StandaloneVerifier
                     {
                         Console.WriteLine(
                             $"Error - Silver code could not be written to {outputSilverFile}. Check that you have write permissions to that location and that the directory leading up to it exists.");
-                        return ErrorCode.ERROR;
+                        return ErrorCode.Error;
                     }
                 }
                 // Run verifier
@@ -177,11 +177,11 @@ namespace Sharpsilver.StandaloneVerifier
                 }
                 if (result.WasTranslationSuccessful)
                 {
-                    return ErrorCode.SUCCESS;
+                    return ErrorCode.Success;
                 }
                 else
                 {
-                    return ErrorCode.ERROR;
+                    return ErrorCode.Error;
                 }
             }
             catch (System.IO.IOException exception)
@@ -191,7 +191,7 @@ namespace Sharpsilver.StandaloneVerifier
                 {
                     Console.WriteLine(exception.ToString());
                 }
-                return ErrorCode.ERROR;
+                return ErrorCode.Error;
             }
         }
     }
