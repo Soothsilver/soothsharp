@@ -27,5 +27,14 @@ namespace Sharpsilver.Translation
         /// return statements).
         /// </summary>
         public const string SilverMethodEndLabel = "end";
+
+        /// <summary>
+        /// Name of the "silver type" for the superclass of all classes, System.Object.
+        /// </summary>
+        public const string SilverSystemObject = "System_Object";
+
+        public const string CSharpTypeDomain = "CSharpType";
+        public const string TypeOfFunction = "typeof";
+        public const string IsSubTypeFunction = "isSubtype";
     }
 }

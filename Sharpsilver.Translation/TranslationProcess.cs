@@ -5,6 +5,9 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
 using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel;
 using Sharpsilver.Translation.Translators;
+using System.Collections.Generic;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Intermediate;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 
 namespace Sharpsilver.Translation
 {
@@ -14,10 +17,19 @@ namespace Sharpsilver.Translation
         public SemanticModel SemanticModel;
         public IdentifierTranslator IdentifierTranslator = new IdentifierTranslator();
         public ContractsTranslator ContractsTranslator;
-
+        private List<CollectedType> collectedTypes = new List<CollectedType>();
+        public CollectedType AddToCollectedTypes(ClassSharpnode classSharpnode)
+        {
+            var name = IdentifierTranslator.RegisterAndGetIdentifier(
+                SemanticModel.GetDeclaredSymbol(classSharpnode.DeclarationSyntax));
+            var superclassObject = IdentifierTranslator.SystemObject;
+            CollectedType type = new CollectedType(name, superclassObject);
+            collectedTypes.Add(type);
+            return type;
+        }
         public TranslationProcess()
         {
-            ContractsTranslator =   new ContractsTranslator(this);
+            this.ContractsTranslator =   new ContractsTranslator(this);
         }
         public TranslationResult TranslateCode(string csharpCode, bool writeProgressToConsole = false)
         {
@@ -29,12 +41,11 @@ namespace Sharpsilver.Translation
 
         public TranslationResult TranslateTree(SyntaxTree tree, bool writeProgressToConsole = false)
         {
-            var root = (CompilationUnitSyntax)tree.GetRoot();
-            var mscorlib = MetadataReference.CreateFromFile(typeof(System.Attribute).Assembly.Location);
+            var mscorlib = MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location);
 
             // 1. Prepare compilation object.
             if (writeProgressToConsole) Console.WriteLine("- Compiling.");
-            Compilation = CSharpCompilation.Create("translated_assembly")
+            this.Compilation = CSharpCompilation.Create("translated_assembly")
                                     .AddSyntaxTrees(tree)
                                     .AddReferences(mscorlib)
                                     .AddReferences(MetadataReference.CreateFromFile("Sharpsilver.Contracts.dll"))
@@ -42,7 +53,7 @@ namespace Sharpsilver.Translation
 
             // 2. Prepare semantic analysis.
             if (writeProgressToConsole) Console.WriteLine("- Creating semantic model.");
-            SemanticModel = Compilation.GetSemanticModel(tree, true);
+            this.SemanticModel = this.Compilation.GetSemanticModel(tree, true);
 
             // 3. Convert to Sharpnode intermediate representation.
             Sharpnode cSharpTree;
@@ -57,6 +68,7 @@ namespace Sharpsilver.Translation
             }
 
             // 4. Collect types.
+            cSharpTree.CollectTypesInto(this);
 
             // 5. Convert to Silver intermediate representation.
             if (writeProgressToConsole) Console.WriteLine("- Translating.");
@@ -71,13 +83,31 @@ namespace Sharpsilver.Translation
                 return TranslationResult.Error(null, Diagnostics.SSIL104_ExceptionConstructingSilver, ex.ToString());
             }
 
+            // 5a. Add types and common code
+            HighlevelSequenceSilvernode rootSilvernode = new AbstractSyntaxTrees.Silver.HighlevelSequenceSilvernode(
+                null, translationResult.Silvernode);
+
+            HighlevelSequenceSilvernode axioms = new HighlevelSequenceSilvernode(null);
+
+            CSharpTypeDomainSilvernode domain = new CSharpTypeDomainSilvernode(axioms);
+
+            rootSilvernode.List.Add(domain);
+            foreach (var collectedType in collectedTypes)
+            {
+                rootSilvernode.List.Add(collectedType.GenerateGlobalSilvernode());
+                axioms.List.Add(collectedType.GenerateSilvernodeInsideCSharpType());
+            }
+
+            
             // 6. Assign names to identifiers
-            IdentifierTranslator.AssignTrueNames();
+            this.IdentifierTranslator.AssignTrueNames();
 
             // 7. Postprocessing.
-            translationResult.Silvernode.Postprocess();
+            rootSilvernode.Postprocess();
+            translationResult.Silvernode = rootSilvernode;
             return translationResult;
         }
-        
+
+     
     }
 }

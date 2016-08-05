@@ -67,14 +67,15 @@ namespace Sharpsilver.Translation.Translators
             "Perm",
             "Ref"
         };
-        private readonly Dictionary<ISymbol, IdentifierDeclaration> registeredGlobalSymbols =
-            new Dictionary<ISymbol, IdentifierDeclaration>();
-        private readonly Dictionary<ISymbol, IdentifierReference> references = new Dictionary<ISymbol, IdentifierReference>();
+        private readonly Dictionary<TaggedSymbol, IdentifierDeclaration> registeredGlobalSymbols = new Dictionary<TaggedSymbol, IdentifierDeclaration>();
+        private readonly Dictionary<TaggedSymbol, IdentifierReference> references = new Dictionary<TaggedSymbol, IdentifierReference>();
+        public readonly IdentifierReference SystemObject = new IdentifierReference(Constants.SilverSystemObject);
 
         private readonly List<string> usedSilverIdentifiers = new List<string>
         {
             Constants.SilverMethodEndLabel,
             Constants.SilverReturnVariableName,
+            Constants.SilverSystemObject,
             ""
         }.Union(SilverKeywords).ToList();
 
@@ -92,19 +93,29 @@ namespace Sharpsilver.Translation.Translators
 
         public IdentifierDeclaration RegisterAndGetIdentifier(ISymbol method)
         {
-            IdentifierDeclaration identifier = new IdentifierDeclaration(method, this);
-            registeredGlobalSymbols.Add(method, identifier);
+            return RegisterAndGetIdentifierWithTag(method, "");
+        }
+        public IdentifierDeclaration RegisterAndGetIdentifierWithTag(ISymbol classSymbol, string init)
+        {
+            var taggedSymbol = new TaggedSymbol(classSymbol, init);
+            IdentifierDeclaration identifier = new IdentifierDeclaration(taggedSymbol, this);
+            registeredGlobalSymbols.Add(taggedSymbol, identifier);
             return identifier;
         }
 
         public IdentifierReference GetIdentifierReference(ISymbol method)
         {
-            if (references.ContainsKey(method))
+            return GetIdentifierReferenceWithTag(method, "");
+        }
+        public IdentifierReference GetIdentifierReferenceWithTag(ISymbol method, string tag)
+        {
+            var taggedSymbol = new TaggedSymbol(method, tag);
+            if (references.ContainsKey(taggedSymbol))
             {
-                return references[method];
+                return references[taggedSymbol];
             }
-            IdentifierReference reference = new IdentifierReference(method, this);
-            references.Add(method, reference);
+            IdentifierReference reference = new IdentifierReference(taggedSymbol, this);
+            references.Add(taggedSymbol, reference);
             return reference;
         }
 
@@ -117,11 +128,15 @@ namespace Sharpsilver.Translation.Translators
         {
             foreach (var kvp in registeredGlobalSymbols)
             {
-                ISymbol symbol = kvp.Value.Symbol;
+                ISymbol symbol = kvp.Value.Symbol.Symbol;
                 string baseSilverName = silverize(symbol.GetNameWithoutNamespaces());
-                if (kvp.Key is IParameterSymbol)
+                if (kvp.Key.Symbol is IParameterSymbol)
                 {
                     baseSilverName = symbol.GetSimpleName();
+                }
+                if (kvp.Key.Tag != "")
+                {
+                    baseSilverName += "_" + kvp.Key.Tag;
                 }
                 string silverName = baseSilverName;
                 int i = 2;
@@ -146,5 +161,7 @@ namespace Sharpsilver.Translation.Translators
                 }
             }
         }
+
+     
     }
 }

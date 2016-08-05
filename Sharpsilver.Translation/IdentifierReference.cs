@@ -11,12 +11,20 @@ namespace Sharpsilver.Translation
     public class IdentifierReference : Identifier
     {
         private IdentifierTranslator identifierTranslator;
-        private ISymbol method;
+        private TaggedSymbol symbol;
 
-        public IdentifierReference(ISymbol method, IdentifierTranslator identifierTranslator)
+        public IdentifierReference(TaggedSymbol symbol, IdentifierTranslator identifierTranslator)
         {
-            this.method = method;
+            this.symbol = symbol;
             this.identifierTranslator = identifierTranslator;
+        }
+
+        /// <summary>
+        /// Creates a reference directly from a Silver name.
+        /// </summary>
+        public IdentifierReference(string silvername)
+        {
+            this.Silvername = silvername;
         }
 
         public string Silvername { get; set; }

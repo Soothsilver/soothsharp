@@ -10,11 +10,11 @@ using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Simple;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
-    public class HighlevelSequenceSilvernode : ComplexSilvernode
+    class SimpleSequenceSilvernode : ComplexSilvernode
     {
         public List<Silvernode> List;
 
-        public HighlevelSequenceSilvernode(SyntaxNode originalNode, params Silvernode[] topLevelSilvernodes)
+        public SimpleSequenceSilvernode(SyntaxNode originalNode, params Silvernode[] topLevelSilvernodes)
             : base(originalNode)
         {
             List = new List<Silvernode>(topLevelSilvernodes);
@@ -22,7 +22,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
         
         protected override IEnumerable<Silvernode> Children
         {
-            get { return List.SelectMany(s => new Silvernode[] {s, new NewlineSilvernode()}); }
+            get { return List.SelectMany(s => new Silvernode[] {s }); }
         }
     }
 }

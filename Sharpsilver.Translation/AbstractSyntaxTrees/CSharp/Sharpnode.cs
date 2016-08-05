@@ -16,9 +16,19 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
 
         protected Sharpnode(SyntaxNode originalNode)
         {
-            OriginalNode = originalNode;
+            this.OriginalNode = originalNode;
         }
 
         public abstract TranslationResult Translate(TranslationContext context);
+
+        /// <summary>
+        /// Collects all C# types from all children and adds them to the collection in the <see cref="TranslationProcess"/>. If this node
+        /// is a type declaration, this node is collected as well. If this node is a class declaration, its instance fields are also processed.
+        /// </summary>
+        /// <param name="translationProcess">The process to add the types into.</param>
+        public virtual void CollectTypesInto(TranslationProcess translationProcess)
+        {
+            // For most sharpnodes, do nothing.
+        }
     }
 }

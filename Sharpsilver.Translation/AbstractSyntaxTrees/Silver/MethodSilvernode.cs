@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Linq;
 using MoreLinq;
 using System;
+using Microsoft.CodeAnalysis;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
@@ -14,7 +15,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
         private TypeSilvernode returnType;
         private List<VerificationConditionSilvernode> verificationConditions;
         private List<ParameterSilvernode> parameters;
-        public MethodSilvernode(MethodDeclarationSyntax methodDeclarationSyntax,
+        public MethodSilvernode(SyntaxNode methodDeclarationSyntax,
             IdentifierSilvernode identifierSilvernode, 
             List<ParameterSilvernode> parameters,
             TypeSilvernode returnType, 
@@ -60,8 +61,8 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
                     children.AddRange(verificationConditions.WithSeparator<Silvernode>("\n").SelectMany(
                         condition =>
                         {
-                            if (condition is TextSilvernode) return new Silvernode[] {condition};
-                            return new Silvernode[] {"\t", condition};
+                            if (condition is TextSilvernode) return new[] {condition};
+                            return new[] {"\t", condition};
                         }
                         ));
                     children.Add("\n");

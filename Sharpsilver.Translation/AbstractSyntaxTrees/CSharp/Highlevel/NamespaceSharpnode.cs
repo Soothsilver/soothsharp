@@ -10,9 +10,10 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel
 
         public NamespaceSharpnode(NamespaceDeclarationSyntax node) : base(node)
         {
-            children.AddRange(node.Members.Select<MemberDeclarationSyntax, Sharpnode>(
+            this.children.AddRange(node.Members.Select<MemberDeclarationSyntax, Sharpnode>(
               mbr =>
               {
+                  // ReSharper disable once SwitchStatementMissingSomeCases
                   switch (mbr.Kind())
                   {
                       case Microsoft.CodeAnalysis.CSharp.SyntaxKind.NamespaceDeclaration:
@@ -29,7 +30,15 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel
 
         public override TranslationResult Translate(TranslationContext translationContext)
         {
-            return CommonUtils.GetHighlevelSequence(children.Select(child => child.Translate(translationContext)), OriginalNode);
+            return CommonUtils.GetHighlevelSequence(this.children.Select(child => child.Translate(translationContext)), this.OriginalNode);
+        }
+
+        public override void CollectTypesInto(TranslationProcess translationProcess)
+        {
+            foreach (Sharpnode sharpnode in this.children)
+            {
+                sharpnode.CollectTypesInto(translationProcess);
+            }
         }
     }
 }

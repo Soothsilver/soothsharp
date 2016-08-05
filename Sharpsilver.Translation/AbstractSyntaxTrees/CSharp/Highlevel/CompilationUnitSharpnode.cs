@@ -11,7 +11,7 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel
         public CompilationUnitSharpnode(CompilationUnitSyntax node) : base(node)
         {
             // Using directives ignored.
-            children.AddRange(node.Members.Select(
+            this.children.AddRange(node.Members.Select(
                 mbr => mbr is NamespaceDeclarationSyntax
                     ? new NamespaceSharpnode((NamespaceDeclarationSyntax) mbr) as Sharpnode
                     : new UnexpectedSharpnode(mbr) as Sharpnode));
@@ -19,8 +19,16 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var results = children.Select(child => child.Translate(context));
-            return CommonUtils.GetHighlevelSequence(results, OriginalNode);
+            var results = this.children.Select(child => child.Translate(context));
+            return CommonUtils.GetHighlevelSequence(results, this.OriginalNode);
+        }
+
+        public override void CollectTypesInto(TranslationProcess translationProcess)
+        {
+            foreach (Sharpnode child in this.children)
+            {
+                child.CollectTypesInto(translationProcess);
+            }
         }
     }
 }

@@ -192,19 +192,23 @@ namespace Sharpsilver.Translation
 
         public static Sharpnode MapClassMember(MemberDeclarationSyntax node)
         {
+            // ReSharper disable once SwitchStatementMissingSomeCases
             switch(node.Kind())
             {
                 // Supported declarations:
                 case SyntaxKind.MethodDeclaration:
                     return new MethodSharpnode(node as MethodDeclarationSyntax);
 
-                // Declarations that are not supported (yet)
                 case SyntaxKind.FieldDeclaration:
-                    return new DiagnosticSharpnode(node, Diagnostics.SSIL105_FeatureNotYetSupported, "fields");
+                    return new FieldDeclarationSharpnode(node as FieldDeclarationSyntax);
+                    
+                case SyntaxKind.ConstructorDeclaration:
+                    return new ConstructorSharpnode(node as ConstructorDeclarationSyntax);
+
+                // Declarations that are not supported 
                 case SyntaxKind.AddAccessorDeclaration:
                 case SyntaxKind.AnonymousObjectMemberDeclarator:
                 case SyntaxKind.CatchDeclaration:
-                case SyntaxKind.ConstructorDeclaration:
                 case SyntaxKind.ConversionOperatorDeclaration:
                 case SyntaxKind.DelegateDeclaration:
                 case SyntaxKind.DestructorDeclaration:

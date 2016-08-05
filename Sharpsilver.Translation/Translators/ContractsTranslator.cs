@@ -10,12 +10,8 @@ namespace Sharpsilver.Translation.Translators
 {
     public class ContractsTranslator
     {
-        private const string ContractsNamespace = 
-            nameof(Sharpsilver) + "." + 
-            nameof(Sharpsilver.Contracts) + ".";
-        private const string ContractsClass = 
-            ContractsNamespace + 
-            nameof(Sharpsilver.Contracts.Contract) + ".";
+        private const string ContractsNamespace = nameof(Sharpsilver) + "." + nameof(Contracts) + ".";
+        private const string ContractsClass = ContractsNamespace + nameof(Contract) + ".";
         public const string ContractEnsures = ContractsClass + nameof(Contract.Ensures);
         public const string ContractRequires = ContractsClass + nameof(Contract.Requires);
         public const string ContractInvariant = ContractsClass + nameof(Contract.Invariant);
@@ -25,17 +21,17 @@ namespace Sharpsilver.Translation.Translators
         public const string Implication = "System.Boolean." + nameof(StaticExtension.Implies);
 
 
-        public const string SilvernameAttribute = ContractsNamespace + nameof(Sharpsilver.Contracts.SilvernameAttribute);
-        public const string PredicateAttribute = ContractsNamespace + nameof(Sharpsilver.Contracts.PredicateAttribute);
-        public const string PureAttribute = ContractsNamespace + nameof(Sharpsilver.Contracts.PureAttribute);
-        public const string VerifiedAttribute = ContractsNamespace + nameof(Sharpsilver.Contracts.VerifiedAttribute);
-        public const string UnverifiedAttribute = ContractsNamespace + nameof(Sharpsilver.Contracts.UnverifiedAttribute);
+        public const string SilvernameAttribute = ContractsNamespace + nameof(Contracts.SilvernameAttribute);
+        public const string PredicateAttribute = ContractsNamespace + nameof(Contracts.PredicateAttribute);
+        public const string PureAttribute = ContractsNamespace + nameof(Contracts.PureAttribute);
+        public const string VerifiedAttribute = ContractsNamespace + nameof(Contracts.VerifiedAttribute);
+        public const string UnverifiedAttribute = ContractsNamespace + nameof(Contracts.UnverifiedAttribute);
         
         private TranslationProcess parent;
 
         public ContractsTranslator(TranslationProcess process)
         {
-            parent = process;
+            this.parent = process;
         }
         
     }

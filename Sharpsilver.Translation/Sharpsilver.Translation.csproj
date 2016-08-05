@@ -108,6 +108,7 @@
     <Compile Include="AbstractSyntaxTrees\CommonUtils.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\DiagnosticExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\IncrementExpressionSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Highlevel\ConstructorSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\BlockSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\SimpleAssignmentExpressionSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\ParenthesizedExpressionSharpnode.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\LocalDeclarationSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\ForStatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\Intermediate\CollectedType.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\SimpleSequenceSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\Statements\AssignmentSilvernode.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\ReturnStatementSharpnode.cs" />
     <Compile Include="AbstractSyntaxTrees\Silver\ComplexSilvernode.cs" />
@@ -184,7 +186,9 @@
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\CompoundAssignmentExpressionSharpnode.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Expressions\IdentifierExpressionSharpnode.cs" />
+    <Compile Include="AbstractSyntaxTrees\Silver\CSharpTypeDomainSilvernode.cs" />
     <Compile Include="Diagnostics\Diagnostics.cs" />
+    <Compile Include="AbstractSyntaxTrees\CSharp\Highlevel\FieldDeclarationSharpnode.cs" />
     <Compile Include="Identifier.cs" />
     <Compile Include="IdentifierReference.cs" />
     <Compile Include="IdentifierDeclaration.cs" />
@@ -201,6 +205,7 @@
     <Compile Include="TranslationContext.cs" />
     <Compile Include="TranslationResult.cs" />
     <Compile Include="RoslynToSharpnode.cs" />
+    <Compile Include="Translators\TaggedSymbol.cs" />
     <Compile Include="Translators\TypeTranslator.cs" />
     <Compile Include="AbstractSyntaxTrees\CSharp\Statements\WhileStatementSharpnode.cs" />
   </ItemGroup>

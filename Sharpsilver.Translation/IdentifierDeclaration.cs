@@ -11,9 +11,9 @@ namespace Sharpsilver.Translation
     public class IdentifierDeclaration : Identifier
     {
         private IdentifierTranslator identifierTranslator;
-        public ISymbol Symbol;
+        public TaggedSymbol Symbol;
          
-        public IdentifierDeclaration(ISymbol symbol, IdentifierTranslator identifierTranslator)
+        public IdentifierDeclaration(TaggedSymbol symbol, IdentifierTranslator identifierTranslator)
         {
             this.Symbol = symbol;
             this.identifierTranslator = identifierTranslator;

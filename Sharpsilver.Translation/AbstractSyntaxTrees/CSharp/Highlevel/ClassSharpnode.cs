@@ -1,33 +1,64 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 using Sharpsilver.Translation.Translators;
+using Sharpsilver.Translation.AbstractSyntaxTrees.Intermediate;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel
 {
-    internal class ClassSharpnode : Sharpnode
+    /// <summary>
+    /// Represents a class declaration in the C# abstract syntax tree.
+    /// </summary>
+    public class ClassSharpnode : Sharpnode
     {
+        public ClassDeclarationSyntax DeclarationSyntax { get; }
+        public bool IsStatic;
         private List<Sharpnode> children = new List<Sharpnode>();
+        /// <summary>
+        /// If this sharpnode's type was already collected by the translation process, then this contains a reference to the type. Use this
+        /// to fill in instance fields, for example.
+        /// </summary>
+        public CollectedType TypeIfCollected;
         
 
         public ClassSharpnode(ClassDeclarationSyntax node) : base(node)
         {
-            children.AddRange(node.Members.Select(mbr => RoslynToSharpnode.MapClassMember(mbr)));
+            this.DeclarationSyntax = node;
+            this.IsStatic = node.Modifiers.Any(syntaxToken => syntaxToken.Kind() == SyntaxKind.StaticKeyword);
+            this.children.AddRange(node.Members.Select(RoslynToSharpnode.MapClassMember));
+            if (node.Members.All(mds => mds.Kind() != SyntaxKind.ConstructorDeclaration) && !this.IsStatic)
+            {
+                this.children.Add(new ConstructorSharpnode(this));
+            }
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var classSymbol = context.Process.SemanticModel.GetDeclaredSymbol(OriginalNode as ClassDeclarationSyntax);
+            var classSymbol = context.Process.SemanticModel.GetDeclaredSymbol(this.OriginalNode as ClassDeclarationSyntax);
 
             var attributes = classSymbol.GetAttributes();
             
             if (attributes.Any(attribute => attribute.AttributeClass.GetQualifiedName() == ContractsTranslator.UnverifiedAttribute))
             {
-                return TranslationResult.FromSilvernode(new SinglelineCommentSilvernode($"Class {classSymbol.GetQualifiedName()} skipped because it was marked [Unverified].", OriginalNode));
+                return TranslationResult.FromSilvernode(new SinglelineCommentSilvernode($"Class {classSymbol.GetQualifiedName()} skipped because it was marked [Unverified].", this.OriginalNode));
             }
-            return CommonUtils.GetHighlevelSequence(children.Select(child => child.Translate(context)));
+            return CommonUtils.GetHighlevelSequence(this.children.Select(child => child.Translate(context)));
+        }
+
+        public override void CollectTypesInto(TranslationProcess translationProcess)
+        {
+            this.TypeIfCollected = translationProcess.AddToCollectedTypes(this);
+            foreach (Sharpnode node in children)
+            {
+                if (node is FieldDeclarationSharpnode)
+                {
+                    this.TypeIfCollected.InstanceFields.Add(
+                        translationProcess.IdentifierTranslator.RegisterAndGetIdentifier(((FieldDeclarationSharpnode)node).GetSymbol(translationProcess.SemanticModel)));
+                }
+            }
         }
     }
 }
