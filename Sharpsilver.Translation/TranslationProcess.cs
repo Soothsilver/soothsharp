@@ -11,6 +11,9 @@ using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 
 namespace Sharpsilver.Translation
 {
+    /// <summary>
+    /// The translation process contains all information about verifying a C# solution and encapsulates all procedures necessary for verification. The process is started by either the Visual Studio plugin frontend or the standalone csverify.exe frontend.
+    /// </summary>
     public class TranslationProcess
     {
         public CSharpCompilation Compilation;
@@ -37,8 +40,6 @@ namespace Sharpsilver.Translation
             SyntaxTree tree = CSharpSyntaxTree.ParseText(csharpCode);
             return TranslateTree(tree, writeProgressToConsole);
         }
-
-
         public TranslationResult TranslateTree(SyntaxTree tree, bool writeProgressToConsole = false)
         {
             var mscorlib = MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location);
@@ -107,7 +108,5 @@ namespace Sharpsilver.Translation
             translationResult.Silvernode = rootSilvernode;
             return translationResult;
         }
-
-     
     }
 }
