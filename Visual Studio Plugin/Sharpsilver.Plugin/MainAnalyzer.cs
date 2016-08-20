@@ -98,6 +98,7 @@ namespace Sharpsilver.Plugin
             var result = translationProcess.TranslateTree(treeContext.Tree);
             foreach(var diagnostic in result.Errors)
             {
+
                 if (diagnostic.Node != null)
                 {
                     treeContext.ReportDiagnostic(Diagnostic.Create(

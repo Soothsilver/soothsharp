@@ -52,14 +52,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Sharpsilver.Translation\Sharpsilver.Translation.csproj">
+    <ProjectReference Include="..\..\Sharpsilver.Translation\Sharpsilver.Translation.csproj">
       <Project>{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}</Project>
       <Name>Sharpsilver.Translation</Name>
       <!-->     <IncludeOutputGroupsInVSIX>VSIXContainerProjectOutputGroup%3bBuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     -->
     </ProjectReference>
-    <ProjectReference Include="..\..\VSPluginV2\Sharpsilver.Plugin.csproj">
+    <ProjectReference Include="..\Sharpsilver.Plugin\Sharpsilver.Plugin.csproj">
       <Project>{2FB8FCA9-89E2-4B72-AD19-6C1BADDEBC62}</Project>
       <Name>Sharpsilver.Plugin</Name>
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>

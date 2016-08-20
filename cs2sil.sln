@@ -7,14 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csverify", "csverify\csveri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Contracts", "Sharpsilver.Contracts\Sharpsilver.Contracts.csproj", "{B2FF4360-C774-41CE-98FC-60494F6EFC60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Plugin.Vsix", "Visual Studio Plugin\SharpsilverVisualStudioPlugin\SharpsilverVisualStudioPlugin.Vsix\Sharpsilver.Plugin.Vsix.csproj", "{D8A79F6F-A0F5-4F57-AB27-01A8BAF36DEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Plugin.Vsix", "Visual Studio Plugin\Sharpsilver.Plugin.Vsix\Sharpsilver.Plugin.Vsix.csproj", "{D8A79F6F-A0F5-4F57-AB27-01A8BAF36DEC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B2FF4360-C774-41CE-98FC-60494F6EFC60} = {B2FF4360-C774-41CE-98FC-60494F6EFC60}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visual Studio Plugin", "Visual Studio Plugin", "{39E42E76-D407-46FE-8EF7-FDB25ABC9E7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Plugin", "Visual Studio Plugin\VSPluginV2\Sharpsilver.Plugin.csproj", "{2FB8FCA9-89E2-4B72-AD19-6C1BADDEBC62}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Plugin", "Visual Studio Plugin\Sharpsilver.Plugin\Sharpsilver.Plugin.csproj", "{2FB8FCA9-89E2-4B72-AD19-6C1BADDEBC62}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B2FF4360-C774-41CE-98FC-60494F6EFC60} = {B2FF4360-C774-41CE-98FC-60494F6EFC60}
 	EndProjectSection
