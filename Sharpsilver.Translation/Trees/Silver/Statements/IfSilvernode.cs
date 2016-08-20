@@ -1,9 +1,9 @@
 ﻿using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 using System.Collections.Generic;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
+using Sharpsilver.Translation.Trees.Silver.Statements;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
+namespace Sharpsilver.Translation.Trees.Silver
 {
     internal class IfSilvernode : Silvernode
     {

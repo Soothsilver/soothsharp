@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.Exceptions;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
+namespace Sharpsilver.Translation.Trees.CSharp
 {
     public class TypeSharpnode : Sharpnode
     {

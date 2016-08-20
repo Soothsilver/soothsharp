@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
+namespace Sharpsilver.Translation.Trees.CSharp
 {
     public abstract class StatementSharpnode : Sharpnode
     {

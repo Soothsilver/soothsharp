@@ -1,13 +1,13 @@
 ﻿using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 using System.Collections.Generic;
 using Sharpsilver.Translation;
-using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions;
+using Sharpsilver.Translation.Trees.CSharp.Expressions;
 using Sharpsilver.Translation.Translators;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
+namespace Sharpsilver.Translation.Trees.CSharp
 {
     public class InvocationExpressionSharpnode : ExpressionSharpnode
     {

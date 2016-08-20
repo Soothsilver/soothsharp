@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using MoreLinq;
 using System.Threading.Tasks;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
+using Sharpsilver.Translation.Trees.Silver.Statements;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
+namespace Sharpsilver.Translation.Trees.Silver
 {
     /// <summary>
     /// Represents a node in the Silver syntax tree.

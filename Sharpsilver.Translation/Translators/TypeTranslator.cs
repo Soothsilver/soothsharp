@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 using System;
 using System.Collections.Generic;
 using System.Linq;

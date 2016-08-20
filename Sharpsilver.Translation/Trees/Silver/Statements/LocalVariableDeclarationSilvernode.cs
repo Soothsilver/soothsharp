@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis;
 using Sharpsilver.Translation.Translators;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements
+namespace Sharpsilver.Translation.Trees.Silver.Statements
 {
     class LocalVariableDeclarationSilvernode : StatementSilvernode
     {

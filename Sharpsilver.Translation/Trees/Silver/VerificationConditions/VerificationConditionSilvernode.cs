@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
+namespace Sharpsilver.Translation.Trees.Silver
 {
     public abstract class VerificationConditionSilvernode : Silvernode, IComparable<VerificationConditionSilvernode>
     {

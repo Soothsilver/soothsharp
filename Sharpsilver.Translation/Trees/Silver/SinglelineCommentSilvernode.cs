@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
+namespace Sharpsilver.Translation.Trees.Silver
 {
     internal class SinglelineCommentSilvernode : Silvernode
     {

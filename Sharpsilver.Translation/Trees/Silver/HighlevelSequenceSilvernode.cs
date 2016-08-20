@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MoreLinq;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Simple;
+using Sharpsilver.Translation.Trees.Silver.Simple;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
+namespace Sharpsilver.Translation.Trees.Silver
 {
     /// <summary>
     /// Represents a sequence of Silver code regions, separated by a newline character. This is meant to be used at the root level only; certainly
     /// within functions and methods this should not be used.
     /// </summary>
-    /// <seealso cref="Sharpsilver.Translation.AbstractSyntaxTrees.Silver.ComplexSilvernode" />
+    /// <seealso cref="Sharpsilver.Translation.Trees.Silver.ComplexSilvernode" />
     public class HighlevelSequenceSilvernode : ComplexSilvernode
     {
         /// <summary>

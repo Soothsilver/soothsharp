@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MoreLinq;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Simple;
+using Sharpsilver.Translation.Trees.Silver.Simple;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
+namespace Sharpsilver.Translation.Trees.Silver
 {
     class SimpleSequenceSilvernode : ComplexSilvernode
     {

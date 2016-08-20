@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
+namespace Sharpsilver.Translation.Trees.CSharp.Expressions
 {
     public class LiteralExpressionSharpnode : ExpressionSharpnode
     {

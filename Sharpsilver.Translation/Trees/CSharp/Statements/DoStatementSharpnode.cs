@@ -1,5 +1,5 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
+using Sharpsilver.Translation.Trees.CSharp;
 
 namespace Sharpsilver.Translation
 {

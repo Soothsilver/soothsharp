@@ -1,12 +1,12 @@
 ﻿using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees
+namespace Sharpsilver.Translation.Trees
 {
     class CommonUtils
     {

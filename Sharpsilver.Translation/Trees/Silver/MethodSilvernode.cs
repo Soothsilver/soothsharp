@@ -4,9 +4,9 @@ using System.Linq;
 using MoreLinq;
 using System;
 using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
+using Sharpsilver.Translation.Trees.Silver.Statements;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
+namespace Sharpsilver.Translation.Trees.Silver
 {
     internal class MethodSilvernode : ComplexSilvernode
     {

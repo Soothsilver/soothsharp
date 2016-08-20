@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
+namespace Sharpsilver.Translation.Trees.CSharp
 {
     class DiagnosticExpressionSharpnode : ExpressionSharpnode
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
+namespace Sharpsilver.Translation.Trees.Silver
 {
     public class CSharpTypeDomainSilvernode : ComplexSilvernode
     {

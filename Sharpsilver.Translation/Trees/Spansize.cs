@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees
+namespace Sharpsilver.Translation.Trees
 {
     public class Spansize
     {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements
+namespace Sharpsilver.Translation.Trees.Silver.Statements
 {
     public abstract class StatementSilvernode : ComplexSilvernode
     {

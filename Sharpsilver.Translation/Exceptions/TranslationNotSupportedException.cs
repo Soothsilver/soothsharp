@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
+using Sharpsilver.Translation.Trees.CSharp;
 
 namespace Sharpsilver.Translation.Exceptions
 {

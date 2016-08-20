@@ -2,9 +2,9 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation;
 using System.Collections.Generic;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
+namespace Sharpsilver.Translation.Trees.CSharp.Expressions
 {
     public class ConditionalExpressionSharpnode : ExpressionSharpnode
     {

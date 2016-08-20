@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
-using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions;
-using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel;
-using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements;
+using Sharpsilver.Translation.Trees.CSharp;
+using Sharpsilver.Translation.Trees.CSharp.Expressions;
+using Sharpsilver.Translation.Trees.CSharp.Highlevel;
+using Sharpsilver.Translation.Trees.CSharp.Statements;
 
 namespace Sharpsilver.Translation
 {

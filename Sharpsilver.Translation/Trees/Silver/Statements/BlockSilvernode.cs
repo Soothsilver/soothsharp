@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements
+namespace Sharpsilver.Translation.Trees.Silver.Statements
 {
     public class BlockSilvernode : StatementSilvernode
     {

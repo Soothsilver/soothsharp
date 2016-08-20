@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
+namespace Sharpsilver.Translation.Trees.CSharp
 {
     class UnknownSharpnode : Sharpnode
     {

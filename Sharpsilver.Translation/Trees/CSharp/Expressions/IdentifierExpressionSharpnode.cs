@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp;
-using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
+using Sharpsilver.Translation.Trees.CSharp;
 using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 using Sharpsilver.Translation.Translators;
 
 namespace Sharpsilver.Translation

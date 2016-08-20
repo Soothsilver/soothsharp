@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation;
 using System.Collections.Generic;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
+namespace Sharpsilver.Translation.Trees.CSharp.Expressions
 {
     public class BinaryExpressionSharpnode : ExpressionSharpnode
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Simple
+namespace Sharpsilver.Translation.Trees.Silver.Simple
 {
     class NewlineSilvernode : Silvernode
     {

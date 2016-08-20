@@ -2,12 +2,12 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
-using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel;
+using Sharpsilver.Translation.Trees.CSharp;
+using Sharpsilver.Translation.Trees.CSharp.Highlevel;
 using Sharpsilver.Translation.Translators;
 using System.Collections.Generic;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Intermediate;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Intermediate;
+using Sharpsilver.Translation.Trees.Silver;
 
 namespace Sharpsilver.Translation
 {

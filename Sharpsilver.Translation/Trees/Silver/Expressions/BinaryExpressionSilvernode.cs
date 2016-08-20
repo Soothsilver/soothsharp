@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
+namespace Sharpsilver.Translation.Trees.CSharp.Expressions
 {
     internal class BinaryExpressionSilvernode : ExpressionSilvernode
     {

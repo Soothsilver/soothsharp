@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 using Microsoft.CodeAnalysis.CSharp;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
+using Sharpsilver.Translation.Trees.Silver.Statements;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Statements
+namespace Sharpsilver.Translation.Trees.CSharp.Statements
 {
     class LabeledStatementSharpnode : StatementSharpnode
     {

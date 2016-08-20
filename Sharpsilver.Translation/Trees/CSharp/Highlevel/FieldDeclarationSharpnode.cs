@@ -1,9 +1,9 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel
+namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
 {
     public class FieldDeclarationSharpnode : Sharpnode
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements
+namespace Sharpsilver.Translation.Trees.Silver.Statements
 {
     class LabelSilvernode : StatementSilvernode
     {

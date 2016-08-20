@@ -1,11 +1,11 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.AbstractSyntaxTrees.CSharp;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.CSharp;
+using Sharpsilver.Translation.Trees.Silver;
 using Sharpsilver.Translation;
 using System.Collections.Generic;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
+using Sharpsilver.Translation.Trees.Silver.Statements;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp
+namespace Sharpsilver.Translation.Trees.CSharp
 {
     internal class IfStatementSharpnode : StatementSharpnode
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
+using Sharpsilver.Translation.Trees.Silver.Statements;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Expressions
+namespace Sharpsilver.Translation.Trees.CSharp.Expressions
 {
     internal class CompoundAssignmentExpressionSharpnode : ExpressionSharpnode
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Intermediate
+namespace Sharpsilver.Translation.Trees.Intermediate
 {
     public class CollectedType
     {

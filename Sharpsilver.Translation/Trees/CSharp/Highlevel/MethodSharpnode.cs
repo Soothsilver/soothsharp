@@ -3,11 +3,11 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
+using Sharpsilver.Translation.Trees.Silver;
+using Sharpsilver.Translation.Trees.Silver.Statements;
 using Sharpsilver.Translation.Translators;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel
+namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
 {
     internal class MethodSharpnode : Sharpnode
     {

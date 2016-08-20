@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
+namespace Sharpsilver.Translation.Trees.Silver
 {
     /// <summary>
     /// This silvernode consists of several smaller silvernodes. 
     /// </summary>
-    /// <seealso cref="Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Silvernode" />
+    /// <seealso cref="Sharpsilver.Translation.Trees.Silver.Silvernode" />
     public abstract class ComplexSilvernode : Silvernode
     {
         /// <summary>

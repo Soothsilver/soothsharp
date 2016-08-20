@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel
+namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
 {
     internal class NamespaceSharpnode : Sharpnode
     {

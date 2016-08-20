@@ -3,11 +3,11 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
+using Sharpsilver.Translation.Trees.Silver;
 using Sharpsilver.Translation.Translators;
-using Sharpsilver.Translation.AbstractSyntaxTrees.Intermediate;
+using Sharpsilver.Translation.Trees.Intermediate;
 
-namespace Sharpsilver.Translation.AbstractSyntaxTrees.CSharp.Highlevel
+namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
 {
     /// <summary>
     /// Represents a class declaration in the C# abstract syntax tree.
