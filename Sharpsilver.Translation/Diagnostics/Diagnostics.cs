@@ -1,9 +1,20 @@
 using System;
 using System.Collections.Generic;
-// ReSharper disable InconsistentNaming
 
 namespace Sharpsilver.Translation
 {
+    /// <summary>
+    /// This class contains static constants that represent the various errors and warnings Sharpsilver might generate.
+    /// <para>
+    /// Error codes 100-199 are translation errors that mean that a program cannot be translated into Silver.
+    /// </para>
+    /// <para>
+    /// Error codes 200-299 are verification warnings that mean that the backend does not guarantee correctness of the code.
+    /// </para>
+    /// <para>
+    /// Error codes 300-399 are internal errors of the transcompiler.
+    /// </para>
+    /// </summary>
     public class Diagnostics
     {
         // *********************************** 100 Translation Errors 

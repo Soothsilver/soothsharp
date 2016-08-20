@@ -11,9 +11,11 @@ using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 
 namespace Sharpsilver.Translation.BackendInterface
 {
+    /// <summary>
+    /// Connnects to the "silicon" backend verifier.
+    /// </summary>
     public class SiliconBackend : IBackend
-    {
-    
+    {    
         public VerificationResult Verify(Silvernode silvernode)
         {
             string silvercode = silvernode.ToString();

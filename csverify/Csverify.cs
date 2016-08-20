@@ -7,17 +7,47 @@ using Sharpsilver.Translation.BackendInterface;
 
 namespace Sharpsilver.StandaloneVerifier
 {
+    /// <summary>
+    /// This class is compiled into the csverify.exe executable which takes C# code files, produces Silver files and verifies them for formal correctness. 
+    /// </summary>
     class Csverify
     {
-        private static bool Verbose;
-        private static bool WaitAfterwards;
+        /// <summary>
+        /// Whether additional messages about the translation process should be printed.
+        /// </summary>
+        static bool Verbose;
+        /// <summary>
+        /// Whether the program should terminate normally or wait for the user to press a key after it completes.
+        /// </summary>
+        static bool WaitAfterwards = false;
+        /// <summary>
+        /// Whether only classes and members tagged with <see cref="Sharpsilver.Contracts.VerifiedAttribute"/> should be translated into Silver.
+        /// If false, then all classes and members not tagged with <see cref="Sharpsilver.Contracts.UnverifiedAttribute"/> will be translated. 
+        /// </summary>
         static bool OnlyAnnotated = false;
+        /// <summary>
+        /// Whether Silicon is used to verify correctness. If both <see cref="UseCarbon"/> and <see cref="UseSilicon"/> are set,
+        /// then Carbon takes precedence and Silicon is not run.
+        /// </summary>
         static bool UseSilicon = false;
+        /// <summary>
+        /// Whether Carbon is used to verify correctness. If both <see cref="UseCarbon"/> and <see cref="UseSilicon"/> are set,
+        /// then Carbon takes precedence and Silicon is not run.
+        /// </summary>
         static bool UseCarbon = true;
+        /// <summary>
+        /// Filename where the Silver output should be written out. If null, then the Silver output is not written to disk.
+        /// </summary>
         static string outputSilverFile = null;
-
+        /// <summary>
+        /// Current version of this assembly.
+        /// </summary>
         static string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-        static string header = System.AppDomain.CurrentDomain.FriendlyName + " " + version + "\n" + "Verifies C# code files for correctness with respect to specified verification conditions.";
+        /// <summary>
+        /// Name and short description of this assembly.
+        /// </summary>
+        static string header = System.AppDomain.CurrentDomain.FriendlyName + " " + version + "\n" +
+            "Verifies C# code files for correctness with respect to specified verification conditions.";
 
         static int Main(string[] args)
         {
@@ -90,7 +120,6 @@ namespace Sharpsilver.StandaloneVerifier
             // TODO verify multiple codefiles
             string csharpFilename = verifiedFiles[0];
             Console.WriteLine($"Csverify will now verify '{csharpFilename}'.");
-            Console.WriteLine();
             try
             {
                 if (!System.IO.File.Exists(csharpFilename))

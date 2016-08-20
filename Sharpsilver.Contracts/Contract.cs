@@ -25,8 +25,6 @@ namespace Sharpsilver.Contracts
             }
         }
 
-  
-
         /// <summary>
         /// Within contracts, represents the return value of a method. Can only be used in method postconditions.
         /// </summary>

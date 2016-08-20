@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Sharpsilver.Translation
 {
+    /// <summary>
+    /// Whether a diagnostic is an error or a warning.
+    /// </summary>
     public enum DiagnosticSeverity
     {
         /// <summary>

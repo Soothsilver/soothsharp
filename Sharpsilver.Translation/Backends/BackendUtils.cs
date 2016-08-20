@@ -9,6 +9,9 @@ using Sharpsilver.Translation.AbstractSyntaxTrees.Silver;
 
 namespace Sharpsilver.Translation.BackendInterface
 {
+    /// <summary>
+    /// Contains static constants and functions used by both backends.
+    /// </summary>
     public static class BackendUtils
     {
         private static List<Regex> harmlessLines = new List<Regex>();
@@ -73,7 +76,6 @@ namespace Sharpsilver.Translation.BackendInterface
 
             return errors;
         }
-
 
         public static SyntaxNode GetSyntaxNodeFromCodePosition(string codePosition, Silvernode originalCode)
         {
