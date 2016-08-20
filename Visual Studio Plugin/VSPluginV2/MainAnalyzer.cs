@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Sharpsilver.Translation;
 using Sharpsilver.Translation.BackendInterface;
 
-namespace Sharpsilver.VisualStudioPlugin
+namespace Sharpsilver.Plugin
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class SharpsilverVisualStudioPluginAnalyzer : DiagnosticAnalyzer

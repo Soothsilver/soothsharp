@@ -4,6 +4,11 @@
     <Identity Id="SharpsilverVisualStudioPlugin..f213f4d2-1b2c-4411-808e-72f28b798870" Version="1.0" Language="en-US" Publisher="Petr Hudeček"/>
     <DisplayName>Sharpsilver for Visual Studio</DisplayName>
     <Description xml:space="preserve">Provides a CSharp to Silver translation service for Visual Studio. When enabled, code diagnostics alert you about code that cannot be verified via the Viper project and it also provides a button to verify your code by passing the generated code to Silicon.</Description>
+    <MoreInfo>https://github.com/Soothsilver/cs2sil/wiki</MoreInfo>
+    <License>LICENSE.txt</License>
+    <Icon>csverify1.png</Icon>
+    <PreviewImage>csverify1.png</PreviewImage>
+    <Tags>verification, silver, logic, permission logic, code analysis, software verification, Sharpsilver</Tags>
   </Metadata>
   <Installation>
     <InstallationTarget Version="[14.0,]" Id="Microsoft.VisualStudio.Pro" />
@@ -12,8 +17,8 @@
     <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
   </Dependencies>
   <Assets>
-    <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="VSPluginV2" Path="|VSPluginV2|" />
-    <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="VSPluginV2" Path="|VSPluginV2|" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="Sharpsilver.Translation" Path="|Sharpsilver.Translation|" AssemblyName="|Sharpsilver.Translation;AssemblyName|" />
+    <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="Sharpsilver.Plugin" Path="|Sharpsilver.Plugin|" />
+    <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="Sharpsilver.Plugin" Path="|Sharpsilver.Plugin|" />
   </Assets>
 </PackageManifest>

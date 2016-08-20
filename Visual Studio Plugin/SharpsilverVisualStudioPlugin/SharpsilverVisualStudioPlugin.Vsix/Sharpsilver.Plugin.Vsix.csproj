@@ -13,8 +13,8 @@
     <ProjectGuid>{D8A79F6F-A0F5-4F57-AB27-01A8BAF36DEC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SharpsilverVisualStudioPlugin.Vsix</RootNamespace>
-    <AssemblyName>SharpsilverVisualStudioPlugin.Vsix</AssemblyName>
+    <RootNamespace>Sharpsilver.Plugin.Vsix</RootNamespace>
+    <AssemblyName>Sharpsilver.Plugin.Vsix</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
@@ -59,15 +59,19 @@
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     -->
     </ProjectReference>
-    <ProjectReference Include="..\..\VSPluginV2\VSPluginV2.csproj">
+    <ProjectReference Include="..\..\VSPluginV2\Sharpsilver.Plugin.csproj">
       <Project>{2FB8FCA9-89E2-4B72-AD19-6C1BADDEBC62}</Project>
-      <Name>VSPluginV2</Name>
+      <Name>Sharpsilver.Plugin</Name>
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="csverify1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
