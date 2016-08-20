@@ -14,10 +14,6 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements
             this.left = left;
             this.right = right;
         }
-        public override string ToString()
-        {
-            return left + " := " + right;
-        }
         protected override IEnumerable<Silvernode> Children
         {
             get

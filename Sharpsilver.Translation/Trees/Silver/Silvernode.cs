@@ -9,16 +9,38 @@ using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Statements;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
+    /// <summary>
+    /// Represents a node in the Silver syntax tree.
+    /// </summary>
     public abstract class Silvernode
     {
+        /// <summary>
+        /// The C# syntax node this silvernode comes from, or null, if this silvernode is not associated to a C# node. This is used to 
+        /// connect potential errors in this silvernode back to the C# source.
+        /// </summary>
         public SyntaxNode OriginalNode;
-        public SyntaxToken OriginalToken;
-        public SyntaxTrivia OriginalTrivia;
-        protected int ColumnOffset;
+        /// <summary>
+        /// Gets the children of this silvernode, if any. All <see cref="ComplexSilvernode"/>s have children, but other silvernodes cannot.
+        /// </summary>
         protected virtual IEnumerable<Silvernode> Children => new Silvernode[0];
 
+        /// <summary>
+        /// Gets the C# node that was translated into the deepmost silvernode that is present at the specified character offset off the 
+        /// beginning of this silvernode.
+        /// <para>
+        /// For example, if the offset is 5, this method will find the silvernode that has some text at the sixth character of this silvernode.
+        /// The deepmost silvernode may not have an associated C# node. In that case, we ascend the tree and the deepmost silvernode that actually
+        /// has an associated C# node is selected.
+        /// </para>
+        /// <para>
+        /// It is an error to call this method with an offset that is not present in this silvernode.
+        /// </para>
+        /// </summary>
+        /// <param name="offset">The character offset at which we should recover the C# node</param>
+        /// <returns>The C# node associated with the silvernode at the given offset</returns>
         public SyntaxNode GetSyntaxNodeFromOffset(int offset)
         {
+            if (offset >= this.Size) throw new ArgumentException("The offset must be within this node.", nameof(offset));
             int curoffset = offset;
             foreach (var child in Children)
             {
@@ -39,30 +61,36 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
             return this.OriginalNode;
         }
 
+        /// <summary>
+        /// Gets the length, in characters, of this silvernode.
+        /// </summary>
         protected int Size => ToString().Length;
 
+        /// <summary>
+        /// Returns a value that indicates whether this silvernode represents a contract ("requires", "ensures" or "invariant").
+        /// </summary>
         public virtual bool IsVerificationCondition()
         {
             return false;
         }
 
+        /// <summary>
+        /// Initializes a new <see cref="Silvernode"/>. 
+        /// </summary>
+        /// <param name="originalNode">The associated C# node, or null.</param>
         protected Silvernode(SyntaxNode originalNode)
         {
             OriginalNode = originalNode;
         }
-        protected Silvernode(SyntaxToken originalToken)
-        {
-            OriginalToken = originalToken;
-        }
-        protected Silvernode(SyntaxTrivia originalTrivia)
-        {
-            OriginalTrivia = originalTrivia;
-        }
 
-        public abstract override string ToString();
+        /// <summary>
+        /// Returns the Silver code text that silvernode evaluates to.
+        /// </summary>
+        public abstract override string ToString();   
 
-   
-
+        /// <summary>
+        /// Postprocessing may modify silvernodes. Postprocessing includes procedures such as indenting code blocks.
+        /// </summary>
         public virtual void Postprocess()
         {
             foreach (var child in Children)
@@ -71,6 +99,10 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
             }
         }
 
+        /// <summary>
+        /// This implicit operator converts a string to a simple text silvernode. This is a useful shortcut in complex translations.
+        /// </summary>
+        /// <param name="s">The string that will be output into the Silver source.</param>
         public static implicit operator Silvernode(string s)
         {
             return new TextSilvernode(s);

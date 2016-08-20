@@ -103,10 +103,18 @@ namespace Sharpsilver.Contracts
         {
         }
 
+        /// <summary>
+        /// Performs the Silver inhale operation. TODO what does it actually do?
+        /// </summary>
+        /// <param name="expression">TODO.</param>
         public static void Inhale(bool expression)
         {
 
         }
+        /// <summary>
+        /// Performs the Silver exhale operation. TODO what does it actually do?
+        /// </summary>
+        /// <param name="expression">TODO.</param>
         public static void Exhale(bool expression)
         {
 

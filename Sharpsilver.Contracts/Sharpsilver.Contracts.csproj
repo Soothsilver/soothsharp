@@ -61,8 +61,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)\$(TargetFileName)" "$(SolutionDir)\csverify\bin\Debug"
-copy "$(TargetDir)\$(TargetFileName)" "$(SolutionDir)\Visual Studio Plugin\SharpsilverVisualStudioPlugin\SharpsilverVisualStudioPlugin.Vsix\bin\Debug"</PostBuildEvent>
+    <PostBuildEvent>mkdir "$(SolutionDir)\csverify\bin\Debug"
+mkdir "$(SolutionDir)\Visual Studio Plugin\Sharpsilver.Plugin\bin\Debug"
+mkdir "$(SolutionDir)\Visual Studio Plugin\Sharpsilver.Plugin.Vsix\bin\Debug"
+copy "$(TargetDir)\$(TargetFileName)" "$(SolutionDir)\csverify\bin\Debug"
+copy "$(TargetDir)\$(TargetFileName)" "$(SolutionDir)\Visual Studio Plugin\Sharpsilver.Plugin.Vsix\bin\Debug"
+copy "$(TargetDir)\$(TargetFileName)" "$(SolutionDir)\Visual Studio Plugin\Sharpsilver.Plugin\bin\Debug"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

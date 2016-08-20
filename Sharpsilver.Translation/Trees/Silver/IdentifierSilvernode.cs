@@ -16,12 +16,12 @@ namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
                 silverIdentifierReference = identifier as IdentifierReference;
         }
 
-        public IdentifierSilvernode(SyntaxToken identifierToken, IdentifierDeclaration silverIdentifier) : base(identifierToken)
+        public IdentifierSilvernode(SyntaxToken identifierToken, IdentifierDeclaration silverIdentifier) : base(null)
         {
             this.identifierToken = identifierToken;
             this.silverIdentifier = silverIdentifier;
         }
-        public IdentifierSilvernode(SyntaxToken identifierToken, IdentifierReference silverIdentifier) : base(identifierToken)
+        public IdentifierSilvernode(SyntaxToken identifierToken, IdentifierReference silverIdentifier) : base(null)
         {
             this.identifierToken = identifierToken;
             this.silverIdentifierReference = silverIdentifier;

@@ -10,11 +10,26 @@ using Sharpsilver.Translation.AbstractSyntaxTrees.Silver.Simple;
 
 namespace Sharpsilver.Translation.AbstractSyntaxTrees.Silver
 {
+    /// <summary>
+    /// Represents a sequence of Silver code regions, separated by a newline character. This is meant to be used at the root level only; certainly
+    /// within functions and methods this should not be used.
+    /// </summary>
+    /// <seealso cref="Sharpsilver.Translation.AbstractSyntaxTrees.Silver.ComplexSilvernode" />
     public class HighlevelSequenceSilvernode : ComplexSilvernode
     {
+        /// <summary>
+        /// Contains silvernodes that this silvernode contains.
+        /// </summary>
         public List<Silvernode> List;
 
-        public HighlevelSequenceSilvernode(SyntaxNode originalNode, params Silvernode[] topLevelSilvernodes)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HighlevelSequenceSilvernode"/> class.
+        /// </summary>
+        /// <param name="originalNode">The C# original node, or null.</param>
+        /// <param name="topLevelSilvernodes">Silvernodes that make up this silvernode.</param>
+        public HighlevelSequenceSilvernode(
+            SyntaxNode originalNode, 
+            params Silvernode[] topLevelSilvernodes)
             : base(originalNode)
         {
             List = new List<Silvernode>(topLevelSilvernodes);

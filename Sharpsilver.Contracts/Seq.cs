@@ -36,23 +36,48 @@ namespace Sharpsilver.Contracts
         /// </summary>
         public int Length => list.Count;
 
+        /// <summary>
+        /// Returns the subsequence that starts at an index and ends at another index.
+        /// </summary>
+        /// <param name="from">The beginning index, inclusive.</param>
+        /// <param name="to">The end index, inclusive.</param>
         public Seq<T> Range(int from, int to)
         {
             return new Seq<T>(list.GetRange(from, to - from));
         }
 
+        /// <summary>
+        /// Returns the subsequence that starts at the given index.
+        /// </summary>
+        /// <param name="from">The beginning index, inclusive.</param>
         public Seq<T> RangeFrom(int from)
         {
             return new Seq<T>(list.Skip(from).ToList());
         }
 
+        /// <summary>
+        /// Determines whether the sequence contains the specified item.
+        /// </summary>
+        /// <param name="item">The item to test for.</param>
         public bool Contains(T item)
         {
             return list.Contains(item);
         }
 
+        /// <summary>
+        /// Gets the item at the specified index.
+        /// </summary>
+        /// <param name="index">The index.</param>
         public T this[int index] => list[index];
 
+        /// <summary>
+        /// Concatenates two sequences.
+        /// </summary>
+        /// <param name="one">The first sequence.</param>
+        /// <param name="other">The second sequence.</param>
+        /// <returns>
+        /// The concatenated sequence.
+        /// </returns>
         public static Seq<T> operator +(Seq<T> one, Seq<T> other)
         {
             return new Seq<T>(one.list.Union(other.list).ToList());
