@@ -64,6 +64,12 @@ namespace Sharpsilver.Translation
             return String.Join("\n", lines.Select(line => "\t" + line));
         }
 
+        /// <summary>
+        /// Creates a new <see cref="IEnumerable{T}"/> from the existing one, but puts a separator element between each two elements. This method does not use ToString() at all.
+        /// </summary>
+        /// <param name="sequence">The original <see cref="IEnumerable{T}"/>.</param>
+        /// <param name="separator">The separator element.</param>
+        /// <returns></returns>
         public static IEnumerable<T> WithSeparator<T>(this IEnumerable<T> sequence, T separator)
         {
             int i = 0;

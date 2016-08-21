@@ -12,8 +12,15 @@ using Sharpsilver.Translation.Trees.CSharp.Statements;
 
 namespace Sharpsilver.Translation
 {
+    /// <summary>
+    /// This class contains static methods that convert Roslyn instances into sharpnode.
+    /// </summary>
     public class RoslynToSharpnode
     {
+        /// <summary>
+        /// Converts a Roslyn statement into a sharpnode.
+        /// </summary>
+        /// <param name="statement">The statement.</param>
         public static StatementSharpnode MapStatement(StatementSyntax statement)
         {
             switch(statement.Kind())
@@ -49,13 +56,13 @@ namespace Sharpsilver.Translation
                 case SyntaxKind.BreakStatement:
                 case SyntaxKind.ContinueStatement:
                 case SyntaxKind.ForEachStatement:
-                case SyntaxKind.GlobalStatement:
-                case SyntaxKind.GotoCaseStatement:
-                case SyntaxKind.GotoDefaultStatement:
                 case SyntaxKind.LockStatement:
-                case SyntaxKind.SwitchStatement:
                 case SyntaxKind.UsingStatement:
                     return new UnknownStatementSharpnode(statement);
+                case SyntaxKind.SwitchStatement:
+                case SyntaxKind.GotoCaseStatement:
+                case SyntaxKind.GotoDefaultStatement:
+                    return new UnknownStatementSharpnode(statement, "switch");
                 case SyntaxKind.ThrowStatement:
                 case SyntaxKind.TryStatement:
                     return new UnknownStatementSharpnode(statement, "exceptions");
@@ -67,6 +74,10 @@ namespace Sharpsilver.Translation
             }
         }
 
+        /// <summary>
+        /// Converts a Roslyn expression into a sharpnode.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
         internal static ExpressionSharpnode MapExpression(ExpressionSyntax expression)
         {
             
@@ -148,6 +159,8 @@ namespace Sharpsilver.Translation
                 // Invocation
                 case SyntaxKind.InvocationExpression:
                     return new InvocationExpressionSharpnode(expression as InvocationExpressionSyntax);
+                case SyntaxKind.ObjectCreationExpression:
+                    return new ObjectCreationExpressionSharpnode(expression as ObjectCreationExpressionSyntax);
 
                 // Literals
                 case SyntaxKind.TrueLiteralExpression:
@@ -190,6 +203,10 @@ namespace Sharpsilver.Translation
             }
         }
 
+        /// <summary>
+        /// Converts a Roslyn class member into a sharpnode.
+        /// </summary>
+        /// <param name="node">The class member declaration node.</param>
         public static Sharpnode MapClassMember(MemberDeclarationSyntax node)
         {
             // ReSharper disable once SwitchStatementMissingSomeCases
@@ -224,6 +241,8 @@ namespace Sharpsilver.Translation
                 case SyntaxKind.RemoveAccessorDeclaration:
                 case SyntaxKind.StructDeclaration:
                 case SyntaxKind.UnknownAccessorDeclaration:
+                    return new UnknownSharpnode(node);
+                case SyntaxKind.GlobalStatement:
                     return new UnknownSharpnode(node);
                 default:
                     return new UnknownSharpnode(node);

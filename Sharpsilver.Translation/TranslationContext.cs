@@ -3,8 +3,15 @@ using System;
 
 namespace Sharpsilver.Translation
 {
+    /// <summary>
+    /// A context modifies how should C# code be translated into Silver. A context determines, for example,
+    /// whether we requires pure expressions without side-effects.
+    /// </summary>
     public class TranslationContext
     {
+        /// <summary>
+        /// Gets the instance of this transcompilation process.
+        /// </summary>
         public TranslationProcess Process { get; }
         /// <summary>
         /// Indicates whether only pure expressions are allowed in this context.
@@ -18,7 +25,9 @@ namespace Sharpsilver.Translation
         /// Indicates whether only classes and method marked [Verified] should be verified, or whether everything should be verified.
         /// </summary>
         public bool VerifyOnlyMarkedItems { get; private set; } = false;
-
+        /// <summary>
+        /// Gets the semantic model of the C# compilation.
+        /// </summary>
         public SemanticModel Semantics => Process.SemanticModel;
 
         /// <summary>

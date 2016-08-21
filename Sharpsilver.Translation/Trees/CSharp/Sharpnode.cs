@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Sharpsilver.Translation.Trees.CSharp
 {
+    /// <summary>
+    /// Represents a node in the C# abstract tree.
+    /// </summary>
     public abstract class Sharpnode
     {
         /// <summary>
@@ -19,6 +22,11 @@ namespace Sharpsilver.Translation.Trees.CSharp
             this.OriginalNode = originalNode;
         }
 
+        /// <summary>
+        /// Converts this sharpnode into a silvernode and a list of errors.
+        /// </summary>
+        /// <param name="context">Translation context (such as whether we're in a pure context).</param>
+        /// <returns></returns>
         public abstract TranslationResult Translate(TranslationContext context);
 
         /// <summary>

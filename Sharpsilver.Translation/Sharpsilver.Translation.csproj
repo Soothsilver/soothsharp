@@ -108,6 +108,7 @@
     <Compile Include="Trees\CommonUtils.cs" />
     <Compile Include="Trees\CSharp\Expressions\DiagnosticExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\IncrementExpressionSharpnode.cs" />
+    <Compile Include="Trees\CSharp\Expressions\ObjectCreationExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Highlevel\ConstructorSharpnode.cs" />
     <Compile Include="Trees\CSharp\Statements\BlockSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\SimpleAssignmentExpressionSharpnode.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Trees\CSharp\Statements\LocalDeclarationSharpnode.cs" />
     <Compile Include="Trees\CSharp\Statements\ForStatementSharpnode.cs" />
     <Compile Include="Trees\Intermediate\CollectedType.cs" />
+    <Compile Include="Trees\Silver\Expressions\NewSilvernode.cs" />
     <Compile Include="Trees\Silver\SimpleSequenceSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\AssignmentSilvernode.cs" />
     <Compile Include="Trees\CSharp\Statements\ReturnStatementSharpnode.cs" />
@@ -189,9 +191,9 @@
     <Compile Include="Trees\Silver\CSharpTypeDomainSilvernode.cs" />
     <Compile Include="Diagnostics\Diagnostics.cs" />
     <Compile Include="Trees\CSharp\Highlevel\FieldDeclarationSharpnode.cs" />
-    <Compile Include="Identifier.cs" />
-    <Compile Include="IdentifierReference.cs" />
-    <Compile Include="IdentifierDeclaration.cs" />
+    <Compile Include="Translators\Identifiers\Identifier.cs" />
+    <Compile Include="Translators\Identifiers\IdentifierReference.cs" />
+    <Compile Include="Translators\Identifiers\IdentifierDeclaration.cs" />
     <Compile Include="SilverType.cs" />
     <Compile Include="Translators\ContractsTranslator.cs" />
     <Compile Include="Diagnostics\DiagnosticSeverity.cs" />
@@ -199,13 +201,13 @@
     <Compile Include="Error.cs" />
     <Compile Include="Exceptions\TranslationNotSupportedException.cs" />
     <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="Translators\IdentifierTranslator.cs" />
+    <Compile Include="Translators\Identifiers\IdentifierTranslator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TranslationProcess.cs" />
     <Compile Include="TranslationContext.cs" />
     <Compile Include="TranslationResult.cs" />
     <Compile Include="RoslynToSharpnode.cs" />
-    <Compile Include="Translators\TaggedSymbol.cs" />
+    <Compile Include="Translators\Identifiers\TaggedSymbol.cs" />
     <Compile Include="Translators\TypeTranslator.cs" />
     <Compile Include="Trees\CSharp\Statements\WhileStatementSharpnode.cs" />
   </ItemGroup>
