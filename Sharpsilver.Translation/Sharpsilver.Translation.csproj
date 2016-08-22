@@ -123,6 +123,7 @@
     <Compile Include="Trees\CSharp\Statements\LocalDeclarationSharpnode.cs" />
     <Compile Include="Trees\CSharp\Statements\ForStatementSharpnode.cs" />
     <Compile Include="Trees\Intermediate\CollectedType.cs" />
+    <Compile Include="Trees\Silver\Expressions\AccSilvernode.cs" />
     <Compile Include="Trees\Silver\Expressions\NewSilvernode.cs" />
     <Compile Include="Trees\Silver\SimpleSequenceSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\AssignmentSilvernode.cs" />

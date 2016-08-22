@@ -15,6 +15,8 @@ namespace Sharpsilver.Translation.Translators
         public const string ContractEnsures = ContractsClass + nameof(Contract.Ensures);
         public const string ContractRequires = ContractsClass + nameof(Contract.Requires);
         public const string ContractInvariant = ContractsClass + nameof(Contract.Invariant);
+        public const string ContractRead = ContractsClass + nameof(Contract.Read);
+        public const string ContractAcc = ContractsClass + nameof(Contract.Acc);
         public const string ContractAssert = ContractsClass + nameof(Contract.Assert);
         public const string ContractAssume = ContractsClass + nameof(Contract.Assume);
         public const string ContractIntResult = ContractsClass + nameof(Contract.IntegerResult);

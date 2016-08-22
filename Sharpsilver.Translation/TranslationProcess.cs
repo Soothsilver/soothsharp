@@ -66,6 +66,7 @@ namespace Sharpsilver.Translation
             // 2. Prepare semantic analysis.
             if (writeProgressToConsole) Console.WriteLine("- Creating semantic model.");
             this.SemanticModel = this.Compilation.GetSemanticModel(tree, true);
+            
 
             // 3. Convert to Sharpnode intermediate representation.
             Sharpnode cSharpTree;

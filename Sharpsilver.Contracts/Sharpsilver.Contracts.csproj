@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\PredicateAttribute.cs" />
+    <Compile Include="Attributes\SignatureOnlyAttribute.cs" />
     <Compile Include="Contract.cs" />
     <Compile Include="Internals\WithinContractsOnlyAttribute.cs" />
     <Compile Include="Permission.cs" />
