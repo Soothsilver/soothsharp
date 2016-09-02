@@ -8,6 +8,7 @@ using Sharpsilver.Translation.Translators;
 using System.Collections.Generic;
 using Sharpsilver.Translation.Trees.Intermediate;
 using Sharpsilver.Translation.Trees.Silver;
+using System.Linq;
 
 namespace Sharpsilver.Translation
 {
@@ -21,7 +22,10 @@ namespace Sharpsilver.Translation
         public SemanticModel SemanticModel;
         public IdentifierTranslator IdentifierTranslator = new IdentifierTranslator();
         public ContractsTranslator ContractsTranslator;
+        private TranslationConfiguration Configuration;
         private List<CollectedType> collectedTypes = new List<CollectedType>();
+        private List<CompilationUnit> compilationUnits = new List<CompilationUnit>();
+        private List<string> referencedAssemblies = new List<string>();
         public CollectedType AddToCollectedTypes(ClassSharpnode classSharpnode)
         {
             var name = IdentifierTranslator.RegisterAndGetIdentifier(
@@ -120,6 +124,66 @@ namespace Sharpsilver.Translation
             rootSilvernode.Postprocess();
             translationResult.Silvernode = rootSilvernode;
             return translationResult;
+        }
+
+        public static TranslationProcess Create(
+            List<string> verifiedFiles, 
+            List<string> assumedFiles, 
+            List<string> references, 
+            TranslationConfiguration translationConfiguration)
+        {
+            TranslationProcess process = new Translation.TranslationProcess();
+            process.Configuration = translationConfiguration;
+            foreach(string name in verifiedFiles)
+            {
+                if (translationConfiguration.Verbose)
+                {
+                    Console.WriteLine($"- Adding '{name}' to files marked for full verification.");
+                }
+                process.compilationUnits.Add(CompilationUnit.CreateFromFile(name, CompilationUnitVerificationStyle.FullVerification));
+            }
+            foreach (string name in assumedFiles)
+            {
+                if (translationConfiguration.Verbose)
+                {
+                    Console.WriteLine($"- Adding '{name}' to files marked for signature extraction only.");
+                }
+                process.compilationUnits.Add(CompilationUnit.CreateFromFile(name, CompilationUnitVerificationStyle.ContractsOnly));
+            }
+            foreach (string name in references)
+            {
+                if (translationConfiguration.Verbose)
+                {
+                    Console.WriteLine($"- Adding '{name}' to referenced assemblies.");
+                }
+                process.referencedAssemblies.Add(name);
+            }
+
+
+            return process;
+        }
+
+        public TranslationProcessResult Execute()
+        {
+            VerboseLog("Loading mscorlib and Sharpsilver.Contracts...");
+            var mscorlib = MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location);
+            var contractsLibrary = MetadataReference.CreateFromFile("Sharpsilver.Contracts.dll");
+            VerboseLog("Initializing compilation...");
+            CSharpCompilation compilationObject = CSharpCompilation.Create("translated_assembly",
+                compilationUnits.Select(unit => unit.RoslynTree),
+                (new[] { mscorlib, contractsLibrary }).Union(referencedAssemblies.Select(filename => MetadataReference.CreateFromFile(filename)))
+                );
+            VerboseLog("Starting processing trees...");
+
+            return new TranslationProcessResult(new EmptySilvernode(null), new List<Error>() { new Error(Diagnostics.SSIL302_InternalError, null, "oh ou") });
+        }
+
+        private void VerboseLog(string logline)
+        {
+            if (Configuration.Verbose)
+            {
+                Console.WriteLine("- " + logline);
+            }
         }
     }
 }

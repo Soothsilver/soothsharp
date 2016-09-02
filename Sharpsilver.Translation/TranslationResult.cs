@@ -9,6 +9,9 @@ using Sharpsilver.Translation.Trees.Silver;
 
 namespace Sharpsilver.Translation
 {
+    /// <summary>
+    /// Represents the result of a main phase translation of a sharpnode.
+    /// </summary>
     public class TranslationResult
     {
         // Universal

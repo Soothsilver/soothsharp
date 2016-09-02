@@ -1,9 +1,9 @@
 #Sharpsilver C#-to-Silver Translator
 **Sharpsilver** is a transcompiler that transforms C# code into code files of the Silver Intermediate Language (`.sil`), a verification language based on permission logics.
 
-This project is currently in active development.
+This project is currently in active development. 
 
-### Examples
+## Basic Example
 
 For example, the following C# code:
 ```csharp
@@ -62,3 +62,7 @@ Silicon finished in 3,057 seconds.
 No errors found.
 ```
 and thus, the C# code would be successfully verified as correct.
+
+## Specification
+
+The primary document describing Sharpsilver is here: [[https://docs.google.com/document/d/1oigf0U18ez57u9dDOkV7dxn4yzFwu4Dt-glyrHz7I0I/edit?usp=sharing]]
