@@ -23,6 +23,8 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
                           return new ClassSharpnode(mbr as ClassDeclarationSyntax);
                       case Microsoft.CodeAnalysis.CSharp.SyntaxKind.StructDeclaration:
                           return new DiagnosticSharpnode(mbr, Diagnostics.SSIL108_FeatureNotSupported, "structs");
+                      case Microsoft.CodeAnalysis.CSharp.SyntaxKind.EnumDeclaration:
+                          return new DiagnosticSharpnode(mbr, Diagnostics.SSIL105_FeatureNotYetSupported, "enums");
                       default:
                           return new UnexpectedSharpnode(mbr);
                   }

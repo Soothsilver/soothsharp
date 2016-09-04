@@ -37,7 +37,16 @@ namespace Sharpsilver.Translation.Trees.Silver
 
         public override IEnumerable<Silvernode> Children
         {
-            get { return List.SelectMany(s => new Silvernode[] {s, new NewlineSilvernode()}); }
+            get {
+                for (int i = 0; i < List.Count; i++)
+                {
+                    yield return List[i];
+                    if (i != List.Count - 1)
+                    {
+                        yield return new NewlineSilvernode();
+                    }
+                }
+            }
         }
 
         protected override void Optimize()

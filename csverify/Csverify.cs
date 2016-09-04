@@ -104,6 +104,12 @@ namespace Sharpsilver.Cs2Sil
                 return (int)ExitCode.InputError;
             }
 
+            if (Verbose)
+            {
+                Console.WriteLine(header);
+                Console.WriteLine();
+            }
+
             int result = (int)RunVerification(verifiedFiles, assumedFiles, references);
 
             if (WaitAfterwards)
@@ -142,7 +148,8 @@ namespace Sharpsilver.Cs2Sil
                     references,
                     new TranslationConfiguration()
                     {
-                        Verbose = Verbose
+                        Verbose = Verbose,
+                        VerifyUnmarkedItems = !OnlyAnnotated
                     });
             }
             catch (Exception ex)

@@ -22,9 +22,9 @@ namespace Sharpsilver.Translation
         /// </summary>
         public bool UnderVerifiedAttribute { get; private set; } = false;
         /// <summary>
-        /// Indicates whether only classes and method marked [Verified] should be verified, or whether everything should be verified.
+        /// Indicates whether classes and method with no [Verified] or [Unverified] attribute should be verified.
         /// </summary>
-        public bool VerifyOnlyMarkedItems { get; private set; } = false;
+        public bool VerifyUnmarkedItems { get; private set; } = false;
         /// <summary>
         /// Gets the semantic model of the C# compilation.
         /// </summary>
@@ -41,7 +41,7 @@ namespace Sharpsilver.Translation
             this.Process = copyFrom.Process;
             this.UnderVerifiedAttribute = copyFrom.UnderVerifiedAttribute;
             this.Semantics = copyFrom.Semantics;
-            this.VerifyOnlyMarkedItems = copyFrom.VerifyOnlyMarkedItems;
+            this.VerifyUnmarkedItems = copyFrom.VerifyUnmarkedItems;
         }
 
         private TranslationContext(TranslationProcess process, SemanticModel semantics)
@@ -49,9 +49,12 @@ namespace Sharpsilver.Translation
             Process = process;
             Semantics = semantics;
         }
-        public static TranslationContext StartNew(TranslationProcess translationProcess, SemanticModel semantics)
+        public static TranslationContext StartNew(TranslationProcess translationProcess, SemanticModel semantics, bool verifyUnmarkedItems)
         {
-            return new TranslationContext(translationProcess, semantics);
+            return new TranslationContext(translationProcess, semantics)
+            {
+                VerifyUnmarkedItems = verifyUnmarkedItems
+            };
         }
 
         /// <summary>

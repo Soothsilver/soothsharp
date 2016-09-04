@@ -9,7 +9,7 @@ namespace Sharpsilver.Translation
     /// <summary>
     /// Represents a type of the Silver language.
     /// </summary>
-    enum SilverType
+    public enum SilverType
     {
         /// <summary>
         /// No type, for example, this represents the type of a method without a return value.

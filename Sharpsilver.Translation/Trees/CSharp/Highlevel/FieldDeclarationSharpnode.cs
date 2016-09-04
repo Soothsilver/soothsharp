@@ -9,10 +9,11 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
     {
         private FieldDeclarationSyntax fieldDeclarationSyntax;
 
-        public ISymbol GetSymbol(SemanticModel semanticModel)
+        public IFieldSymbol GetSymbol(SemanticModel semanticModel)
         {
             var symbol = semanticModel.GetDeclaredSymbol(fieldDeclarationSyntax.Declaration.Variables.First());
-            return symbol;
+            IFieldSymbol fieldsymbol = (IFieldSymbol)symbol;
+            return fieldsymbol;
         }
 
         public FieldDeclarationSharpnode(FieldDeclarationSyntax fieldDeclarationSyntax) : base(fieldDeclarationSyntax)

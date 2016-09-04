@@ -90,6 +90,12 @@ namespace Sharpsilver.Translation
          "A C# file or reference could not be loaded ({0})",
          "",
          DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL113_VerificationSettingsContradiction =
+     SharpsilverDiagnostic.Create(
+         "SSIL113",
+         "This is marked both [Verified] and [Unverified]. Which do you want?",
+         "",
+         DiagnosticSeverity.Error);
 
         // ****************************** 200 Backend Verifier Errors
         public static SharpsilverDiagnostic SSIL201_BackendNotFound =

@@ -32,7 +32,13 @@ namespace Sharpsilver.Translation
         /// Name of the "silver type" for the superclass of all classes, System.Object.
         /// </summary>
         public const string SilverSystemObject = "System_Object";
-
+        /// <summary>
+        /// The identifier that represents the receiver object in Silver
+        /// </summary>
+        public const string SilverThis = "this";
+        /// <summary>
+        /// The silvername for the domain that represents C# typing system.
+        /// </summary>
         public const string CSharpTypeDomain = "CSharpType";
         public const string TypeOfFunction = "typeof";
         public const string IsSubTypeFunction = "isSubtype";

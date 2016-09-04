@@ -106,7 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompilationUnit.cs" />
-    <Compile Include="Optimizers\AllInOptimizer.cs" />
     <Compile Include="TranslationConfiguration.cs" />
     <Compile Include="TranslationProcessResult.cs" />
     <Compile Include="Trees\CommonUtils.cs" />
@@ -126,6 +125,7 @@
     <Compile Include="Trees\CSharp\Statements\LabeledStatementSharpnode.cs" />
     <Compile Include="Trees\CSharp\Statements\LocalDeclarationSharpnode.cs" />
     <Compile Include="Trees\CSharp\Statements\ForStatementSharpnode.cs" />
+    <Compile Include="Trees\Intermediate\CollectedField.cs" />
     <Compile Include="Trees\Intermediate\CollectedType.cs" />
     <Compile Include="Trees\Silver\Expressions\AccSilvernode.cs" />
     <Compile Include="Trees\Silver\Expressions\NewSilvernode.cs" />
@@ -215,6 +215,7 @@
     <Compile Include="Translators\Identifiers\TaggedSymbol.cs" />
     <Compile Include="Translators\TypeTranslator.cs" />
     <Compile Include="Trees\CSharp\Statements\WhileStatementSharpnode.cs" />
+    <Compile Include="VerificationSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -229,9 +230,7 @@
       <Name>Sharpsilver.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assist\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

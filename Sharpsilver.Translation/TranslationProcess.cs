@@ -6,7 +6,6 @@ using Sharpsilver.Translation.Trees.CSharp;
 using Sharpsilver.Translation.Trees.CSharp.Highlevel;
 using Sharpsilver.Translation.Translators;
 using System.Collections.Generic;
-using Sharpsilver.Translation.Trees.Intermediate;
 using Sharpsilver.Translation.Trees.Silver;
 using System.Linq;
 
@@ -18,10 +17,9 @@ namespace Sharpsilver.Translation
     /// </summary>
     public class TranslationProcess
     {
-        private CSharpCompilation Compilation;
         internal IdentifierTranslator IdentifierTranslator = new IdentifierTranslator();
         private ContractsTranslator ContractsTranslator;
-        private TranslationConfiguration Configuration;
+        internal TranslationConfiguration Configuration;
         private List<CollectedType> collectedTypes = new List<CollectedType>();
         private List<CompilationUnit> compilationUnits = new List<CompilationUnit>();
         private List<string> referencedAssemblies = new List<string>();
@@ -38,6 +36,8 @@ namespace Sharpsilver.Translation
         {
             this.ContractsTranslator = new ContractsTranslator(this);
         }
+        List<Error> masterErrorList = new List<Error>();
+        private bool executed = false;
 
         public static TranslationProcess Create(
             List<string> verifiedFiles, 
@@ -76,8 +76,17 @@ namespace Sharpsilver.Translation
             return process;
         }
 
+        internal void AddError(Error error)
+        {
+            masterErrorList.Add(error);
+        }
         public TranslationProcessResult Execute()
         {
+            if (executed)
+            {
+                throw new InvalidOperationException("The process was already executed once.");
+            }
+            executed = true;
             VerboseLog("Loading mscorlib and Sharpsilver.Contracts...");
             var mscorlib = MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location);
             var contractsLibrary = MetadataReference.CreateFromFile("Sharpsilver.Contracts.dll");
@@ -96,7 +105,6 @@ namespace Sharpsilver.Translation
 
             VerboseLog("Processing trees...");
             HighlevelSequenceSilvernode masterTree = new HighlevelSequenceSilvernode(null);
-            List<Error> masterErrorList = new List<Error>();
             foreach (CompilationUnit compilationUnit in compilationUnits)
             {
                 VerboseLog("Processing " + compilationUnit.RoslynTree.FilePath + "...");
@@ -122,7 +130,7 @@ namespace Sharpsilver.Translation
                 TranslationResult translationResult;
                 try
                 {
-                    translationResult = cSharpTree.Translate(TranslationContext.StartNew(this, semanticModel));
+                    translationResult = cSharpTree.Translate(TranslationContext.StartNew(this, semanticModel, Configuration.VerifyUnmarkedItems));
                 }
                 catch (Exception ex)
                 {

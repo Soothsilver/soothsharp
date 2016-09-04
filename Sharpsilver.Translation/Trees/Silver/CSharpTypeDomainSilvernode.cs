@@ -32,7 +32,7 @@ namespace Sharpsilver.Translation.Trees.Silver
                     "\tfunction " + Constants.IsSubTypeFunction + "(subtype: " + Constants.CSharpTypeDomain +
                     ", supertype: " + Constants.CSharpTypeDomain + "): Bool\n",
                     axioms,
-                    "}"
+                    "\n}"
                 };
             }
         }
