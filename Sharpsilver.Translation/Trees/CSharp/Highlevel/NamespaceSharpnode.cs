@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
@@ -33,11 +34,11 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
             return CommonUtils.GetHighlevelSequence(this.children.Select(child => child.Translate(translationContext)), this.OriginalNode);
         }
 
-        public override void CollectTypesInto(TranslationProcess translationProcess)
+        public override void CollectTypesInto(TranslationProcess translationProcess, SemanticModel semantics)
         {
             foreach (Sharpnode sharpnode in this.children)
             {
-                sharpnode.CollectTypesInto(translationProcess);
+                sharpnode.CollectTypesInto(translationProcess, semantics);
             }
         }
     }

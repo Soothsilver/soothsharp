@@ -26,7 +26,7 @@ namespace Sharpsilver.Translation.Trees.Silver
         /// Gets the silvernodes that make up this complex silvernode. A complex silvernode does not generate any text on its own, all of its 
         /// Silver text must be formed by its children.
         /// </summary>
-        protected abstract override IEnumerable<Silvernode> Children { get; }
+        public abstract override IEnumerable<Silvernode> Children { get; }
         /// <summary>
         /// Joins the <c>ToString()</c> results of all children together.
         /// </summary>

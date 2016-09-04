@@ -10,12 +10,10 @@ namespace Sharpsilver.Translation
 {
     public class IdentifierReference : Identifier
     {
-        private IdentifierTranslator identifierTranslator;
-        private TaggedSymbol symbol;
 
         public IdentifierReference(TaggedSymbol symbol, IdentifierTranslator identifierTranslator)
         {
-            this.symbol = symbol;
+            this.Symbol = symbol;
             this.identifierTranslator = identifierTranslator;
         }
 
@@ -27,7 +25,6 @@ namespace Sharpsilver.Translation
             this.Silvername = silvername;
         }
 
-        public string Silvername { get; set; }
 
         public override string ToString()
         {

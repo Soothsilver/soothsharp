@@ -84,6 +84,12 @@ namespace Sharpsilver.Translation
           "\"{0}\" is not a statement silvernode.",
           "",
           DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL112_FileNotFound =
+     SharpsilverDiagnostic.Create(
+         "SSIL112",
+         "A C# file or reference could not be loaded ({0})",
+         "",
+         DiagnosticSeverity.Error);
 
         // ****************************** 200 Backend Verifier Errors
         public static SharpsilverDiagnostic SSIL201_BackendNotFound =

@@ -22,7 +22,7 @@ namespace Sharpsilver.Translation.Trees.Silver
         /// <summary>
         /// Gets the children of this silvernode, if any. All <see cref="ComplexSilvernode"/>s have children, but other silvernodes cannot.
         /// </summary>
-        protected virtual IEnumerable<Silvernode> Children => new Silvernode[0];
+        public virtual IEnumerable<Silvernode> Children => new Silvernode[0];
 
         /// <summary>
         /// Gets the C# node that was translated into the deepmost silvernode that is present at the specified character offset off the 
@@ -106,6 +106,25 @@ namespace Sharpsilver.Translation.Trees.Silver
         public static implicit operator Silvernode(string s)
         {
             return new TextSilvernode(s);
+        }
+
+        /// <summary>
+        /// Runs the OPTIMIZATION PHASE for this silvernode.
+        /// </summary>
+        protected virtual void Optimize()
+        {
+        }
+
+        /// <summary>
+        /// Runs the OPTIMIZATION PHASE for this silvernode, then calls itself on its children.
+        /// </summary>
+        public void OptimizeRecursively()
+        {
+            this.Optimize();
+            foreach (var child in this.Children)
+            {
+                child.OptimizeRecursively();
+            }
         }
     }
 }

@@ -65,11 +65,12 @@ namespace Sharpsilver.Plugin
 
         private void WholeTreeVerificationAnalysis(SyntaxTreeAnalysisContext treeContext)
         {
+            /*
             if (treeContext.Tree.GetText().ToString().Length < 10)
             {
                 return;
             }
-            var translationProcess = new TranslationProcess();
+            var translationProcess = TranslationProcess.Create()
             var result = translationProcess.TranslateTree(treeContext.Tree);
             if (!result.WasTranslationSuccessful) return; // translation errors are handled by the other method
             if (result.Silvernode.ToString().Trim() == "") return;
@@ -89,11 +90,12 @@ namespace Sharpsilver.Plugin
                         rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
                         );
                 }
-            }
+            }*/
         }
 
         private void WholeTreeTranslationAnalysis(SyntaxTreeAnalysisContext treeContext)
         {
+            /*
             var translationProcess = new TranslationProcess();
             var result = translationProcess.TranslateTree(treeContext.Tree);
             foreach(var diagnostic in result.Errors)
@@ -111,7 +113,7 @@ namespace Sharpsilver.Plugin
                         rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
                         );
                 }
-            }
+            }*/
 
         }
     }

@@ -14,7 +14,7 @@ namespace Sharpsilver.Translation.Trees.Silver
             Type = type;
         }
 
-        protected override IEnumerable<Silvernode> Children
+        public override IEnumerable<Silvernode> Children
         {
             get
             {

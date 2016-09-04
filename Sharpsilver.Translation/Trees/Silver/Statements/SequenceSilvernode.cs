@@ -12,7 +12,7 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
             List.AddRange(nodes);
         }
 
-        protected override IEnumerable<Silvernode> Children => List.WithSeparator<Silvernode>("\n" + Tabs());
+        public override IEnumerable<Silvernode> Children => List.WithSeparator<Silvernode>("\n" + Tabs());
 
         public List<StatementSilvernode> List = new List<StatementSilvernode>();
     }

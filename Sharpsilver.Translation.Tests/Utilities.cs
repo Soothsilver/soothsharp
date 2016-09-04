@@ -10,10 +10,10 @@ namespace Sharpsilver.Translation.Tests
 {
     class Utilities
     {
-        public static TranslationResult Translate(string filename)
+        public static TranslationProcessResult Translate(string filename)
         {
-            TranslationProcess process = new TranslationProcess();
-            var result = process.TranslateCode(filename, false);
+            TranslationProcess process = TranslationProcess.Create(new List<string> { filename }, new List<string>(), new List<string>(), new TranslationConfiguration());
+            var result = process.Execute();
             return result;
         }
         public static string ReadAllText(string filename)

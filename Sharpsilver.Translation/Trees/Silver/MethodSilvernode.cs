@@ -29,7 +29,7 @@ namespace Sharpsilver.Translation.Trees.Silver
             this.block = block;
             this.parameters = parameters;
         }
-        protected override IEnumerable<Silvernode> Children
+        public override IEnumerable<Silvernode> Children
         {
             get
             {

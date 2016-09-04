@@ -19,8 +19,8 @@ namespace Sharpsilver.Translation.Trees.Silver
         {
             List = new List<Silvernode>(topLevelSilvernodes);
         }
-        
-        protected override IEnumerable<Silvernode> Children
+
+        public override IEnumerable<Silvernode> Children
         {
             get { return List.SelectMany(s => new Silvernode[] {s }); }
         }

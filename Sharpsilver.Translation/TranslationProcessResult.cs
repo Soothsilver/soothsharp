@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Sharpsilver.Translation.Trees.Silver;
 
 namespace Sharpsilver.Translation
@@ -22,6 +23,10 @@ namespace Sharpsilver.Translation
         {
             Silvernode = silvernode;
             Errors = errors;
+        }
+        public static TranslationProcessResult Error(SyntaxNode syntaxNode, SharpsilverDiagnostic diagnostic, params object[] arguments)
+        {
+            return new TranslationProcessResult(null, new List<Translation.Error> { new Translation.Error(diagnostic, syntaxNode, arguments) });
         }
     }
 }

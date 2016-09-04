@@ -28,7 +28,7 @@ namespace Sharpsilver.Translation
         /// <summary>
         /// Gets the semantic model of the C# compilation.
         /// </summary>
-        public SemanticModel Semantics => Process.SemanticModel;
+        public SemanticModel Semantics { get; private set; }
 
         /// <summary>
         /// Creates a new translation context as a copy of a previous one.
@@ -40,16 +40,18 @@ namespace Sharpsilver.Translation
             this.IsPure = copyFrom.IsPure;
             this.Process = copyFrom.Process;
             this.UnderVerifiedAttribute = copyFrom.UnderVerifiedAttribute;
+            this.Semantics = copyFrom.Semantics;
             this.VerifyOnlyMarkedItems = copyFrom.VerifyOnlyMarkedItems;
         }
 
-        private TranslationContext(TranslationProcess process)
+        private TranslationContext(TranslationProcess process, SemanticModel semantics)
         {
             Process = process;
+            Semantics = semantics;
         }
-        public static TranslationContext StartNew(TranslationProcess translationProcess)
+        public static TranslationContext StartNew(TranslationProcess translationProcess, SemanticModel semantics)
         {
-            return new TranslationContext(translationProcess);
+            return new TranslationContext(translationProcess, semantics);
         }
 
         /// <summary>

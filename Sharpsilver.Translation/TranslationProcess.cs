@@ -18,112 +18,25 @@ namespace Sharpsilver.Translation
     /// </summary>
     public class TranslationProcess
     {
-        public CSharpCompilation Compilation;
-        public SemanticModel SemanticModel;
-        public IdentifierTranslator IdentifierTranslator = new IdentifierTranslator();
-        public ContractsTranslator ContractsTranslator;
+        private CSharpCompilation Compilation;
+        internal IdentifierTranslator IdentifierTranslator = new IdentifierTranslator();
+        private ContractsTranslator ContractsTranslator;
         private TranslationConfiguration Configuration;
         private List<CollectedType> collectedTypes = new List<CollectedType>();
         private List<CompilationUnit> compilationUnits = new List<CompilationUnit>();
         private List<string> referencedAssemblies = new List<string>();
-        public CollectedType AddToCollectedTypes(ClassSharpnode classSharpnode)
+        internal CollectedType AddToCollectedTypes(ClassSharpnode classSharpnode, SemanticModel semanticModel)
         {
             var name = IdentifierTranslator.RegisterAndGetIdentifier(
-                SemanticModel.GetDeclaredSymbol(classSharpnode.DeclarationSyntax));
+                semanticModel.GetDeclaredSymbol(classSharpnode.DeclarationSyntax));
             var superclassObject = IdentifierTranslator.SystemObject;
             CollectedType type = new CollectedType(name, superclassObject);
             collectedTypes.Add(type);
             return type;
         }
-        public TranslationProcess()
+        private TranslationProcess()
         {
             this.ContractsTranslator = new ContractsTranslator(this);
-        }
-        /// <summary>
-        /// Translates C# code into a Silver syntax tree or produces errors.
-        /// </summary>
-        /// <param name="csharpCode">The C# code.</param>
-        /// <param name="writeProgressToConsole">If true, translation progress will be written to the console.</param>
-        public TranslationResult TranslateCode(string csharpCode, bool writeProgressToConsole = false)
-        {
-            if (writeProgressToConsole) Console.WriteLine("- Syntax analysis begins.");
-            SyntaxTree tree = CSharpSyntaxTree.ParseText(csharpCode);
-            return TranslateTree(tree, writeProgressToConsole);
-        }
-        /// <summary>
-        /// Translates a C# syntax tree into a Silver syntax tree or produces error.
-        /// </summary>
-        /// <param name="tree">The C# syntax tree.</param>
-        /// <param name="writeProgressToConsole">If true, translation progress will be written to the console.</param>
-        public TranslationResult TranslateTree(SyntaxTree tree, bool writeProgressToConsole = false)
-        {
-            var mscorlib = MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location);
-
-            // 1. Prepare compilation object.
-            if (writeProgressToConsole) Console.WriteLine("- Compiling.");
-            this.Compilation = CSharpCompilation.Create("translated_assembly")
-                                    .AddSyntaxTrees(tree)
-                                    .AddReferences(mscorlib)
-                                    .AddReferences(MetadataReference.CreateFromFile("Sharpsilver.Contracts.dll"))
-                                    ;
-
-            // 2. Prepare semantic analysis.
-            if (writeProgressToConsole) Console.WriteLine("- Creating semantic model.");
-            this.SemanticModel = this.Compilation.GetSemanticModel(tree, true);
-            
-
-            // 3. Convert to Sharpnode intermediate representation.
-            Sharpnode cSharpTree;
-            if (writeProgressToConsole) Console.WriteLine("- Mapping to sharpnodes.");
-            try
-            {
-                cSharpTree = new CompilationUnitSharpnode(tree.GetRoot() as CompilationUnitSyntax);
-            }
-            catch (Exception ex)
-            {
-                return TranslationResult.Error(null, Diagnostics.SSIL103_ExceptionConstructingCSharp, ex.ToString());
-            }
-
-            // 4. Collect types.
-            if (writeProgressToConsole) Console.WriteLine("- Collecting types.");
-            cSharpTree.CollectTypesInto(this);
-
-            // 5. Convert to Silver intermediate representation.
-            if (writeProgressToConsole) Console.WriteLine("- Translating.");
-            TranslationResult translationResult;
-            try
-            {
-                translationResult = cSharpTree.Translate(TranslationContext.StartNew(this));
-            }
-            catch (Exception ex)
-            {
-
-                return TranslationResult.Error(null, Diagnostics.SSIL104_ExceptionConstructingSilver, ex.ToString());
-            }
-
-            // 6. Add types and common code
-            HighlevelSequenceSilvernode rootSilvernode = new HighlevelSequenceSilvernode(
-                null, 
-                translationResult.Silvernode);
-
-            HighlevelSequenceSilvernode axioms = new HighlevelSequenceSilvernode(null);
-            CSharpTypeDomainSilvernode domain = new CSharpTypeDomainSilvernode(axioms);
-
-            rootSilvernode.List.Add(domain);
-            foreach (var collectedType in collectedTypes)
-            {
-                rootSilvernode.List.Add(collectedType.GenerateGlobalSilvernode());
-                axioms.List.Add(collectedType.GenerateSilvernodeInsideCSharpType());
-            }
-
-            
-            // 7. Assign names to identifiers
-            this.IdentifierTranslator.AssignTrueNames();
-
-            // 8. Postprocessing.
-            rootSilvernode.Postprocess();
-            translationResult.Silvernode = rootSilvernode;
-            return translationResult;
         }
 
         public static TranslationProcess Create(
@@ -169,13 +82,80 @@ namespace Sharpsilver.Translation
             var mscorlib = MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location);
             var contractsLibrary = MetadataReference.CreateFromFile("Sharpsilver.Contracts.dll");
             VerboseLog("Initializing compilation...");
-            CSharpCompilation compilationObject = CSharpCompilation.Create("translated_assembly",
-                compilationUnits.Select(unit => unit.RoslynTree),
-                (new[] { mscorlib, contractsLibrary }).Union(referencedAssemblies.Select(filename => MetadataReference.CreateFromFile(filename)))
-                );
-            VerboseLog("Starting processing trees...");
+            CSharpCompilation compilation;
+            try
+            {
+                 compilation = CSharpCompilation.Create("translated_assembly",
+                    compilationUnits.Select(unit => unit.RoslynTree),
+                    (new[] { mscorlib, contractsLibrary }).Union(referencedAssemblies.Select(filename => MetadataReference.CreateFromFile(filename)))
+                    );
+            } catch (System.IO.IOException exception)
+            {
+                return TranslationProcessResult.Error(null, Diagnostics.SSIL112_FileNotFound, exception.Message);
+            }
 
-            return new TranslationProcessResult(new EmptySilvernode(null), new List<Error>() { new Error(Diagnostics.SSIL302_InternalError, null, "oh ou") });
+            VerboseLog("Processing trees...");
+            HighlevelSequenceSilvernode masterTree = new HighlevelSequenceSilvernode(null);
+            List<Error> masterErrorList = new List<Error>();
+            foreach (CompilationUnit compilationUnit in compilationUnits)
+            {
+                VerboseLog("Processing " + compilationUnit.RoslynTree.FilePath + "...");
+                VerboseLog("- Semantic analysis...");
+                SemanticModel semanticModel = compilation.GetSemanticModel(compilationUnit.RoslynTree, false);
+
+                VerboseLog("- Mapping to sharpnodes...");
+                Sharpnode cSharpTree;
+                try
+                {
+                    cSharpTree = new CompilationUnitSharpnode(compilationUnit.RoslynTree.GetRoot() as CompilationUnitSyntax);
+                }
+                catch (Exception ex)
+                {
+                    masterErrorList.Add(new Error(Diagnostics.SSIL103_ExceptionConstructingCSharp, compilationUnit.RoslynTree.GetRoot(), ex.ToString()));
+                    continue;
+                }
+
+                VerboseLog("- COLLECTION PHASE begins...");
+                cSharpTree.CollectTypesInto(this, semanticModel);
+
+                VerboseLog("- MAIN PHASE begins...");
+                TranslationResult translationResult;
+                try
+                {
+                    translationResult = cSharpTree.Translate(TranslationContext.StartNew(this, semanticModel));
+                }
+                catch (Exception ex)
+                {
+                    masterErrorList.Add(new Error(Diagnostics.SSIL104_ExceptionConstructingSilver, compilationUnit.RoslynTree.GetRoot(), ex.ToString()));
+                    continue;
+                }
+                masterTree.List.Add(translationResult.Silvernode);
+                masterErrorList.AddRange(translationResult.Errors);
+            }
+
+            VerboseLog("GLOBAL ADDITION PHASE begins...");
+            HighlevelSequenceSilvernode axioms = new HighlevelSequenceSilvernode(null);
+            CSharpTypeDomainSilvernode domain = new CSharpTypeDomainSilvernode(axioms);
+
+            masterTree.List.Add(domain);
+            foreach (var collectedType in collectedTypes)
+            {
+                masterTree.List.Add(collectedType.GenerateGlobalSilvernode());
+                axioms.List.Add(collectedType.GenerateSilvernodeInsideCSharpType());
+            }
+
+            VerboseLog("REFERENCED ASSEMBLIES ADDITION PHASE is not yet implemented.");
+
+            VerboseLog("OPTIMIZATION PHASE begins...");
+            masterTree.OptimizeRecursively();
+
+            VerboseLog("Assigning silvernames to identifiers...");
+            this.IdentifierTranslator.AssignTrueNames();
+
+            VerboseLog("Postprocessing...");
+            masterTree.Postprocess();
+
+            return new TranslationProcessResult(masterTree, masterErrorList);
         }
 
         private void VerboseLog(string logline)

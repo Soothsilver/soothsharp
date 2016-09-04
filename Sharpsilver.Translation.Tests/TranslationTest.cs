@@ -19,10 +19,10 @@ namespace Sharpsilver.Translation.Tests
             string fullFilename = System.IO.Path.Combine(dir, filename);
             string csharpCode = System.IO.File.ReadAllText(fullFilename);
 
-            var translation = new TranslationProcess();
-            var result = translation.TranslateCode(csharpCode, false);
+            var translation = TranslationProcess.Create(new List<string>() { fullFilename }, new List<string>(), new List<string>(), new TranslationConfiguration());
+            var result = translation.Execute();
             
-                Assert.True(result.WasTranslationSuccessful, string.Join("\n", result.Errors));
+            Assert.True(result.WasTranslationSuccessful, string.Join("\n", result.Errors));
         }
 
         public static IEnumerable<object[]> GetTestFiles()

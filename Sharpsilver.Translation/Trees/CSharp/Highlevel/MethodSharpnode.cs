@@ -27,7 +27,7 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var method = context.Process.SemanticModel.GetDeclaredSymbol(this.methodDeclarationSyntax);
+            var method = context.Semantics.GetDeclaredSymbol(this.methodDeclarationSyntax);
             var identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(method);
             var innerContext = context;
             var body = this.Body.Translate(innerContext);

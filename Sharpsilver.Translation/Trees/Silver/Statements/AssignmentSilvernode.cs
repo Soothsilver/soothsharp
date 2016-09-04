@@ -14,7 +14,7 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
             this.left = left;
             this.right = right;
         }
-        protected override IEnumerable<Silvernode> Children
+        public override IEnumerable<Silvernode> Children
         {
             get
             {

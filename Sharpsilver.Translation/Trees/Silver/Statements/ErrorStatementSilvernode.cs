@@ -15,6 +15,6 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
 
         }
 
-        protected override IEnumerable<Silvernode> Children => new Silvernode[] { Constants.SilverErrorString };
+        public override IEnumerable<Silvernode> Children => new Silvernode[] { Constants.SilverErrorString };
     }
 }

@@ -21,7 +21,7 @@ namespace Sharpsilver.Translation.Trees.Silver
             this.axioms = axioms;
         }
 
-        protected override IEnumerable<Silvernode> Children
+        public override IEnumerable<Silvernode> Children
         {
             get
             {

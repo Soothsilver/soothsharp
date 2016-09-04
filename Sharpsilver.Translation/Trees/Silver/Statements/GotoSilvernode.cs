@@ -17,7 +17,7 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
         {
             Label = text;
         }
-        protected override IEnumerable<Silvernode> Children
+        public override IEnumerable<Silvernode> Children
         {
             get
             {

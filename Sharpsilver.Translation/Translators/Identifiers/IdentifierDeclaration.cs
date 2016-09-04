@@ -10,16 +10,13 @@ namespace Sharpsilver.Translation
 {
     public class IdentifierDeclaration : Identifier
     {
-        private IdentifierTranslator identifierTranslator;
-        public TaggedSymbol Symbol;
          
         public IdentifierDeclaration(TaggedSymbol symbol, IdentifierTranslator identifierTranslator)
         {
             this.Symbol = symbol;
             this.identifierTranslator = identifierTranslator;
         }
-
-        public string Silvername { get; set; }
+        
 
         public override string ToString()
         {

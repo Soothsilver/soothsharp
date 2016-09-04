@@ -37,7 +37,7 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var classSymbol = context.Process.SemanticModel.GetDeclaredSymbol(this.OriginalNode as ClassDeclarationSyntax);
+            var classSymbol = context.Semantics.GetDeclaredSymbol(this.OriginalNode as ClassDeclarationSyntax);
 
             var attributes = classSymbol.GetAttributes();
             
@@ -48,15 +48,15 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
             return CommonUtils.GetHighlevelSequence(this.children.Select(child => child.Translate(context)));
         }
 
-        public override void CollectTypesInto(TranslationProcess translationProcess)
+        public override void CollectTypesInto(TranslationProcess translationProcess, SemanticModel semantics)
         {
-            this.TypeIfCollected = translationProcess.AddToCollectedTypes(this);
+            this.TypeIfCollected = translationProcess.AddToCollectedTypes(this, semantics);
             foreach (Sharpnode node in children)
             {
                 if (node is FieldDeclarationSharpnode)
                 {
                     this.TypeIfCollected.InstanceFields.Add(
-                        translationProcess.IdentifierTranslator.RegisterAndGetIdentifier(((FieldDeclarationSharpnode)node).GetSymbol(translationProcess.SemanticModel)));
+                        translationProcess.IdentifierTranslator.RegisterAndGetIdentifier(((FieldDeclarationSharpnode)node).GetSymbol(semantics)));
                 }
             }
         }
