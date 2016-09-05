@@ -11,13 +11,23 @@ namespace Sharpsilver.Translation.Trees.CSharp
 {
     class UnknownExpressionSharpnode : ExpressionSharpnode
     {
-        public UnknownExpressionSharpnode(ExpressionSyntax node) : base(node)
+        string featureName;
+        public UnknownExpressionSharpnode(ExpressionSyntax node, string featureName = null) : base(node)
         {
+            this.featureName = featureName;
         }
+
 
         public override TranslationResult Translate(TranslationContext translationContext)
         {
-            return TranslationResult.Error(OriginalNode, Diagnostics.SSIL101_UnknownNode, OriginalNode.Kind());
+            if (featureName == null)
+            {
+                return TranslationResult.Error(OriginalNode, Diagnostics.SSIL101_UnknownNode, OriginalNode.Kind());
+            } else
+            {
+                return TranslationResult.Error(OriginalNode,
+                    Diagnostics.SSIL108_FeatureNotSupported, featureName);
+            }
         }
     }
 }

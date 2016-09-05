@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis;
 using Sharpsilver.Translation.Trees.Silver;
-using Sharpsilver.Translation.Translators;
 using Microsoft.CodeAnalysis.CSharp;
 using Sharpsilver.Translation.Trees.Silver.Statements;
 
@@ -102,7 +101,7 @@ namespace Sharpsilver.Translation.Trees.CSharp.Statements
             // Add assignment if there is an initial value.
             var res = initialValue.Translate(context);
             AssignmentSilvernode assignmentSilvernode =
-                new AssignmentSilvernode(new IdentifierSilvernode(variable.Identifier, identifier), res.Silvernode, OriginalNode);
+                new AssignmentSilvernode(new IdentifierSilvernode(identifier), res.Silvernode, OriginalNode);
             errors.AddRange(res.Errors);
             return TranslationResult.FromSilvernode(new SequenceSilvernode(OriginalNode,
                 intro,

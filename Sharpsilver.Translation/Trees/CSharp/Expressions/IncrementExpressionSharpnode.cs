@@ -4,8 +4,9 @@ using Sharpsilver.Translation;
 using System.Collections.Generic;
 using Sharpsilver.Translation.Trees.Silver;
 using Sharpsilver.Translation.Trees.Silver.Statements;
+using Sharpsilver.Translation.Trees.CSharp.Expressions;
 
-namespace Sharpsilver.Translation.Trees.CSharp.Expressions
+namespace Sharpsilver.Translation.Trees.CSharp
 {
     public class IncrementExpressionSharpnode : ExpressionSharpnode
     {

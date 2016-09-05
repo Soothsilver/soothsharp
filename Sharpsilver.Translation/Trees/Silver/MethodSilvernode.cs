@@ -15,9 +15,12 @@ namespace Sharpsilver.Translation.Trees.Silver
         private TypeSilvernode returnType;
         private List<VerificationConditionSilvernode> verificationConditions;
         private List<ParameterSilvernode> parameters;
+        private string returnValueName;
+
         public MethodSilvernode(SyntaxNode methodDeclarationSyntax,
             IdentifierSilvernode identifierSilvernode, 
             List<ParameterSilvernode> parameters,
+            string returnName,
             TypeSilvernode returnType, 
             List<VerificationConditionSilvernode> verificationConditions,
             BlockSilvernode block)
@@ -27,6 +30,7 @@ namespace Sharpsilver.Translation.Trees.Silver
             this.returnType = returnType;
             this.verificationConditions = verificationConditions;
             this.block = block;
+            this.returnValueName = returnName;
             this.parameters = parameters;
         }
         public override IEnumerable<Silvernode> Children
@@ -49,7 +53,7 @@ namespace Sharpsilver.Translation.Trees.Silver
                     children.AddRange(new Silvernode[]
                     {
                         " returns (",
-                        Constants.SilverReturnVariableName,
+                        returnValueName,
                         " : ",
                         returnType,
                         ")"

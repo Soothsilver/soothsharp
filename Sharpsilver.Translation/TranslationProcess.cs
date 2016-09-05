@@ -4,7 +4,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.Trees.CSharp;
 using Sharpsilver.Translation.Trees.CSharp.Highlevel;
-using Sharpsilver.Translation.Translators;
 using System.Collections.Generic;
 using Sharpsilver.Translation.Trees.Silver;
 using System.Linq;

@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.Trees.Silver;
 using Sharpsilver.Translation.Trees.Silver.Statements;
-using Sharpsilver.Translation.Translators;
 
 namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
 {
@@ -76,12 +75,14 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
             }
             var innerStatements = body.Silvernode as BlockSilvernode;
             Debug.Assert(innerStatements != null, "innerStatements != null");
+            innerStatements.Prepend(new AssignmentSilvernode(Constants.SilverThis, "new(*)", null));
             innerStatements.Add(new LabelSilvernode(Constants.SilverMethodEndLabel, null));
 
             var methodSilvernode = 
                 new MethodSilvernode(this.methodSyntax, // method
                     new IdentifierSilvernode(identifier), // name
                     silverParameters,
+                    Constants.SilverThis,
                     new TypeSilvernode(null,                    
                         TypeTranslator.TranslateType(
                             classSymbol, null, 

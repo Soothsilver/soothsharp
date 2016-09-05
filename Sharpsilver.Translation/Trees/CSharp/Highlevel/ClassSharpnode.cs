@@ -4,7 +4,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.Trees.Silver;
-using Sharpsilver.Translation.Translators;
 
 namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
 {

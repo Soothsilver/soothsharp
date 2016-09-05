@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.Translators;
 
 namespace Sharpsilver.Translation
 {

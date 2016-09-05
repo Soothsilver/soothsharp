@@ -94,9 +94,6 @@
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
@@ -109,7 +106,9 @@
       <Name>Sharpsilver.Translation</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y /S /E $(ProjectDir)Files $(SolutionDir)csverify\bin\Debug\Files
@@ -117,6 +116,12 @@ xcopy /Y /S /E $(ProjectDir)Files $(ProjectDir)\bin\Debug\Files
 xcopy /Y /S /E $(ProjectDir)Systemwide $(SolutionDir)csverify\bin\Debug\Systemwide
 xcopy /Y /S /E $(ProjectDir)Systemwide $(ProjectDir)\bin\Debug\Systemwide</PostBuildEvent>
   </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Tenhle projekt odkazuje na balíčky NuGet, které nejsou v tomhle počítači k dispozici. Když je chcete stáhnout, použijte funkci obnovení balíčků NuGet.  Další informace najdete na adrese http://go.microsoft.com/fwlink/?LinkID=322105. Chybějícím souborem je soubor {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

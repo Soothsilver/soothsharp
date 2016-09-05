@@ -110,6 +110,7 @@
     <Compile Include="TranslationProcessResult.cs" />
     <Compile Include="Trees\CommonUtils.cs" />
     <Compile Include="Trees\CSharp\Expressions\DiagnosticExpressionSharpnode.cs" />
+    <Compile Include="Trees\CSharp\Expressions\MemberAccessExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\IncrementExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\ObjectCreationExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Highlevel\ConstructorSharpnode.cs" />

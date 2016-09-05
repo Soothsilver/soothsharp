@@ -55,7 +55,7 @@ namespace Sharpsilver.Translation.Tests
                 var verificationResult = backend.Verify(result.Silvernode);
                 errors = verificationResult.Errors;
             }
-            Assert.True(expectedErrorcodes.Count == errors.Count, "Expected error count: " + expectedErrorcodes.Count + "\nActual errors: " + errors.Count + "\n" + string.Join("\n", result.Errors));
+            Assert.True(expectedErrorcodes.Count == errors.Count, "Expected error count: " + expectedErrorcodes.Count + "\nActual errors: " + errors.Count + "\n" + string.Join("\n", errors));
             foreach (var error in errors)
             {
                 if (expectedErrorcodes.Contains(error.Diagnostic.ErrorCode.ToLower()))

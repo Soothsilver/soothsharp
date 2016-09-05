@@ -5,7 +5,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.Trees.Silver;
 using Sharpsilver.Translation.Trees.Silver.Statements;
-using Sharpsilver.Translation.Translators;
 
 namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
 {
@@ -55,8 +54,9 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
             innerStatements.Add(new LabelSilvernode(Constants.SilverMethodEndLabel, null));
             var methodSilvernode = 
                 new MethodSilvernode(this.methodDeclarationSyntax, // method
-                    new IdentifierSilvernode(this.methodDeclarationSyntax.Identifier, identifier), // name
+                    new IdentifierSilvernode(identifier), // name
                     silverParameters,
+                    Constants.SilverReturnVariableName,
                     new TypeSilvernode(this.methodDeclarationSyntax.ReturnType,                    
                         TypeTranslator.TranslateType(
                             method.ReturnType, this.methodDeclarationSyntax.ReturnType, 

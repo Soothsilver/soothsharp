@@ -4,7 +4,6 @@ namespace Sharpsilver.Translation.Trees.Silver
 {
     internal class IdentifierSilvernode : Silvernode
     {
-        private SyntaxToken identifierToken;
         private IdentifierDeclaration silverIdentifier;
         private IdentifierReference silverIdentifierReference;
 
@@ -16,14 +15,12 @@ namespace Sharpsilver.Translation.Trees.Silver
                 silverIdentifierReference = identifier as IdentifierReference;
         }
 
-        public IdentifierSilvernode(SyntaxToken identifierToken, IdentifierDeclaration silverIdentifier) : base(null)
+        public IdentifierSilvernode(IdentifierDeclaration silverIdentifier, SyntaxNode originalNode = null) : base(originalNode)
         {
-            this.identifierToken = identifierToken;
             this.silverIdentifier = silverIdentifier;
         }
-        public IdentifierSilvernode(SyntaxToken identifierToken, IdentifierReference silverIdentifier) : base(null)
+        public IdentifierSilvernode(IdentifierReference silverIdentifier, SyntaxNode originalNode = null) : base(originalNode)
         {
-            this.identifierToken = identifierToken;
             this.silverIdentifierReference = silverIdentifier;
         }
 

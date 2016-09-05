@@ -188,16 +188,21 @@ namespace Sharpsilver.Translation
 
                 // Variables
                 case SyntaxKind.IdentifierName:
+                    return new IdentifierExpressionSharpnode(expression as IdentifierNameSyntax);
                 case SyntaxKind.SimpleMemberAccessExpression:
-                    return new IdentifierExpressionSharpnode(expression as ExpressionSyntax);
+                    return new IdentifierExpressionSharpnode(expression as MemberAccessExpressionSyntax);
+
 
                 // Others
                 case SyntaxKind.ConditionalExpression:
                     return new ConditionalExpressionSharpnode(expression as ConditionalExpressionSyntax);
                 case SyntaxKind.ParenthesizedExpression:
                     return new ParenthesizedExpressionSharpnode(expression as ParenthesizedExpressionSyntax);
-                    
 
+
+                case SyntaxKind.PointerMemberAccessExpression:
+                case SyntaxKind.PointerIndirectionExpression:
+                    return new UnknownExpressionSharpnode(expression, "pointers");
                 default:
                     return new UnknownExpressionSharpnode(expression);
             }

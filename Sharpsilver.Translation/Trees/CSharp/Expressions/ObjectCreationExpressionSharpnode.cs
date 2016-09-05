@@ -5,7 +5,6 @@ using Sharpsilver.Translation.Trees.Silver;
 using System.Collections.Generic;
 using Sharpsilver.Translation;
 using Sharpsilver.Translation.Trees.CSharp.Expressions;
-using Sharpsilver.Translation.Translators;
 
 namespace Sharpsilver.Translation.Trees.CSharp
 {

@@ -13,6 +13,10 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
         {
             Statements.Add(statement);
         }
+        public void Prepend(StatementSilvernode statement)
+        {
+            Statements.Insert(0, statement);
+        }
 
         public BlockSilvernode(BlockSyntax blockSyntax, List<StatementSilvernode> statements) : base(blockSyntax)
         {

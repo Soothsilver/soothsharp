@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharpsilver.Translation.Translators
+namespace Sharpsilver.Translation
 {
     /// <summary>
     /// Allows declarations to register new identifiers, and variables/method calls to get existing identifiers.
