@@ -67,7 +67,7 @@ namespace Sharpsilver.Cs2Sil
                 .Add("?|help|h", "Shows this message.", option => showHelp = option != null)
                 .Add("v|version", $"Shows that the version of this program is {version}.", option => showVersion = option != null)
                 .Add("V|verbose", "Enables verbose mode. In verbose mode, additional debugging information is printed and more details are written for each error message.", option => Verbose = option != null)
-                .Add("q|quiet", "Enable quiet mode. In quiet mode, only the resulting Silver code or error messages are shown. Verbose mode takes precedence over quiet mode.", option => Quiet = option != null)
+                .Add("q|quiet", "Enable quiet mode. In quiet mode, only the resulting Silver code or error messages are shown.", option => Quiet = option != null)
                 .Add("r|reference=", "Adds the {ASSEMBLY.DLL} file as a reference when doing semantic analysis on the code. mscorlib and Sharpsilver.Contracts are added automatically.", filename => references.Add(filename))
                 .Add("a|assume=", "Translates the file {CLASS.CS} to Silver and prepends it to the main generated file, but its methods and functions won't be verified - their postconditions will be assumed to be true. ", filename => assumedFiles.Add(filename))   
                 .Add("w|wait", "When the program finishes, it will wait for the user to press any key before terminating.", option => WaitAfterwards = option != null)
@@ -97,6 +97,16 @@ namespace Sharpsilver.Cs2Sil
             {
                 WriteHelp(optionset);
                 return (int)ExitCode.Success;
+            }
+            if (Verbose && Quiet)
+            {
+                Console.WriteLine("Verbose and quiet mode are not compatible.");
+                return (int)ExitCode.InputError;
+            }
+            if (UseCarbon && UseSilicon)
+            {
+                Console.WriteLine("It's not possible to use both Carbon and Silicon during the same run.");
+                return (int)ExitCode.InputError;
             }
             if (verifiedFiles.Count < 1)
             {

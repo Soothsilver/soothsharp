@@ -10,7 +10,7 @@ namespace Sharpsilver.Translation.Tests
 {
     public class TranslationTest
     {
-      //  [Theory()]
+        [Theory()]
         [MemberData(nameof(GetTestFiles))]
         public void TranslationToSilverOk(string filename)
         { 
