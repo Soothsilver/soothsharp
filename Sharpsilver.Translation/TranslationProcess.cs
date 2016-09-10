@@ -27,7 +27,7 @@ namespace Sharpsilver.Translation
             var name = IdentifierTranslator.RegisterAndGetIdentifier(
                 semanticModel.GetDeclaredSymbol(classSharpnode.DeclarationSyntax));
             var superclassObject = IdentifierTranslator.SystemObject;
-            CollectedType type = new CollectedType(name, superclassObject);
+            CollectedType type = new CollectedType(semanticModel.GetDeclaredSymbol(classSharpnode.DeclarationSyntax), name, superclassObject);
             collectedTypes.Add(type);
             return type;
         }
@@ -147,7 +147,7 @@ namespace Sharpsilver.Translation
             masterTree.List.Add(domain);
             foreach (var collectedType in collectedTypes)
             {
-                masterTree.List.Add(collectedType.GenerateGlobalSilvernode());
+                masterTree.List.Add(collectedType.GenerateGlobalSilvernode(this));
                 axioms.List.Add(collectedType.GenerateSilvernodeInsideCSharpType());
             }
 

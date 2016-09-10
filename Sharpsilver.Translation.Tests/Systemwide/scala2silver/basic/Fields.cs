@@ -9,10 +9,10 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.basic
 
         public Fields()
         {
-            Contract.Ensures(Contract.Read(variable) && variable == 3);
-
             variable = 3;
-            value = new C(3);
+
+            value = new C(2);
+            object d = new D();
         }
     }
 
@@ -20,9 +20,16 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.basic
     {
         private int a;
 
+        
         public C(int a)
         {
             this.a = a;
+
         }
+        
+    }
+    class D
+    {
+
     }
 }

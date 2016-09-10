@@ -39,7 +39,7 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
         public override TranslationResult Translate(TranslationContext context)
         {
             var classSymbol = context.Semantics.GetDeclaredSymbol(this.parentClass); 
-            var identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifierWithTag(classSymbol, "init");
+            var identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifierWithTag(classSymbol, Constants.ConstructorTag);
             var innerContext = context;
             var body = this.Body.Translate(innerContext);
             var methodSymbol = this.methodSyntax != null ? context.Semantics.GetDeclaredSymbol(this.methodSyntax) : null;
@@ -75,7 +75,11 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
             }
             var innerStatements = body.Silvernode as BlockSilvernode;
             Debug.Assert(innerStatements != null, "innerStatements != null");
-            innerStatements.Prepend(new AssignmentSilvernode(Constants.SilverThis, "new(*)", null));
+            innerStatements.Prepend(new AssignmentSilvernode(Constants.SilverThis,
+                new CallSilvernode(
+                 context.Process.IdentifierTranslator.GetIdentifierReferenceWithTag(classSymbol, Constants.InitializerTag)    
+                , new List<Silvernode>(), SilverType.Ref, null)
+                , null));
             innerStatements.Add(new LabelSilvernode(Constants.SilverMethodEndLabel, null));
 
             var methodSilvernode = 

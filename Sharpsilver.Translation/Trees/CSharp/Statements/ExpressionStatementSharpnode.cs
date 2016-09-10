@@ -37,7 +37,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 {
                     var tempVar = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();
                     var sequence = new SequenceSilvernode(OriginalNode,
-                        new LocalVariableDeclarationSilvernode(tempVar, call.Type, null),
+                        new VarStatementSilvernode(tempVar, call.Type, null),
                         new AssignmentSilvernode(new TextSilvernode(tempVar.ToString(), null),
                             call, null)
                         );
@@ -50,11 +50,15 @@ namespace Sharpsilver.Translation.Trees.CSharp
             }
             else if (exResult.Silvernode is BinaryExpressionSilvernode)
             {
-                return TranslationResult.FromSilvernode(exResult.Silvernode, exResult.Errors);
+                return exResult;
             }
             else if (exResult.Silvernode is AssignmentSilvernode)
             {
-                return TranslationResult.FromSilvernode(exResult.Silvernode, exResult.Errors);
+                return exResult;
+            }
+            else if (exResult.Silvernode is StatementSilvernode)
+            {
+                return exResult;
             }
 
             return TranslationResult.Error(Expression.OriginalNode, Diagnostics.SSIL107_ThisExpressionCannotBeStatement);

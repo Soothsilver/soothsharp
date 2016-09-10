@@ -16,11 +16,7 @@ namespace Sharpsilver.Translation
         /// <summary>
         /// Indicates whether only pure expressions are allowed in this context.
         /// </summary>
-        public bool IsPure { get; private set; } = false;
-        /// <summary>
-        /// Indicates whether the containing type or method is marked [Verified].
-        /// </summary>
-        public bool UnderVerifiedAttribute { get; private set; } = false;
+        public PurityContext PurityContext { get; private set; } = PurityContext.PurityNotRequired;
         /// <summary>
         /// Indicates whether classes and method with no [Verified] or [Unverified] attribute should be verified.
         /// </summary>
@@ -36,10 +32,8 @@ namespace Sharpsilver.Translation
         /// <param name="copyFrom">The context that should be copied.</param>
         public TranslationContext(TranslationContext copyFrom)
         {
-            this.UnderVerifiedAttribute = copyFrom.UnderVerifiedAttribute;
-            this.IsPure = copyFrom.IsPure;
+            this.PurityContext = copyFrom.PurityContext;
             this.Process = copyFrom.Process;
-            this.UnderVerifiedAttribute = copyFrom.UnderVerifiedAttribute;
             this.Semantics = copyFrom.Semantics;
             this.VerifyUnmarkedItems = copyFrom.VerifyUnmarkedItems;
         }
@@ -61,12 +55,31 @@ namespace Sharpsilver.Translation
         /// Creates a context copy that is pure in addition to the properties of the copied context.
         /// </summary>
         /// <returns>A copy of the context that is marked pure.</returns>
-        public TranslationContext ForcePure()
+        public TranslationContext ChangePurityContext(PurityContext newPurityContext)
         {
             return new TranslationContext(this)
             {
-                IsPure = true
+                PurityContext = newPurityContext
             };
         }
+    }
+    /// <summary>
+    /// Some sharpnodes can only be translated in impure context. The <see cref="PurityContext"/> determines what should be done
+    /// if they're encountered elsewhere. 
+    /// </summary>
+    public enum PurityContext
+    {
+        /// <summary>
+        /// Sharpnodes that result in impure silvernodes may translate normally.
+        /// </summary>
+        PurityNotRequired,
+        /// <summary>
+        /// Sharpnodes must result in pure silvernodes, but prepatory impure silvernodes may be stored with the <see cref="TranslationResult"/>'s prepend nodes.
+        /// </summary>
+        Purifiable,
+        /// <summary>
+        /// Sharpnodes must result in pure silvernodes. If they can't do that, an error should be triggered.
+        /// </summary>
+        PureOrFail
     }
 }

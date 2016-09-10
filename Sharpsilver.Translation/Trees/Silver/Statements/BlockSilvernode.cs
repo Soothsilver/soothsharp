@@ -42,6 +42,25 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
             }
         }
 
+
+        protected override void Optimize()
+        {
+            // Blocks cannot happen with blocks. Remove nested blocks (deeply)!
+            for(int i = 0; i < Statements.Count; i++)
+            {
+                StatementSilvernode possibleBlock = Statements[i];
+                if (possibleBlock is BlockSilvernode)
+                {
+                    BlockSilvernode block = (BlockSilvernode)possibleBlock;
+                    Statements.RemoveAt(i);
+                    Statements.InsertRange(i, block.Statements);
+                    i--;
+                }
+            }
+
+            
+        }
+
         public override BlockSilvernode EncloseInBlockIfNotAlready()
         {
             return this;

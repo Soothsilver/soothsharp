@@ -143,7 +143,6 @@
     <Compile Include="Trees\Silver\Statements\ErrorStatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\StatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\VarStatementSilvernode.cs" />
-    <Compile Include="Trees\Silver\Statements\LocalVariableDeclarationSilvernode.cs" />
     <Compile Include="Trees\Silver\VerificationConditions\InvariantSilvernode.cs" />
     <Compile Include="Trees\Silver\VerificationConditions\RequiresSilvernode.cs" />
     <Compile Include="Trees\Silver\UnaryExpressionSilvernode.cs" />

@@ -75,8 +75,9 @@ namespace Sharpsilver.Translation.Trees.CSharp
             {
                 MemberAccessExpressionSyntax memberAccess = MethodGroup as MemberAccessExpressionSyntax;
                 var leftExpression = RoslynToSharpnode.MapExpression(memberAccess.Expression);
+                // TODO verify the purity
                 var leftExpressionResult = leftExpression.Translate(context);
-                var rightExpressionResult = Arguments[0].Translate(context.ForcePure());
+                var rightExpressionResult = Arguments[0].Translate(context.ChangePurityContext(PurityContext.PureOrFail));
                 Silvernode implies = new BinaryExpressionSilvernode(
                     leftExpressionResult.Silvernode,
                     "==>",
@@ -99,7 +100,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
         private TranslationResult TranslateAsVerificationCondition(string methodName, TranslationContext context)
         {
             // TODO more checks
-            var conditionResult = Arguments[0].Translate(context.ForcePure());
+            var conditionResult = Arguments[0].Translate(context.ChangePurityContext(PurityContext.PureOrFail));
             Silvernode result = null;
             switch(methodName)
             {

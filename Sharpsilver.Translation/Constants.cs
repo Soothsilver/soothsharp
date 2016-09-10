@@ -42,5 +42,8 @@ namespace Sharpsilver.Translation
         public const string CSharpTypeDomain = "CSharpType";
         public const string TypeOfFunction = "typeof";
         public const string IsSubTypeFunction = "isSubtype";
+
+        public const string InitializerTag = "init";
+        public const string ConstructorTag = "ctor";
     }
 }

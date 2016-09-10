@@ -96,6 +96,12 @@ namespace Sharpsilver.Translation
          "This is marked both [Verified] and [Unverified]. Which do you want?",
          "",
          DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL114_NotPureContext =
+  SharpsilverDiagnostic.Create(
+      "SSIL114",
+      "This cannot be translated into a pure assertion. ({0})",
+      "In this context, C# code is forced to be translated into pure Silver assertions. However, this C# node cannot be translated in a pure way.",
+      DiagnosticSeverity.Error);
 
         // ****************************** 200 Backend Verifier Errors
         public static SharpsilverDiagnostic SSIL201_BackendNotFound =

@@ -28,10 +28,7 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
             this.DeclarationSyntax = node;
             this.IsStatic = node.Modifiers.Any(syntaxToken => syntaxToken.Kind() == SyntaxKind.StaticKeyword);
             this.children.AddRange(node.Members.Select(RoslynToSharpnode.MapClassMember));
-            if (node.Members.All(mds => mds.Kind() != SyntaxKind.ConstructorDeclaration) && !this.IsStatic)
-            {
-                this.children.Add(new ConstructorSharpnode(this));
-            }
+      
         }
 
         public override TranslationResult Translate(TranslationContext context)

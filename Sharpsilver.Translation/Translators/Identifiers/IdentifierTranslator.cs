@@ -99,9 +99,9 @@ namespace Sharpsilver.Translation
         {
             return RegisterAndGetIdentifierWithTag(method, "");
         }
-        public IdentifierDeclaration RegisterAndGetIdentifierWithTag(ISymbol classSymbol, string init)
+        public IdentifierDeclaration RegisterAndGetIdentifierWithTag(ISymbol classSymbol, string tag)
         {
-            var taggedSymbol = new TaggedSymbol(classSymbol, init);
+            var taggedSymbol = new TaggedSymbol(classSymbol, tag);
             IdentifierDeclaration identifier = new IdentifierDeclaration(taggedSymbol, this);
             registeredGlobalSymbols.Add(taggedSymbol, identifier);
             return identifier;
@@ -123,9 +123,12 @@ namespace Sharpsilver.Translation
             return reference;
         }
 
-        public string RegisterNewUniqueIdentifier()
+
+        private int temporaryIdentifiersRegisteredCount = 0;
+        public Identifier RegisterNewUniqueIdentifier()
         {
-            return "_id";
+            temporaryIdentifiersRegisteredCount++;
+            return RegisterAndGetIdentifierWithTag(null, "tmp" + temporaryIdentifiersRegisteredCount);
         }
 
         public void AssignTrueNames()
@@ -133,10 +136,14 @@ namespace Sharpsilver.Translation
             foreach (var kvp in registeredGlobalSymbols)
             {
                 ISymbol symbol = kvp.Value.Symbol.Symbol;
-                string baseSilverName = silverize(symbol.GetNameWithoutNamespaces());
-                if (kvp.Key.Symbol is IParameterSymbol)
+                string baseSilverName = "";
+                if (symbol != null)
                 {
-                    baseSilverName = symbol.GetSimpleName();
+                    baseSilverName = silverize(symbol.GetNameWithoutNamespaces());
+                    if (kvp.Key.Symbol is IParameterSymbol)
+                    {
+                        baseSilverName = symbol.GetSimpleName();
+                    }
                 }
                 if (kvp.Key.Tag != "")
                 {

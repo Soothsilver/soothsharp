@@ -89,9 +89,10 @@ namespace Sharpsilver.Translation.Trees.CSharp.Statements
             List<Error> errors = new List<Error>();
             VarStatementSilvernode intro =
                     new VarStatementSilvernode(identifier, 
-                                       TypeTranslator.TranslateTypeToString(
+                                       TypeTranslator.TranslateType(
                                            context.Semantics.GetSymbolInfo(typeSyntax).Symbol as ITypeSymbol, typeSyntax,
                                            out err), OriginalNode);
+
             if (err != null) errors.Add(err);
             if (initialValue == null)
             {
@@ -99,12 +100,14 @@ namespace Sharpsilver.Translation.Trees.CSharp.Statements
             }
 
             // Add assignment if there is an initial value.
-            var res = initialValue.Translate(context);
+            var res = initialValue.Translate(context.ChangePurityContext(PurityContext.Purifiable));
+
             AssignmentSilvernode assignmentSilvernode =
                 new AssignmentSilvernode(new IdentifierSilvernode(identifier), res.Silvernode, OriginalNode);
             errors.AddRange(res.Errors);
             return TranslationResult.FromSilvernode(new SequenceSilvernode(OriginalNode,
                 intro,
+                new SequenceSilvernode(null, res.PrependTheseSilvernodes.ToArray()),
                 assignmentSilvernode), errors);
         }
     }

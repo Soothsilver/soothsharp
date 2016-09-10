@@ -5,6 +5,7 @@ using Sharpsilver.Translation.Trees.Silver;
 using System.Collections.Generic;
 using Sharpsilver.Translation;
 using Sharpsilver.Translation.Trees.CSharp.Expressions;
+using Sharpsilver.Translation.Trees.Silver.Statements;
 
 namespace Sharpsilver.Translation.Trees.CSharp
 {
@@ -23,8 +24,42 @@ namespace Sharpsilver.Translation.Trees.CSharp
 
         public override TranslationResult Translate(TranslationContext context)
         {
+            var constructorSymbol = context.Semantics.GetSymbolInfo(OriginalNode).Symbol as IMethodSymbol;
+            var classSymbol = constructorSymbol.ContainingType;
+            bool isDefaultConstructor = constructorSymbol.IsImplicitlyDeclared;
+
+            var identifier = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();
+
+            var arguments = new List<Silvernode>();
+            var errors = new List<Error>();
+            // TODO add purifiable thingies before here
+            foreach(var arg in Arguments)
+            {
+                var res = arg.Translate(context.ChangePurityContext(PurityContext.Purifiable));
+                arguments.Add(res.Silvernode);
+                errors.AddRange(res.Errors);
+            }
+
+            Silvernode constructorCall = new CallSilvernode(context.Process.IdentifierTranslator.GetIdentifierReferenceWithTag(classSymbol, isDefaultConstructor ? Constants.InitializerTag : Constants.ConstructorTag),
+                arguments,
+                SilverType.Ref,
+                this.OriginalNode);
+
+            switch(context.PurityContext)
+            {
+                case PurityContext.PurityNotRequired:
+                case PurityContext.Purifiable:
+                    return TranslationResult.FromSilvernode(new IdentifierSilvernode(identifier), errors).AndPrepend(
+                        new VarStatementSilvernode(identifier, SilverType.Ref, this.OriginalNode),
+                        new AssignmentSilvernode(new IdentifierSilvernode(identifier), constructorCall, this.OriginalNode) 
+                        );
+
+                case PurityContext.PureOrFail:
+                    return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL114_NotPureContext, "Object creation is inherently impure.");
+            }
+
             return TranslationResult.FromSilvernode(
-                new NewSilvernode(this.OriginalNode)
+                new NewStarSilvernode(this.OriginalNode)
                 );
         }
 

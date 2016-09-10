@@ -6,13 +6,13 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
 {
     public class VarStatementSilvernode : StatementSilvernode
     {
-        private IdentifierDeclaration identifier;
-        private string type;
+        private Identifier identifier;
+        private SilverType type;
 
-        public VarStatementSilvernode(IdentifierDeclaration identifier, string v, SyntaxNode originalNode) : base(originalNode)
+        public VarStatementSilvernode(Identifier identifier, SilverType type, SyntaxNode originalNode) : base(originalNode)
         {
             this.identifier = identifier;
-            this.type = v;
+            this.type = type;
         }
 
         public override IEnumerable<Silvernode> Children
@@ -22,7 +22,7 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
                 yield return "var ";
                 yield return identifier.ToString();
                 yield return " : ";
-                yield return type;
+                yield return type.ToString();
             }
         }
     }

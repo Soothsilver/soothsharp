@@ -24,6 +24,11 @@ namespace Sharpsilver.Translation.Trees.Silver
             this.silverIdentifierReference = silverIdentifier;
         }
 
+        public static implicit operator IdentifierSilvernode(Identifier identifier)
+        {
+            return new IdentifierSilvernode(identifier);
+        }
+
         public override string ToString()
         {
             if (silverIdentifier != null)

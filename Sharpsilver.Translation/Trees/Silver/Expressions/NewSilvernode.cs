@@ -4,9 +4,9 @@ using Microsoft.CodeAnalysis;
 
 namespace Sharpsilver.Translation.Trees.Silver
 {
-    class NewSilvernode : ExpressionSilvernode
+    class NewStarSilvernode : ExpressionSilvernode
     {
-        public NewSilvernode(
+        public NewStarSilvernode(
             SyntaxNode originalNode) : base(originalNode, SilverType.Ref)
         {
 
@@ -14,7 +14,7 @@ namespace Sharpsilver.Translation.Trees.Silver
 
         public override string ToString()
         {
-            return "new()";
+            return "new(*)";
         }
     }
 }

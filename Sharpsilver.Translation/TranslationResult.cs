@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.Trees.Silver;
+using Sharpsilver.Translation.Trees.Silver.Statements;
 
 namespace Sharpsilver.Translation
 {
@@ -24,6 +25,11 @@ namespace Sharpsilver.Translation
             }
         }
         public List<Error> Errors = new List<Error>();
+        /// <summary>
+        /// If this <see cref="TranslationResult"/> is a result of a sharpnode that's being purified, then this will contain the silvernodes
+        /// that must be prepended to this silvernode, at the closest location that allows impure silvernodes. 
+        /// </summary>
+        public List<StatementSilvernode> PrependTheseSilvernodes = new List<StatementSilvernode>();
 
         // For methods and loops.
         public List<VerificationConditionSilvernode> VerificationConditions = new List<VerificationConditionSilvernode>();
@@ -35,6 +41,19 @@ namespace Sharpsilver.Translation
             r.Errors.Add(new Translation.Error(diagnostic, node,diagnosticArguments));
             return r;
         }
+
+        public TranslationResult AndPrepend(params StatementSilvernode[] silvernodes)
+        {
+            this.PrependTheseSilvernodes = new List<StatementSilvernode>(silvernodes);
+            return this;
+        }
+
+        /// <summary>
+        /// Creates a translation result from the specified node and a list of errors.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <param name="errors">The errors. If null, then no errors occurred.</param>
+        /// <returns></returns>
         public static TranslationResult FromSilvernode(Silvernode node, IEnumerable<Error> errors = null)
         {
             TranslationResult result = new TranslationResult();
@@ -44,15 +63,6 @@ namespace Sharpsilver.Translation
                 result.Errors.AddRange(errors);
             }
             return result;
-        }
-
-        public string GetSilverCodeAsString()
-        {
-            if (Silvernode == null)
-            {
-                return "/*[! ERROR !]*/";
-            }
-            return Silvernode.ToString();
         }
     }
 }

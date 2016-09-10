@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 using Sharpsilver.Translation.Trees.Silver;
+using Sharpsilver.Translation.Trees.Silver.Statements;
 
 namespace Sharpsilver.Translation
 {
@@ -7,17 +9,19 @@ namespace Sharpsilver.Translation
     {
         public Identifier Name;
         public Identifier Supertype;
+        public ISymbol ClassSymbol;
         public List<CollectedField> InstanceFields = new List<CollectedField>();
 
-        public CollectedType(Identifier name, Identifier supertype)
+        public CollectedType(ISymbol classSymbol, Identifier name, Identifier supertype)
         {
+            this.ClassSymbol = classSymbol;
             Name = name;
             Supertype = supertype;
         }
 
-        public Silvernode GenerateGlobalSilvernode()
+        public Silvernode GenerateGlobalSilvernode(TranslationProcess process)
         {
-            
+
             var node = new SimpleSequenceSilvernode(null);
 
             foreach (CollectedField field in InstanceFields)
@@ -31,6 +35,36 @@ namespace Sharpsilver.Translation
                     node.List.Add("\n");
                 }
             }
+
+            Identifier initializer = process.IdentifierTranslator.RegisterAndGetIdentifierWithTag(ClassSymbol, Constants.InitializerTag);
+
+            var accessToAllFields = new List<VerificationConditionSilvernode>();
+            foreach (CollectedField field in InstanceFields)
+            {
+                var protectedField = new SimpleSequenceSilvernode(null,
+                    Constants.SilverThis,
+                    ".",
+                    new IdentifierSilvernode(field.Name)
+                    );
+                accessToAllFields.Add(new EnsuresSilvernode(new AccSilvernode(protectedField, "write", null), null));
+
+            }
+
+            var initializerContents = new BlockSilvernode(null, new List<Trees.Silver.Statements.StatementSilvernode>());
+            initializerContents.Add(new AssignmentSilvernode(Constants.SilverThis, new NewStarSilvernode(null), null));
+
+            var initializerMethod = new MethodSilvernode(null,
+                new IdentifierSilvernode(initializer),
+                new List<ParameterSilvernode>(),
+                Constants.SilverThis,
+                new TypeSilvernode(null, SilverType.Ref),
+                accessToAllFields,
+                initializerContents);
+
+            node.List.Add("\n");
+            node.List.Add(initializerMethod);
+
+
             return node;
         }
 
