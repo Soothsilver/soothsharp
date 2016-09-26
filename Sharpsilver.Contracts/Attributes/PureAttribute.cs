@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Sharpsilver.Contracts
 {
     /// <summary>
-    /// The annnotated method is pure and should be translated as a Silver pure function.
+    /// The annnotated method is pure and should be translated as a Silver function.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     public class PureAttribute : Attribute

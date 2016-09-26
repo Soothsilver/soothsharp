@@ -65,4 +65,6 @@ and thus, the C# code would be successfully verified as correct.
 
 ## Specification
 
-The primary document describing Sharpsilver is here: [[https://docs.google.com/document/d/1oigf0U18ez57u9dDOkV7dxn4yzFwu4Dt-glyrHz7I0I/edit?usp=sharing]]
+The primary document describing Sharpsilver is here: 
+https://docs.google.com/document/d/1oigf0U18ez57u9dDOkV7dxn4yzFwu4Dt-glyrHz7I0I/edit?usp=sharing
+

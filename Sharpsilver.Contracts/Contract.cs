@@ -1,5 +1,4 @@
-﻿using Sharpsilver.Contracts.Internals;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,10 +14,8 @@ namespace Sharpsilver.Contracts
         /// <summary>
         /// Within contracts, represents the return value of a function or a method, if it is of the type System.Int32. This is a shortcut for <see cref="Contract.Result{Int32}"/> with <see cref="int"/> as the type parameter.
         /// </summary>       
-        [WithinContractsOnly]
         public static int IntegerResult
         {
-            [WithinContractsOnly]
             get
             {
                 return 0;
@@ -26,11 +23,10 @@ namespace Sharpsilver.Contracts
         }
 
         /// <summary>
-        /// Within contracts, represents the return value of a method. Can only be used in method postconditions.
+        /// Within contracts, represents the return value of a method. Can only be used in method or function postconditions.
         /// </summary>
         /// <typeparam name="T">Return type of the method.</typeparam>
         /// <returns>Value returned by the method.</returns>
-        [WithinContractsOnly]
         public static T Result<T>()
         {
             return default(T);
@@ -42,7 +38,6 @@ namespace Sharpsilver.Contracts
         /// <typeparam name="T">Type of the variable.</typeparam>
         /// <param name="value">Variable whose value at start of method should be returned.</param>
         /// <returns>Value of the variable as it was at start of method.</returns>
-        [WithinContractsOnly]
         public static T Old<T>(T value)
         {
             return default(T);
@@ -52,10 +47,9 @@ namespace Sharpsilver.Contracts
         /// Adds a proof obligation: The verifier must ensure that the specified postcondition is true when this method returns.
         /// 
         /// <para>
-        /// <c>Remarks:</c> You must put the "Contract.Ensures()" call on the top level of the statement block for the method. By convention, you should put all Contact.Requires() and Contract.Ensures() calls at the top of the function before any other statements. This C# method itself has an empty body but it is translated into Silver constructs. 
-        /// </para>
-        /// <para>
-        /// The boolean expression given as the argument must be a pure expression.
+        /// <c>Remarks:</c> You must put the "Contract.Ensures()" call on the top level of the statement block for the method. 
+        /// By convention, you should put all Contact.Requires() and Contract.Ensures() calls at the top of the function before any other statements.
+        /// This C# method itself has an empty body but it is translated into Silver constructs. 
         /// </para>
         /// </summary>
         /// <param name="postcondition">The condition that will be verified to be true at each exit point.</param>
@@ -66,7 +60,9 @@ namespace Sharpsilver.Contracts
         /// <summary>
         /// Adds a precondition: The verifier can assume that it is true when this method is entered, and callsites must prove the condition when they call this method.
         /// <para>
-        /// Remarks: You must put the "Contract.Ensures()" call on the top level of the statement block for the method. By convention, you should put all Contact.Requires() and Contract.Ensures() calls at the top of the function before any other statements. This C# method itself has an empty body but it is translated into Silver constructs. 
+        /// Remarks: You must put the "Contract.Ensures()" call on the top level of the statement block for the method. 
+        /// By convention, you should put all Contact.Requires() and Contract.Ensures() calls at the top of the function before any other statements. 
+        /// This C# method itself has an empty body but it is translated into Silver constructs. 
         /// </para>
         /// <para>
         /// The boolean expression given as the argument must be a pure expression.
@@ -104,50 +100,53 @@ namespace Sharpsilver.Contracts
         }
 
         /// <summary>
-        /// Performs the Silver inhale operation. TODO what does it actually do?
+        /// Folds the specified predicate with the given arguments. 
         /// </summary>
-        /// <param name="expression">TODO.</param>
+        /// <param name="predicateCall">The predicate, with arguments, to fold.</param>
+        public static void Fold(bool predicateCall)
+        {
+        }
+        /// <summary>
+        /// Unfolds the specified predicate with the given arguments. 
+        /// </summary>
+        /// <param name="predicateCall">The predicate, with arguments, to unfold.</param>
+        public static void Unfold(bool predicateCall)
+        {
+        }
+
+
+        /// <summary>
+        /// Inhales the specified assertion at this point. Any boolean conditions are assumed and permissions to any spatial assertions are gained.
+        /// </summary>
+        /// <param name="expression">The conditions to be assumed, and assertions to gain permissions to.</param>
         public static void Inhale(bool expression)
         {
 
         }
         /// <summary>
-        /// Performs the Silver exhale operation. TODO what does it actually do?
+        /// Exhales the specified assertion at this point. Any spatial assertions are dropped. If there are insufficient permissions for them, then
+        /// verification failes. Any boolean conditions are ignored.
         /// </summary>
-        /// <param name="expression">TODO.</param>
+        /// <param name="expression">Spatial assertions to which permissions should be dropped.</param>
         public static void Exhale(bool expression)
         {
 
         }
 
         /// <summary>
-        /// Represents the permission to access the specified field. TODO
+        /// Atomic spatial assertion that provides full write permission to the specified location.
         /// </summary>
-        /// <typeparam name="T">TODO</typeparam>
-        /// <param name="field">TODO</param>
-        /// <returns>TODO</returns>
-        public static bool Acc<T>(T field)
-        {
-            return true;
-        }
-
-        /// <summary>
-        /// Represents a read-only epsilon permission to access the specified field. TODO
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="field"></param>
-        /// <returns></returns>
-        public static bool Read<T>(T field)
+        /// <param name="fieldOrPredicateCall">The field or predicate (with arguments) that the spatial assertion refers to.</param>
+        public static bool Acc<T>(T fieldOrPredicateCall)
         {
             return true;
         }
         /// <summary>
-        /// Represents a full write permission to access the specified field.
+        /// Atomic spatial assertion that provides the specified permission to the specified location.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="field"></param>
-        /// <returns></returns>
-        public static bool Write<T>(T field)
+        /// <param name="fieldOrPredicateCall">The field or predicate (with arguments) that the spatial assertion refers to.</param>
+        /// <param name="permission">How much permissions does this spatial assertion refer to.</param>
+        public static bool Acc<T>(T fieldOrPredicateCall, Permission permission)
         {
             return true;
         }

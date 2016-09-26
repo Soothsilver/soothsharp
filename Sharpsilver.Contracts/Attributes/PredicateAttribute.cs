@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Sharpsilver.Contracts
 {
     /// <summary>
-    /// The annotated method should be translated as a Silver predicate.
+    /// The annotated method should be translated as a non-abstract Silver predicate.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     public class PredicateAttribute : Attribute

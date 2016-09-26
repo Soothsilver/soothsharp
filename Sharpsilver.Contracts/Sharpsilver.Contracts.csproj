@@ -42,10 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\AbstractPredicateAttribute.cs" />
     <Compile Include="Attributes\PredicateAttribute.cs" />
     <Compile Include="Attributes\SignatureOnlyAttribute.cs" />
     <Compile Include="Contract.cs" />
-    <Compile Include="Internals\WithinContractsOnlyAttribute.cs" />
     <Compile Include="Permission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\PureAttribute.cs" />
@@ -54,11 +54,6 @@
     <Compile Include="Attributes\VerifiedAttribute.cs" />
     <Compile Include="Seq.cs" />
     <Compile Include="StaticExtension.cs" />
-    <Compile Include="Verified\VerifiedArray.cs" />
-    <Compile Include="Verified\VerifiedGraph.cs" />
-    <Compile Include="Verified\VerifiedHeap.cs" />
-    <Compile Include="Verified\VerifiedMath.cs" />
-    <Compile Include="Verified\VerifiedSortedArrayList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

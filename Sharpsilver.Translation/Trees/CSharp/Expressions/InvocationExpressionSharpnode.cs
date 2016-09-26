@@ -40,7 +40,6 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 case ContractsTranslator.ContractEnsures:
                 case ContractsTranslator.ContractRequires:
                 case ContractsTranslator.ContractInvariant:
-                case ContractsTranslator.ContractRead:
                     return TranslateAsVerificationCondition(methodName, context);
                 case ContractsTranslator.Implication:
                     return TranslateAsImplication(context);
@@ -159,9 +158,6 @@ namespace Sharpsilver.Translation.Trees.CSharp
                     break;
                 case ContractsTranslator.ContractInvariant:
                     result = new InvariantSilvernode(conditionResult.Silvernode, OriginalNode);
-                    break;
-                case ContractsTranslator.ContractRead:
-                    result = new AccSilvernode(conditionResult.Silvernode, new TextSilvernode("epsilon"), OriginalNode);
                     break;
                 default:
                     return TranslationResult.Error(OriginalNode, Diagnostics.SSIL301_InternalLocalizedError, "unknown kind of verification condition");
