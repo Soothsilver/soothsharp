@@ -38,7 +38,8 @@ namespace Sharpsilver.Translation.Trees.CSharp
                     var tempVar = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();
                     var sequence = new SequenceSilvernode(OriginalNode,
                         new VarStatementSilvernode(tempVar, call.Type, null),
-                        new AssignmentSilvernode(new TextSilvernode(tempVar.ToString(), null),
+                        new AssignmentSilvernode(
+                            new IdentifierSilvernode(tempVar),
                             call, null)
                         );
                     return TranslationResult.FromSilvernode(sequence, exResult.Errors);

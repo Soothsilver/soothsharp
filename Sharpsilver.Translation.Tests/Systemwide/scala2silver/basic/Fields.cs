@@ -11,25 +11,27 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.basic
         {
             variable = 3;
 
+            Contract.Assert(variable < 4);
+            Contract.Assert(variable > 2);
+
             value = new C(2);
-            object d = new D();
+
+            Contract.Assert(value.a == 2);
         }
     }
 
     class C
     {
-        private int a;
+        public int a;
 
         
         public C(int a)
         {
+            Contract.Ensures(Contract.Acc(this.a) && this.a == a);
+
             this.a = a;
 
         }
         
-    }
-    class D
-    {
-
     }
 }

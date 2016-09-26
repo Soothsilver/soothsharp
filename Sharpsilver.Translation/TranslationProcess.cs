@@ -141,16 +141,18 @@ namespace Sharpsilver.Translation
             }
 
             VerboseLog("GLOBAL ADDITION PHASE begins...");
-            HighlevelSequenceSilvernode axioms = new HighlevelSequenceSilvernode(null);
-            CSharpTypeDomainSilvernode domain = new CSharpTypeDomainSilvernode(axioms);
+            // Axioms and domains are not necessary now.
+            
+            //HighlevelSequenceSilvernode axioms = new HighlevelSequenceSilvernode(null);
+            //CSharpTypeDomainSilvernode domain = new CSharpTypeDomainSilvernode(axioms);
 
-            masterTree.List.Add(domain);
+            // masterTree.List.Add(domain);
             foreach (var collectedType in collectedTypes)
             {
                 masterTree.List.Add(collectedType.GenerateGlobalSilvernode(this));
-                axioms.List.Add(collectedType.GenerateSilvernodeInsideCSharpType());
+                //axioms.List.Add(collectedType.GenerateSilvernodeInsideCSharpType());
             }
-
+            
             VerboseLog("REFERENCED ASSEMBLIES ADDITION PHASE is not yet implemented.");
 
             VerboseLog("OPTIMIZATION PHASE begins...");

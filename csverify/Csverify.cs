@@ -48,6 +48,7 @@ namespace Sharpsilver.Cs2Sil
         /// Current version of this assembly.
         /// </summary>
         static string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        static bool LineNumbers = true;
         /// <summary>
         /// Name and short description of this assembly.
         /// </summary>
@@ -73,6 +74,7 @@ namespace Sharpsilver.Cs2Sil
                 .Add("w|wait", "When the program finishes, it will wait for the user to press any key before terminating.", option => WaitAfterwards = option != null)
                 .Add("O|only-annotated", "Only transcompile classes that have the [Verified] attribute, and static methods that have the [Verified] attribute even if their containing classes don't have the [Verified] attribute." , option => OnlyAnnotated = option != null)
                 .Add("o|output-file=", "Print the resulting Silver code into the {OUTPUT.SIL} file.", filename => outputSilverFile = filename)
+                .Add("line-numbers", "Print line numbers before the Silver code", ln => LineNumbers = ln != null)
                 .Add("s|silicon", "Use the Silicon backend to verify the Silver code. Use the  \"-s-\" option to disable Silicon verification.", option => UseSilicon = option != null)
                 .Add("c|carbon", "Use the Carbon backend to verify the Silver code. Use the  \"-c-\" option to disable Carbon verification.", option => UseCarbon = option != null)
                 ;
@@ -181,7 +183,18 @@ namespace Sharpsilver.Cs2Sil
                 Console.WriteLine("=======================");
             }
             string silvercode = result.Silvernode.ToString();
-            Console.WriteLine(silvercode);
+            if (LineNumbers)
+            {
+                int lineId = 1;
+                foreach (var line in silvercode.Split('\n'))
+                {
+                    Console.WriteLine(lineId + ": " + line);
+                    lineId++;
+                }
+            } else
+            {
+                Console.WriteLine(silvercode);
+            }
             if (result.Errors.Count > 0) {
                 if (!Quiet)
                 {

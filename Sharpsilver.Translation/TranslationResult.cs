@@ -27,7 +27,7 @@ namespace Sharpsilver.Translation
         public List<Error> Errors = new List<Error>();
         /// <summary>
         /// If this <see cref="TranslationResult"/> is a result of a sharpnode that's being purified, then this will contain the silvernodes
-        /// that must be prepended to this silvernode, at the closest location that allows impure silvernodes. 
+        /// that must be prepended to this silvernode, at the closest location that allows impure silvernodes. If not, this will be an empty list.
         /// </summary>
         public List<StatementSilvernode> PrependTheseSilvernodes = new List<StatementSilvernode>();
 
@@ -63,6 +63,28 @@ namespace Sharpsilver.Translation
                 result.Errors.AddRange(errors);
             }
             return result;
+        }
+
+        internal TranslationResult AsImpureAssertion(TranslationContext context, SilverType type, string impurityReason)
+        {
+           switch(context.PurityContext)
+            {
+                case PurityContext.PureOrFail:
+                    this.Errors.Add(new Translation.Error(Diagnostics.SSIL114_NotPureContext, this.Silvernode.OriginalNode, impurityReason));
+                    break;
+                case PurityContext.Purifiable:
+                    var newTempVar = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();
+                    VarStatementSilvernode v = new VarStatementSilvernode(newTempVar, type, null);
+                    AssignmentSilvernode a = new Trees.Silver.Statements.AssignmentSilvernode(new IdentifierSilvernode(newTempVar),
+                        this.Silvernode, null);
+                    this.PrependTheseSilvernodes.Add(v);
+                    this.PrependTheseSilvernodes.Add(a);
+                    this.Silvernode = new IdentifierSilvernode(newTempVar);
+                    break;
+                case PurityContext.PurityNotRequired:
+                    break;
+            }
+            return this;
         }
     }
 }

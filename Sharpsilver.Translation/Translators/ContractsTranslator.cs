@@ -19,6 +19,8 @@ namespace Sharpsilver.Translation
         public const string ContractAcc = ContractsClass + nameof(Contract.Acc);
         public const string ContractAssert = ContractsClass + nameof(Contract.Assert);
         public const string ContractAssume = ContractsClass + nameof(Contract.Assume);
+        public const string ContractInhale = ContractsClass + nameof(Contract.Inhale);
+        public const string ContractExhale = ContractsClass + nameof(Contract.Exhale);
         public const string ContractIntResult = ContractsClass + nameof(Contract.IntegerResult);
         public const string Implication = "System.Boolean." + nameof(StaticExtension.Implies);
 

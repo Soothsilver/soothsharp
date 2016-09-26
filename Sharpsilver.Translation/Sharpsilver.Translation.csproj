@@ -110,6 +110,7 @@
     <Compile Include="TranslationProcessResult.cs" />
     <Compile Include="Trees\CommonUtils.cs" />
     <Compile Include="Trees\CSharp\Expressions\DiagnosticExpressionSharpnode.cs" />
+    <Compile Include="Trees\CSharp\Expressions\DirectSilvercodeExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\MemberAccessExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\IncrementExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\ObjectCreationExpressionSharpnode.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Trees\Silver\HighlevelSequenceSilvernode.cs" />
     <Compile Include="Trees\Silver\Simple\NewlineSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\ErrorStatementSilvernode.cs" />
+    <Compile Include="Trees\Silver\Statements\AssertionLikeSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\StatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\VarStatementSilvernode.cs" />
     <Compile Include="Trees\Silver\VerificationConditions\InvariantSilvernode.cs" />
@@ -232,6 +234,12 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /Y /S /E $(SolutionDir)Sharpsilver.Translation.Tests\Files $(SolutionDir)csverify\bin\Debug\Files
+xcopy /Y /S /E $(SolutionDir)Sharpsilver.Translation.Tests\Files $(SolutionDir)Sharpsilver.Translation.Tests\bin\Debug\Files
+xcopy /Y /S /E $(SolutionDir)/harpsilver.Translation.Tests\Systemwide $(SolutionDir)csverify\bin\Debug\Systemwide
+xcopy /Y /S /E $(SolutionDir)Sharpsilver.Translation.Tests\Systemwide $(SolutionDir)Sharpsilver.Translation.Tests\bin\Debug\Systemwide</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

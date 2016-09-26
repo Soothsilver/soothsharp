@@ -162,6 +162,10 @@ namespace Sharpsilver.Translation
                 case SyntaxKind.ObjectCreationExpression:
                     return new ObjectCreationExpressionSharpnode(expression as ObjectCreationExpressionSyntax);
 
+                // Keywords
+                case SyntaxKind.ThisExpression:
+                    return new DirectSilvercodeExpressionSharpnode("this", expression);
+
                 // Literals
                 case SyntaxKind.TrueLiteralExpression:
                     return new LiteralExpressionSharpnode(expression as LiteralExpressionSyntax, true);
@@ -190,7 +194,7 @@ namespace Sharpsilver.Translation
                 case SyntaxKind.IdentifierName:
                     return new IdentifierExpressionSharpnode(expression as IdentifierNameSyntax);
                 case SyntaxKind.SimpleMemberAccessExpression:
-                    return new IdentifierExpressionSharpnode(expression as MemberAccessExpressionSyntax);
+                    return new MemberAccessExpressionSharpnode(expression as MemberAccessExpressionSyntax);
 
 
                 // Others

@@ -99,7 +99,7 @@ namespace Sharpsilver.Translation
         public static SharpsilverDiagnostic SSIL114_NotPureContext =
   SharpsilverDiagnostic.Create(
       "SSIL114",
-      "This cannot be translated into a pure assertion. ({0})",
+      "This ({0}) cannot be translated into a pure assertion.",
       "In this context, C# code is forced to be translated into pure Silver assertions. However, this C# node cannot be translated in a pure way.",
       DiagnosticSeverity.Error);
 

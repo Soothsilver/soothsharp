@@ -8,8 +8,8 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
         private CellAss c;
         public Assignments()
         {
-            Ensures(Write(a) && a == 0);
-            Ensures(Write(c) && Write(c.Value) && c.Value == 0);
+            Ensures(Acc(a) && a == 0);
+            Ensures(Acc(c) && Acc(c.Value) && c.Value == 0);
 
             a = 0;
             c = new CellAss();
@@ -17,8 +17,8 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
 
         public static void Test(Assignments ass, CellAss cell)
         {
-            Requires(Write(ass.a) && Write(ass.c) && Write(ass.c.Value) &&
-                              Write(cell.Value));
+            Requires(Acc(ass.a) && Acc(ass.c) && Acc(ass.c.Value) &&
+                              Acc(cell.Value));
             var d = new Assignments();
             Assert(d.a == 0);
             Assert(d.c.Value == 0);
@@ -48,7 +48,7 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
         public int Value;
         public CellAss()
         {
-            Ensures(Write(Value) && Value == 0);
+            Ensures(Acc(Value) && Value == 0);
             Value = 0;
         }
     }

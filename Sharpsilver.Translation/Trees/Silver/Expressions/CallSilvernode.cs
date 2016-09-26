@@ -7,10 +7,10 @@ namespace Sharpsilver.Translation.Trees.Silver
     class CallSilvernode : ExpressionSilvernode
     {
         private List<Silvernode> expressions;
-        private IdentifierReference identifier;
+        private Identifier identifier;
 
         public CallSilvernode(
-            IdentifierReference identifier, 
+            Identifier identifier, 
             List<Silvernode> expressions, 
             SilverType returnType,
             SyntaxNode originalNode) : base(originalNode, returnType)

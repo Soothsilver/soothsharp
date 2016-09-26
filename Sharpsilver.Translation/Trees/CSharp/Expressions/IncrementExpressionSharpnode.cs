@@ -34,9 +34,13 @@ namespace Sharpsilver.Translation.Trees.CSharp
         {
             var expression = Expression.Translate(context);
             // Statement form only.
+            // TODO what if it's not a Silver lvalue?
             string @operator = Direction == IncrementExpressionDirection.Increment ? "+" : "-";
-            return TranslationResult.FromSilvernode(new AssignmentSilvernode(new TextSilvernode(expression.Silvernode.ToString(), expression.Silvernode.OriginalNode), 
-                new BinaryExpressionSilvernode(expression.Silvernode, @operator, new TextSilvernode("1", null), OriginalNode), OriginalNode), expression.Errors);
+            return TranslationResult.FromSilvernode(
+                new AssignmentSilvernode(
+                    expression.Silvernode, 
+                    new BinaryExpressionSilvernode(expression.Silvernode, @operator, new TextSilvernode("1", null), OriginalNode),
+                    OriginalNode), expression.Errors);
         }
     }
 

@@ -5,6 +5,7 @@ using Sharpsilver.Translation.Trees.Silver;
 using System.Collections.Generic;
 using Sharpsilver.Translation;
 using Sharpsilver.Translation.Trees.CSharp.Expressions;
+using Sharpsilver.Translation.Trees.Silver.Statements;
 
 namespace Sharpsilver.Translation.Trees.CSharp
 {
@@ -25,12 +26,16 @@ namespace Sharpsilver.Translation.Trees.CSharp
 
         public override TranslationResult Translate(TranslationContext context)
         {
+            List<StatementSilvernode> prependors = new List<StatementSilvernode>();
+
             var method = context.Semantics.GetSymbolInfo(MethodGroup);
             var methodSymbol = method.Symbol as IMethodSymbol;
             var methodName = methodSymbol.GetQualifiedName();
 
             // Verification conditions
-            switch(methodName)
+            bool translateAsPhpStatement = false;
+            string languageFeatureName = null;
+            switch (methodName)
             {
                 case ContractsTranslator.ContractEnsures:
                 case ContractsTranslator.ContractRequires:
@@ -39,34 +44,73 @@ namespace Sharpsilver.Translation.Trees.CSharp
                     return TranslateAsVerificationCondition(methodName, context);
                 case ContractsTranslator.Implication:
                     return TranslateAsImplication(context);
+                case ContractsTranslator.ContractAssert:
+                    languageFeatureName = "assert";
+                    translateAsPhpStatement = true;
+                    break;
+                case ContractsTranslator.ContractAssume:
+                    languageFeatureName = "assume";
+                    translateAsPhpStatement = true;
+                    break;
+                case ContractsTranslator.ContractInhale:
+                    languageFeatureName = "inhale";
+                    translateAsPhpStatement = true;
+                    break;
+                case ContractsTranslator.ContractExhale:
+                    languageFeatureName = "exhale";
+                    translateAsPhpStatement = true;
+                    break;
+                case ContractsTranslator.ContractAcc:
+                    languageFeatureName = "acc";
+                    break;
             }
 
             // Get identifier and evaluate arguments
-            var identifier = context.Process.IdentifierTranslator.GetIdentifierReference(method.Symbol as IMethodSymbol);
+            Error error;
+            Identifier identifier;
+            SilverType st;
+            if (languageFeatureName == null)
+            {
+                identifier = context.Process.IdentifierTranslator.GetIdentifierReference(method.Symbol as IMethodSymbol);
+                st = TypeTranslator.TranslateType(methodSymbol.ReturnType, MethodGroup, out error);
+            } else
+            {
+                identifier = new IdentifierReference(languageFeatureName);
+                st = SilverType.Bool;
+                error = null;
+            }
             var expressions = new List<Silvernode>();
             var errors = new List<Error>();
             foreach(var argument in Arguments)
             {
                 var result = argument.Translate(context);
                 expressions.Add(result.Silvernode);
+                prependors.AddRange(result.PrependTheseSilvernodes);
                 errors.AddRange(result.Errors);
             }
 
-            Error error;
-            SilverType st = TypeTranslator.TranslateType(methodSymbol.ReturnType, MethodGroup, out error);
             if (error != null) errors.Add(error);
+            if (translateAsPhpStatement)
+            {
+                return TranslationResult.FromSilvernode(
+                    new AssertionLikeSilvernode(languageFeatureName, expressions[0], this.OriginalNode)
+                    , errors).AndPrepend(prependors.ToArray());
+            }
+            else
+            {
+                // Return result
+                Silvernode invocationSilvernode = new CallSilvernode(
+                        identifier,
+                        expressions,
+                        st,
+                        OriginalNode
+                    );
 
-            // Return result
-            Silvernode invocationSilvernode = new CallSilvernode(
-                    identifier,
-                    expressions,
-                    st,
-                    OriginalNode
-                );
-            return TranslationResult.FromSilvernode(
-                invocationSilvernode,
-                errors
-                );
+                return TranslationResult.FromSilvernode(
+                    invocationSilvernode,
+                    errors
+                    ).AndPrepend(prependors.ToArray()).AsImpureAssertion(context, st, "method call");
+            }
         }
 
         private TranslationResult TranslateAsImplication(TranslationContext context)
@@ -77,7 +121,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 var leftExpression = RoslynToSharpnode.MapExpression(memberAccess.Expression);
                 // TODO verify the purity
                 var leftExpressionResult = leftExpression.Translate(context);
-                var rightExpressionResult = Arguments[0].Translate(context.ChangePurityContext(PurityContext.PureOrFail));
+                var rightExpressionResult = Arguments[0].Translate(context);
                 Silvernode implies = new BinaryExpressionSilvernode(
                     leftExpressionResult.Silvernode,
                     "==>",
@@ -87,7 +131,10 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 var errors = new List<Error>();
                 errors.AddRange(leftExpressionResult.Errors);
                 errors.AddRange(rightExpressionResult.Errors);
-                return TranslationResult.FromSilvernode(implies, errors);
+                var prepedors = new List<StatementSilvernode>();
+                prepedors.AddRange(leftExpressionResult.PrependTheseSilvernodes);
+                prepedors.AddRange(rightExpressionResult.PrependTheseSilvernodes);
+                return TranslationResult.FromSilvernode(implies, errors).AndPrepend(prepedors.ToArray());
             }
             else
             {
@@ -100,7 +147,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
         private TranslationResult TranslateAsVerificationCondition(string methodName, TranslationContext context)
         {
             // TODO more checks
-            var conditionResult = Arguments[0].Translate(context.ChangePurityContext(PurityContext.PureOrFail));
+            var conditionResult = Arguments[0].Translate(context.ChangePurityContext(PurityContext.PurityNotRequired));
             Silvernode result = null;
             switch(methodName)
             {

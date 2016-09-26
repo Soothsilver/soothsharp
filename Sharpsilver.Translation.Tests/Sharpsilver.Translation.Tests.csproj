@@ -70,15 +70,14 @@
     <Compile Include="Files\Basic\Simple.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Files\Classes\Sub\List.cs" />
     <Compile Include="Files\Issues\SimplePostCondition.cs" />
-    <Compile Include="Files\Issues\NullReferenceException1.cs" />
-    <Compile Include="Files\Mathematical\Theorems.cs" />
     <Compile Include="Files\Syntax\For.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="SystemTest.cs" />
-    <Compile Include="Systemwide\scala2silver\basic\Fields.cs" />
+    <Compile Include="Systemwide\scala2silver\basic\Fields.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Systemwide\scala2silver\basic\Implications.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -116,6 +115,10 @@
 xcopy /Y /S /E $(ProjectDir)Files $(ProjectDir)\bin\Debug\Files
 xcopy /Y /S /E $(ProjectDir)Systemwide $(SolutionDir)csverify\bin\Debug\Systemwide
 xcopy /Y /S /E $(ProjectDir)Systemwide $(ProjectDir)\bin\Debug\Systemwide</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>rmdir /S /Q $(ProjectDir)bin\Debug\Files
+rmdir /S /Q $(ProjectDir)bin\Debug\Systemwide</PreBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
