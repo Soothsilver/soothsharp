@@ -125,9 +125,9 @@ namespace Sharpsilver.Contracts
         }
         /// <summary>
         /// Exhales the specified assertion at this point. Any spatial assertions are dropped. If there are insufficient permissions for them, then
-        /// verification failes. Any boolean conditions are ignored.
+        /// verification failes. Any boolean conditions are asserted, but not dropped.
         /// </summary>
-        /// <param name="expression">Spatial assertions to which permissions should be dropped.</param>
+        /// <param name="expression">Spatial assertions to which permissions should be dropped, and boolean conditions which should be asserted.</param>
         public static void Exhale(bool expression)
         {
 

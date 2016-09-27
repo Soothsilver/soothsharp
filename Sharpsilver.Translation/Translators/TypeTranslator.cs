@@ -37,12 +37,14 @@ namespace Sharpsilver.Translation
                 case "System.Decimal":
                 case "System.Char":
                 case "System.Byte":
+                    error = new Error(Diagnostics.SSIL106_TypeNotSupported, where, typeSymbol.GetQualifiedName());
+                    return SilverType.Error;
                 case "System.Int16":
                 case "System.UInt16":
                 case "System.UInt32":
                 case "System.Int64":
                 case "System.UInt64":
-                     error = new Error(Diagnostics.SSIL106_TypeNotSupported, where, typeSymbol.GetQualifiedName());
+                    error = new Error(Diagnostics.SSIL115_ThisIntegerSizeNotSupported, where, typeSymbol.GetQualifiedName());
                     return SilverType.Error;
                 case "System.Void":
                     return SilverType.Void;

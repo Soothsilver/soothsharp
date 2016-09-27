@@ -1,1 +1,28 @@
 This is a list of issues/features to add.
+
+FEATURE SUPPORT LIST:
+- static variables
+- arrays
+- constants
+
+- Permission type
+- function
+- predicate
+- Seq
+- old
+- forall, exists
+
+
+BUGFIX LIST:
+- fix incode todo's
+- member access
+- reject value types 
+- trigger error on unknown identifier
+- multiple variable declaaration
+
+
+CHECK LIST:
+- assignment operators
+- nested blocks
+- label/goto
+- instance method

@@ -52,7 +52,7 @@ namespace Sharpsilver.Translation
             SharpsilverDiagnostic.Create(
                 "SSIL106",
                 "The type {0} is not supported in Silver.",
-                "The Silver language can only use a 32-bit integer, a boolean and reference objects. Other value types besides these three cannot be translated.",
+                "The Silver language can only use an integer, a boolean and reference objects. Other value types besides these three cannot be translated.",
                 DiagnosticSeverity.Error);
         public static SharpsilverDiagnostic SSIL107_ThisExpressionCannotBeStatement =
             SharpsilverDiagnostic.Create(
@@ -102,6 +102,12 @@ namespace Sharpsilver.Translation
       "This ({0}) cannot be translated into a pure assertion.",
       "In this context, C# code is forced to be translated into pure Silver assertions. However, this C# node cannot be translated in a pure way.",
       DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL115_ThisIntegerSizeNotSupported =
+          SharpsilverDiagnostic.Create(
+              "SSIL115",
+              "Use System.Int32 instead of {0}.",
+              "The Silver language's integers are unbounded. To prevent confusion, use only 'System.Int32' integers, please. Your actual used type wouldn't matter anyway, since Viper does not check for overflow or underflow.",
+              DiagnosticSeverity.Error);
 
         // ****************************** 200 Backend Verifier Errors
         public static SharpsilverDiagnostic SSIL201_BackendNotFound =
