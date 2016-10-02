@@ -46,6 +46,8 @@ namespace Sharpsilver.Translation
                 case "System.UInt64":
                     error = new Error(Diagnostics.SSIL115_ThisIntegerSizeNotSupported, where, typeSymbol.GetQualifiedName());
                     return SilverType.Error;
+                case ContractsTranslator.PermissionType:
+                    return SilverType.Perm;
                 case "System.Void":
                     return SilverType.Void;
                 default:

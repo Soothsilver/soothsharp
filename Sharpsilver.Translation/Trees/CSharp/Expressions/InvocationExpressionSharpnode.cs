@@ -74,7 +74,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 st = TypeTranslator.TranslateType(methodSymbol.ReturnType, MethodGroup, out error);
             } else
             {
-                identifier = new IdentifierReference(languageFeatureName);
+                identifier = new Identifier(languageFeatureName);
                 st = SilverType.Bool;
                 error = null;
             }

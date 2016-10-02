@@ -11,7 +11,9 @@ namespace Sharpsilver.Contracts
     /// </summary>
     public class Permission
     {
+#pragma warning disable CS0414
         private SpecialPermission special = SpecialPermission.NotSpecial;
+#pragma warning restore CS0414
         private int numerator;
         private int denominator;
 

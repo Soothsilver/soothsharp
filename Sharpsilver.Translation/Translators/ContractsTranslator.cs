@@ -21,8 +21,13 @@ namespace Sharpsilver.Translation
         public const string ContractInhale = ContractsClass + nameof(Contract.Inhale);
         public const string ContractExhale = ContractsClass + nameof(Contract.Exhale);
         public const string ContractIntResult = ContractsClass + nameof(Contract.IntegerResult);
+        public const string Result = ContractsClass + nameof(Contract.Result);
+        public const string Fold = ContractsClass + nameof(Contract.Fold);
+        public const string Unfold = ContractsClass + nameof(Contract.Unfold);
+
         public const string Implication = "System.Boolean." + nameof(StaticExtension.Implies);
 
+        public const string PermissionType = ContractsNamespace + nameof(Contracts.Permission);
 
         public const string SilvernameAttribute = ContractsNamespace + nameof(Contracts.SilvernameAttribute);
         public const string PredicateAttribute = ContractsNamespace + nameof(Contracts.PredicateAttribute);

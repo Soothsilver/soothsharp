@@ -67,9 +67,9 @@ namespace Sharpsilver.Translation
             "Perm",
             "Ref"
         };
-        private readonly Dictionary<TaggedSymbol, IdentifierDeclaration> registeredGlobalSymbols = new Dictionary<TaggedSymbol, IdentifierDeclaration>();
-        private readonly Dictionary<TaggedSymbol, IdentifierReference> references = new Dictionary<TaggedSymbol, IdentifierReference>();
-        public readonly IdentifierReference SystemObject = new IdentifierReference(Constants.SilverSystemObject);
+        private readonly Dictionary<TaggedSymbol, Identifier> registeredGlobalSymbols = new Dictionary<TaggedSymbol, Identifier>();
+        private readonly Dictionary<TaggedSymbol, Identifier> references = new Dictionary<TaggedSymbol, Identifier>();
+        public readonly Identifier SystemObject = new Identifier(Constants.SilverSystemObject);
 
         private readonly List<string> usedSilverIdentifiers = new List<string>
         {
@@ -95,30 +95,30 @@ namespace Sharpsilver.Translation
             return new string(updatedArray);
         }
 
-        public IdentifierDeclaration RegisterAndGetIdentifier(ISymbol method)
+        public Identifier RegisterAndGetIdentifier(ISymbol method)
         {
             return RegisterAndGetIdentifierWithTag(method, "");
         }
-        public IdentifierDeclaration RegisterAndGetIdentifierWithTag(ISymbol classSymbol, string tag)
+        public Identifier RegisterAndGetIdentifierWithTag(ISymbol classSymbol, string tag)
         {
             var taggedSymbol = new TaggedSymbol(classSymbol, tag);
-            IdentifierDeclaration identifier = new IdentifierDeclaration(taggedSymbol, this);
+            Identifier identifier = new Identifier(taggedSymbol, this);
             registeredGlobalSymbols.Add(taggedSymbol, identifier);
             return identifier;
         }
 
-        public IdentifierReference GetIdentifierReference(ISymbol method)
+        public Identifier GetIdentifierReference(ISymbol method)
         {
             return GetIdentifierReferenceWithTag(method, "");
         }
-        public IdentifierReference GetIdentifierReferenceWithTag(ISymbol method, string tag)
+        public Identifier GetIdentifierReferenceWithTag(ISymbol method, string tag)
         {
             var taggedSymbol = new TaggedSymbol(method, tag);
             if (references.ContainsKey(taggedSymbol))
             {
                 return references[taggedSymbol];
             }
-            IdentifierReference reference = new IdentifierReference(taggedSymbol, this);
+            Identifier reference = new Identifier(taggedSymbol, this);
             references.Add(taggedSymbol, reference);
             return reference;
         }
@@ -167,7 +167,8 @@ namespace Sharpsilver.Translation
                 }
                 else
                 {
-                    // TODO report the error (if it can occur at all? ...probably only in syntax-problematic code or in otherwise unsupported code)
+                    // TODO report the error (if it can occur at all? 
+                    // ...probably only in syntax-problematic code or in otherwise unsupported code)
                     kvp.Value.Silvername = Constants.SilverErrorString;
                 }
             }

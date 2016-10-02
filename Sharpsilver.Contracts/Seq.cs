@@ -13,13 +13,14 @@ namespace Sharpsilver.Contracts
     public class Seq<T>
     {
         private List<T> list = new List<T>(1);
+
         /// <summary>
-        /// Initializes a new sequence with a single element.
+        /// Initializes a new sequence.
         /// </summary>
-        /// <param name="initialElement">The only element that will be in the sequence</param>
-        public Seq(T initialElement)
+        /// <param name="elements">The elements in the sequence. Must not be given as an array.</param>
+        public Seq(params T[] elements)
         {
-            list.Add(initialElement);
+            list = new List<T>(elements);
         }
 
         /// <summary>
@@ -37,22 +38,29 @@ namespace Sharpsilver.Contracts
         public int Length => list.Count;
 
         /// <summary>
-        /// Returns the subsequence that starts at an index and ends at another index.
+        /// Returns the subsequence that drops the first elements.
         /// </summary>
-        /// <param name="from">The beginning index, inclusive.</param>
-        /// <param name="to">The end index, inclusive.</param>
-        public Seq<T> Range(int from, int to)
+        /// <param name="howMany">The number of elements to skip at the beginning.</param>
+        public Seq<T> Drop(int howMany)
         {
-            return new Seq<T>(list.GetRange(from, to - from));
+            return new Seq<T>(list.Skip(howMany).ToList());
         }
-
         /// <summary>
-        /// Returns the subsequence that starts at the given index.
+        /// Returns the subsequence that contains only the first elements.
         /// </summary>
-        /// <param name="from">The beginning index, inclusive.</param>
-        public Seq<T> RangeFrom(int from)
+        /// <param name="howMany">The number of elements to take at the beginning.</param>
+        public Seq<T> Take(int howMany)
         {
-            return new Seq<T>(list.Skip(from).ToList());
+            return new Seq<T>(list.Take(howMany).ToList());
+        }
+        /// <summary>
+        /// Returns the subsequence that first TAKES the first "take" elements and then DROPS the first "drop" elements.
+        /// </summary>  
+        /// <param name="drop">The number of elements to drop at the beginning.</param>
+        /// <param name="take">The number of elements to take at the beginning.</param>
+        public Seq<T> Take(int drop, int take)
+        {
+            return new Seq<T>(list.Take(take).Skip(drop).ToList());
         }
 
         /// <summary>

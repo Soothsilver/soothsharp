@@ -199,8 +199,6 @@
     <Compile Include="Diagnostics\Diagnostics.cs" />
     <Compile Include="Trees\CSharp\Highlevel\FieldDeclarationSharpnode.cs" />
     <Compile Include="Translators\Identifiers\Identifier.cs" />
-    <Compile Include="Translators\Identifiers\IdentifierReference.cs" />
-    <Compile Include="Translators\Identifiers\IdentifierDeclaration.cs" />
     <Compile Include="SilverType.cs" />
     <Compile Include="Translators\ContractsTranslator.cs" />
     <Compile Include="Diagnostics\DiagnosticSeverity.cs" />

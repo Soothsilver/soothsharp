@@ -5,10 +5,10 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
 {
     class LabelSilvernode : StatementSilvernode
     {
-        public IdentifierDeclaration Identifier;
+        public Identifier Identifier;
         public string Label;
 
-        public LabelSilvernode(IdentifierDeclaration identifier, SyntaxNode original) : base(original)
+        public LabelSilvernode(Identifier identifier, SyntaxNode original) : base(original)
         {
             Identifier = identifier;
         }
