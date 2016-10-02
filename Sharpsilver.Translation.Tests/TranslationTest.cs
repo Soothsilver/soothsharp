@@ -14,7 +14,7 @@ namespace Sharpsilver.Translation.Tests
         [MemberData(nameof(GetTestFiles))]
         public void TranslationToSilverOk(string filename)
         { 
-
+            
             string dir = AppDomain.CurrentDomain.BaseDirectory;
             string fullFilename = System.IO.Path.Combine(dir, filename);
             string csharpCode = System.IO.File.ReadAllText(fullFilename);

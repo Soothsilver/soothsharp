@@ -29,11 +29,12 @@ namespace Sharpsilver.Translation.Trees.CSharp
             errors.AddRange(thenResult.Errors);
             if (elseResult != null)
                 errors.AddRange(elseResult.Errors);
+
             return TranslationResult.FromSilvernode(new IfSilvernode(
                 OriginalNode,
                 conditionResult.Silvernode,
                 thenResult.Silvernode as StatementSilvernode,
-                elseResult.Silvernode as StatementSilvernode),
+                elseResult?.Silvernode as StatementSilvernode),
                 errors);
         }
     }

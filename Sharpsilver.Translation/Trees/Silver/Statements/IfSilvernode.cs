@@ -2,10 +2,11 @@
 using Sharpsilver.Translation.Trees.Silver;
 using System.Collections.Generic;
 using Sharpsilver.Translation.Trees.Silver.Statements;
+using System;
 
 namespace Sharpsilver.Translation.Trees.Silver
 {
-    internal class IfSilvernode : Silvernode
+    internal class IfSilvernode : StatementSilvernode
     {
         private Silvernode condition;
         private Silvernode then;
@@ -33,10 +34,20 @@ namespace Sharpsilver.Translation.Trees.Silver
             }
         }
 
-        public override string ToString()
+        public override IEnumerable<Silvernode> Children
         {
-            return "if (" + condition.ToString() + ") " + this.then.ToString()
-                + (elseBranch != null ? " else " + this.elseBranch.ToString() : "");
+            get
+            {
+                yield return "if (";
+                yield return condition;
+                yield return ") ";
+                yield return this.then;
+                if (elseBranch != null)
+                {
+                    yield return " else ";
+                    yield return elseBranch;
+                }
+            }
         }
     }
 }

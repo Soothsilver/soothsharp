@@ -17,7 +17,7 @@ namespace Sharpsilver.Translation.Trees.CSharp.Statements
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            return TranslationResult.FromSilvernode(new TextSilvernode("", OriginalNode));
+            return TranslationResult.FromSilvernode(new TextStatementSilvernode("", OriginalNode));
         }
     }
 }

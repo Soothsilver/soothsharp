@@ -90,6 +90,12 @@
     <Compile Include="Systemwide\scala2silver\translation\Assignments.cs" />
     <Compile Include="Systemwide\scala2silver\translation\Assume.cs" />
     <Compile Include="Systemwide\scala2silver\translation\Implies.cs" />
+    <Content Include="Systemwide\sharpsilver\issues\DoubleBlock.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Systemwide\sharpsilver\translation\CustomGoto.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Compile Include="TranslationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities.cs" />

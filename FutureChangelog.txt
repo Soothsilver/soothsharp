@@ -23,6 +23,5 @@ BUGFIX LIST:
 
 CHECK LIST:
 - assignment operators
-- nested blocks
 - label/goto
 - instance method
