@@ -108,6 +108,7 @@
     <Compile Include="CompilationUnit.cs" />
     <Compile Include="TranslationConfiguration.cs" />
     <Compile Include="TranslationProcessResult.cs" />
+    <Compile Include="Translators\SubroutineBuilder.cs" />
     <Compile Include="Trees\CommonUtils.cs" />
     <Compile Include="Trees\CSharp\Expressions\DiagnosticExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\DirectSilvercodeExpressionSharpnode.cs" />
@@ -131,6 +132,9 @@
     <Compile Include="Trees\Intermediate\CollectedType.cs" />
     <Compile Include="Trees\Silver\Expressions\AccSilvernode.cs" />
     <Compile Include="Trees\Silver\Expressions\NewSilvernode.cs" />
+    <Compile Include="Trees\Silver\Highlevel\PredicateSilvernode.cs" />
+    <Compile Include="Trees\Silver\Highlevel\FunctionSilvernode.cs" />
+    <Compile Include="Trees\Silver\Highlevel\SubroutineSilvernode.cs" />
     <Compile Include="Trees\Silver\SimpleSequenceSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\AssignmentSilvernode.cs" />
     <Compile Include="Trees\CSharp\Statements\ReturnStatementSharpnode.cs" />
@@ -139,7 +143,7 @@
     <Compile Include="Trees\Silver\Expressions\ParenthesizedExpressionSilvernode.cs" />
     <Compile Include="Trees\Silver\Expressions\CallSilvernode.cs" />
     <Compile Include="Trees\Silver\Expressions\ExpressionSilvernode.cs" />
-    <Compile Include="Trees\Silver\HighlevelSequenceSilvernode.cs" />
+    <Compile Include="Trees\Silver\Highlevel\HighlevelSequenceSilvernode.cs" />
     <Compile Include="Trees\Silver\Simple\NewlineSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\ErrorStatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\AssertionLikeSilvernode.cs" />
@@ -167,7 +171,7 @@
     <Compile Include="Trees\Silver\Statements\BlockSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\GotoSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\LabelSilvernode.cs" />
-    <Compile Include="Trees\Silver\MethodSilvernode.cs" />
+    <Compile Include="Trees\Silver\Highlevel\MethodSilvernode.cs" />
     <Compile Include="Trees\Silver\ParameterSilvernode.cs" />
     <Compile Include="Trees\Silver\Simple\TextSilvernode.cs" />
     <Compile Include="Trees\Silver\Simple\TypeSilvernode.cs" />
@@ -197,7 +201,7 @@
     <Compile Include="Trees\CSharp\Expressions\CompoundAssignmentExpressionSharpnode.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Trees\CSharp\Expressions\IdentifierExpressionSharpnode.cs" />
-    <Compile Include="Trees\Silver\CSharpTypeDomainSilvernode.cs" />
+    <Compile Include="Trees\Silver\Highlevel\CSharpTypeDomainSilvernode.cs" />
     <Compile Include="Diagnostics\Diagnostics.cs" />
     <Compile Include="Trees\CSharp\Highlevel\FieldDeclarationSharpnode.cs" />
     <Compile Include="Translators\Identifiers\Identifier.cs" />

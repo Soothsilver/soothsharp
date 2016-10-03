@@ -25,6 +25,7 @@ namespace Sharpsilver.Translation
         /// Gets the semantic model of the C# compilation.
         /// </summary>
         public SemanticModel Semantics { get; private set; }
+        public bool IsFunctionBlock { get; set; }
 
         /// <summary>
         /// Creates a new translation context as a copy of a previous one.
@@ -35,6 +36,7 @@ namespace Sharpsilver.Translation
             this.PurityContext = copyFrom.PurityContext;
             this.Process = copyFrom.Process;
             this.Semantics = copyFrom.Semantics;
+            this.IsFunctionBlock = copyFrom.IsFunctionBlock;
             this.VerifyUnmarkedItems = copyFrom.VerifyUnmarkedItems;
         }
 

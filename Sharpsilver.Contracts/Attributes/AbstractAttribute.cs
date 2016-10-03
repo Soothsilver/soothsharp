@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace Sharpsilver.Contracts
 {
     /// <summary>
-    /// The annotated method should be translated as an abstract Silver predicate. The body of this method
+    /// The annotated method should be translated as abstractin Silver. The body of this method
     /// will be ignored - just put anything in there that will satisfy the typing system.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class AbstractPredicateAttribute : Attribute
+    public class AbstractAttribute : Attribute
     {
     }
 }

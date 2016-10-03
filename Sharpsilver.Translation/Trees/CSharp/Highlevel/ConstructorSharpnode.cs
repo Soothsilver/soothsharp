@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Sharpsilver.Translation.Translators;
 using Sharpsilver.Translation.Trees.Silver;
 using Sharpsilver.Translation.Trees.Silver.Statements;
 
@@ -38,12 +39,24 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var classSymbol = context.Semantics.GetDeclaredSymbol(this.parentClass); 
+            var methodSymbol = this.methodSyntax != null ? context.Semantics.GetDeclaredSymbol(this.methodSyntax) : null;
+            var classSymbol = context.Semantics.GetDeclaredSymbol(this.parentClass);
+
+
+            SubroutineBuilder builder = new SubroutineBuilder(
+                methodSymbol,
+                true,
+                null,
+                classSymbol,
+                Parameters,
+                Body,
+                context, 
+                this.OriginalNode);
+            return builder.TranslateSelf();
+            /*
             var identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifierWithTag(classSymbol, Constants.ConstructorTag);
             var innerContext = context;
             var body = this.Body.Translate(innerContext);
-            var methodSymbol = this.methodSyntax != null ? context.Semantics.GetDeclaredSymbol(this.methodSyntax) : null;
-            
             Error diagnostic;
             var silverParameters = new List<ParameterSilvernode>();
             TranslationResult r = new TranslationResult();
@@ -100,6 +113,7 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
             r.Errors.AddRange(body.Errors);
             if (diagnostic != null) r.Errors.Add(diagnostic);
             return r;
+            */
         }
     }
 }

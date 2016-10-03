@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\AbstractPredicateAttribute.cs" />
+    <Compile Include="Attributes\AbstractAttribute.cs" />
     <Compile Include="Attributes\PredicateAttribute.cs" />
     <Compile Include="Attributes\SignatureOnlyAttribute.cs" />
     <Compile Include="Contract.cs" />

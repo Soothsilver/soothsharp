@@ -108,7 +108,30 @@ namespace Sharpsilver.Translation
               "Use System.Int32 instead of {0}.",
               "The Silver language's integers are unbounded. To prevent confusion, use only 'System.Int32' integers, please. Your actual used type wouldn't matter anyway, since Viper does not check for overflow or underflow.",
               DiagnosticSeverity.Error);
-
+        public static SharpsilverDiagnostic SSIL116_MethodAttributeContradiction =
+         SharpsilverDiagnostic.Create(
+            "SSIL116",
+            "Constructors and predicates cannot be declared [Pure].",
+            "The [Pure] attribute causes the C# method to be translated as a Viper function. Viper predicates can't be functions. Constructors, in the transcompiler's view, also cannot be functions.",
+            DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL117_ConstructorMustNotBeAbstract =
+         SharpsilverDiagnostic.Create(
+           "SSIL117",
+           "Constructors cannot be declared [Abstract].",
+           "",
+        DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL118_FunctionsMustHaveAReturnType =
+         SharpsilverDiagnostic.Create(
+           "SSIL118",
+           "Methods declared [Pure] must have a non-void return type.",
+           "In Viper, functions always return a value. Methods with the [Pure] attribute are translated as a functions and thus can't have the void return type. ",
+           DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL119_PredicateMustBeBool =
+         SharpsilverDiagnostic.Create(
+           "SSIL119",
+           "Methods declared [Predicate] must have the boolean return type.",
+           "Methods with the [Predicate] attribute are translated as Viper predicates. Predicates are either spatial or boolean - either way, the return type must be System.Boolean.",
+           DiagnosticSeverity.Error);
         // ****************************** 200 Backend Verifier Errors
         public static SharpsilverDiagnostic SSIL201_BackendNotFound =
             SharpsilverDiagnostic.Create(

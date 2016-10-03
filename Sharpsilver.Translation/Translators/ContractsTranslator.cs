@@ -24,6 +24,7 @@ namespace Sharpsilver.Translation
         public const string Result = ContractsClass + nameof(Contract.Result);
         public const string Fold = ContractsClass + nameof(Contract.Fold);
         public const string Unfold = ContractsClass + nameof(Contract.Unfold);
+        public const string Old = ContractsClass + nameof(Contract.Old);
 
         public const string Implication = "System.Boolean." + nameof(StaticExtension.Implies);
 
@@ -34,7 +35,8 @@ namespace Sharpsilver.Translation
         public const string PureAttribute = ContractsNamespace + nameof(Contracts.PureAttribute);
         public const string VerifiedAttribute = ContractsNamespace + nameof(Contracts.VerifiedAttribute);
         public const string UnverifiedAttribute = ContractsNamespace + nameof(Contracts.UnverifiedAttribute);
-        
+        public const string AbstractAttribute = ContractsNamespace + nameof(Contracts.AbstractAttribute);
+
         private TranslationProcess parent;
 
         public ContractsTranslator(TranslationProcess process)

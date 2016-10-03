@@ -10,6 +10,7 @@ FEATURE SUPPORT LIST:
 - predicate
 - Seq
 - old
+- result
 - forall, exists
 
 
@@ -18,10 +19,9 @@ BUGFIX LIST:
 - member access
 - reject value types 
 - trigger error on unknown identifier
-- multiple variable declaaration
+- multiple variable declaration
 
 
 CHECK LIST:
 - assignment operators
-- label/goto
 - instance method

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Sharpsilver.Translation.Translators;
 using Sharpsilver.Translation.Trees.Silver;
 using Sharpsilver.Translation.Trees.Silver.Statements;
 
@@ -26,49 +27,18 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
 
         public override TranslationResult Translate(TranslationContext context)
         {
+
             var method = context.Semantics.GetDeclaredSymbol(this.methodDeclarationSyntax);
-            var identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(method);
-            var innerContext = context;
-            var body = this.Body.Translate(innerContext);
-            
-            Error diagnostic;
-
-            var attributes = method.GetAttributes();
-            if (attributes.Any(attribute => attribute.AttributeClass.GetQualifiedName() == ContractsTranslator.UnverifiedAttribute))
-            {
-                return TranslationResult.FromSilvernode(new SinglelineCommentSilvernode($"Method {method.GetQualifiedName()} skipped because it was marked [Unverified].", this.OriginalNode));
-            }
-
-            var silverParameters = new List<ParameterSilvernode>();
-            TranslationResult r = new TranslationResult();
-            for (int i = 0; i < this.Parameters.Count; i++)
-            {
-                ParameterSharpnode sharpnode = this.Parameters[i];
-                var symbol = method.Parameters[i];
-                var rrs = sharpnode.Translate(context, symbol);
-                silverParameters.Add(rrs.Silvernode as ParameterSilvernode);
-                r.Errors.AddRange(rrs.Errors);
-            }
-            var innerStatements = body.Silvernode as BlockSilvernode;
-            Debug.Assert(innerStatements != null, "innerStatements != null");
-            innerStatements.Add(new LabelSilvernode(Constants.SilverMethodEndLabel, null));
-            var methodSilvernode = 
-                new MethodSilvernode(this.methodDeclarationSyntax, // method
-                    new IdentifierSilvernode(identifier), // name
-                    silverParameters,
-                    Constants.SilverReturnVariableName,
-                    new TypeSilvernode(this.methodDeclarationSyntax.ReturnType,                    
-                        TypeTranslator.TranslateType(
-                            method.ReturnType, this.methodDeclarationSyntax.ReturnType, 
-                            out diagnostic)
-                        ), // return type
-                    body.VerificationConditions, // verification conditions 
-                    innerStatements // code
-                );
-            r.Silvernode = methodSilvernode;
-            r.Errors.AddRange(body.Errors);
-            if (diagnostic != null) r.Errors.Add(diagnostic);
-            return r;
+            SubroutineBuilder builder = new SubroutineBuilder(
+                method,
+                false,
+                ReturnType,
+                null,
+                Parameters,
+                Body,
+                context,
+                OriginalNode);
+            return builder.TranslateSelf();
         }
     }
 }

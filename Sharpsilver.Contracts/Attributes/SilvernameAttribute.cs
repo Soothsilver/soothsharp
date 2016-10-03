@@ -3,14 +3,12 @@
 namespace Sharpsilver.Contracts
 {
     /// <summary>
-    /// Sets the name of the annotated class, method or field in the generated Silver code. 
+    /// Sets the name of the annotated item in the generated Silver code. 
     /// It is the user's responsibility to ensure that the chosen name won't collide with any other name 
     /// specified by this attribute elsewhere or with a name generated automatically by the translator. 
     /// </summary>
     [AttributeUsage(
-        AttributeTargets.Class |
-        AttributeTargets.Method |
-        AttributeTargets.Field)]
+        AttributeTargets.Method)]
     public class SilvernameAttribute : Attribute
     {
         /// <summary>

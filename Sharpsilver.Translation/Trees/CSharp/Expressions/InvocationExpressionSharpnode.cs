@@ -62,6 +62,9 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 case ContractsTranslator.ContractAcc:
                     languageFeatureName = "acc";
                     break;
+                case ContractsTranslator.Old:
+                    languageFeatureName = "old";
+                    break;
             }
 
             // Get identifier and evaluate arguments
