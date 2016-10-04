@@ -35,46 +35,25 @@ namespace Sharpsilver.Contracts
         /// <summary>
         /// Gets the full write permission (1/1).
         /// </summary>
-        public static Permission Write
-        {
-            get
-            {
-                return new Permission(1, 1);
-            }
-        }
+        public static Permission Write => new Permission(1, 1);
+
         /// <summary>
         /// Gets the wildcard permission (unspecified non-zero permission).
         /// </summary>
-        public static Permission Wildcard
+        public static Permission Wildcard => new Permission(0, 0)
         {
-            get
-            {
-                return new Permission(0, 0)
-                {
-                    special = SpecialPermission.Wildcard
-                };
-            }
-        }
+            special = SpecialPermission.Wildcard
+        };
+
         /// <summary>
         /// Gets a half permission (1/2).
         /// </summary>
-        public static Permission Half
-        {
-            get
-            {
-                return new Permission(1, 2);
-            }
-        }
+        public static Permission Half => new Permission(1, 2);
+
         /// <summary>
         /// Gets the zero permission (0/1).
         /// </summary>
-        public static Permission None
-        {
-            get
-            {
-                return new Permission(0, 1);
-            }
-        }
+        public static Permission None => new Permission(0, 1);
 
         /// <summary>
         /// Retrieves the current permission we have at this point to the given field or predicate.
@@ -96,7 +75,7 @@ namespace Sharpsilver.Contracts
         /// <param name="two">The second operand.</param>
         public static Permission operator +(Permission one, Permission two)
         {
-            return new Contracts.Permission(one.numerator * two.denominator + one.denominator * two.numerator, one.denominator * two.denominator);
+            return new Permission(one.numerator * two.denominator + one.denominator * two.numerator, one.denominator * two.denominator);
         }
         /// <summary>
         /// Implements the operator - for permissions.
@@ -105,7 +84,7 @@ namespace Sharpsilver.Contracts
         /// <param name="two">The second operand.</param>
         public static Permission operator -(Permission one, Permission two)
         {
-            return new Contracts.Permission(one.numerator * two.denominator - one.denominator * two.numerator, one.denominator * two.denominator);
+            return new Permission(one.numerator * two.denominator - one.denominator * two.numerator, one.denominator * two.denominator);
         }
         /// <summary>
         /// Implements the operator * for permissions.
@@ -114,7 +93,7 @@ namespace Sharpsilver.Contracts
         /// <param name="two">The second operand.</param>
         public static Permission operator *(Permission one, Permission two)
         {
-            return new Contracts.Permission(one.numerator * two.numerator, one.denominator * two.denominator);
+            return new Permission(one.numerator * two.numerator, one.denominator * two.denominator);
         }
         /// <summary>
         /// Implements the operator * for permissions.
@@ -123,7 +102,7 @@ namespace Sharpsilver.Contracts
         /// <param name="two">The second operand.</param>
         public static Permission operator *(int one, Permission two)
         {
-            return new Contracts.Permission(one * two.numerator, two.denominator);
+            return new Permission(one * two.numerator, two.denominator);
         }
         /// <summary>
         /// Implements the operator * for permissions.
@@ -132,7 +111,7 @@ namespace Sharpsilver.Contracts
         /// <param name="two">The second operand.</param>
         public static Permission operator *(Permission one, int two)
         {
-            return new Contracts.Permission(one.numerator * two, one.denominator);
+            return new Permission(one.numerator * two, one.denominator);
         }
 
 

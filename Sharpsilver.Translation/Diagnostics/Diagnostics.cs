@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+// ReSharper disable InconsistentNaming
+// These names are based on error codes.
 
 namespace Sharpsilver.Translation
 {

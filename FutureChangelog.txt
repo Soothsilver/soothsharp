@@ -5,12 +5,12 @@ FEATURE SUPPORT LIST:
 - arrays
 - constants
 
-- Permission type
-- function
-- predicate
+- Permission type (IN PROGRESS)
+- function (IN PROGRESS)
+- predicate (IN PROGRESS)
 - Seq
-- old
-- result
+- old (DONE)
+- result 
 - forall, exists
 
 
@@ -18,10 +18,11 @@ BUGFIX LIST:
 - fix incode todo's
 - member access
 - reject value types 
-- trigger error on unknown identifier
-- multiple variable declaration
-
 
 CHECK LIST:
 - assignment operators
 - instance method
+
+NICE-TO-HAVE:
+- multiple variable declaration
+- testing uses nailgun

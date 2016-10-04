@@ -12,17 +12,12 @@ namespace Sharpsilver.Contracts
     public class SilvernameAttribute : Attribute
     {
         /// <summary>
-        /// Gets or sets the identifier the annotated item will have in generated Silver code.
-        /// </summary>
-        private string SilverIdentifier { get; set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SilvernameAttribute"/> class.
         /// </summary>
         /// <param name="silverIdentifier">The identifier the annotated item will have in generated Silver code.</param>
+        // ReSharper disable once UnusedParameter.Local
         public SilvernameAttribute(string silverIdentifier)
         {
-            SilverIdentifier = silverIdentifier;
         }
     }
 }

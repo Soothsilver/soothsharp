@@ -5,57 +5,61 @@ using Sharpsilver.Translation;
 using Mono.Options;
 using Sharpsilver.Translation.BackendInterface;
 using Sharpsilver.Translation.Trees.Silver;
+// ReSharper disable RedundantDefaultMemberInitializer
 
 namespace Sharpsilver.Cs2Sil
 {
     /// <summary>
     /// This class is compiled into the csverify.exe executable which takes C# code files, produces Silver files and verifies them for formal correctness. 
     /// </summary>
-    class Csverify
+    internal class Csverify
     {
         /// <summary>
         /// Whether additional messages about the translation process should be printed.
         /// </summary>
-        static bool Verbose;
+        private static bool verbose = false;
         /// <summary>
         /// In quiet mode, some messages are suppressed.
         /// </summary>
-        static bool Quiet;
+        private static bool quiet = false;
         /// <summary>
         /// Whether the program should terminate normally or wait for the user to press a key after it completes.
         /// </summary>
-        static bool WaitAfterwards = false;
+        private static bool waitAfterwards = false;
         /// <summary>
         /// Whether only classes and members tagged with <see cref="Sharpsilver.Contracts.VerifiedAttribute"/> should be translated into Silver.
         /// If false, then all classes and members not tagged with <see cref="Sharpsilver.Contracts.UnverifiedAttribute"/> will be translated. 
         /// </summary>
-        static bool OnlyAnnotated = false;
+        private static bool onlyAnnotated = false;
         /// <summary>
-        /// Whether Silicon is used to verify correctness. If both <see cref="UseCarbon"/> and <see cref="UseSilicon"/> are set,
+        /// Whether Silicon is used to verify correctness. If both <see cref="useCarbon"/> and <see cref="useSilicon"/> are set,
         /// then Carbon takes precedence and Silicon is not run.
         /// </summary>
-        static bool UseSilicon = false;
+        private static bool useSilicon = false;
         /// <summary>
-        /// Whether Carbon is used to verify correctness. If both <see cref="UseCarbon"/> and <see cref="UseSilicon"/> are set,
+        /// Whether Carbon is used to verify correctness. If both <see cref="useCarbon"/> and <see cref="useSilicon"/> are set,
         /// then Carbon takes precedence and Silicon is not run.
         /// </summary>
-        static bool UseCarbon = true;
+        private static bool useCarbon = true;
         /// <summary>
         /// Filename where the Silver output should be written out. If null, then the Silver output is not written to disk.
         /// </summary>
-        static string outputSilverFile = null;
+        private static string outputSilverFile = null;
         /// <summary>
         /// Current version of this assembly.
         /// </summary>
-        static string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-        static bool LineNumbers = true;
+        private static string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        /// <summary>
+        /// Whether line numbers should be printed when printed the resultant Silver code
+        /// </summary>
+        private static bool lineNumbers = true;
         /// <summary>
         /// Name and short description of this assembly.
         /// </summary>
-        static string header = System.AppDomain.CurrentDomain.FriendlyName + " " + version + "\n" +
+        private static string header = AppDomain.CurrentDomain.FriendlyName + " " + version + "\n" +
             "Verifies C# code files for correctness with respect to specified verification conditions.";
 
-        static int Main(string[] args)
+        private static int Main(string[] args)
         {
             bool showHelp = false;
             bool showVersion = false;
@@ -67,16 +71,16 @@ namespace Sharpsilver.Cs2Sil
             var optionset = new OptionSet()
                 .Add("?|help|h", "Shows this message.", option => showHelp = option != null)
                 .Add("v|version", $"Shows that the version of this program is {version}.", option => showVersion = option != null)
-                .Add("V|verbose", "Enables verbose mode. In verbose mode, additional debugging information is printed and more details are written for each error message.", option => Verbose = option != null)
-                .Add("q|quiet", "Enable quiet mode. In quiet mode, only the resulting Silver code or error messages are shown.", option => Quiet = option != null)
+                .Add("V|verbose", "Enables verbose mode. In verbose mode, additional debugging information is printed and more details are written for each error message.", option => verbose = option != null)
+                .Add("q|quiet", "Enable quiet mode. In quiet mode, only the resulting Silver code or error messages are shown.", option => quiet = option != null)
                 .Add("r|reference=", "Adds the {ASSEMBLY.DLL} file as a reference when doing semantic analysis on the code. mscorlib and Sharpsilver.Contracts are added automatically.", filename => references.Add(filename))
                 .Add("a|assume=", "Translates the file {CLASS.CS} to Silver and prepends it to the main generated file, but its methods and functions won't be verified - their postconditions will be assumed to be true. ", filename => assumedFiles.Add(filename))   
-                .Add("w|wait", "When the program finishes, it will wait for the user to press any key before terminating.", option => WaitAfterwards = option != null)
-                .Add("O|only-annotated", "Only transcompile classes that have the [Verified] attribute, and static methods that have the [Verified] attribute even if their containing classes don't have the [Verified] attribute." , option => OnlyAnnotated = option != null)
+                .Add("w|wait", "When the program finishes, it will wait for the user to press any key before terminating.", option => waitAfterwards = option != null)
+                .Add("O|only-annotated", "Only transcompile classes that have the [Verified] attribute, and static methods that have the [Verified] attribute even if their containing classes don't have the [Verified] attribute." , option => onlyAnnotated = option != null)
                 .Add("o|output-file=", "Print the resulting Silver code into the {OUTPUT.SIL} file.", filename => outputSilverFile = filename)
-                .Add("line-numbers", "Print line numbers before the Silver code", ln => LineNumbers = ln != null)
-                .Add("s|silicon", "Use the Silicon backend to verify the Silver code. Use the  \"-s-\" option to disable Silicon verification.", option => UseSilicon = option != null)
-                .Add("c|carbon", "Use the Carbon backend to verify the Silver code. Use the  \"-c-\" option to disable Carbon verification.", option => UseCarbon = option != null)
+                .Add("line-numbers", "Print line numbers before the Silver code", ln => lineNumbers = ln != null)
+                .Add("s|silicon", "Use the Silicon backend to verify the Silver code. Use the  \"-s-\" option to disable Silicon verification.", option => useSilicon = option != null)
+                .Add("c|carbon", "Use the Carbon backend to verify the Silver code. Use the  \"-c-\" option to disable Carbon verification.", option => useCarbon = option != null)
                 ;
             try
             {
@@ -100,12 +104,12 @@ namespace Sharpsilver.Cs2Sil
                 WriteHelp(optionset);
                 return (int)ExitCode.Success;
             }
-            if (Verbose && Quiet)
+            if (verbose && quiet)
             {
                 Console.WriteLine("Verbose and quiet mode are not compatible.");
                 return (int)ExitCode.InputError;
             }
-            if (UseCarbon && UseSilicon)
+            if (useCarbon && useSilicon)
             {
                 Console.WriteLine("It's not possible to use both Carbon and Silicon during the same run.");
                 return (int)ExitCode.InputError;
@@ -116,7 +120,7 @@ namespace Sharpsilver.Cs2Sil
                 return (int)ExitCode.InputError;
             }
 
-            if (Verbose)
+            if (verbose)
             {
                 Console.WriteLine(header);
                 Console.WriteLine();
@@ -124,7 +128,7 @@ namespace Sharpsilver.Cs2Sil
 
             int result = (int)RunVerification(verifiedFiles, assumedFiles, references);
 
-            if (WaitAfterwards)
+            if (waitAfterwards)
             {
                 Console.WriteLine();
                 Console.WriteLine("Work complete. Press any key to exit...");
@@ -160,8 +164,8 @@ namespace Sharpsilver.Cs2Sil
                     references,
                     new TranslationConfiguration()
                     {
-                        Verbose = Verbose,
-                        VerifyUnmarkedItems = !OnlyAnnotated
+                        Verbose = verbose,
+                        VerifyUnmarkedItems = !onlyAnnotated
                     });
             }
             catch (Exception ex)
@@ -173,7 +177,7 @@ namespace Sharpsilver.Cs2Sil
 
             TranslationProcessResult result = process.Execute();
 
-            if (!Quiet)
+            if (!quiet)
             {
                 Console.WriteLine(
                     result.WasTranslationSuccessful ? "Successfully translated." : $"Translation failed with {result.Errors.Count} errors."
@@ -183,7 +187,7 @@ namespace Sharpsilver.Cs2Sil
                 Console.WriteLine("=======================");
             }
             string silvercode = result.Silvernode.ToString();
-            if (LineNumbers)
+            if (lineNumbers)
             {
                 int lineId = 1;
                 foreach (var line in silvercode.Split('\n'))
@@ -196,7 +200,7 @@ namespace Sharpsilver.Cs2Sil
                 Console.WriteLine(silvercode);
             }
             if (result.Errors.Count > 0) {
-                if (!Quiet)
+                if (!quiet)
                 {
                     Console.WriteLine("=======================");
                     Console.WriteLine($"Errors: {result.Errors.Count}.");
@@ -204,13 +208,13 @@ namespace Sharpsilver.Cs2Sil
                 foreach (Error error in result.Errors)
                 {
                     Console.WriteLine(error.ToString());
-                    if (Verbose)
+                    if (verbose)
                     {
                         Console.WriteLine("Details: " + error.Diagnostic.Details);
                         Console.WriteLine();
                     }
                 }
-                if (!Quiet)
+                if (!quiet)
                 {
                     Console.WriteLine("=======================");
                 }
@@ -221,7 +225,7 @@ namespace Sharpsilver.Cs2Sil
                 try
                 {
                     System.IO.File.WriteAllText(outputSilverFile, silvercode);
-                    if (!Quiet)
+                    if (!quiet)
                     {
                         Console.WriteLine($"Silver code written to {outputSilverFile}.");
                     }
@@ -234,9 +238,9 @@ namespace Sharpsilver.Cs2Sil
                 }
             }
             // Run verifier
-            if (UseSilicon || UseCarbon)
+            if (useSilicon || useCarbon)
             {
-                if (!Quiet)
+                if (!quiet)
                 {
                     Console.WriteLine("=======================");
                 }
@@ -244,11 +248,11 @@ namespace Sharpsilver.Cs2Sil
                 if (result.WasTranslationSuccessful)
                 {
                     IBackend backend;
-                    if (UseSilicon) backend = new SiliconBackend();
+                    if (useSilicon) backend = new SiliconBackend();
                     else backend = new CarbonBackend();
 
                     var verificationResult = backend.Verify(result.Silvernode);
-                    if (Verbose)
+                    if (verbose)
                     {
                         Console.WriteLine(verificationResult.OriginalOutput);
                         Console.WriteLine("=======================");
@@ -259,14 +263,14 @@ namespace Sharpsilver.Cs2Sil
                     }
                     if (verificationResult.Errors.Count > 0)
                     {
-                        if (!Quiet)
+                        if (!quiet)
                         {
                             Console.WriteLine($"Errors: {verificationResult.Errors.Count}.");
                         }
                         foreach (Error error in verificationResult.Errors)
                         {
                             Console.WriteLine(error.ToString());
-                            if (Verbose)
+                            if (verbose)
                             {
                                 Console.WriteLine("Details: " + error.Diagnostic.Details);
                                 Console.WriteLine();
