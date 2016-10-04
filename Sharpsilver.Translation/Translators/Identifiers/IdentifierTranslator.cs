@@ -13,6 +13,11 @@ namespace Sharpsilver.Translation
     /// </summary>
     public class IdentifierTranslator
     {
+        private TranslationProcess process;
+        public IdentifierTranslator(TranslationProcess process)
+        {
+            this.process = process;
+        }
         private static string[] SilverKeywords = new[]
         {
             "import",
@@ -167,9 +172,8 @@ namespace Sharpsilver.Translation
                 }
                 else
                 {
-                    // TODO report the error (if it can occur at all? 
-                    // ...probably only in syntax-problematic code or in otherwise unsupported code)
-                    kvp.Value.Silvername = Constants.SilverErrorString;
+                    process.AddError(new Translation.Error(Diagnostics.SSIL120_UndeclaredNameReferenced, null, kvp.Key.Symbol +
+                        (String.IsNullOrEmpty(kvp.Key.Tag) ? "" : "_" + kvp.Key.Tag)));
                 }
             }
         }

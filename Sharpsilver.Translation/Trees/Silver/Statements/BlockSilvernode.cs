@@ -8,7 +8,7 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
     public class BlockSilvernode : StatementSilvernode
     {
         private BlockSyntax blockSyntax;
-        private List<StatementSilvernode> Statements;
+        public List<StatementSilvernode> Statements;
         public void Add(StatementSilvernode statement)
         {
             Statements.Add(statement);
@@ -45,20 +45,38 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
 
         protected override void Optimize()
         {
-            // Blocks cannot happen with blocks. Remove nested blocks (deeply)!
             for(int i = 0; i < Statements.Count; i++)
             {
-                StatementSilvernode possibleBlock = Statements[i];
-                if (possibleBlock is BlockSilvernode)
+                StatementSilvernode thisStatement = Statements[i];
+
+                // Blocks cannot happen with blocks. Remove nested blocks (deeply)!
+                if (thisStatement is BlockSilvernode)
                 {
-                    BlockSilvernode block = (BlockSilvernode)possibleBlock;
+                    BlockSilvernode block = (BlockSilvernode)thisStatement;
                     Statements.RemoveAt(i);
                     Statements.InsertRange(i, block.Statements);
                     i--;
                 }
+                // TODO this does not work well because of sequences
+                // Remove goto's that just go to the immediately following label
+                else if (thisStatement is GotoSilvernode)
+                {
+                    if (i != Statements.Count - 1)
+                    {
+                        GotoSilvernode thisSilvernode = (GotoSilvernode)thisStatement;
+                        Silvernode nextNode = Statements[i + 1];
+                        if (nextNode is LabelSilvernode)
+                        {
+                            LabelSilvernode nextNodeAsLabel = (LabelSilvernode)nextNode;
+                            if (thisSilvernode.Label == nextNodeAsLabel.Label)
+                            {
+                                Statements.RemoveAt(i);
+                                i--;
+                            }
+                        }
+                    }
+                }
             }
-
-            
         }
 
         public override BlockSilvernode EncloseInBlockIfNotAlready()

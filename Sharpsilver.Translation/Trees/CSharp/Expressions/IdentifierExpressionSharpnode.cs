@@ -26,12 +26,9 @@ namespace Sharpsilver.Translation
         public override TranslationResult Translate(TranslationContext context)
         {
             ISymbol symbol = this.GetIdentifierSymbol(context);
-            if (symbol.GetQualifiedName() == ContractsTranslator.ContractIntResult)
-            {
-                return TranslationResult.FromSilvernode(
-                                new TextSilvernode(Constants.SilverReturnVariableName, IdentifierName)
-                                );
-            }
+            TranslationResult contractResult = context.Process.ContractsTranslator.TranslateIdentifierAsContract(symbol, IdentifierName, context);
+            if (contractResult != null) return contractResult;
+
             var identifierNode = new IdentifierSilvernode(context.Process.IdentifierTranslator.GetIdentifierReference(symbol));
             if (symbol.ContainingSymbol.Kind == SymbolKind.Method)
             {

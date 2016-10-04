@@ -126,5 +126,34 @@ namespace Sharpsilver.Translation.Trees.Silver
                 child.OptimizeRecursively();
             }
         }
+
+        /// <summary>
+        /// Performs the specified actions on this node and all descendant nodes recursively.
+        /// </summary>
+        /// <param name="action">The action to perform on this node and each descendant.</param>
+        public void Recurse(Action<Silvernode> action)
+        {
+            action(this);
+            foreach (var child in this.Children)
+            {
+                child.Recurse(action);
+            }
+        }
+        /// <summary>
+        /// Gets all descedants, recursively, of this silvernode, excluding this node itself.
+        /// </summary>
+        public IEnumerable<Silvernode> Descendants
+        {
+            get {
+                foreach (var child in this.Children)
+                {
+                    yield return child;
+                    foreach (var descendant in child.Descendants)
+                    {
+                        yield return descendant;
+                    }
+                }
+            }
+        }
     }
 }

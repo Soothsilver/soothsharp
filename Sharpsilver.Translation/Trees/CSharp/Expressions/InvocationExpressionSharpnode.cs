@@ -65,6 +65,14 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 case ContractsTranslator.Old:
                     languageFeatureName = "old";
                     break;
+                case ContractsTranslator.Fold:
+                    languageFeatureName = "fold";
+                    translateAsPhpStatement = true;
+                    break;
+                case ContractsTranslator.Unfold:
+                    languageFeatureName = "unfold";
+                    translateAsPhpStatement = true;
+                    break;
             }
 
             // Get identifier and evaluate arguments

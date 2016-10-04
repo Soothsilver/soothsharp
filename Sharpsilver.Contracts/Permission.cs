@@ -18,11 +18,16 @@ namespace Sharpsilver.Contracts
         private int denominator;
 
         /// <summary>
-        /// Creates a fractional permission. The arguments must be integer literals.
+        /// Creates a fractional permission.
         /// </summary>
         /// <param name="numerator">The numerator of the fraction.</param>
         /// <param name="denominator">The denominator of the fraction.</param>
-        public Permission(int numerator, int denominator)
+        public static Permission Create(int numerator, int denominator)
+        {
+            return new Permission(numerator, denominator);
+        }
+
+        private Permission(int numerator, int denominator)
         {
             this.numerator = numerator;
             this.denominator = denominator;
@@ -48,6 +53,16 @@ namespace Sharpsilver.Contracts
                 {
                     special = SpecialPermission.Wildcard
                 };
+            }
+        }
+        /// <summary>
+        /// Gets a half permission (1/2).
+        /// </summary>
+        public static Permission Half
+        {
+            get
+            {
+                return new Permission(1, 2);
             }
         }
         /// <summary>

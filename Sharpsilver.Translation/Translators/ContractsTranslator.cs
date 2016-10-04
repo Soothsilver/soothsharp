@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sharpsilver.Contracts;
+using Microsoft.CodeAnalysis;
+using Sharpsilver.Translation.Trees.Silver;
 
 namespace Sharpsilver.Translation
 {
     public class ContractsTranslator
     {
+        // Contracts class
         private const string ContractsNamespace = nameof(Sharpsilver) + "." + nameof(Contracts) + ".";
         private const string ContractsClass = ContractsNamespace + nameof(Contract) + ".";
         public const string ContractEnsures = ContractsClass + nameof(Contract.Ensures);
@@ -26,10 +29,21 @@ namespace Sharpsilver.Translation
         public const string Unfold = ContractsClass + nameof(Contract.Unfold);
         public const string Old = ContractsClass + nameof(Contract.Old);
 
+        // Static extensions
         public const string Implication = "System.Boolean." + nameof(StaticExtension.Implies);
+        public const string Equivalence = "System.Boolean." + nameof(StaticExtension.EquivalentTo);
 
+        // Permission class
         public const string PermissionType = ContractsNamespace + nameof(Contracts.Permission);
-        public const string PermissionTypeDot = PermissionType + ".";
+        private const string PermissionTypeDot = PermissionType + ".";
+        public const string PermissionWrite = PermissionTypeDot + nameof(Permission.Write);
+        public const string PermissionHalf = PermissionTypeDot + nameof(Permission.Half);
+        public const string PermissionNone = PermissionTypeDot + nameof(Permission.None);
+        public const string PermissionWildcard = PermissionTypeDot + nameof(Permission.Wildcard);
+        public const string PermissionCreate = PermissionTypeDot + nameof(Permission.Create);
+        public const string PermissionFromLocation = PermissionTypeDot + nameof(Permission.FromLocation);
+
+        // Attributes
         public const string SilvernameAttribute = ContractsNamespace + nameof(Contracts.SilvernameAttribute);
         public const string PredicateAttribute = ContractsNamespace + nameof(Contracts.PredicateAttribute);
         public const string PureAttribute = ContractsNamespace + nameof(Contracts.PureAttribute);
@@ -37,9 +51,35 @@ namespace Sharpsilver.Translation
         public const string UnverifiedAttribute = ContractsNamespace + nameof(Contracts.UnverifiedAttribute);
         public const string AbstractAttribute = ContractsNamespace + nameof(Contracts.AbstractAttribute);
 
-        public const string PermissionWrite = PermissionTypeDot + nameof(Permission.Write);
-        public const string PermissionNone = PermissionTypeDot + nameof(Permission.None);
-        public const string PermissionWildcard = PermissionTypeDot + nameof(Permission.Wildcard);
+
+        public TranslationResult TranslateIdentifierAsContract(ISymbol symbol, SyntaxNode originalNode, TranslationContext context)
+        {
+            string silvertext = null;
+            switch(symbol.GetQualifiedName())
+            {
+                case ContractIntResult:
+                    silvertext = Constants.SilverReturnVariableName;
+                    break;
+                case PermissionNone:
+                    silvertext = "none";
+                    break;
+                case PermissionHalf:
+                    silvertext = "1/2";
+                    break;
+                case PermissionWildcard:
+                    silvertext = "wildcard";
+                    break;
+                case PermissionWrite:
+                    silvertext = "write";
+                    break;
+            }
+            if (silvertext != null) { 
+            return TranslationResult.FromSilvernode(
+                                new TextSilvernode(silvertext, originalNode)
+                                );
+            }
+            return null;
+        }
 
         private TranslationProcess parent;
 

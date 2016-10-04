@@ -16,8 +16,8 @@ namespace Sharpsilver.Translation
     /// </summary>
     public class TranslationProcess
     {
-        internal IdentifierTranslator IdentifierTranslator = new IdentifierTranslator();
-        private ContractsTranslator ContractsTranslator;
+        internal IdentifierTranslator IdentifierTranslator;
+        public ContractsTranslator ContractsTranslator;
         internal TranslationConfiguration Configuration;
         private List<CollectedType> collectedTypes = new List<CollectedType>();
         private List<CompilationUnit> compilationUnits = new List<CompilationUnit>();
@@ -34,6 +34,7 @@ namespace Sharpsilver.Translation
         private TranslationProcess()
         {
             this.ContractsTranslator = new ContractsTranslator(this);
+            this.IdentifierTranslator = new IdentifierTranslator(this);
         }
         List<Error> masterErrorList = new List<Error>();
         private bool executed = false;

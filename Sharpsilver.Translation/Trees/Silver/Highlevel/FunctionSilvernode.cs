@@ -36,10 +36,8 @@ namespace Sharpsilver.Translation.Trees.Silver
                 children.Add(" (");
                 children.AddRange(Parameters.WithSeparator<Silvernode>(new TextSilvernode(", ")));
                 children.Add(")");
-                // TODO make sure pure functions don't return void
                 children.Add(" : ");
                 children.Add(ReturnType);
-                children.Add(")");
                 
                 AddVerificationConditions(children);
                 AddBlock(children);

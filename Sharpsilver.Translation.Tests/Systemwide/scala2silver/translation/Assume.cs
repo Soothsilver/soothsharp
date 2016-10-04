@@ -36,7 +36,7 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
 
         public void Succeeds()
         {
-            Inhale(Acc(a, Wildcard) && Acc(c, Wildcard) && Acc(c, new Permission(1, 2)));
+            Inhale(Acc(a, Wildcard) && Acc(c, Wildcard) && Acc(c, Permission.Half));
             Assume(a > 0);
             Assert(a > 0);
             Assume(f() > 0);

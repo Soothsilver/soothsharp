@@ -24,12 +24,8 @@ namespace Sharpsilver.Translation
         {
             SymbolInfo symbolInfo = context.Semantics.GetSymbolInfo(this.Expression);
             ISymbol symbol = symbolInfo.Symbol;
-            if (symbol.GetQualifiedName() == ContractsTranslator.ContractIntResult)
-            {
-                return TranslationResult.FromSilvernode(
-                                new TextSilvernode(Constants.SilverReturnVariableName, this.Expression.Name)
-                                );
-            }
+            TranslationResult contractResult = context.Process.ContractsTranslator.TranslateIdentifierAsContract(symbol, this.Expression, context);
+            if (contractResult != null) return contractResult;
             Identifier lastIdentifier = context.Process.IdentifierTranslator.GetIdentifierReference(symbol);
             var errors = new List<Error>();
 

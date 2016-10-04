@@ -132,6 +132,12 @@ namespace Sharpsilver.Translation
            "Methods declared [Predicate] must have the boolean return type.",
            "Methods with the [Predicate] attribute are translated as Viper predicates. Predicates are either spatial or boolean - either way, the return type must be System.Boolean.",
            DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL120_UndeclaredNameReferenced =
+     SharpsilverDiagnostic.Create(
+       "SSIL120",
+       "Code references the name '{0}' which was not declared.",
+       "This error would usually mean that you're using a reference that was not given to the transcompiler or that there is an error in the transcompiler.",
+       DiagnosticSeverity.Error);
         // ****************************** 200 Backend Verifier Errors
         public static SharpsilverDiagnostic SSIL201_BackendNotFound =
             SharpsilverDiagnostic.Create(
