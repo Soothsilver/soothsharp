@@ -59,7 +59,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicTests.cs" />
     <Compile Include="Files\Basic\Implications.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -70,6 +69,8 @@
     <Compile Include="Files\Basic\Simple.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Files\Basic\MethodCall.cs" />
+    <Compile Include="Systemwide\sharpsilver\issues\MissingMethod.cs" />
     <Compile Include="Files\Issues\SimplePostCondition.cs" />
     <Compile Include="Files\Syntax\For.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

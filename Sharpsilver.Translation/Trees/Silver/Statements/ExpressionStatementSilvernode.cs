@@ -1,9 +1,12 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 using Sharpsilver.Translation.Trees.Silver;
+using Sharpsilver.Translation.Trees.Silver.Statements;
 
 namespace Sharpsilver.Translation.Trees.Silver
 {
-    internal class ExpressionStatementSilvernode : Silvernode
+    internal class ExpressionStatementSilvernode : StatementSilvernode
     {
         private Silvernode Expression;
 
@@ -13,9 +16,13 @@ namespace Sharpsilver.Translation.Trees.Silver
             this.Expression = expression;
         }
 
-        public override string ToString()
+        public override IEnumerable<Silvernode> Children
         {
-            return Expression.ToString() + ";";
+            get
+            {
+                yield return Expression;
+                yield return ";";
+            }
         }
     }
 }

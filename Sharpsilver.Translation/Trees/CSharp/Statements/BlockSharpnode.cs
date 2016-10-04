@@ -38,14 +38,16 @@ namespace Sharpsilver.Translation.Trees.CSharp
                     }
                     else
                     {
-                        if (!(statementResult.Silvernode is StatementSilvernode))
+                        StatementSilvernode statementSilvernode;
+                        if ((statementResult.Silvernode is StatementSilvernode))
                         {
-                            diagnostics.Add(new Error(Diagnostics.SSIL111_NonStatement, statement.OriginalNode, statementResult.Silvernode.ToString()));
+                            statementSilvernode = (StatementSilvernode)statementResult.Silvernode;
                         }
                         else
                         {
-                            statements.Add((StatementSilvernode) statementResult.Silvernode);
+                            statementSilvernode = new ExpressionStatementSilvernode(statementResult.Silvernode, statementResult.Silvernode.OriginalNode);
                         }
+                        statements.Add(statementSilvernode);
                     }
                 }
                 diagnostics.AddRange(statementResult.Errors);

@@ -12,10 +12,10 @@ namespace Sharpsilver.Translation.Tests
     {
         [Theory()]
         [MemberData(nameof(GetTestFiles))]
-        public void Sys(string filename)
+        public void Sys(string test)
         {
             string dir = AppDomain.CurrentDomain.BaseDirectory;
-            string fullFilename = System.IO.Path.Combine(dir, filename);
+            string fullFilename = System.IO.Path.Combine(dir, test);
             string csharpCode = System.IO.File.ReadAllText(fullFilename);
 
             var translation = TranslationProcess.Create(
@@ -35,7 +35,8 @@ namespace Sharpsilver.Translation.Tests
                 string trimmed = line.Trim();
                 if (trimmed.StartsWith("//"))
                 {
-                    string ubertrimmed = line.Substring(2).Trim().ToLower();
+                    string ubertrimmed = trimmed.Substring(2).Trim().ToLower();
+              //      Assert.True(false, "'" + ubertrimmed + "'");
                     if (ubertrimmed.StartsWith("expect"))
                     {
                         string megatrimmed = ubertrimmed.Substring(7).Trim();

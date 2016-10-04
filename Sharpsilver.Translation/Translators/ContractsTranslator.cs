@@ -29,13 +29,17 @@ namespace Sharpsilver.Translation
         public const string Implication = "System.Boolean." + nameof(StaticExtension.Implies);
 
         public const string PermissionType = ContractsNamespace + nameof(Contracts.Permission);
-
+        public const string PermissionTypeDot = PermissionType + ".";
         public const string SilvernameAttribute = ContractsNamespace + nameof(Contracts.SilvernameAttribute);
         public const string PredicateAttribute = ContractsNamespace + nameof(Contracts.PredicateAttribute);
         public const string PureAttribute = ContractsNamespace + nameof(Contracts.PureAttribute);
         public const string VerifiedAttribute = ContractsNamespace + nameof(Contracts.VerifiedAttribute);
         public const string UnverifiedAttribute = ContractsNamespace + nameof(Contracts.UnverifiedAttribute);
         public const string AbstractAttribute = ContractsNamespace + nameof(Contracts.AbstractAttribute);
+
+        public const string PermissionWrite = PermissionTypeDot + nameof(Permission.Write);
+        public const string PermissionNone = PermissionTypeDot + nameof(Permission.None);
+        public const string PermissionWildcard = PermissionTypeDot + nameof(Permission.Wildcard);
 
         private TranslationProcess parent;
 

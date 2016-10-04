@@ -12,11 +12,11 @@ namespace Sharpsilver.Translation.Tests
     {
         [Theory()]
         [MemberData(nameof(GetTestFiles))]
-        public void TranslationToSilverOk(string filename)
+        public void TransOnly(string test)
         { 
             
             string dir = AppDomain.CurrentDomain.BaseDirectory;
-            string fullFilename = System.IO.Path.Combine(dir, filename);
+            string fullFilename = System.IO.Path.Combine(dir, test);
             string csharpCode = System.IO.File.ReadAllText(fullFilename);
 
             var translation = TranslationProcess.Create(new List<string>() { fullFilename }, new List<string>(), new List<string>(), new TranslationConfiguration());
