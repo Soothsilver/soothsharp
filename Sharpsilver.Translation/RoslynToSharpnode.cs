@@ -164,7 +164,7 @@ namespace Sharpsilver.Translation
 
                 // Keywords
                 case SyntaxKind.ThisExpression:
-                    return new DirectSilvercodeExpressionSharpnode("this", expression);
+                    return new DirectSilvercodeExpressionSharpnode(Constants.SilverThis, expression);
 
                 // Literals
                 case SyntaxKind.TrueLiteralExpression:

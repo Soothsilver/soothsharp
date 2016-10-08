@@ -6,18 +6,21 @@ using System.Collections.Generic;
 using Sharpsilver.Translation;
 using Sharpsilver.Translation.Trees.CSharp.Expressions;
 using Sharpsilver.Translation.Trees.Silver.Statements;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace Sharpsilver.Translation.Trees.CSharp
 {
     public class InvocationExpressionSharpnode : ExpressionSharpnode
     {
         public ExpressionSyntax MethodGroup;
+        private ExpressionSharpnode MethodGroupSharpnode;
         public List<ExpressionSharpnode> Arguments = new List<ExpressionSharpnode>();
 
         public InvocationExpressionSharpnode(InvocationExpressionSyntax syntax) : base(syntax)
         {
             this.MethodGroup = syntax.Expression;
-            foreach(var argument in syntax.ArgumentList.Arguments)
+            MethodGroupSharpnode = RoslynToSharpnode.MapExpression(syntax.Expression);
+            foreach (var argument in syntax.ArgumentList.Arguments)
             {
                 this.Arguments.Add(RoslynToSharpnode.MapExpression(argument.Expression));
                 // TODO name:colon, ref/out...
@@ -78,6 +81,8 @@ namespace Sharpsilver.Translation.Trees.CSharp
                     break;
             }
 
+            var expressions = new List<Silvernode>();
+            var errors = new List<Error>();
             // Get identifier and evaluate arguments
             Error error;
             Identifier identifier;
@@ -90,6 +95,21 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 {
                     isImpure = false;
                 }
+                if (!theMethod.IsStatic)
+                {
+                    if (MethodGroupSharpnode is IdentifierExpressionSharpnode)
+                    {
+                        Arguments.Add(new DirectSilvercodeExpressionSharpnode(Constants.SilverThis, MethodGroup));
+                    }
+                    else if (MethodGroupSharpnode is MemberAccessExpressionSharpnode)
+                    {
+                        Arguments.Add(((MemberAccessExpressionSharpnode)MethodGroupSharpnode).Container);
+                    }
+                    else
+                    {
+                        errors.Add(new Translation.Error(Diagnostics.SSIL102_UnexpectedNode, MethodGroup, MethodGroup.Kind()));
+                    }
+                }
                 st = TypeTranslator.TranslateType(methodSymbol.ReturnType, MethodGroup, out error);
             }
             else
@@ -98,8 +118,6 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 st = SilverType.Bool;
                 error = null;
             }
-            var expressions = new List<Silvernode>();
-            var errors = new List<Error>();
             foreach(var argument in Arguments)
             {
                 var result = argument.Translate(context);

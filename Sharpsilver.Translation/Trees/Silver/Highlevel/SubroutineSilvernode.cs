@@ -66,9 +66,11 @@ namespace Sharpsilver.Translation.Trees.Silver
             if (block != null)
             {
                 int howManyGotos = block.Descendants.Count(sn => sn is GotoSilvernode && ((GotoSilvernode)sn).Label == Constants.SilverMethodEndLabel);
-                StatementSilvernode lastStatement = block.Statements.Last();
+                StatementSilvernode lastStatement = block.Statements.Count >= 1 ? block.Statements[block.Statements.Count - 1] : null;
                 StatementSilvernode preLastStatement = block.Statements.Count >= 2 ? block.Statements[block.Statements.Count - 2] : null;
-                if ((lastStatement.GetType() == typeof(LabelSilvernode) && ((LabelSilvernode)lastStatement).Label == Constants.SilverMethodEndLabel) &&
+                if (lastStatement != null &&
+                    (lastStatement.GetType() == typeof(LabelSilvernode) && ((LabelSilvernode)lastStatement).Label == Constants.SilverMethodEndLabel) &&
+                    preLastStatement != null &&
                     (preLastStatement.GetType() == typeof(GotoSilvernode) && ((GotoSilvernode)preLastStatement).Label == Constants.SilverMethodEndLabel) &&
                     howManyGotos == 1)
                 {

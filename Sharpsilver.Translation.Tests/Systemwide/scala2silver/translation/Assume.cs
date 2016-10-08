@@ -1,31 +1,27 @@
 ﻿using Sharpsilver.Contracts;
 using static Sharpsilver.Contracts.Contract;
 using static Sharpsilver.Contracts.Permission;
+#pragma warning disable 649
 
 namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
 {
     class AssumeClass
     {
         [Pure]
-        public int f()
+        public int F()
         {
             Requires(Acc(c, Wildcard));
             return c;
         }
 
-        int a; int b; int c;
-
-        public AssumeClass(int a, int b, int c)
-        {
-            this.a = a;
-            this.b = b;
-            this.c = c;
-        }
+        private int a;
+        private int b;
+        private int c;
 
         [Predicate]
         public bool P()
         {
-            return Acc(c, Wildcard) && f() > 0;
+            return Acc(c, Wildcard) && F() > 0;
         }
 
         [Predicate]
@@ -36,10 +32,10 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
 
         public void Succeeds()
         {
-            Inhale(Acc(a, Wildcard) && Acc(c, Wildcard) && Acc(c, Permission.Half));
+            Inhale(Acc(a, Wildcard) && Acc(c, Wildcard) && Acc(c, Half));
             Assume(a > 0);
             Assert(a > 0);
-            Assume(f() > 0);
+            Assume(F() > 0);
             Fold(Acc(P(), Write));
             Assume(Acc(Q(), Write));
             Unfold(Acc(Q(), Write));
@@ -49,6 +45,7 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
         public void Fails1()
         {
             Inhale(Acc(a, Wildcard));
+            // expect SSIL204 at next
             Assert(a > 0);
             Assume(a > 0);
 
@@ -57,6 +54,7 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
         {
             Inhale(Acc(a, Wildcard));
             Assume(a > 0);
+            // expect SSIL204 at next
             Assert(a == 0);
 
         }
@@ -64,12 +62,14 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
         {
             Inhale(Acc(a, Wildcard) && Acc(b, Wildcard));
             Assume(b == 0);
+            // expect SSIL204 at next
             Assert(a == 0);
         }
         public void Fails4()
         {
             Inhale(Acc(a, Wildcard) && Acc(b, Wildcard));
             Inhale(Acc(Q(), Write));
+            // expect SSIL204 at next
             Assert(b > 0);
         }
     }

@@ -26,17 +26,23 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
         {
             get
             {
-                yield return "{\n";
-                yield return Tabs() + "\t";
-
-                foreach (var a in Statements.WithSeparator<Silvernode>(new TextSilvernode("\n" + Tabs() + "\t")))
+                if (Statements.Count != 0)
                 {
-                    yield return a;
-                }
+                    yield return "{\n";
+                    yield return Tabs() + "\t";
 
-                yield return "\n";
-                yield return Tabs();
-                yield return "}";
+                    foreach (var a in Statements.WithSeparator<Silvernode>(new TextSilvernode("\n" + Tabs() + "\t")))
+                    {
+                        yield return a;
+                    }
+
+                    yield return "\n";
+                    yield return Tabs();
+                    yield return "}";
+                } else
+                {
+                    yield return "{}";
+                }
             }
         }
 

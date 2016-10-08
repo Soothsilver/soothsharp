@@ -214,7 +214,7 @@ namespace Sharpsilver.Cs2Sil
                         {
                             Console.WriteLine("Details: " + error.Diagnostic.Details);
                         }
-                        Console.WriteLine("Node source: " + error.Node.GetText().ToString());
+                        Console.WriteLine("Node source: " + error.Node.GetText().ToString().Trim());
                         Console.WriteLine();
                     }
                 }
@@ -280,7 +280,7 @@ namespace Sharpsilver.Cs2Sil
                                 {
                                     Console.WriteLine("Details: " + error.Diagnostic.Details);
                                 }
-                                Console.WriteLine("Node source: " + error.Node.GetText().ToString());
+                                Console.WriteLine("Node source: " + error.Node.GetText().ToString().Trim());
                                 Console.WriteLine();
                             }
                         }

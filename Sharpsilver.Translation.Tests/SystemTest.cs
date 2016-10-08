@@ -28,23 +28,33 @@ namespace Sharpsilver.Translation.Tests
             var result = translation.Execute();
 
             var lines = csharpCode.Split('\n');
-            var expectedErrorcodes = new List<string>();
+            var expectedErrorcodes = new List<Tuple<string,int>>();
             bool syntaxOnly = false;
+            int lineNumber = 0;
             foreach (string line in lines)
             {
-                string trimmed = line.Trim();
+                lineNumber++;
+                string trimmed = line.Trim().ToLower();
                 if (trimmed.StartsWith("//"))
                 {
-                    string ubertrimmed = trimmed.Substring(2).Trim().ToLower();
-              //      Assert.True(false, "'" + ubertrimmed + "'");
-                    if (ubertrimmed.StartsWith("expect"))
+                    string[] words = trimmed.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (words.Length < 2) continue;
+                    if (words[1] == "syntax") syntaxOnly = true;
+                    if (words[1] == "expect" && words.Length >= 3)
                     {
-                        string megatrimmed = ubertrimmed.Substring(7).Trim();
-                        expectedErrorcodes.Add(megatrimmed);
-                    }
-                    else if (ubertrimmed.StartsWith("syntax"))
-                    {
-                        syntaxOnly = true;
+                        string code = words[2];
+                        int errorNumber = -1;
+                        if (words.Length == 5)
+                        {
+                            if (words[3] == "at")
+                            {
+                                if (words[4] == "next")
+                                {
+                                    errorNumber = lineNumber + 1;
+                                }
+                            }
+                        }
+                        expectedErrorcodes.Add(new Tuple<string, int>(code, errorNumber));
                     }
                 }
             }
@@ -59,13 +69,16 @@ namespace Sharpsilver.Translation.Tests
             Assert.True(expectedErrorcodes.Count == errors.Count, "Expected error count: " + expectedErrorcodes.Count + "\nActual errors: " + errors.Count + "\n" + string.Join("\n", errors));
             foreach (var error in errors)
             {
-                if (expectedErrorcodes.Contains(error.Diagnostic.ErrorCode.ToLower()))
+                var appropriateTuple =
+                    expectedErrorcodes.Find(tuple => tuple.Item1 == error.Diagnostic.ErrorCode.ToLower() &&
+                   (tuple.Item2 == -1 || tuple.Item2 == error.CsharpLine));
+                if (appropriateTuple != null)
                 {
-                    expectedErrorcodes.Remove(error.Diagnostic.ErrorCode);
+                    expectedErrorcodes.Remove(appropriateTuple);
                 }
                 else
                 {
-                    Assert.True(false, string.Join("\n", errors));
+                    Assert.True(false, "Actual:\n" + string.Join("\n", errors) + "Expected:\n" + string.Join("\n", expectedErrorcodes));
                 }
             }
 
