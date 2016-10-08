@@ -6,6 +6,7 @@ using Sharpsilver.Translation.Trees.Silver;
 using System.Collections.Generic;
 using System.Linq;
 using Sharpsilver.Translation;
+using Sharpsilver.Translation.Trees.CSharp.Statements;
 using Sharpsilver.Translation.Trees.Silver.Statements;
 
 namespace Sharpsilver.Translation.Trees.CSharp
@@ -23,9 +24,10 @@ namespace Sharpsilver.Translation.Trees.CSharp
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            List<StatementSilvernode> statements = new List<StatementSilvernode>();
-            List<VerificationConditionSilvernode> verificationConditions = new List<VerificationConditionSilvernode>();
-            List<Error> diagnostics = new List<Error>();
+            var statements = new List<StatementSilvernode>();
+            var verificationConditions = new List<VerificationConditionSilvernode>();
+            var diagnostics = new List<Error>();
+            bool inFunctionOrPredicateBlockReturnStatementAlreadyOccured = false;
             foreach(var statement in Statements)
             {
                 var statementResult = statement.Translate(context);
@@ -38,6 +40,28 @@ namespace Sharpsilver.Translation.Trees.CSharp
                     }
                     else
                     {
+                        if (context.IsFunctionOrPredicateBlock)
+                        {
+
+                            if (statement.GetType() == typeof(ReturnStatementSharpnode))
+                            {
+                                if (inFunctionOrPredicateBlockReturnStatementAlreadyOccured)
+                                {
+                                    diagnostics.Add(new Translation.Error(Diagnostics.SSIL122_FunctionsAndPredicatesCannotHaveMoreThanOneReturnStatement,
+                                        statement.OriginalNode));
+                                }
+                                else
+                                {
+                                    inFunctionOrPredicateBlockReturnStatementAlreadyOccured = true;
+                                }
+                            }
+                            else
+                            {
+                                diagnostics.Add(new Translation.Error(Diagnostics.SSIL121_FunctionsAndPredicatesCannotHaveStatements,
+                                    statement.OriginalNode));
+
+                            }
+                        }
                         StatementSilvernode statementSilvernode;
                         if ((statementResult.Silvernode is StatementSilvernode))
                         {
@@ -53,11 +77,13 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 diagnostics.AddRange(statementResult.Errors);
             }
             BlockSilvernode block = new BlockSilvernode(BlockSyntax, statements);
-            TranslationResult r = new TranslationResult {Silvernode = block};
             verificationConditions.Sort();
-            r.VerificationConditions = verificationConditions;
-            r.Errors = diagnostics;
-            return r;
+            return new TranslationResult
+            {
+                Silvernode = block,
+                Errors = diagnostics,
+                VerificationConditions = verificationConditions
+            };
         }
     }
 }

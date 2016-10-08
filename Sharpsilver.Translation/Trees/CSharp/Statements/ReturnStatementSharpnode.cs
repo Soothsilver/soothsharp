@@ -21,10 +21,16 @@ namespace Sharpsilver.Translation.Trees.CSharp.Statements
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            StatementsSequenceSilvernode statements = new StatementsSequenceSilvernode(OriginalNode);
             var expr = Expression.Translate(context);
             var errors = new List<Error>();
             errors.AddRange(expr.Errors);
+
+            if (context.IsFunctionOrPredicateBlock)
+            {
+                return TranslationResult.FromSilvernode(expr.Silvernode, errors);
+            }
+
+            StatementsSequenceSilvernode statements = new StatementsSequenceSilvernode(OriginalNode);
             statements.List.Add(
                 new AssignmentSilvernode(
                     new TextSilvernode(Constants.SilverReturnVariableName, OriginalNode),

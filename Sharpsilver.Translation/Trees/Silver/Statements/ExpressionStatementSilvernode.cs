@@ -8,20 +8,19 @@ namespace Sharpsilver.Translation.Trees.Silver
 {
     internal class ExpressionStatementSilvernode : StatementSilvernode
     {
-        private Silvernode Expression;
+        private Silvernode expression;
 
         public ExpressionStatementSilvernode(Silvernode expression, SyntaxNode originalNode)
             : base(originalNode)
         {
-            this.Expression = expression;
+            this.expression = expression;
         }
 
         public override IEnumerable<Silvernode> Children
         {
             get
             {
-                yield return Expression;
-                yield return ";";
+                yield return this.expression;
             }
         }
     }

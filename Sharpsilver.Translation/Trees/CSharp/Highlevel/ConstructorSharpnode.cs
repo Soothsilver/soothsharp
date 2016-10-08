@@ -46,7 +46,6 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
             SubroutineBuilder builder = new SubroutineBuilder(
                 methodSymbol,
                 true,
-                null,
                 classSymbol,
                 Parameters,
                 Body,

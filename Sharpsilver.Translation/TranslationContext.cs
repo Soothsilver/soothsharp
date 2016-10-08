@@ -16,7 +16,7 @@ namespace Sharpsilver.Translation
         /// <summary>
         /// Indicates whether only pure expressions are allowed in this context.
         /// </summary>
-        public PurityContext PurityContext { get; private set; } = PurityContext.PurityNotRequired;
+        public PurityContext PurityContext { get; set; } = PurityContext.PurityNotRequired;
         /// <summary>
         /// Indicates whether classes and method with no [Verified] or [Unverified] attribute should be verified.
         /// </summary>

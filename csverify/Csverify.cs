@@ -211,6 +211,7 @@ namespace Sharpsilver.Cs2Sil
                     if (verbose)
                     {
                         Console.WriteLine("Details: " + error.Diagnostic.Details);
+                        Console.WriteLine("Node source: " + error.Node.GetText().ToString());
                         Console.WriteLine();
                     }
                 }

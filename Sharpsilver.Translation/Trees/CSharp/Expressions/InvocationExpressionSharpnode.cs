@@ -34,6 +34,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
 
             // Verification conditions
             bool translateAsPhpStatement = false;
+            bool isImpure = true;
             string languageFeatureName = null;
             switch (methodName)
             {
@@ -42,7 +43,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 case ContractsTranslator.ContractInvariant:
                     return TranslateAsVerificationCondition(methodName, context);
                 case ContractsTranslator.Implication:
-                    return TranslateAsImplication(context);
+                    return TranslateAsImplication(context); 
                 case ContractsTranslator.ContractAssert:
                     languageFeatureName = "assert";
                     translateAsPhpStatement = true;
@@ -60,9 +61,11 @@ namespace Sharpsilver.Translation.Trees.CSharp
                     translateAsPhpStatement = true;
                     break;
                 case ContractsTranslator.ContractAcc:
+                    isImpure = false;
                     languageFeatureName = "acc";
                     break;
                 case ContractsTranslator.Old:
+                    isImpure = false;
                     languageFeatureName = "old";
                     break;
                 case ContractsTranslator.Fold:
@@ -82,8 +85,14 @@ namespace Sharpsilver.Translation.Trees.CSharp
             if (languageFeatureName == null)
             {
                 identifier = context.Process.IdentifierTranslator.GetIdentifierReference(method.Symbol as IMethodSymbol);
+                IMethodSymbol theMethod = (method.Symbol as IMethodSymbol);
+                if (ContractsTranslator.IsMethodPureOrPredicate(theMethod))
+                {
+                    isImpure = false;
+                }
                 st = TypeTranslator.TranslateType(methodSymbol.ReturnType, MethodGroup, out error);
-            } else
+            }
+            else
             {
                 identifier = new Identifier(languageFeatureName);
                 st = SilverType.Bool;
@@ -116,10 +125,17 @@ namespace Sharpsilver.Translation.Trees.CSharp
                         OriginalNode
                     );
 
-                return TranslationResult.FromSilvernode(
+                TranslationResult result = TranslationResult.FromSilvernode(
                     invocationSilvernode,
                     errors
-                    ).AndPrepend(prependors.ToArray()).AsImpureAssertion(context, st, "method call");
+                    ).AndPrepend(prependors.ToArray());
+                if (isImpure)
+                {
+                    return result.AsImpureAssertion(context, st, "method call");
+                } else
+                {
+                    return result;
+                }
             }
         }
 

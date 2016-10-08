@@ -87,6 +87,13 @@ namespace Sharpsilver.Translation
         {
             this.parent = process;
         }
-        
+
+        public static bool IsMethodPureOrPredicate(IMethodSymbol theMethod)
+        {
+            var attributes = theMethod.GetAttributes();
+            return attributes.Any(
+                attr => attr.AttributeClass.GetQualifiedName() == ContractsTranslator.PureAttribute ||
+                        attr.AttributeClass.GetQualifiedName() == PredicateAttribute);
+        }
     }
 }

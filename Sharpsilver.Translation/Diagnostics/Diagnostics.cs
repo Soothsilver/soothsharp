@@ -140,6 +140,19 @@ namespace Sharpsilver.Translation
        "Code references the name '{0}' which was not declared.",
        "This error would usually mean that you're using a reference that was not given to the transcompiler or that there is an error in the transcompiler.",
        DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL121_FunctionsAndPredicatesCannotHaveStatements =
+   SharpsilverDiagnostic.Create(
+     "SSIL121",
+     "Methods declared [Pure] or [Predicate] may only contain return statements and contracts.",
+     "A method thus declared is translated to a Viper function or predicate. These constructs may have bodies, but these bodies must contain an assertion only, not statements. This is why only contracts (such as Contract.Ensures(...)) and a single return statement are permitted here.",
+     DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL122_FunctionsAndPredicatesCannotHaveMoreThanOneReturnStatement =
+   SharpsilverDiagnostic.Create(
+     "SSIL122",
+     "Methods declared [Pure] or [Predicate] must have exactly one return statement.",
+     "A method thus declared is translated to a Viper function or predicate. These constructs may have bodies, but these bodies must contain an assertion only, not statements. There can't be any statements, and the single return statement is translated as a Viper assertion. There can't be more than one.",
+     DiagnosticSeverity.Error);
+
         // ****************************** 200 Backend Verifier Errors
         public static SharpsilverDiagnostic SSIL201_BackendNotFound =
             SharpsilverDiagnostic.Create(

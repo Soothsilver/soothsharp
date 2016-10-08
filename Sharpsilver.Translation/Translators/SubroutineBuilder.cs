@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +12,13 @@ using Sharpsilver.Translation.Trees.Silver.Statements;
 
 namespace Sharpsilver.Translation.Translators
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     class SubroutineBuilder
     {
         private BlockSharpnode BodySharpnode;
         private bool IsConstructor;
         private IMethodSymbol MethodSymbol;
         private List<ParameterSharpnode> Parameters;
-        private TypeSharpnode ReturnTypeSharpnode;
         private TranslationContext Context;
         private INamedTypeSymbol ConstructorClass;
         private SyntaxNode OriginalNode;
@@ -25,7 +26,6 @@ namespace Sharpsilver.Translation.Translators
         public SubroutineBuilder(
             IMethodSymbol symbol,
             bool isConstructor,
-            TypeSharpnode returnType,
             INamedTypeSymbol constructorClass,
             List<ParameterSharpnode> parameters,
             BlockSharpnode body,
@@ -36,13 +36,12 @@ namespace Sharpsilver.Translation.Translators
             this.ConstructorClass = constructorClass;
             this.MethodSymbol = symbol;
             this.IsConstructor = isConstructor;
-            this.ReturnTypeSharpnode = returnType;
             this.Parameters = parameters;
             this.BodySharpnode = body;
             this.Context = context;
             this.OriginalNode = originalNode;
         }
-        
+
 
         public TranslationResult TranslateSelf()
         {
@@ -57,8 +56,12 @@ namespace Sharpsilver.Translation.Translators
                     return TranslationResult.FromSilvernode(new SinglelineCommentSilvernode($"Method {MethodSymbol.GetQualifiedName()} skipped because it was marked [Unverified].", this.OriginalNode));
                 case VerificationSetting.Contradiction:
                     return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL113_VerificationSettingsContradiction);
+                case VerificationSetting.Verify:
+                    break;
+                default:
+                    throw new InvalidOperationException("Nonexistent verification settings.");
             }
-            foreach(var attribute in attributes)
+            foreach (var attribute in attributes)
             {
                 switch (attribute.AttributeClass.GetQualifiedName())
                 {
@@ -86,19 +89,23 @@ namespace Sharpsilver.Translation.Translators
                         }
                         break;
                     case ContractsTranslator.AbstractAttribute:
-                        if( IsConstructor)
+                        if (IsConstructor)
                         {
                             return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL117_ConstructorMustNotBeAbstract);
-
                         }
                         isAbstract = true;
                         break;
+                        // Ignore other attributes.
                 }
             }
-            TranslationContext bodyContext = new TranslationContext(Context);
+            TranslationContext bodyContext = Context;
             if (silverKind == SilverKind.Function || silverKind == SilverKind.Predicate)
             {
-                bodyContext.IsFunctionOrPredicateBlock = true;
+                bodyContext = new TranslationContext(Context)
+                {
+                    IsFunctionOrPredicateBlock = true,
+                    PurityContext = PurityContext.PureOrFail
+                };
             }
             TranslationResult body = this.BodySharpnode.Translate(bodyContext);
             result.Errors.AddRange(body.Errors);
@@ -125,11 +132,7 @@ namespace Sharpsilver.Translation.Translators
             }
 
             Error diagnostic;
-            SilverType silverReturnType =
-                            TypeTranslator.TranslateType(
-                            IsConstructor ? ConstructorClass : MethodSymbol.ReturnType,
-                            null,
-                            out diagnostic);
+            SilverType silverReturnType = TypeTranslator.TranslateType(IsConstructor ? ConstructorClass : MethodSymbol.ReturnType, null, out diagnostic);
             if (diagnostic != null) result.Errors.Add(diagnostic);
             var silTypeSilvernode = new TypeSilvernode(null, silverReturnType);
             var silVerificationConditions = body?.VerificationConditions;
@@ -144,56 +147,27 @@ namespace Sharpsilver.Translation.Translators
             }
             if (IsConstructor)
             {
-                silBlock.Prepend(
-                    new AssignmentSilvernode(Constants.SilverThis,
-             new CallSilvernode(
-              Context.Process.IdentifierTranslator.GetIdentifierReferenceWithTag(ConstructorClass,
-              Constants.InitializerTag)
-             , new List<Silvernode>(), SilverType.Ref, null)
-             , null));
+                silBlock.Prepend(new AssignmentSilvernode(Constants.SilverThis, new CallSilvernode(Context.Process.IdentifierTranslator.GetIdentifierReferenceWithTag(ConstructorClass, Constants.InitializerTag), new List<Silvernode>(), SilverType.Ref, null), null));
             }
-            silBlock.Add(new LabelSilvernode(Constants.SilverMethodEndLabel, null));
-
+            if (silverKind == SilverKind.Method)
+            {
+                silBlock.Add(new LabelSilvernode(Constants.SilverMethodEndLabel, null));
+            }
             switch (silverKind)
             {
                 case SilverKind.Method:
-                    result.Silvernode =
-                         new MethodSilvernode(
-                             silOriginalnode,
-                             silName,
-                             silParameters,
-                             silReturnValueName,
-                             silTypeSilvernode,
-                             silVerificationConditions,
-                             isAbstract ? null : silBlock
-                             );
+                    result.Silvernode = new MethodSilvernode(silOriginalnode, silName, silParameters, silReturnValueName, silTypeSilvernode, silVerificationConditions, isAbstract ? null : silBlock);
                     break;
                 case SilverKind.Function:
-                    result.Silvernode =
-                       new FunctionSilvernode(
-                           silOriginalnode,
-                           silName,
-                           silParameters,
-                           silReturnValueName,
-                           silTypeSilvernode,
-                           silVerificationConditions,
-                             isAbstract ? null : silBlock
-                           );
+                    result.Silvernode = new FunctionSilvernode(silOriginalnode, silName, silParameters, silReturnValueName, silTypeSilvernode, silVerificationConditions, isAbstract ? null : silBlock);
                     break;
                 case SilverKind.Predicate:
-                    result.Silvernode =
-                       new PredicateSilvernode(
-                           silOriginalnode,
-                           silName,
-                           silParameters,
-                           silReturnValueName,
-                           silTypeSilvernode,
-                           silVerificationConditions,
-                           isAbstract ? null : silBlock
-                           );
+                    result.Silvernode = new PredicateSilvernode(silOriginalnode, silName, silParameters, silReturnValueName, silTypeSilvernode, silVerificationConditions, isAbstract ? null : silBlock);
                     break;
+                default:
+                    throw new InvalidOperationException("Nonexistent silverkind.");
             }
-         
+
             return result;
         }
 

@@ -81,36 +81,7 @@ namespace Sharpsilver.Translation.Trees.Silver
 
             }
         }
-        /*
-        protected override void OptimizePre()
-        {
-            foreach (var child in this.Children)
-            {
-                child.OptimizeRecursively();
-            }
-            BlockSilvernode block = Children.Where(s => s is BlockSilvernode).FirstOrDefault() as BlockSilvernode;
-            if (block != null)
-            {
-                List<LabelSilvernode> toRemove = new List<Statements.LabelSilvernode>();
-                foreach(LabelSilvernode label in block.Statements.Where(stmt => stmt is LabelSilvernode).Cast<LabelSilvernode>())
-                {
-                    if (block.Descendants.Any(descendant =>
-                    descendant is GotoSilvernode &&
-                    ((GotoSilvernode)descendant).Label == label.Label))
-                    {
-                        // Is useful.
-                    }
-                    else
-                    {
-                        toRemove.Add(label);
-                    }
-                }
-                foreach(var label in toRemove)
-                {
-                    block.Statements.Remove(label);
-                }
-            }
-        }*/
+    
     }
     
 }
