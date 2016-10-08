@@ -21,7 +21,7 @@ namespace Sharpsilver.Translation.Trees.CSharp.Statements
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            SequenceSilvernode statements = new SequenceSilvernode(OriginalNode);
+            StatementsSequenceSilvernode statements = new StatementsSequenceSilvernode(OriginalNode);
             var expr = Expression.Translate(context);
             var errors = new List<Error>();
             errors.AddRange(expr.Errors);

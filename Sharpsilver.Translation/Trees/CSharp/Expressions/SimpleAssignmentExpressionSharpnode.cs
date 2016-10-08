@@ -26,7 +26,7 @@ namespace Sharpsilver.Translation.Trees.CSharp.Expressions
             IEnumerable<Error> errors = CommonUtils.CombineErrors(left, right);
 
             var assignment = new AssignmentSilvernode(left.Silvernode, right.Silvernode, OriginalNode);
-            var sequence = new SequenceSilvernode(null, right.PrependTheseSilvernodes.Union(new[] { assignment }).ToArray());
+            var sequence = new StatementsSequenceSilvernode(null, right.PrependTheseSilvernodes.Union(new[] { assignment }).ToArray());
 
             return TranslationResult.FromSilvernode(sequence, errors);
         }

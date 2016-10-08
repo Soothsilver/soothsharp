@@ -49,7 +49,7 @@ namespace Sharpsilver.Translation.Trees.Silver
             }
         }
 
-        protected override void Optimize()
+        protected override void OptimizePre()
         {
             List.RemoveAll(silvernode => silvernode.ToString() == "");
 

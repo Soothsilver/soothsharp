@@ -26,7 +26,7 @@ namespace Sharpsilver.Translation.Trees.CSharp.Statements
             var symbol = context.Semantics.GetDeclaredSymbol(Self);
             var identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(symbol);
             var statementResult = Statement.Translate(context);
-            SequenceSilvernode seq = new SequenceSilvernode(OriginalNode, 
+            StatementsSequenceSilvernode seq = new StatementsSequenceSilvernode(OriginalNode, 
                 new LabelSilvernode(identifier, OriginalNode),
                 (StatementSilvernode) statementResult.Silvernode 
                 );

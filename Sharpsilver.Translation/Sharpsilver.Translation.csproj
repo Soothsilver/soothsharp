@@ -187,7 +187,7 @@
     <Compile Include="Trees\Silver\SinglelineCommentSilvernode.cs" />
     <Compile Include="Trees\CSharp\UnexpectedSharpnode.cs" />
     <Compile Include="Trees\CSharp\UnknownSharpnode.cs" />
-    <Compile Include="Trees\Silver\Statements\SequenceSilvernode.cs" />
+    <Compile Include="Trees\Silver\Statements\StatementsSequenceSilvernode.cs" />
     <Compile Include="Trees\Silver\Silvernode.cs" />
     <Compile Include="Trees\Silver\VerificationConditions\VerificationConditionSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\WhileSilvernode.cs" />

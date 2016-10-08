@@ -9,9 +9,9 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
     /// Contains several statement silvernodes that are separated by newlines.
     /// </summary>
     /// <seealso cref="Sharpsilver.Translation.Trees.Silver.Statements.StatementSilvernode" />
-    public class SequenceSilvernode : StatementSilvernode
+    public class StatementsSequenceSilvernode : StatementSilvernode
     {
-        public SequenceSilvernode(SyntaxNode node, params StatementSilvernode[] nodes) : base(node)
+        public StatementsSequenceSilvernode(SyntaxNode node, params StatementSilvernode[] nodes) : base(node)
         {
             List.AddRange(nodes);
         }
@@ -20,7 +20,7 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
 
         public List<StatementSilvernode> List = new List<StatementSilvernode>();
 
-        protected override void Optimize()
+        protected override void OptimizePre()
         {
             List.RemoveAll(sn => String.IsNullOrEmpty(sn.ToString()));
         }

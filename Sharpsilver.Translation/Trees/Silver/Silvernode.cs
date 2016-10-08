@@ -109,10 +109,17 @@ namespace Sharpsilver.Translation.Trees.Silver
         }
 
         /// <summary>
-        /// Runs the OPTIMIZATION PHASE for this silvernode.
+        /// Runs the OPTIMIZATION PHASE for this silvernode, BEFORE optimization on child nodes is run.
         /// </summary>
-        protected virtual void Optimize()
+        protected virtual void OptimizePre()
         {
+        }
+        /// <summary>
+        /// Runs the OPTIMIZATION PHASE for this silvernode, AFTER optimization on child nodes is run.
+        /// </summary>
+        protected virtual void OptimizePost()
+        {
+
         }
 
         /// <summary>
@@ -120,11 +127,12 @@ namespace Sharpsilver.Translation.Trees.Silver
         /// </summary>
         public void OptimizeRecursively()
         {
-            this.Optimize();
+            this.OptimizePre();
             foreach (var child in this.Children)
             {
                 child.OptimizeRecursively();
             }
+            this.OptimizePost();
         }
 
         /// <summary>

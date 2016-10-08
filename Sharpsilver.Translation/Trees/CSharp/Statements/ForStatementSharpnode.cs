@@ -59,7 +59,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
                     statementBlock,
                     OriginalNode
                     );
-            var sequence = new SequenceSilvernode(OriginalNode);
+            var sequence = new StatementsSequenceSilvernode(OriginalNode);
             foreach (var initializer in Initializers)
             {
                 var initializerResult = initializer.Translate(context);

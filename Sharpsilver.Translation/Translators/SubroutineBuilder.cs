@@ -96,9 +96,9 @@ namespace Sharpsilver.Translation.Translators
                 }
             }
             TranslationContext bodyContext = new TranslationContext(Context);
-            if (silverKind == SilverKind.Function)
+            if (silverKind == SilverKind.Function || silverKind == SilverKind.Predicate)
             {
-                bodyContext.IsFunctionBlock = true;
+                bodyContext.IsFunctionOrPredicateBlock = true;
             }
             TranslationResult body = this.BodySharpnode.Translate(bodyContext);
             result.Errors.AddRange(body.Errors);

@@ -7,7 +7,6 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
 {
     public class BlockSilvernode : StatementSilvernode
     {
-        private BlockSyntax blockSyntax;
         public List<StatementSilvernode> Statements;
         public void Add(StatementSilvernode statement)
         {
@@ -20,7 +19,6 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
 
         public BlockSilvernode(BlockSyntax blockSyntax, List<StatementSilvernode> statements) : base(blockSyntax)
         {
-            this.blockSyntax = blockSyntax;
             this.Statements = statements;
         }
 
@@ -43,7 +41,7 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
         }
 
 
-        protected override void Optimize()
+        protected override void OptimizePre()
         {
             for(int i = 0; i < Statements.Count; i++)
             {
@@ -57,6 +55,16 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
                     Statements.InsertRange(i, block.Statements);
                     i--;
                 }
+                else if (thisStatement is StatementsSequenceSilvernode)
+                {
+                    StatementsSequenceSilvernode sequence = (StatementsSequenceSilvernode)thisStatement;
+                    sequence.OptimizeRecursively();
+                    List<StatementSilvernode> points = sequence.List;
+                    Statements.RemoveAt(i);
+                    Statements.InsertRange(i, points);
+                    i--;
+                }
+                /*
                 // TODO this does not work well because of sequences
                 // Remove goto's that just go to the immediately following label
                 else if (thisStatement is GotoSilvernode)
@@ -75,7 +83,7 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
                             }
                         }
                     }
-                }
+                }*/
             }
         }
 

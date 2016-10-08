@@ -58,8 +58,8 @@ namespace Sharpsilver.Translation.Trees.CSharp.Statements
                 }
                 diagnostics.AddRange(statementResult.Errors);
             }
-            SequenceSilvernode sequence = new SequenceSilvernode(OriginalNode, statements.ToArray());
-            return TranslationResult.FromSilvernode(sequence, diagnostics);
+            StatementsSequenceSilvernode statementsSequence = new StatementsSequenceSilvernode(OriginalNode, statements.ToArray());
+            return TranslationResult.FromSilvernode(statementsSequence, diagnostics);
         }
     }
 
@@ -105,9 +105,9 @@ namespace Sharpsilver.Translation.Trees.CSharp.Statements
             AssignmentSilvernode assignmentSilvernode =
                 new AssignmentSilvernode(new IdentifierSilvernode(identifier), res.Silvernode, OriginalNode);
             errors.AddRange(res.Errors);
-            return TranslationResult.FromSilvernode(new SequenceSilvernode(OriginalNode,
+            return TranslationResult.FromSilvernode(new StatementsSequenceSilvernode(OriginalNode,
                 intro,
-                new SequenceSilvernode(null, res.PrependTheseSilvernodes.ToArray()),
+                new StatementsSequenceSilvernode(null, res.PrependTheseSilvernodes.ToArray()),
                 assignmentSilvernode), errors);
         }
     }

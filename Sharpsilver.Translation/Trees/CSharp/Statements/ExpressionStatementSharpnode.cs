@@ -36,7 +36,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 if (call.Type != SilverType.Void)
                 {
                     var tempVar = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();
-                    var sequence = new SequenceSilvernode(OriginalNode,
+                    var sequence = new StatementsSequenceSilvernode(OriginalNode,
                         new VarStatementSilvernode(tempVar, call.Type, null),
                         new AssignmentSilvernode(
                             new IdentifierSilvernode(tempVar),
