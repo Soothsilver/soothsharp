@@ -19,6 +19,7 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
             Assert(false.Implies(true));
             Assert(Fun(2, 1).Implies(Fun(1, 2)));
             Assert(!(Fun(1, 2).Implies(Fun(2, 1))));
+            // expect SSIL204 at next
             Assert(true.Implies(false));
         }
 

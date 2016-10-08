@@ -99,11 +99,11 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 {
                     if (MethodGroupSharpnode is IdentifierExpressionSharpnode)
                     {
-                        Arguments.Add(new DirectSilvercodeExpressionSharpnode(Constants.SilverThis, MethodGroup));
+                        Arguments.Insert(0, new DirectSilvercodeExpressionSharpnode(Constants.SilverThis, MethodGroup));
                     }
                     else if (MethodGroupSharpnode is MemberAccessExpressionSharpnode)
                     {
-                        Arguments.Add(((MemberAccessExpressionSharpnode)MethodGroupSharpnode).Container);
+                        Arguments.Insert(0,((MemberAccessExpressionSharpnode)MethodGroupSharpnode).Container);
                     }
                     else
                     {
