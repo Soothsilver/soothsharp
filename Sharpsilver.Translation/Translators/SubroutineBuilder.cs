@@ -111,6 +111,10 @@ namespace Sharpsilver.Translation.Translators
             result.Errors.AddRange(body.Errors);
 
             var silverParameters = new List<ParameterSilvernode>();
+            if (!IsConstructor && !MethodSymbol.IsStatic)
+            {
+                silverParameters.Add(new ParameterSilvernode(new Identifier(Constants.SilverThis), new TypeSilvernode(null, SilverType.Ref), null));
+            }
             for (int i = 0; i < this.Parameters.Count; i++)
             {
                 ParameterSharpnode sharpnode = this.Parameters[i];

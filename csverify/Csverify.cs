@@ -210,7 +210,10 @@ namespace Sharpsilver.Cs2Sil
                     Console.WriteLine(error.ToString());
                     if (verbose)
                     {
-                        Console.WriteLine("Details: " + error.Diagnostic.Details);
+                        if (!String.IsNullOrEmpty(error.Diagnostic.Details))
+                        {
+                            Console.WriteLine("Details: " + error.Diagnostic.Details);
+                        }
                         Console.WriteLine("Node source: " + error.Node.GetText().ToString());
                         Console.WriteLine();
                     }
@@ -273,7 +276,11 @@ namespace Sharpsilver.Cs2Sil
                             Console.WriteLine(error.ToString());
                             if (verbose)
                             {
-                                Console.WriteLine("Details: " + error.Diagnostic.Details);
+                                if (!String.IsNullOrEmpty(error.Diagnostic.Details))
+                                {
+                                    Console.WriteLine("Details: " + error.Diagnostic.Details);
+                                }
+                                Console.WriteLine("Node source: " + error.Node.GetText().ToString());
                                 Console.WriteLine();
                             }
                         }
