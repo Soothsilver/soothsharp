@@ -29,7 +29,6 @@ namespace Sharpsilver.Translation.Trees.CSharp.Statements
             var typeSyntax = syntax.Type;
             foreach (var variable in syntax.Variables)
             {
-                SyntaxToken identifier = variable.Identifier;
                 ExpressionSharpnode initialValue = null;
                 if (variable.Initializer != null)
                 {

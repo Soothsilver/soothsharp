@@ -107,7 +107,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
                     }
                     else
                     {
-                        errors.Add(new Translation.Error(Diagnostics.SSIL102_UnexpectedNode, MethodGroup, MethodGroup.Kind()));
+                        errors.Add(new Error(Diagnostics.SSIL102_UnexpectedNode, MethodGroup, MethodGroup.Kind()));
                     }
                 }
                 st = TypeTranslator.TranslateType(methodSymbol.ReturnType, MethodGroup, out error);

@@ -38,7 +38,7 @@ namespace Sharpsilver.Translation
         {
             TranslationResult r = new TranslationResult();
             r.Silvernode = new ErrorSilvernode(node);
-            r.Errors.Add(new Translation.Error(diagnostic, node,diagnosticArguments));
+            r.Errors.Add(new Error(diagnostic, node,diagnosticArguments));
             return r;
         }
 
@@ -70,12 +70,12 @@ namespace Sharpsilver.Translation
            switch(context.PurityContext)
             {
                 case PurityContext.PureOrFail:
-                    this.Errors.Add(new Translation.Error(Diagnostics.SSIL114_NotPureContext, this.Silvernode.OriginalNode, impurityReason));
+                    this.Errors.Add(new Error(Diagnostics.SSIL114_NotPureContext, this.Silvernode.OriginalNode, impurityReason));
                     break;
                 case PurityContext.Purifiable:
                     var newTempVar = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();
                     VarStatementSilvernode v = new VarStatementSilvernode(newTempVar, type, null);
-                    AssignmentSilvernode a = new Trees.Silver.Statements.AssignmentSilvernode(new IdentifierSilvernode(newTempVar),
+                    AssignmentSilvernode a = new AssignmentSilvernode(new IdentifierSilvernode(newTempVar),
                         this.Silvernode, null);
                     this.PrependTheseSilvernodes.Add(v);
                     this.PrependTheseSilvernodes.Add(a);

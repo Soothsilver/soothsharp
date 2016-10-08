@@ -37,32 +37,32 @@ namespace Sharpsilver.Translation.BackendInterface
 
             foreach (string line in backendToolResult.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                foreach (Regex r in BackendUtils.harmlessLines)
+                foreach (Regex r in harmlessLines)
                 {
                     if (r.IsMatch(line)) goto nextline;
                 }
                 if (line.Contains("Parse error"))
                 {
-                    Match m = BackendUtils.regexParseError.Match(line);
+                    Match m = regexParseError.Match(line);
                     if (m.Success)
                     {
                         var errorText = m.Groups[1].Value;
                         var codePosition = m.Groups[2].Value;
-                        errors.Add(new Error(Diagnostics.SSIL203_ParseError, BackendUtils.GetSyntaxNodeFromCodePosition(codePosition, originalCode),
+                        errors.Add(new Error(Diagnostics.SSIL203_ParseError, GetSyntaxNodeFromCodePosition(codePosition, originalCode),
                             errorText));
                         continue;
                     }
                 }
                 else
                 {
-                    var matches = BackendUtils.regexCodePosition.Matches(line);
+                    var matches = regexCodePosition.Matches(line);
                     if (matches.Count > 0)
                     {
                         var errorText = line.Trim();
                         foreach (Match m in matches)
                         {
                             var codePosition = m.Value;
-                            errors.Add(new Error(Diagnostics.SSIL204_OtherLocalizedError, BackendUtils.GetSyntaxNodeFromCodePosition(codePosition, originalCode),
+                            errors.Add(new Error(Diagnostics.SSIL204_OtherLocalizedError, GetSyntaxNodeFromCodePosition(codePosition, originalCode),
                                 errorText));
                         }
                     }
@@ -82,6 +82,7 @@ namespace Sharpsilver.Translation.BackendInterface
             Match m = regexCodePosition.Match(codePosition);
             if (m.Success)
             {
+                // ReSharper disable once UnusedVariable
                 string codefile = m.Groups[1].Value;
                 string lineString = m.Groups[2].Value;
                 string columnString = m.Groups[3].Value;

@@ -5,14 +5,10 @@ FEATURE SUPPORT LIST:
 - arrays
 - constants
 
-- Permission type (IN PROGRESS)
-- function (IN PROGRESS)
-- predicate (IN PROGRESS)
+- Permission type (IN PROGRESS) - .Create, .FromLocation
 - Seq
-- old (DONE)
 - result 
 - forall, exists
-
 
 BUGFIX LIST:
 - fix incode todo's
@@ -21,8 +17,13 @@ BUGFIX LIST:
 
 CHECK LIST:
 - assignment operators
-- instance method
 
 NICE-TO-HAVE:
 - multiple variable declaration
 - testing uses nailgun
+
+DONE (to check):
+- instance method
+- function 
+- predicate 
+- old 

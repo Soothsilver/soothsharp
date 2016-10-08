@@ -8,14 +8,14 @@ namespace Sharpsilver.Translation
 {
     public class Identifier
     {
-        public IdentifierTranslator identifierTranslator { get; set; }
+        public IdentifierTranslator IdentifierTranslator { get; set; }
         public TaggedSymbol Symbol { get; set; }
 
 
         public Identifier(TaggedSymbol symbol, IdentifierTranslator identifierTranslator)
         {
             this.Symbol = symbol;
-            this.identifierTranslator = identifierTranslator;
+            this.IdentifierTranslator = identifierTranslator;
         }
         public Identifier(string silvername)
         {

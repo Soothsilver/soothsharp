@@ -34,7 +34,7 @@ namespace Sharpsilver.Translation
         public const string Equivalence = "System.Boolean." + nameof(StaticExtension.EquivalentTo);
 
         // Permission class
-        public const string PermissionType = ContractsNamespace + nameof(Contracts.Permission);
+        public const string PermissionType = ContractsNamespace + nameof(Permission);
         private const string PermissionTypeDot = PermissionType + ".";
         public const string PermissionWrite = PermissionTypeDot + nameof(Permission.Write);
         public const string PermissionHalf = PermissionTypeDot + nameof(Permission.Half);
@@ -81,18 +81,11 @@ namespace Sharpsilver.Translation
             return null;
         }
 
-        private TranslationProcess parent;
-
-        public ContractsTranslator(TranslationProcess process)
-        {
-            this.parent = process;
-        }
-
         public static bool IsMethodPureOrPredicate(IMethodSymbol theMethod)
         {
             var attributes = theMethod.GetAttributes();
             return attributes.Any(
-                attr => attr.AttributeClass.GetQualifiedName() == ContractsTranslator.PureAttribute ||
+                attr => attr.AttributeClass.GetQualifiedName() == PureAttribute ||
                         attr.AttributeClass.GetQualifiedName() == PredicateAttribute);
         }
     }

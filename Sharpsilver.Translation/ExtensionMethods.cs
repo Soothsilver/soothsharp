@@ -26,9 +26,7 @@ namespace Sharpsilver.Translation
 
         public static readonly SymbolDisplayFormat SimpleSymbolFormat =
             new SymbolDisplayFormat(
-                parameterOptions: SymbolDisplayParameterOptions.IncludeName,
-                localOptions: SymbolDisplayLocalOptions.None,
-                memberOptions: SymbolDisplayMemberOptions.None
+                parameterOptions: SymbolDisplayParameterOptions.IncludeName
                 );
 
         /// <summary>

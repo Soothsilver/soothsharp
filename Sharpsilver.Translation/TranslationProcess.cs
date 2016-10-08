@@ -33,11 +33,11 @@ namespace Sharpsilver.Translation
         }
         private TranslationProcess()
         {
-            this.ContractsTranslator = new ContractsTranslator(this);
+            this.ContractsTranslator = new ContractsTranslator();
             this.IdentifierTranslator = new IdentifierTranslator(this);
         }
         List<Error> masterErrorList = new List<Error>();
-        private bool executed = false;
+        private bool executed;
 
         public static TranslationProcess Create(
             List<string> verifiedFiles, 
@@ -45,7 +45,7 @@ namespace Sharpsilver.Translation
             List<string> references, 
             TranslationConfiguration translationConfiguration)
         {
-            TranslationProcess process = new Translation.TranslationProcess();
+            TranslationProcess process = new TranslationProcess();
             process.Configuration = translationConfiguration;
             foreach(string name in verifiedFiles)
             {

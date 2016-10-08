@@ -33,7 +33,7 @@ namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
         {
             this.parentClass = theClass.DeclarationSyntax;
             this.Parameters = new List<ParameterSharpnode>();
-            this.Body = new CSharp.BlockSharpnode(null);
+            this.Body = new BlockSharpnode(null);
         }
 
 

@@ -14,7 +14,7 @@ namespace Sharpsilver.Translation
     {
         internal static string TranslateTypeToString(ITypeSymbol typeSymbol, TypeSyntax where, out Error error)
         {
-            return TypeTranslator.SilverTypeToString(TranslateType(typeSymbol, where, out error));
+            return SilverTypeToString(TranslateType(typeSymbol, where, out error));
         }
         /// <summary>
         /// Translates a C# type into a Silver type.

@@ -18,7 +18,7 @@ namespace Sharpsilver.Translation
                 return Errors.All(err => err.Diagnostic.Severity != DiagnosticSeverity.Error);
             }
         }
-        public List<Error> Errors { get; private set; } 
+        public List<Error> Errors { get; } 
         public TranslationProcessResult(Silvernode silvernode, List<Error> errors)
         {
             Silvernode = silvernode;
@@ -26,7 +26,7 @@ namespace Sharpsilver.Translation
         }
         public static TranslationProcessResult Error(SyntaxNode syntaxNode, SharpsilverDiagnostic diagnostic, params object[] arguments)
         {
-            return new TranslationProcessResult(null, new List<Translation.Error> { new Translation.Error(diagnostic, syntaxNode, arguments) });
+            return new TranslationProcessResult(null, new List<Error> { new Error(diagnostic, syntaxNode, arguments) });
         }
     }
 }

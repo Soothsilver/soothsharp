@@ -34,6 +34,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
         /// is a type declaration, this node is collected as well. If this node is a class declaration, its instance fields are also processed.
         /// </summary>
         /// <param name="translationProcess">The process to add the types into.</param>
+        /// <param name="semantics">Semantic model of the current tree that is being translated.</param>
         public virtual void CollectTypesInto(TranslationProcess translationProcess, SemanticModel semantics)
         {
             // For most sharpnodes, do nothing.

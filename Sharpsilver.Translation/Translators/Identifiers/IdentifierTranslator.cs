@@ -18,7 +18,7 @@ namespace Sharpsilver.Translation
         {
             this.process = process;
         }
-        private static string[] SilverKeywords = new[]
+        private static string[] silverKeywords = new[]
         {
             "import",
             "domain",
@@ -86,11 +86,11 @@ namespace Sharpsilver.Translation
             Constants.CSharpTypeDomain,
             Constants.SilverThis,
             ""
-        }.Union(SilverKeywords).ToList();
+        }.Union(silverKeywords).ToList();
 
         // TODO register local symbols, later on, when import mechanisms and local syntax in Silver are more clear to me
 
-        private string silverize(string identifier)
+        private static string Silverize(string identifier)
         {
             char[] charArray = identifier.Replace('.', '_').ToCharArray();
             char[] updatedArray =
@@ -129,7 +129,7 @@ namespace Sharpsilver.Translation
         }
 
 
-        private int temporaryIdentifiersRegisteredCount = 0;
+        private int temporaryIdentifiersRegisteredCount;
         public Identifier RegisterNewUniqueIdentifier()
         {
             temporaryIdentifiersRegisteredCount++;
@@ -144,7 +144,7 @@ namespace Sharpsilver.Translation
                 string baseSilverName = "";
                 if (symbol != null)
                 {
-                    baseSilverName = silverize(symbol.GetNameWithoutNamespaces());
+                    baseSilverName = Silverize(symbol.GetNameWithoutNamespaces());
                     if (kvp.Key.Symbol is IParameterSymbol)
                     {
                         baseSilverName = symbol.GetSimpleName();
@@ -172,7 +172,7 @@ namespace Sharpsilver.Translation
                 }
                 else
                 {
-                    process.AddError(new Translation.Error(Diagnostics.SSIL120_UndeclaredNameReferenced, null, kvp.Key.Symbol +
+                    process.AddError(new Error(Diagnostics.SSIL120_UndeclaredNameReferenced, null, kvp.Key.Symbol +
                         (String.IsNullOrEmpty(kvp.Key.Tag) ? "" : "_" + kvp.Key.Tag)));
                 }
             }

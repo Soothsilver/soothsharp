@@ -50,7 +50,7 @@ namespace Sharpsilver.Translation
 
             }
 
-            var initializerContents = new BlockSilvernode(null, new List<Trees.Silver.Statements.StatementSilvernode>());
+            var initializerContents = new BlockSilvernode(null, new List<StatementSilvernode>());
             initializerContents.Add(new AssignmentSilvernode(Constants.SilverThis, new NewStarSilvernode(null), null));
 
             var initializerMethod = new MethodSilvernode(null,

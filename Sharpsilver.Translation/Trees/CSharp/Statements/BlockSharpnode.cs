@@ -47,7 +47,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
                             {
                                 if (inFunctionOrPredicateBlockReturnStatementAlreadyOccured)
                                 {
-                                    diagnostics.Add(new Translation.Error(Diagnostics.SSIL122_FunctionsAndPredicatesCannotHaveMoreThanOneReturnStatement,
+                                    diagnostics.Add(new Error(Diagnostics.SSIL122_FunctionsAndPredicatesCannotHaveMoreThanOneReturnStatement,
                                         statement.OriginalNode));
                                 }
                                 else
@@ -57,7 +57,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
                             }
                             else
                             {
-                                diagnostics.Add(new Translation.Error(Diagnostics.SSIL121_FunctionsAndPredicatesCannotHaveStatements,
+                                diagnostics.Add(new Error(Diagnostics.SSIL121_FunctionsAndPredicatesCannotHaveStatements,
                                     statement.OriginalNode));
 
                             }

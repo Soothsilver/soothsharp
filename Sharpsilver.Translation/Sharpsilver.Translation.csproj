@@ -148,7 +148,6 @@
     <Compile Include="Trees\Silver\Statements\ErrorStatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\AssertionLikeSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\StatementSilvernode.cs" />
-    <None Include="Trees\Silver\Statements\TextStatementSilvernode" />
     <Compile Include="Trees\Silver\Statements\TextStatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\VarStatementSilvernode.cs" />
     <Compile Include="Trees\Silver\VerificationConditions\InvariantSilvernode.cs" />

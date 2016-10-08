@@ -19,8 +19,8 @@ namespace Sharpsilver.Translation.BackendInterface
         public VerificationResult Verify(Silvernode silvernode)
         {
             string silvercode = silvernode.ToString();
-            string filename = System.IO.Path.GetTempFileName();
-            System.IO.File.WriteAllText(filename, silvercode);
+            string filename = Path.GetTempFileName();
+            File.WriteAllText(filename, silvercode);
             try
             {
                 Process p = new Process();
@@ -28,13 +28,12 @@ namespace Sharpsilver.Translation.BackendInterface
                 p.StartInfo.RedirectStandardOutput = true;
                 p.StartInfo.CreateNoWindow = true;
                 p.StartInfo.RedirectStandardOutput = true;
-                var enviromentPath = System.Environment.GetEnvironmentVariable("PATH");
+                var enviromentPath = Environment.GetEnvironmentVariable("PATH");
                 Debug.Assert(enviromentPath != null, "enviromentPath != null");
                 var paths = enviromentPath.Split(';');
                 var exePath = paths
                     .Select(x => Path.Combine(x, "carbon.bat"))
-                    .FirstOrDefault(File.Exists);
-                if (exePath == null) exePath = "carbon.bat";
+                    .FirstOrDefault(File.Exists) ?? "carbon.bat";
                 p.StartInfo.FileName = exePath;
                 p.StartInfo.Arguments = "\"" +  filename + "\"";
                 p.Start();

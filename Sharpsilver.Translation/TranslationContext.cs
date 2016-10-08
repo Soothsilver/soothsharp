@@ -20,11 +20,12 @@ namespace Sharpsilver.Translation
         /// <summary>
         /// Indicates whether classes and method with no [Verified] or [Unverified] attribute should be verified.
         /// </summary>
+        // ReSharper disable once RedundantDefaultMemberInitializer
         public bool VerifyUnmarkedItems { get; private set; } = false;
         /// <summary>
         /// Gets the semantic model of the C# compilation.
         /// </summary>
-        public SemanticModel Semantics { get; private set; }
+        public SemanticModel Semantics { get; }
         public bool IsFunctionOrPredicateBlock { get; set; }
 
         /// <summary>
