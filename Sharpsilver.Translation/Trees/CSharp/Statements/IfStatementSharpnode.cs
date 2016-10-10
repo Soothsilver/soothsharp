@@ -20,7 +20,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
         {
             var conditionResult = Condition.Translate(context);
             var thenResult = Then.Translate(context);
-            var elseResult = Else != null ? Else.Translate(context) : null;
+            var elseResult = Else?.Translate(context);
             var errors = new List<Error>();
             errors.AddRange(conditionResult.Errors);
             errors.AddRange(thenResult.Errors);

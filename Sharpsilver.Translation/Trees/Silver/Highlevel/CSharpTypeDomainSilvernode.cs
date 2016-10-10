@@ -20,20 +20,14 @@ namespace Sharpsilver.Translation.Trees.Silver
             this.axioms = axioms;
         }
 
-        public override IEnumerable<Silvernode> Children
+        public override IEnumerable<Silvernode> Children => new Silvernode[]
         {
-            get
-            {
-                return new Silvernode[]
-                {
-                    "domain " + Constants.CSharpTypeDomain + " {\n",
-                    "\tfunction " + Constants.TypeOfFunction + "(object: Ref): " + Constants.CSharpTypeDomain + "\n",
-                    "\tfunction " + Constants.IsSubTypeFunction + "(subtype: " + Constants.CSharpTypeDomain +
-                    ", supertype: " + Constants.CSharpTypeDomain + "): Bool\n",
-                    axioms,
-                    "\n}"
-                };
-            }
-        }
+            "domain " + Constants.CSharpTypeDomain + " {\n",
+            "\tfunction " + Constants.TypeOfFunction + "(object: Ref): " + Constants.CSharpTypeDomain + "\n",
+            "\tfunction " + Constants.IsSubTypeFunction + "(subtype: " + Constants.CSharpTypeDomain +
+            ", supertype: " + Constants.CSharpTypeDomain + "): Bool\n",
+            this.axioms,
+            "\n}"
+        };
     }
 }

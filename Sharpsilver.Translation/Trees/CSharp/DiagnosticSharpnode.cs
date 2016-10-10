@@ -9,11 +9,7 @@ namespace Sharpsilver.Translation.Trees.CSharp
         public DiagnosticSharpnode(SyntaxNode node, SharpsilverDiagnostic diagnostic, params object[] parameters) : base(node)
         {
             this.diagnostic = diagnostic;
-            this.parameters = parameters;
-            if (this.parameters == null)
-            {
-                this.parameters = new object[0];
-            }
+            this.parameters = parameters ?? new object[0];
         }
 
         public override TranslationResult Translate(TranslationContext translationContext)

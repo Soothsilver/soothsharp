@@ -6,34 +6,28 @@ namespace Sharpsilver.Translation.Trees.CSharp.Expressions
 {
     public class LiteralExpressionSharpnode : ExpressionSharpnode
     {
-        private LiteralExpressionSyntax literalExpressionSyntax;
-        private LiteralKind Kind;
+        private LiteralKind kind;
         private bool booleanValue;
         private int integerValue;
 
         public LiteralExpressionSharpnode(LiteralExpressionSyntax literalExpressionSyntax, int literalValue) : base(literalExpressionSyntax)
         {
             this.integerValue = literalValue;
-            this.Kind = LiteralKind.Int32;
-            this.literalExpressionSyntax = literalExpressionSyntax;
+            this.kind = LiteralKind.Int32;
         }
         public LiteralExpressionSharpnode(LiteralExpressionSyntax literalExpressionSyntax, bool literalValue) : base(literalExpressionSyntax)
         {
-            this.literalExpressionSyntax = literalExpressionSyntax;
             this.booleanValue = literalValue;
-            this.Kind = LiteralKind.Boolean;
+            this.kind = LiteralKind.Boolean;
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
             Silvernode sn = null;
-            switch(Kind)
+            switch(this.kind)
             {
                 case LiteralKind.Boolean:
-                    if (booleanValue)
-                        sn = new TextSilvernode("true", OriginalNode);
-                    else
-                        sn = new TextSilvernode("false", OriginalNode);
+                    sn = this.booleanValue ? new TextSilvernode("true", this.OriginalNode) : new TextSilvernode("false", this.OriginalNode);
                     break;
                 case LiteralKind.Int32:
                     sn = new TextSilvernode(integerValue.ToString(), OriginalNode);

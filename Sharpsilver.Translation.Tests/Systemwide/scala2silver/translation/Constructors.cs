@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Sharpsilver.Contracts;
 using static Sharpsilver.Contracts.Contract;
 using static Sharpsilver.Contracts.Permission;
+// ReSharper disable All
+#pragma warning disable 169
 
 namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
 {

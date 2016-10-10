@@ -5,37 +5,37 @@ namespace Sharpsilver.Translation.Trees.CSharp
 {
     public class IncrementExpressionSharpnode : ExpressionSharpnode
     {
-        private IncrementExpressionDirection Direction;
+        private IncrementExpressionDirection direction;
 #pragma warning disable 414
         // TODO make this work
-        private IncrementExpressionOrder Order;
+        private IncrementExpressionOrder order;
 #pragma warning restore 414
-        private ExpressionSharpnode Expression;
+        private ExpressionSharpnode expression;
 
         public IncrementExpressionSharpnode(PrefixUnaryExpressionSyntax syntax, IncrementExpressionDirection direction) : base(syntax)
         {
-            Direction = direction;
-            Order = IncrementExpressionOrder.Pre;
-            Expression = RoslynToSharpnode.MapExpression(syntax.Operand);
+            this.direction = direction;
+            this.order = IncrementExpressionOrder.Pre;
+            this.expression = RoslynToSharpnode.MapExpression(syntax.Operand);
         }
         public IncrementExpressionSharpnode(PostfixUnaryExpressionSyntax syntax, IncrementExpressionDirection direction) : base(syntax)
         {
-            Direction = direction;
-            Order = IncrementExpressionOrder.Post;
-            Expression = RoslynToSharpnode.MapExpression(syntax.Operand);
+            this.direction = direction;
+            this.order = IncrementExpressionOrder.Post;
+            this.expression = RoslynToSharpnode.MapExpression(syntax.Operand);
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var expression = Expression.Translate(context);
+            var translatedExpression = this.expression.Translate(context);
             // Statement form only.
             // TODO what if it's not a Silver lvalue?
-            string @operator = Direction == IncrementExpressionDirection.Increment ? "+" : "-";
+            string @operator = this.direction == IncrementExpressionDirection.Increment ? "+" : "-";
             return TranslationResult.FromSilvernode(
                 new AssignmentSilvernode(
-                    expression.Silvernode, 
-                    new BinaryExpressionSilvernode(expression.Silvernode, @operator, new TextSilvernode("1", null), OriginalNode),
-                    OriginalNode), expression.Errors);
+                    translatedExpression.Silvernode, 
+                    new BinaryExpressionSilvernode(translatedExpression.Silvernode, @operator, new TextSilvernode("1"), OriginalNode),
+                    OriginalNode), translatedExpression.Errors);
         }
     }
 

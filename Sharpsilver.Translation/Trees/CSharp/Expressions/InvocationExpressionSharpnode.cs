@@ -10,13 +10,13 @@ namespace Sharpsilver.Translation.Trees.CSharp
     public class InvocationExpressionSharpnode : ExpressionSharpnode
     {
         public ExpressionSyntax MethodGroup;
-        private ExpressionSharpnode MethodGroupSharpnode;
+        private ExpressionSharpnode methodGroupSharpnode;
         public List<ExpressionSharpnode> Arguments = new List<ExpressionSharpnode>();
 
         public InvocationExpressionSharpnode(InvocationExpressionSyntax syntax) : base(syntax)
         {
             this.MethodGroup = syntax.Expression;
-            MethodGroupSharpnode = RoslynToSharpnode.MapExpression(syntax.Expression);
+            this.methodGroupSharpnode = RoslynToSharpnode.MapExpression(syntax.Expression);
             foreach (var argument in syntax.ArgumentList.Arguments)
             {
                 this.Arguments.Add(RoslynToSharpnode.MapExpression(argument.Expression));
@@ -94,13 +94,13 @@ namespace Sharpsilver.Translation.Trees.CSharp
                 }
                 if (!theMethod.IsStatic)
                 {
-                    if (MethodGroupSharpnode is IdentifierExpressionSharpnode)
+                    if (this.methodGroupSharpnode is IdentifierExpressionSharpnode)
                     {
                         Arguments.Insert(0, new DirectSilvercodeExpressionSharpnode(Constants.SilverThis, MethodGroup));
                     }
-                    else if (MethodGroupSharpnode is MemberAccessExpressionSharpnode)
+                    else if (this.methodGroupSharpnode is MemberAccessExpressionSharpnode)
                     {
-                        Arguments.Insert(0,((MemberAccessExpressionSharpnode)MethodGroupSharpnode).Container);
+                        Arguments.Insert(0,((MemberAccessExpressionSharpnode)this.methodGroupSharpnode).Container);
                     }
                     else
                     {

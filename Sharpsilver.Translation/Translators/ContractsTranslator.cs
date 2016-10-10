@@ -55,14 +55,7 @@ namespace Sharpsilver.Translation
             switch(symbol.GetQualifiedName())
             {
                 case ContractIntResult:
-                    if (context.IsFunctionOrPredicateBlock)
-                    {
-                        silvertext = "result";
-                    }
-                    else
-                    {
-                        silvertext = Constants.SilverReturnVariableName;
-                    }
+                    silvertext = context.IsFunctionOrPredicateBlock ? "result" : Constants.SilverReturnVariableName;
                     break;
                 case PermissionNone:
                     silvertext = "none";

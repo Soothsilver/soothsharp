@@ -14,13 +14,7 @@ namespace Sharpsilver.Contracts
         /// <summary>
         /// Within contracts, represents the return value of a function or a method, if it is of the type System.Int32. This is a shortcut for <see cref="Contract.Result{Int32}"/> with <see cref="int"/> as the type parameter.
         /// </summary>       
-        public static int IntegerResult
-        {
-            get
-            {
-                return 0;
-            }
-        }
+        public static int IntegerResult => 0;
 
         /// <summary>
         /// Within contracts, represents the return value of a method. Can only be used in method or function postconditions.
