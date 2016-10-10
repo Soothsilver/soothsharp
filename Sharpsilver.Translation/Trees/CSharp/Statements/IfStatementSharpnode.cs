@@ -1,9 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.Trees.CSharp;
 using Sharpsilver.Translation.Trees.Silver;
-using Sharpsilver.Translation;
 using System.Collections.Generic;
-using Sharpsilver.Translation.Trees.Silver.Statements;
 
 namespace Sharpsilver.Translation.Trees.CSharp
 {

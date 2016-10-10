@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sharpsilver.Translation
+﻿namespace Sharpsilver.Translation
 {
     /// <summary>
     /// Represents a type of an error that can occur during translation or verification. 

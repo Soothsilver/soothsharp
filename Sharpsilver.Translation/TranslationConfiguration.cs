@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sharpsilver.Translation
+﻿namespace Sharpsilver.Translation
 {
     /// <summary>
     /// Contains settings from the front-end that affect the <see cref="TranslationProcess"/> globally. 

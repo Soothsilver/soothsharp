@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csverify GUI", "csverify GUI\csverify GUI.csproj", "{DE153B77-637B-481C-9071-FADDE0DF782D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +92,14 @@ Global
 		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Release|x86.ActiveCfg = Release|Any CPU
 		{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}.Release|x86.Build.0 = Release|Any CPU
+		{DE153B77-637B-481C-9071-FADDE0DF782D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE153B77-637B-481C-9071-FADDE0DF782D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE153B77-637B-481C-9071-FADDE0DF782D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DE153B77-637B-481C-9071-FADDE0DF782D}.Debug|x86.Build.0 = Debug|Any CPU
+		{DE153B77-637B-481C-9071-FADDE0DF782D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE153B77-637B-481C-9071-FADDE0DF782D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE153B77-637B-481C-9071-FADDE0DF782D}.Release|x86.ActiveCfg = Release|Any CPU
+		{DE153B77-637B-481C-9071-FADDE0DF782D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

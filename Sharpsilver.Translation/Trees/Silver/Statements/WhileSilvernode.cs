@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.Trees.Silver.Statements
+namespace Sharpsilver.Translation.Trees.Silver
 {
     class WhileSilvernode : StatementSilvernode
     {
@@ -35,10 +34,14 @@ namespace Sharpsilver.Translation.Trees.Silver.Statements
                 {
                     children.Add("\n" + Tabs());
                     children.AddRange(verificationConditions.WithSeparator<Silvernode>("\n" + Tabs()).SelectMany(
-                        condition =>
+                        innerCondition
+                        =>
                         {
-                            if (condition is TextSilvernode) return new Silvernode[] { condition };
-                            return new Silvernode[] { "\t", condition };
+                            if (innerCondition
+ is TextSilvernode) return new[] { innerCondition
+ };
+                            return new[] { "\t", innerCondition
+ };
                         }
                         ));
                     children.Add("\n" + Tabs());

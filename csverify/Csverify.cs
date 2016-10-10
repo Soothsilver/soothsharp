@@ -32,15 +32,13 @@ namespace Sharpsilver.Cs2Sil
         /// </summary>
         private static bool onlyAnnotated = false;
         /// <summary>
-        /// Whether Silicon is used to verify correctness. If both <see cref="useCarbon"/> and <see cref="useSilicon"/> are set,
-        /// then Carbon takes precedence and Silicon is not run.
+        /// Whether Silicon is used to verify correctness.
         /// </summary>
         private static bool useSilicon = false;
         /// <summary>
-        /// Whether Carbon is used to verify correctness. If both <see cref="useCarbon"/> and <see cref="useSilicon"/> are set,
-        /// then Carbon takes precedence and Silicon is not run.
+        /// Whether Carbon is used to verify correctness. 
         /// </summary>
-        private static bool useCarbon = true;
+        private static bool useCarbon = false;
         /// <summary>
         /// Filename where the Silver output should be written out. If null, then the Silver output is not written to disk.
         /// </summary>

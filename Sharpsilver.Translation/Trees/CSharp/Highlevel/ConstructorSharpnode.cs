@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.Translators;
-using Sharpsilver.Translation.Trees.Silver;
-using Sharpsilver.Translation.Trees.Silver.Statements;
 
 namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
 {

@@ -1,17 +1,13 @@
-﻿using System;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Sharpsilver.Translation.Trees.Silver
 {
     internal class TypeSilvernode : Silvernode
     {
-        private TypeSyntax returnType;
         private SilverType silverType;
 
         public TypeSilvernode(TypeSyntax typeSyntax, SilverType silverType) : base(typeSyntax)
         {
-            this.returnType = typeSyntax;
             this.silverType = silverType;
         }
 

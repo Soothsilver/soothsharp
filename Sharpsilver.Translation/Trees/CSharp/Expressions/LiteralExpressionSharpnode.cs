@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.Trees.Silver;
 using Microsoft.CodeAnalysis.CSharp;
 

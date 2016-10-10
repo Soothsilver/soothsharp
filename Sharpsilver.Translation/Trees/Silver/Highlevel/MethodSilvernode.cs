@@ -1,10 +1,5 @@
 ﻿using System.Collections.Generic;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Linq;
-using MoreLinq;
-using System;
 using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.Trees.Silver.Statements;
 
 namespace Sharpsilver.Translation.Trees.Silver
 {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Sharpsilver.Translation.Trees.Silver;
-using Sharpsilver.Translation.Trees.Silver.Statements;
 
 namespace Sharpsilver.Translation
 {

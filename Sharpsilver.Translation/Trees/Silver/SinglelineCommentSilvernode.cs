@@ -1,20 +1,19 @@
 ﻿using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.Trees.Silver;
 
 namespace Sharpsilver.Translation.Trees.Silver
 {
     internal class SinglelineCommentSilvernode : Silvernode
     {
-        private string Comment;
+        private string comment;
 
         public SinglelineCommentSilvernode(string v, SyntaxNode originalNode) : base(originalNode)
         {
-            this.Comment = v;
+            this.comment = v;
         }
 
         public override string ToString()
         {
-            return "// " + Comment + "";
+            return "// " + this.comment + "";
         }
     }
 }

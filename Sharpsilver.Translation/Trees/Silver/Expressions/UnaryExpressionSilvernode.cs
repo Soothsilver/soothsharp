@@ -1,23 +1,22 @@
 ﻿using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.Trees.CSharp.Expressions
+namespace Sharpsilver.Translation.Trees.Silver
 {
     internal class PrefixUnaryExpressionSilvernode : Silvernode
     {
-        private Silvernode Operand;
+        private Silvernode operand;
         private string Operator;
 
         public PrefixUnaryExpressionSilvernode(string @operator, Silvernode operand, SyntaxNode originalNode) : base(originalNode)
         {
             this.Operator = @operator;
-            this.Operand = operand;
+            this.operand = operand;
         }
 
         public override string ToString()
         {
             // TODO handle parentheses correctly
-            return Operator + Operand.ToString();
+            return Operator + this.operand;
         }
     }
 }

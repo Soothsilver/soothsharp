@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using MoreLinq;
-using Sharpsilver.Translation.Trees.Silver.Simple;
 
 namespace Sharpsilver.Translation.Trees.Silver
 {
@@ -22,7 +16,7 @@ namespace Sharpsilver.Translation.Trees.Silver
 
         public override IEnumerable<Silvernode> Children
         {
-            get { return List.SelectMany(s => new Silvernode[] {s }); }
+            get { return List.SelectMany(s => new[] { s }); }
         }
     }
 }

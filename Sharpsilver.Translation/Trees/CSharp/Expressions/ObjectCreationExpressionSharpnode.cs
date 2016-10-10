@@ -1,11 +1,7 @@
-﻿using System;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sharpsilver.Translation.Trees.Silver;
 using System.Collections.Generic;
-using Sharpsilver.Translation;
-using Sharpsilver.Translation.Trees.CSharp.Expressions;
-using Sharpsilver.Translation.Trees.Silver.Statements;
 
 namespace Sharpsilver.Translation.Trees.CSharp
 {

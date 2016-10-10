@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Sharpsilver.Translation.Trees.Silver.Statements
+namespace Sharpsilver.Translation.Trees.Silver
 {
     public class BlockSilvernode : StatementSilvernode
     {

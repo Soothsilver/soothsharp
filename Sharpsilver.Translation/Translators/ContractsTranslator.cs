@@ -1,15 +1,12 @@
-﻿using Sharpsilver.Translation.Trees.CSharp;
-using System;
-using System.Collections.Generic;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Sharpsilver.Contracts;
 using Microsoft.CodeAnalysis;
 using Sharpsilver.Translation.Trees.Silver;
 
 namespace Sharpsilver.Translation
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class ContractsTranslator
     {
         // Contracts class
@@ -58,7 +55,14 @@ namespace Sharpsilver.Translation
             switch(symbol.GetQualifiedName())
             {
                 case ContractIntResult:
-                    silvertext = Constants.SilverReturnVariableName;
+                    if (context.IsFunctionOrPredicateBlock)
+                    {
+                        silvertext = "result";
+                    }
+                    else
+                    {
+                        silvertext = Constants.SilverReturnVariableName;
+                    }
                     break;
                 case PermissionNone:
                     silvertext = "none";

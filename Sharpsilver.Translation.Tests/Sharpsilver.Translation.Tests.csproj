@@ -70,6 +70,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Files\Basic\MethodCall.cs" />
+    <Compile Include="Systemwide\scala2silver\translation\Constructors.cs" />
+    <Compile Include="Systemwide\scala2silver\translation\Constants.cs" />
     <Compile Include="Systemwide\sharpsilver\issues\MissingMethod.cs" />
     <Compile Include="Files\Issues\SimplePostCondition.cs" />
     <Compile Include="Files\Syntax\For.cs">

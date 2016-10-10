@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.Trees.CSharp.Expressions
+namespace Sharpsilver.Translation.Trees.Silver
 {
     internal class BinaryExpressionSilvernode : ExpressionSilvernode
     {
@@ -20,7 +19,7 @@ namespace Sharpsilver.Translation.Trees.CSharp.Expressions
         public override string ToString()
         {
             // TODO handle parentheses correctly
-            return left.ToString() + " " + Operator + " " + right.ToString();
+            return this.left + " " + Operator + " " + this.right;
         }
     }
 }

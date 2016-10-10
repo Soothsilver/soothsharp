@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Sharpsilver.Translation.Trees.Silver

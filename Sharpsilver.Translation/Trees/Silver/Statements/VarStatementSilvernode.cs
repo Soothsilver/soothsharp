@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.Trees.Silver.Statements
+namespace Sharpsilver.Translation.Trees.Silver
 {
     public class VarStatementSilvernode : StatementSilvernode
     {

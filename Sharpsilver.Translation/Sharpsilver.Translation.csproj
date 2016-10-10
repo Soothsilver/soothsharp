@@ -150,8 +150,8 @@
     <Compile Include="Trees\Silver\Statements\StatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\TextStatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\VarStatementSilvernode.cs" />
-    <Compile Include="Trees\Silver\VerificationConditions\InvariantSilvernode.cs" />
-    <Compile Include="Trees\Silver\VerificationConditions\RequiresSilvernode.cs" />
+    <Compile Include="Trees\Silver\Contracts\InvariantSilvernode.cs" />
+    <Compile Include="Trees\Silver\Contracts\RequiresSilvernode.cs" />
     <Compile Include="Trees\Silver\Expressions\UnaryExpressionSilvernode.cs" />
     <Compile Include="Trees\Silver\Expressions\BinaryExpressionSilvernode.cs" />
     <Compile Include="Trees\CSharp\Expressions\InvocationExpressionSharpnode.cs" />
@@ -159,7 +159,7 @@
     <Compile Include="Trees\CSharp\Expressions\ExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Statements\ExpressionStatementSharpnode.cs" />
     <Compile Include="Trees\Silver\Expressions\ConditionalExpressionSilvernode.cs" />
-    <Compile Include="Trees\Silver\VerificationConditions\EnsuresSilvernode.cs" />
+    <Compile Include="Trees\Silver\Contracts\EnsuresSilvernode.cs" />
     <Compile Include="Trees\Silver\ErrorSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\ExpressionStatementSilvernode.cs" />
     <Compile Include="Trees\CSharp\Expressions\UnknownExpressionSharpnode.cs" />
@@ -188,7 +188,7 @@
     <Compile Include="Trees\CSharp\UnknownSharpnode.cs" />
     <Compile Include="Trees\Silver\Statements\StatementsSequenceSilvernode.cs" />
     <Compile Include="Trees\Silver\Silvernode.cs" />
-    <Compile Include="Trees\Silver\VerificationConditions\VerificationConditionSilvernode.cs" />
+    <Compile Include="Trees\Silver\Contracts\VerificationConditionSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\WhileSilvernode.cs" />
     <Compile Include="Trees\Spansize.cs" />
     <Compile Include="Backends\BackendUtils.cs" />

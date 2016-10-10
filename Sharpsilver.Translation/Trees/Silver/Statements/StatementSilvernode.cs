@@ -1,12 +1,7 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.Trees.Silver.Statements
+namespace Sharpsilver.Translation.Trees.Silver
 {
     public abstract class StatementSilvernode : ComplexSilvernode
     {
