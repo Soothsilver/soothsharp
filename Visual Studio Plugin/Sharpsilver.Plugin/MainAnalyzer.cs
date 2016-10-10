@@ -16,6 +16,7 @@ namespace Sharpsilver.Plugin
     public class SharpsilverVisualStudioPluginAnalyzer : DiagnosticAnalyzer
     {
         private Dictionary<string, DiagnosticDescriptor> rules;
+
         private IEnumerable<DiagnosticDescriptor> GetRules()
         {
             var diagnostics = Sharpsilver.Translation.Diagnostics.GetAllDiagnostics().ToList();
@@ -36,7 +37,6 @@ namespace Sharpsilver.Plugin
                 yield return dd;
             }
         }
-
         private Microsoft.CodeAnalysis.DiagnosticSeverity transformSeverity(Translation.DiagnosticSeverity severity)
         {
             switch (severity)
@@ -56,25 +56,36 @@ namespace Sharpsilver.Plugin
 
             context.RegisterSyntaxTreeAction(WholeTreeTranslationAnalysis);
             context.RegisterSyntaxTreeAction(WholeTreeVerificationAnalysis);
-
-            /*    context.RegisterSyntaxNodeAction((snac) => {
-
-                }, ImmutableArray.Create(SyntaxKind.SwitchKeyword));
-                */
         }
 
         private void WholeTreeVerificationAnalysis(SyntaxTreeAnalysisContext treeContext)
         {
-            /*
+            
             if (treeContext.Tree.GetText().ToString().Length < 10)
             {
                 return;
             }
-            var translationProcess = TranslationProcess.Create()
-            var result = translationProcess.TranslateTree(treeContext.Tree);
+            var translationProcess = TranslationProcess.CreateFromSyntaxTree(treeContext.Tree);
+            var result = translationProcess.Execute();
+            foreach (var diagnostic in result.Errors)
+            {
+
+                if (diagnostic.Node != null)
+                {
+                    treeContext.ReportDiagnostic(Diagnostic.Create(
+                        rules[diagnostic.Diagnostic.ErrorCode], diagnostic.Node.GetLocation(), diagnostic.DiagnosticArguments)
+                        );
+                }
+                else
+                {
+                    treeContext.ReportDiagnostic(Diagnostic.Create(
+                        rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
+                        );
+                }
+            }
             if (!result.WasTranslationSuccessful) return; // translation errors are handled by the other method
             if (result.Silvernode.ToString().Trim() == "") return;
-            var verifier = new SiliconBackend();
+            var verifier = new CarbonBackend();
             var verificationResult = verifier.Verify(result.Silvernode);
             foreach (var diagnostic in verificationResult.Errors)
             {
@@ -90,14 +101,13 @@ namespace Sharpsilver.Plugin
                         rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
                         );
                 }
-            }*/
+            }
         }
-
         private void WholeTreeTranslationAnalysis(SyntaxTreeAnalysisContext treeContext)
         {
-            /*
-            var translationProcess = new TranslationProcess();
-            var result = translationProcess.TranslateTree(treeContext.Tree);
+
+            var translationProcess = TranslationProcess.CreateFromSyntaxTree(treeContext.Tree);
+            var result = translationProcess.Execute();
             foreach(var diagnostic in result.Errors)
             {
 
@@ -113,8 +123,7 @@ namespace Sharpsilver.Plugin
                         rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
                         );
                 }
-            }*/
-
+            }
         }
     }
 }

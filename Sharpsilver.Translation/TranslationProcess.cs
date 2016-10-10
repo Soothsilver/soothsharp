@@ -39,6 +39,19 @@ namespace Sharpsilver.Translation
         List<Error> masterErrorList = new List<Error>();
         private bool executed;
 
+        public static TranslationProcess CreateFromSyntaxTree(
+          SyntaxTree syntaxTree)
+        {
+
+            TranslationProcess process = new TranslationProcess();
+            process.Configuration = new TranslationConfiguration()
+            {
+                Verbose = false,
+                VerifyUnmarkedItems = true
+            };
+            process.compilationUnits.Add(CompilationUnit.CreateFromTree((CSharpSyntaxTree)syntaxTree, CompilationUnitVerificationStyle.FullVerification));
+            return process;
+        }
         public static TranslationProcess Create(
             List<string> verifiedFiles, 
             List<string> assumedFiles, 
@@ -71,8 +84,6 @@ namespace Sharpsilver.Translation
                 }
                 process.referencedAssemblies.Add(name);
             }
-
-
             return process;
         }
 

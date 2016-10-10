@@ -8,7 +8,6 @@ using Sharpsilver.Contracts;
 using static Sharpsilver.Contracts.Contract;
 using static Sharpsilver.Contracts.Permission;
 // ReSharper disable All
-#pragma warning disable 169
 
 namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
 {
@@ -21,7 +20,9 @@ namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
 
         // IGNORE
         // TODO field invariant
+#pragma warning disable CS0414
         int a = 3;
+#pragma warning restore CS0414
 
         public Constructors(int _param, bool _b, int _paramTrue, int _paramFalse)
         {

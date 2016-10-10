@@ -152,7 +152,13 @@ namespace Sharpsilver.Translation
      "Methods declared [Pure] or [Predicate] must have exactly one return statement.",
      "A method thus declared is translated to a Viper function or predicate. These constructs may have bodies, but these bodies must contain an assertion only, not statements. There can't be any statements, and the single return statement is translated as a Viper assertion. There can't be more than one.",
      DiagnosticSeverity.Error);
-
+        public static SharpsilverDiagnostic SSIL123_ThereIsThisCSharpError =
+   SharpsilverDiagnostic.Create(
+     "SSIL123",
+     "A C# compiler diagnostic prevents correct translation: {0}",
+     "Only valid C# programs can be translated to Viper. Fix any errors offered by the C# compiler, then attempt translation again.",
+     DiagnosticSeverity.Error);
+        
         // ****************************** 200 Backend Verifier Errors
         public static SharpsilverDiagnostic SSIL201_BackendNotFound =
             SharpsilverDiagnostic.Create(

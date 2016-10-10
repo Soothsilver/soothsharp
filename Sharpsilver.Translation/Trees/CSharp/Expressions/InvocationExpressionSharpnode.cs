@@ -30,6 +30,9 @@ namespace Sharpsilver.Translation.Trees.CSharp
 
             var method = context.Semantics.GetSymbolInfo(MethodGroup);
             var methodSymbol = method.Symbol as IMethodSymbol;
+            if (methodSymbol == null) {
+                return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL123_ThereIsThisCSharpError, "This name cannot be unambiguously mapped to a single method.");
+            }
             var methodName = methodSymbol.GetQualifiedName();
 
             // Verification conditions

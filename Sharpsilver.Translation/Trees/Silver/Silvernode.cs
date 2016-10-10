@@ -125,7 +125,8 @@ namespace Sharpsilver.Translation.Trees.Silver
             this.OptimizePre();
             foreach (var child in this.Children)
             {
-                child.OptimizeRecursively();
+                // TODO when the C# syntax is incorrect, the "child" under BlockSilvernode could sometimes be null.
+                child?.OptimizeRecursively();
             }
             this.OptimizePost();
         }
