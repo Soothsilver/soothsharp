@@ -2,10 +2,13 @@
 
 namespace Sharpsilver.Translation
 {
+    /// <summary>
+    /// Represents a C# source file, along with information on the style of how it should be translated to Viper.
+    /// </summary>
     public class CompilationUnit
     {
         public CSharpSyntaxTree RoslynTree { get; private set; }
-        public CompilationUnitVerificationStyle Style { get; private set; }
+        private CompilationUnitVerificationStyle Style { get; set; }
 
         private CompilationUnit(CSharpSyntaxTree tree, CompilationUnitVerificationStyle style)
         {
