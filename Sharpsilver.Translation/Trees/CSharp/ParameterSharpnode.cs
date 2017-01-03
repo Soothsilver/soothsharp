@@ -1,11 +1,11 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp;
-using Sharpsilver.Translation.Exceptions;
-using Sharpsilver.Translation.Trees.Silver;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
+using Soothsharp.Translation.Exceptions;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.Trees.CSharp
+namespace Soothsharp.Translation.Trees.CSharp
 {
     public class ParameterSharpnode : Sharpnode
     {

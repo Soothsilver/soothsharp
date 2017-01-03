@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     static class TypeTranslator
     {

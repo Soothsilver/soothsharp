@@ -1,11 +1,11 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.Trees.CSharp;
-using Sharpsilver.Translation.Trees.CSharp.Expressions;
-using Sharpsilver.Translation.Trees.CSharp.Highlevel;
-using Sharpsilver.Translation.Trees.CSharp.Statements;
+using Soothsharp.Translation.Trees.CSharp;
+using Soothsharp.Translation.Trees.CSharp.Expressions;
+using Soothsharp.Translation.Trees.CSharp.Highlevel;
+using Soothsharp.Translation.Trees.CSharp.Statements;
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     /// <summary>
     /// This class contains static methods that convert Roslyn instances into sharpnode.

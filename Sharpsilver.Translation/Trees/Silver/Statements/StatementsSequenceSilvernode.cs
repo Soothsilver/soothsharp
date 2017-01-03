@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.Trees.Silver
+namespace Soothsharp.Translation.Trees.Silver
 {
     /// <summary>
     /// Contains several statement silvernodes that are separated by newlines.
     /// </summary>
-    /// <seealso cref="Sharpsilver.Translation.Trees.Silver.StatementSilvernode" />
+    /// <seealso cref="StatementSilvernode" />
     public class StatementsSequenceSilvernode : StatementSilvernode
     {
         public StatementsSequenceSilvernode(SyntaxNode node, params StatementSilvernode[] nodes) : base(node)

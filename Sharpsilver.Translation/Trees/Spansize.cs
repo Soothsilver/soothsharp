@@ -1,4 +1,4 @@
-﻿namespace Sharpsilver.Translation.Trees
+﻿namespace Soothsharp.Translation.Trees
 {
     public class Spansize
     {

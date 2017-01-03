@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.Trees.CSharp;
+using Soothsharp.Translation.Trees.CSharp;
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     internal class DoStatementSharpnode : StatementSharpnode
     {

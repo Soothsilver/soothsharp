@@ -1,4 +1,4 @@
-﻿namespace Sharpsilver.Translation
+﻿namespace Soothsharp.Translation
 {
     /// <summary>
     /// Contains settings from the front-end that affect the <see cref="TranslationProcess"/> globally. 

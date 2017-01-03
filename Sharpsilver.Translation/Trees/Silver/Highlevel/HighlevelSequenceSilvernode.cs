@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.Trees.Silver
+namespace Soothsharp.Translation.Trees.Silver
 {
     /// <summary>
     /// Represents a sequence of Silver code regions, separated by a newline character. This is meant to be used at the root level only; certainly
     /// within functions and methods this should not be used.
     /// </summary>
-    /// <seealso cref="Sharpsilver.Translation.Trees.Silver.ComplexSilvernode" />
+    /// <seealso cref="ComplexSilvernode" />
     public class HighlevelSequenceSilvernode : ComplexSilvernode
     {
         /// <summary>

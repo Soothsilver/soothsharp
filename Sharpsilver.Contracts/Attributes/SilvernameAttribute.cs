@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sharpsilver.Contracts
+namespace Soothsharp.Contracts
 {
     /// <summary>
     /// Sets the name of the annotated item in the generated Silver code. 

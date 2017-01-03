@@ -1,9 +1,9 @@
-﻿using Sharpsilver.Contracts;
-using static Sharpsilver.Contracts.Contract;
-using static Sharpsilver.Contracts.Permission;
+﻿using Soothsharp.Contracts;
+using static Soothsharp.Contracts.Contract;
+using static Soothsharp.Contracts.Permission;
 #pragma warning disable 649
 
-namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
+namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.translation
 {
     class AssumeClass
     {

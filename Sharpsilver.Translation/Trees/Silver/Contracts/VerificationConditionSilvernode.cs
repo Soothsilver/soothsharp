@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using System;
 
-namespace Sharpsilver.Translation.Trees.Silver
+namespace Soothsharp.Translation.Trees.Silver
 {
     public abstract class VerificationConditionSilvernode : Silvernode, IComparable<VerificationConditionSilvernode>
     {

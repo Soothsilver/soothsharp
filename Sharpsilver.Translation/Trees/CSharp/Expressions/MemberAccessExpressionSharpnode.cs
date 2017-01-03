@@ -1,11 +1,11 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp;
-using Sharpsilver.Translation.Trees.CSharp;
 using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.Trees.Silver;
 using System.Collections.Generic;
+using Soothsharp.Translation.Trees.CSharp;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     internal class MemberAccessExpressionSharpnode : ExpressionSharpnode
     {

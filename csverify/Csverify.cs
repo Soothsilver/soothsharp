@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Sharpsilver.Translation;
 using Mono.Options;
-using Sharpsilver.Translation.BackendInterface;
-using Sharpsilver.Translation.Trees.Silver;
+using Soothsharp.Translation.Trees.Silver;
+using Soothsharp.Contracts;
+using Soothsharp.Translation;
+using Soothsharp.Translation.BackendInterface;
+
 // ReSharper disable RedundantDefaultMemberInitializer
 
-namespace Sharpsilver.Cs2Sil
+namespace Soothsharp.Cs2Sil
 {
     /// <summary>
     /// This class is compiled into the csverify.exe executable which takes C# code files, produces Silver files and verifies them for formal correctness. 
@@ -27,8 +29,8 @@ namespace Sharpsilver.Cs2Sil
         /// </summary>
         private static bool waitAfterwards = false;
         /// <summary>
-        /// Whether only classes and members tagged with <see cref="Sharpsilver.Contracts.VerifiedAttribute"/> should be translated into Silver.
-        /// If false, then all classes and members not tagged with <see cref="Sharpsilver.Contracts.UnverifiedAttribute"/> will be translated. 
+        /// Whether only classes and members tagged with <see cref="VerifiedAttribute"/> should be translated into Silver.
+        /// If false, then all classes and members not tagged with <see cref="UnverifiedAttribute"/> will be translated. 
         /// </summary>
         private static bool onlyAnnotated = false;
         /// <summary>

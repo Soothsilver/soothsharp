@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     /// <summary>
     /// A context modifies how should C# code be translated into Silver. A context determines, for example,

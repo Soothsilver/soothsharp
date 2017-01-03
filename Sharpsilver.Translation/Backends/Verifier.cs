@@ -1,6 +1,6 @@
-﻿using Sharpsilver.Translation.Trees.Silver;
+﻿using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.BackendInterface
+namespace Soothsharp.Translation.BackendInterface
 {
     /// <summary>
     /// This intermediate class passes a Silver syntax tree to a backend verifier and returns the result.

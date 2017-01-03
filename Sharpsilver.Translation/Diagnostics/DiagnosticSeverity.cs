@@ -1,4 +1,4 @@
-﻿namespace Sharpsilver.Translation
+﻿namespace Soothsharp.Translation
 {
     /// <summary>
     /// Whether a diagnostic is an error or a warning.

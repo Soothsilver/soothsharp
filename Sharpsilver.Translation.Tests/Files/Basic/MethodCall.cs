@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Sharpsilver.Contracts;
+using Soothsharp.Contracts;
 
-namespace Sharpsilver.Translation.Tests.Files.Basic
+namespace Soothsharp.Translation.Tests.Files.Basic
 {
     class MethodCall
     {

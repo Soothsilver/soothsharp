@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Sharpsilver.Translation.Trees.Silver
+namespace Soothsharp.Translation.Trees.Silver
 {
     internal class TypeSilvernode : Silvernode
     {

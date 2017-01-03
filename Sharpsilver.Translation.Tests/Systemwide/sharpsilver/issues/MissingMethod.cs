@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Sharpsilver.Contracts;
+using Soothsharp.Contracts;
 
-namespace Sharpsilver.Translation.Tests.Files.Issues
+namespace Soothsharp.Translation.Tests.Files.Issues
 {
     class MissingMethod
     {

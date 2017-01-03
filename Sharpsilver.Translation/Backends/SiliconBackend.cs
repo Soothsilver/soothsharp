@@ -2,9 +2,9 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Sharpsilver.Translation.Trees.Silver;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.BackendInterface
+namespace Soothsharp.Translation.BackendInterface
 {
     /// <summary>
     /// Connnects to the "silicon" backend verifier.

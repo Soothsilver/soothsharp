@@ -1,8 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.Trees.Silver;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.Trees.CSharp.Statements
+namespace Soothsharp.Translation.Trees.CSharp.Statements
 {
     class GotoStatementSharpnode : StatementSharpnode
     {

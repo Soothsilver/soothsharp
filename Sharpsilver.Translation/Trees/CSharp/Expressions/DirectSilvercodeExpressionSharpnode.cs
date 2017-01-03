@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Sharpsilver.Translation.Trees.CSharp.Expressions
+namespace Soothsharp.Translation.Trees.CSharp.Expressions
 {
     public class DirectSilvercodeExpressionSharpnode : ExpressionSharpnode
     {

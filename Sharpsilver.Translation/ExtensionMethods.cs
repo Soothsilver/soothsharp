@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     /// <summary>
     /// Containts various useful extension methods used in this assembly.

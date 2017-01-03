@@ -1,4 +1,4 @@
-﻿namespace Sharpsilver.Translation
+﻿namespace Soothsharp.Translation
 {
     public class CollectedField
     {

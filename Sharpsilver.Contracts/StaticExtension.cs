@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharpsilver.Contracts
+namespace Soothsharp.Contracts
 {
     /// <summary>
     /// Adds "Implies" as a member method to System.Boolean.

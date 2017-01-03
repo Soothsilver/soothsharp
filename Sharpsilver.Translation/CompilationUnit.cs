@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     /// <summary>
     /// Represents a C# source file, along with information on the style of how it should be translated to Viper.

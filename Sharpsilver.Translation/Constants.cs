@@ -1,6 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     /// <summary>
     /// Contains constant names used in Silver.

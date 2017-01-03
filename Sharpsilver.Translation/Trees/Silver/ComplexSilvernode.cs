@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.Trees.Silver
+namespace Soothsharp.Translation.Trees.Silver
 {
     /// <summary>
     /// This silvernode consists of several smaller silvernodes. 
     /// </summary>
-    /// <seealso cref="Sharpsilver.Translation.Trees.Silver.Silvernode" />
+    /// <seealso cref="Silvernode" />
     public abstract class ComplexSilvernode : Silvernode
     {
         /// <summary>

@@ -1,6 +1,6 @@
-﻿using Sharpsilver.Contracts;
+﻿using Soothsharp.Contracts;
 
-namespace Sharpsilver.Translation.Tests.Files.Basic
+namespace Soothsharp.Translation.Tests.Files.Basic
 {
     static class ScalaPaperExample
     {

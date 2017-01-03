@@ -1,10 +1,10 @@
 ﻿// expect SSIL204
 
-using Sharpsilver.Contracts;
+using Soothsharp.Contracts;
 
 // ReSharper disable BuiltInTypeReferenceStyle
 
-namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.basic
+namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.basic
 {
     [Verified]
     internal static class Simple

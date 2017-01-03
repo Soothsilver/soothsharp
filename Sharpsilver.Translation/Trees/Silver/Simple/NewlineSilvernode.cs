@@ -1,4 +1,4 @@
-﻿namespace Sharpsilver.Translation.Trees.Silver
+﻿namespace Soothsharp.Translation.Trees.Silver
 {
     class NewlineSilvernode : Silvernode
     {

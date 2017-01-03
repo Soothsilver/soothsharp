@@ -1,6 +1,6 @@
-﻿using Sharpsilver.Translation.Trees.Silver;
+﻿using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.BackendInterface
+namespace Soothsharp.Translation.BackendInterface
 {
     /// <summary>
     /// A backend class executes its corresponding executable (carbon or silicon), passing its the transcompiler's output. The backend class

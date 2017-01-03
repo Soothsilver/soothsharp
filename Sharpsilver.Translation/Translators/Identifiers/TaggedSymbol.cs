@@ -1,6 +1,6 @@
 using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     /// <summary>
     /// For the purposes of <see cref="IdentifierTranslator"/>. 

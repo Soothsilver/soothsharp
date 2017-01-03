@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Sharpsilver.Translation.BackendInterface;
+using Soothsharp.Translation.BackendInterface;
 
-namespace Sharpsilver.Translation.Tests
+namespace Soothsharp.Translation.Tests
 {
     class Utilities
     {

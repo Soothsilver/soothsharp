@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.Trees.Silver;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     public class CollectedType
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.Trees.Silver;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.BackendInterface
+namespace Soothsharp.Translation.BackendInterface
 {
     /// <summary>
     /// Contains static constants and functions used by both backends.

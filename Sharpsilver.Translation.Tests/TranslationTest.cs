@@ -1,4 +1,4 @@
-﻿using Sharpsilver.Translation;
+﻿using Soothsharp.Translation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Sharpsilver.Translation.Tests
+namespace Soothsharp.Translation.Tests
 {
     public class TranslationTest
     {

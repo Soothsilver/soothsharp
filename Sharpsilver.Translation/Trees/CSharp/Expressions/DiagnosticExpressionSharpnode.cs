@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Sharpsilver.Translation.Trees.CSharp
+namespace Soothsharp.Translation.Trees.CSharp
 {
     class DiagnosticExpressionSharpnode : ExpressionSharpnode
     {

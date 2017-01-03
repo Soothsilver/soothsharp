@@ -3,7 +3,7 @@ using System.Collections.Generic;
 // ReSharper disable InconsistentNaming
 // These names are based on error codes.
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     /// <summary>
     /// This class contains static constants that represent the various errors and warnings Sharpsilver might generate.

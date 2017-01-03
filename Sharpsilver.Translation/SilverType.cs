@@ -1,4 +1,4 @@
-﻿namespace Sharpsilver.Translation
+﻿namespace Soothsharp.Translation
 {
     /// <summary>
     /// Represents a type of the Silver language.

@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Sharpsilver.Translation.Trees.CSharp
+namespace Soothsharp.Translation.Trees.CSharp
 {
     class UnexpectedSharpnode : Sharpnode
     {

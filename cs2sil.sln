@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csverify", "csverify\csverify.csproj", "{E9C9E6A0-9C5D-4A16-B25D-83140C40033A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Contracts", "Sharpsilver.Contracts\Sharpsilver.Contracts.csproj", "{B2FF4360-C774-41CE-98FC-60494F6EFC60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soothsharp.Contracts", "Sharpsilver.Contracts\Soothsharp.Contracts.csproj", "{B2FF4360-C774-41CE-98FC-60494F6EFC60}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Plugin.Vsix", "Visual Studio Plugin\Sharpsilver.Plugin.Vsix\Sharpsilver.Plugin.Vsix.csproj", "{D8A79F6F-A0F5-4F57-AB27-01A8BAF36DEC}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -19,12 +19,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Plugin", "Visua
 		{B2FF4360-C774-41CE-98FC-60494F6EFC60} = {B2FF4360-C774-41CE-98FC-60494F6EFC60}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Translation", "Sharpsilver.Translation\Sharpsilver.Translation.csproj", "{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soothsharp.Translation", "Sharpsilver.Translation\Soothsharp.Translation.csproj", "{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B2FF4360-C774-41CE-98FC-60494F6EFC60} = {B2FF4360-C774-41CE-98FC-60494F6EFC60}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpsilver.Translation.Tests", "Sharpsilver.Translation.Tests\Sharpsilver.Translation.Tests.csproj", "{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soothsharp.Translation.Tests", "Sharpsilver.Translation.Tests\Soothsharp.Translation.Tests.csproj", "{4819DEFB-A781-4DD5-A3DF-9BDFE6095AC9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2578FD01-0944-4C21-A863-9D01272ED5F8}"
 	ProjectSection(SolutionItems) = preProject

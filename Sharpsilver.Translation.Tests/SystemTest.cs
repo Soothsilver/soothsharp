@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Sharpsilver.Translation.BackendInterface;
+using Soothsharp.Translation.BackendInterface;
 using Xunit;
 
-namespace Sharpsilver.Translation.Tests
+namespace Soothsharp.Translation.Tests
 {
     public class SystemTest
     {

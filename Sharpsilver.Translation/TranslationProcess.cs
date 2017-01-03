@@ -2,13 +2,13 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.Trees.CSharp;
-using Sharpsilver.Translation.Trees.CSharp.Highlevel;
 using System.Collections.Generic;
-using Sharpsilver.Translation.Trees.Silver;
 using System.Linq;
+using Soothsharp.Translation.Trees.CSharp;
+using Soothsharp.Translation.Trees.CSharp.Highlevel;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     /// <summary>
     /// The translation process contains all information about verifying a C# solution and encapsulates all procedures necessary for verification.

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharpsilver.Cs2Sil
+namespace Soothsharp.Cs2Sil
 {
     /// <summary>
     /// Represents the return code of a csverify.exe execution

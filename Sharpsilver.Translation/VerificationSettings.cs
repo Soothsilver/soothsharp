@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     static class VerificationSettings
     {

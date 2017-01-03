@@ -1,12 +1,13 @@
 ﻿//FAILS
-using Sharpsilver.Contracts;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Soothsharp.Contracts;
 
-namespace Sharpsilver.TranslationTests.Files
+namespace Soothsharp.TranslationTests.Files
 {
     [Verified]
     static class Simple

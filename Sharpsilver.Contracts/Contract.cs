@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharpsilver.Contracts
+namespace Soothsharp.Contracts
 {
     /// <summary>
     /// Contains static functions that translate into Silver language constructs, such as preconditions or postconditions.

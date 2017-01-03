@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharpsilver.Contracts
+namespace Soothsharp.Contracts
 {
     /// <summary>
     /// Represents a finite sequence of objects. This class is translated into Silver as Silver's Seq type.

@@ -1,9 +1,9 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
-using Sharpsilver.Translation.Trees.Silver;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.Trees.CSharp.Expressions
+namespace Soothsharp.Translation.Trees.CSharp.Expressions
 {
     public class SimpleAssignmentExpressionSharpnode : ExpressionSharpnode
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 
-namespace Sharpsilver.Translation.Trees.CSharp
+namespace Soothsharp.Translation.Trees.CSharp
 {
     /// <summary>
     /// Represents a node in the C# abstract tree.

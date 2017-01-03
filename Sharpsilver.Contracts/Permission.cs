@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharpsilver.Contracts
+namespace Soothsharp.Contracts
 {
     /// <summary>
     /// Represents a fractional permission that defines the level of access to an address on the heap. Immutable.

@@ -1,6 +1,6 @@
-﻿using static Sharpsilver.Contracts.Contract;
+﻿using static Soothsharp.Contracts.Contract;
 
-namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
+namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.translation
 {
     class Assignments
     {

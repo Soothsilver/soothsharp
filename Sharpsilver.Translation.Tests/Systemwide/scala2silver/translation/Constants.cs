@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Sharpsilver.Contracts;
-using static Sharpsilver.Contracts.Contract;
+using Soothsharp.Contracts;
+using static Soothsharp.Contracts.Contract;
 // ReSharper disable All
 
-namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.translation
+namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.translation
 {
     class Constants
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sharpsilver.Translation.BackendInterface
+namespace Soothsharp.Translation.BackendInterface
 {
     /// <summary>
     /// Represents the result of a backend verification.

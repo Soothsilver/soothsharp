@@ -2,9 +2,9 @@
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.Translators;
+using Soothsharp.Translation.Translators;
 
-namespace Sharpsilver.Translation.Trees.CSharp.Highlevel
+namespace Soothsharp.Translation.Trees.CSharp.Highlevel
 {
     internal class ConstructorSharpnode : Sharpnode
     {

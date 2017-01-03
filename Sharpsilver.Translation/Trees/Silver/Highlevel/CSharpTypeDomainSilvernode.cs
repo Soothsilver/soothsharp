@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 
-namespace Sharpsilver.Translation.Trees.Silver
+namespace Soothsharp.Translation.Trees.Silver
 {
     /// <summary>
     /// Represents the "domain CSharpType" construction that is put into all generated Silver files by the transcompiler. 
     /// See the documentation for more deatils.
     /// </summary>
-    /// <seealso cref="Sharpsilver.Translation.Trees.Silver.ComplexSilvernode" />
+    /// <seealso cref="ComplexSilvernode" />
     public class CSharpTypeDomainSilvernode : ComplexSilvernode
     {
         private readonly HighlevelSequenceSilvernode axioms;

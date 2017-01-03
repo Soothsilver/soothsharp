@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.Trees.Silver;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.Trees.CSharp.Expressions
+namespace Soothsharp.Translation.Trees.CSharp.Expressions
 {
     internal class CompoundAssignmentExpressionSharpnode : ExpressionSharpnode
     {

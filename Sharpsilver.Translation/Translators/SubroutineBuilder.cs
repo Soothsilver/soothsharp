@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.Trees.CSharp;
-using Sharpsilver.Translation.Trees.Silver;
+using Soothsharp.Translation.Trees.CSharp;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.Translators
+namespace Soothsharp.Translation.Translators
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     class SubroutineBuilder

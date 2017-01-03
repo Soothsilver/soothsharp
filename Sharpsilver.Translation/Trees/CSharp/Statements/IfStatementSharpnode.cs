@@ -1,8 +1,8 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sharpsilver.Translation.Trees.Silver;
 using System.Collections.Generic;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.Trees.CSharp
+namespace Soothsharp.Translation.Trees.CSharp
 {
     internal class IfStatementSharpnode : StatementSharpnode
     {

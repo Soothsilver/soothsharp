@@ -1,9 +1,9 @@
 ﻿//SUCCEEDS
 
 using System;
-using Sharpsilver.Contracts;
+using Soothsharp.Contracts;
 
-namespace Sharpsilver.Translation.Tests.Systemwide.scala2silver.basic
+namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.basic
 {
     [Verified]
     static class Implications

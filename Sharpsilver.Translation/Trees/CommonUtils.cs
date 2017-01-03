@@ -1,9 +1,9 @@
 ﻿using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.Trees.Silver;
 using System.Collections.Generic;
 using System.Linq;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation.Trees
+namespace Soothsharp.Translation.Trees
 {
     class CommonUtils
     {

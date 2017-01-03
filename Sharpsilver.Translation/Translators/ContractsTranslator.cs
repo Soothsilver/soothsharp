@@ -1,16 +1,16 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Sharpsilver.Contracts;
 using Microsoft.CodeAnalysis;
-using Sharpsilver.Translation.Trees.Silver;
+using Soothsharp.Contracts;
+using Soothsharp.Translation.Trees.Silver;
 
-namespace Sharpsilver.Translation
+namespace Soothsharp.Translation
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class ContractsTranslator
     {
         // Contracts class
-        private const string ContractsNamespace = nameof(Sharpsilver) + "." + nameof(Contracts) + ".";
+        private const string ContractsNamespace = nameof(Soothsharp) + "." + nameof(Contracts) + ".";
         private const string ContractsClass = ContractsNamespace + nameof(Contract) + ".";
         public const string ContractEnsures = ContractsClass + nameof(Contract.Ensures);
         public const string ContractRequires = ContractsClass + nameof(Contract.Requires);

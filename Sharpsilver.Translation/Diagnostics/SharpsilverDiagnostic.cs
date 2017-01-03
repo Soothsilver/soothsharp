@@ -1,4 +1,4 @@
-﻿namespace Sharpsilver.Translation
+﻿namespace Soothsharp.Translation
 {
     /// <summary>
     /// Represents a type of an error that can occur during translation or verification. 

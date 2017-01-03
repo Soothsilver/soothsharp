@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 
-namespace Sharpsilver.Translation.Trees.Silver
+namespace Soothsharp.Translation.Trees.Silver
 {
     public class TextStatementSilvernode : StatementSilvernode
     {

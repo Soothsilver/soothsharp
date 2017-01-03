@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sharpsilver.Contracts
+namespace Soothsharp.Contracts
 {
     /// <summary>
     /// The annotated method makes use of formal verification and should be translated into Silver. 
