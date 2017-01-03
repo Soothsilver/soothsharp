@@ -107,11 +107,11 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sharpsilver.Contracts\Soothsharp.Contracts.csproj">
+    <ProjectReference Include="..\Soothsharp.Contracts\Soothsharp.Contracts.csproj">
       <Project>{b2ff4360-c774-41ce-98fc-60494f6efc60}</Project>
       <Name>Soothsharp.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sharpsilver.Translation\Soothsharp.Translation.csproj">
+    <ProjectReference Include="..\Soothsharp.Translation\Soothsharp.Translation.csproj">
       <Project>{89df81ed-eee0-499d-ae23-d687fc5cadd3}</Project>
       <Name>Soothsharp.Translation</Name>
     </ProjectReference>

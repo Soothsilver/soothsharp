@@ -230,7 +230,7 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sharpsilver.Contracts\Soothsharp.Contracts.csproj">
+    <ProjectReference Include="..\Soothsharp.Contracts\Soothsharp.Contracts.csproj">
       <Project>{b2ff4360-c774-41ce-98fc-60494f6efc60}</Project>
       <Name>Soothsharp.Contracts</Name>
     </ProjectReference>

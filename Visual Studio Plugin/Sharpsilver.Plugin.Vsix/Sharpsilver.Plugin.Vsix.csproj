@@ -52,7 +52,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Sharpsilver.Translation\Soothsharp.Translation.csproj">
+    <ProjectReference Include="..\..\Soothsharp.Translation\Soothsharp.Translation.csproj">
       <Project>{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}</Project>
       <Name>Soothsharp.Translation</Name>
       <!-->     <IncludeOutputGroupsInVSIX>VSIXContainerProjectOutputGroup%3bBuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
