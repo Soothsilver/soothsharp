@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Soothsharp.Contracts
 {
     /// <summary>
-    /// Represents a finite sequence of objects. This class is translated into Silver as Silver's Seq type.
+    /// Represents a finite immutable mathematical sequence of objects. This class is translated into Viper as Viper's Seq type.
     /// </summary>
     /// <typeparam name="T">Type of the objects in the sequence</typeparam>
     public class Seq<T>
@@ -17,7 +17,7 @@ namespace Soothsharp.Contracts
         /// <summary>
         /// Initializes a new sequence.
         /// </summary>
-        /// <param name="elements">The elements in the sequence. Must not be given as an array.</param>
+        /// <param name="elements">The elements in the sequence. Must not be given as an array - each argument must be a single element.</param>
         public Seq(params T[] elements)
         {
             list = new List<T>(elements);
@@ -33,7 +33,7 @@ namespace Soothsharp.Contracts
         }
 
         /// <summary>
-        /// Gets the number of elements in the sequence. This is backed by Silver's absolute value operator (<code>|seq|</code>).
+        /// Gets the number of elements in the sequence. This is backed by Viper's absolute value operator (<code>|seq|</code>).
         /// </summary>
         public int Length => list.Count;
 

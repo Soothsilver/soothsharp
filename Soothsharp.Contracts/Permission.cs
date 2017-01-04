@@ -9,6 +9,11 @@ namespace Soothsharp.Contracts
     /// <summary>
     /// Represents a fractional permission that defines the level of access to an address on the heap. Immutable.
     /// </summary>
+    /// <remarks>
+    /// This class is functional for representing rational numbers in C# for as long as you don't use the special permissions
+    /// (<see cref="FromLocation{T}(T)"/> and <see cref="Wildcard"/>). However, this is only for debugging - do not use this class 
+    /// to represent rational numbers in your code aside from contracts.
+    /// </remarks>
     public class Permission
     {
 #pragma warning disable CS0414
@@ -194,7 +199,6 @@ namespace Soothsharp.Contracts
          * Note: The division operator "/" is not defined, on purpose, as it does not exist in Silver.
          * It only exists there to create a new Perm out of two integers, which is done here by the constructor.
          */
-
 
         private enum SpecialPermission
         {

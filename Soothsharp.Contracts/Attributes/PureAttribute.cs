@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Soothsharp.Contracts
 {
     /// <summary>
-    /// The annnotated method is pure and should be translated as a Silver function.
+    /// The annnotated method is pure and should be translated as a Viper function.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     public class PureAttribute : Attribute

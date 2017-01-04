@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+// ReSharper disable UnusedParameter.Global
 
 namespace Soothsharp.Contracts
 {
     /// <summary>
-    /// Contains static functions that translate into Silver language constructs, such as preconditions or postconditions.
+    /// Contains static functions that translate into Viper language constructs, such as preconditions or postconditions.
     /// </summary>
     public static class Contract
     {
@@ -100,6 +101,9 @@ namespace Soothsharp.Contracts
         public static void Fold(bool predicateCall)
         {
         }
+
+     
+
         /// <summary>
         /// Unfolds the specified predicate with the given arguments. 
         /// </summary>
@@ -107,7 +111,28 @@ namespace Soothsharp.Contracts
         public static void Unfold(bool predicateCall)
         {
         }
-
+        /// <summary>
+        /// Folds the specified predicate with the given arguments, evaluates the expression, then unfolds the predicate again, and returns the expression.
+        /// </summary>
+        /// <typeparam name="T">Type of the expression.</typeparam>
+        /// <param name="predicateCall">The predicate, with arguments, to fold.</param>
+        /// <param name="expression">The expression that will be the result of this call.</param>
+        /// <returns></returns>
+        public static T Folding<T>(bool predicateCall, T expression)
+        {
+            return expression;
+        }
+        /// <summary>
+        /// Unfolds the specified predicate with the given arguments, evaluates the expression, then folds the predicate again, and returns the expression.
+        /// </summary>
+        /// <typeparam name="T">Type of the expression.</typeparam>
+        /// <param name="predicateCall">The predicate, with arguments, to unfold.</param>
+        /// <param name="expression">The expression that will be the result of this call.</param>
+        /// <returns></returns>
+        public static T Unfolding<T>(bool predicateCall, T expression)
+        {
+            return expression;
+        }
 
         /// <summary>
         /// Inhales the specified assertion at this point. Any boolean conditions are assumed and permissions to any spatial assertions are gained.
@@ -144,5 +169,6 @@ namespace Soothsharp.Contracts
         {
             return true;
         }
+
     }
 }

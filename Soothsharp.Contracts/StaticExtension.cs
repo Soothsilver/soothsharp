@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Soothsharp.Contracts
 {
     /// <summary>
-    /// Adds "Implies" as a member method to System.Boolean.
+    /// Adds "Implies" and "EquivalentTo" as member methods to System.Boolean.
     /// </summary>
     public static class StaticExtension
     {
@@ -19,7 +19,6 @@ namespace Soothsharp.Contracts
         /// <param name="condition">The receiver, the condition operand of the implication.</param>
         /// <param name="result">The right side of the implication.</param>
         /// <returns>True, if the the receiver logically implies the result, i.e. either the receiver is false or the result is true.</returns>
-        [Pure]
         public static bool Implies(this bool condition, bool result)
         {
             return !condition || result;
@@ -29,8 +28,7 @@ namespace Soothsharp.Contracts
         /// </summary>
         /// <param name="leftSide">The receiver.</param>
         /// <param name="rightSide">The argument.</param>
-        /// <returns></returns>
-        [Pure]
+        /// <returns>True, if the two booleans are the same; false otherwise.</returns>
         public static bool EquivalentTo(this bool leftSide, bool rightSide)
         {
             return leftSide == rightSide;
