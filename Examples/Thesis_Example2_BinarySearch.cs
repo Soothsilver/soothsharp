@@ -17,14 +17,14 @@ namespace Soothsharp.Examples
         int BinarySearch(Seq<int> xs, int key)
         {
             // As a precondition, we assume the sequence is sorted:
-            Requires(false /*TODO*/);
+            Requires(ForAll((i) => ForAll((j) => (0 <= i && j < xs.Length && i < j).Implies(xs[i] < xs[j]))));
             // The returned integer is either -1 or an index in the sequence:
             Ensures(-1 <= IntegerResult && IntegerResult < xs.Length);
             // If it's not -1, then the searched value as at the returned index:
             Ensures((0 <= IntegerResult).Implies(xs[IntegerResult] == key));
             // If it is -1, then the searched value is not in the sequence.
-            Ensures((-1 == IntegerResult).Implies(false /*TODO*/));
-            
+            Ensures((-1 == IntegerResult).Implies(ForAll((i) => (0 <= i && i < xs.Length).Implies(xs[i] != key))));
+
             // The rest of this method can be assumed to be correct if the above contracts are correct
             // and verification passes
             int low = 0;
@@ -34,7 +34,10 @@ namespace Soothsharp.Examples
             while (low < high && index == -1)
             {
                 Invariant(0 <= low && low <= high && high <= xs.Length);
-                Invariant((index == -1).Implies(false /*TODO*/));
+                Invariant((index == -1).Implies(ForAll((i) =>
+                    (0 <= i && i < xs.Length && !(low <= i && i < high)).Implies(xs[i] != key)
+                    )));
+
                 Invariant(-1 <= index && index < xs.Length);
                 Invariant((0 <= index).Implies(xs[index] == key));
 
@@ -42,7 +45,8 @@ namespace Soothsharp.Examples
                 if (xs[mid] < key)
                 {
                     low = mid + 1;
-                } else
+                }
+                else
                 {
                     if (key < xs[mid])
                     {
@@ -57,39 +61,5 @@ namespace Soothsharp.Examples
             }
             return index;
         }
-        /*
-
-        method binary_search(xs: Seq[Int], key: Int) returns(index: Int)
-   requires forall i: Int, j: Int:: 0 <= i && j< |xs| && i<j ==> xs[i] < xs[j]
-
-  ensures -1 <= index && index< |xs|
-
-  ensures 0 <= index ==> xs[index] == key
-
-  ensures -1 == index ==> (forall i: Int:: 0 <= i && i< |xs| ==> xs[i] != key)
-{
-  var low: Int := 0 
-  var high: Int := |xs|
-  index := -1
-  
-  while (low<high && index == -1)
-      invariant 0 <= low && low <= high && high <= |xs|
-      invariant index == -1 ==> forall i: Int:: (0 <= i && i< |xs| && !(low <= i && i<high)) ==> xs[i] != key
-      invariant -1 <= index && index< |xs|
-      invariant 0 <= index ==> xs[index] == key
-  {
-    var mid: Int := (low + high) \ 2
-    if (xs[mid] < key) {
-      low := mid + 1
-    } else {
-      if (key<xs[mid]) {
-         high := mid
-} else {
-        index := mid
-        high := mid
-      }
     }
-  }
-}*/
-            }
-        }
+}

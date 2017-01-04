@@ -169,6 +169,15 @@ namespace Soothsharp.Contracts
         {
             return true;
         }
-
+        /// <summary>
+        /// This assertion is true if the given assertion holds for all integers. This should only be called
+        /// within contracts (the C# body of this method merely returns false).
+        /// </summary>
+        /// <param name="assertion">The assertion that should hold for all integers.</param>
+        /// <returns>Always returns false.</returns>
+        public static bool ForAll(Func<int, bool> assertion)
+        {
+            return false;
+        }
     }
 }
