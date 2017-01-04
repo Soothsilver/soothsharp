@@ -10,7 +10,6 @@ namespace Soothsharp.Translation.Tests
 {
     class Utilities
     {
-        // TODO remove this dummy edit
         public static TranslationProcessResult Translate(string filename)
         {
             TranslationProcess process = TranslationProcess.Create(new List<string> { filename }, new List<string>(), new List<string>(), new TranslationConfiguration());
