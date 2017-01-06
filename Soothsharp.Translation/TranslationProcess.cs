@@ -100,7 +100,7 @@ namespace Soothsharp.Translation
             executed = true;
             VerboseLog("Loading mscorlib and Sharpsilver.Contracts...");
             var mscorlib = MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location);
-            var contractsLibrary = MetadataReference.CreateFromFile("Sharpsilver.Contracts.dll");
+            var contractsLibrary = MetadataReference.CreateFromFile("Soothsharp.Contracts.dll");
             VerboseLog("Initializing compilation...");
             CSharpCompilation compilation;
             try

@@ -17,13 +17,13 @@ namespace Soothsharp.Examples
         int BinarySearch(Seq<int> xs, int key)
         {
             // As a precondition, we assume the sequence is sorted:
-            Requires(ForAll((i) => ForAll((j) => (0 <= i && j < xs.Length && i < j).Implies(xs[i] < xs[j]))));
+            Requires(ForAll(i => ForAll(j => (0 <= i && j < xs.Length && i < j).Implies(xs[i] < xs[j]))));
             // The returned integer is either -1 or an index in the sequence:
             Ensures(-1 <= IntegerResult && IntegerResult < xs.Length);
             // If it's not -1, then the searched value as at the returned index:
             Ensures((0 <= IntegerResult).Implies(xs[IntegerResult] == key));
             // If it is -1, then the searched value is not in the sequence.
-            Ensures((-1 == IntegerResult).Implies(ForAll((i) => (0 <= i && i < xs.Length).Implies(xs[i] != key))));
+            Ensures((-1 == IntegerResult).Implies(ForAll(i => (0 <= i && i < xs.Length).Implies(xs[i] != key))));
 
             // The rest of this method can be assumed to be correct if the above contracts are correct
             // and verification passes
@@ -34,7 +34,7 @@ namespace Soothsharp.Examples
             while (low < high && index == -1)
             {
                 Invariant(0 <= low && low <= high && high <= xs.Length);
-                Invariant((index == -1).Implies(ForAll((i) =>
+                Invariant((index == -1).Implies(ForAll(i =>
                     (0 <= i && i < xs.Length && !(low <= i && i < high)).Implies(xs[i] != key)
                     )));
 

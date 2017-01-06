@@ -7,8 +7,8 @@
     <ProjectGuid>{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sharpsilver.Translation</RootNamespace>
-    <AssemblyName>Sharpsilver.Translation</AssemblyName>
+    <RootNamespace>Soothsharp.Translation</RootNamespace>
+    <AssemblyName>Soothsharp.Translation</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -112,6 +112,7 @@
     <Compile Include="Trees\CommonUtils.cs" />
     <Compile Include="Trees\CSharp\Expressions\DiagnosticExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\DirectSilvercodeExpressionSharpnode.cs" />
+    <Compile Include="Trees\CSharp\Expressions\LambdaSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\MemberAccessExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\IncrementExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\ObjectCreationExpressionSharpnode.cs" />
@@ -128,8 +129,8 @@
     <Compile Include="Trees\CSharp\Statements\LabeledStatementSharpnode.cs" />
     <Compile Include="Trees\CSharp\Statements\LocalDeclarationSharpnode.cs" />
     <Compile Include="Trees\CSharp\Statements\ForStatementSharpnode.cs" />
-    <Compile Include="Trees\Intermediate\CollectedField.cs" />
-    <Compile Include="Trees\Intermediate\CollectedType.cs" />
+    <Compile Include="Trees\CollectedField.cs" />
+    <Compile Include="Trees\CollectedType.cs" />
     <Compile Include="Trees\Silver\Expressions\AccSilvernode.cs" />
     <Compile Include="Trees\Silver\Expressions\NewSilvernode.cs" />
     <Compile Include="Trees\Silver\Highlevel\PredicateSilvernode.cs" />
@@ -238,10 +239,8 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /S /E $(SolutionDir)Sharpsilver.Translation.Tests\Files $(SolutionDir)csverify\bin\Debug\Files
-xcopy /Y /S /E $(SolutionDir)Sharpsilver.Translation.Tests\Files $(SolutionDir)Sharpsilver.Translation.Tests\bin\Debug\Files
-xcopy /Y /S /E $(SolutionDir)/harpsilver.Translation.Tests\Systemwide $(SolutionDir)csverify\bin\Debug\Systemwide
-xcopy /Y /S /E $(SolutionDir)Sharpsilver.Translation.Tests\Systemwide $(SolutionDir)Sharpsilver.Translation.Tests\bin\Debug\Systemwide</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

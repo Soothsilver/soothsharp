@@ -7,8 +7,8 @@
     <ProjectGuid>{B2FF4360-C774-41CE-98FC-60494F6EFC60}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sharpsilver.Contracts</RootNamespace>
-    <AssemblyName>Sharpsilver.Contracts</AssemblyName>
+    <RootNamespace>Soothsharp.Contracts</RootNamespace>
+    <AssemblyName>Soothsharp.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Sharpsilver.Contracts.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Soothsharp.Contracts.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp;
+using Soothsharp.Translation.Trees.CSharp;
 using Soothsharp.Translation.Trees.CSharp.Expressions;
 using Soothsharp.Translation.Trees.Silver;
 
@@ -9,9 +10,9 @@ namespace Soothsharp.Translation.Trees.CSharp
 {
     public class InvocationExpressionSharpnode : ExpressionSharpnode
     {
-        public ExpressionSyntax MethodGroup;
+        private ExpressionSyntax MethodGroup;
         private ExpressionSharpnode methodGroupSharpnode;
-        public List<ExpressionSharpnode> Arguments = new List<ExpressionSharpnode>();
+        private List<ExpressionSharpnode> Arguments = new List<ExpressionSharpnode>();
 
         public InvocationExpressionSharpnode(InvocationExpressionSyntax syntax) : base(syntax)
         {
@@ -20,7 +21,6 @@ namespace Soothsharp.Translation.Trees.CSharp
             foreach (var argument in syntax.ArgumentList.Arguments)
             {
                 this.Arguments.Add(RoslynToSharpnode.MapExpression(argument.Expression));
-                // TODO name:colon, ref/out...
             }
         }
 
@@ -46,7 +46,9 @@ namespace Soothsharp.Translation.Trees.CSharp
                 case ContractsTranslator.ContractInvariant:
                     return TranslateAsVerificationCondition(methodName, context);
                 case ContractsTranslator.Implication:
-                    return TranslateAsImplication(context); 
+                    return TranslateAsImplication(context);
+                case ContractsTranslator.ForAll:
+                    return TranslateAsQuantifier(QuantifierKind.ForAll, context);
                 case ContractsTranslator.ContractAssert:
                     languageFeatureName = "assert";
                     translateAsPhpStatement = true;
@@ -157,6 +159,31 @@ namespace Soothsharp.Translation.Trees.CSharp
             }
         }
 
+        private TranslationResult TranslateAsQuantifier(QuantifierKind quantifierKind, TranslationContext context)
+        {
+            var errors = new List<Error>();
+            int numArguments = this.Arguments.Count;
+            if (numArguments != 1)
+            {
+                return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL301_InternalLocalizedError,
+                    "incorrect number of arguments for a quantifier expression");
+            }
+            if (!(this.Arguments[0] is LambdaSharpnode))
+            {
+                return TranslationResult.Error(this.OriginalNode,
+                    Diagnostics.SSIL124_QuantifierMustGetLambda);
+            }
+            LambdaSharpnode lambda = (LambdaSharpnode)this.Arguments[0];
+            TranslationResult result = TranslationResult.FromSilvernode(
+                new SimpleSequenceSilvernode(this.OriginalNode,
+                 "forall "
+                
+                ),
+                errors
+                );
+            return result;
+        }
+
         private TranslationResult TranslateAsImplication(TranslationContext context)
         {
             if (MethodGroup is MemberAccessExpressionSyntax)
@@ -209,5 +236,11 @@ namespace Soothsharp.Translation.Trees.CSharp
             }
             return TranslationResult.FromSilvernode(result, conditionResult.Errors);
         }
+    }
+
+    public enum QuantifierKind
+    {
+        ForAll,
+        Exists
     }
 }

@@ -24,7 +24,10 @@ namespace Soothsharp.Translation
         public const string Result = ContractsClass + nameof(Contract.Result);
         public const string Fold = ContractsClass + nameof(Contract.Fold);
         public const string Unfold = ContractsClass + nameof(Contract.Unfold);
+        public const string Folding = ContractsClass + nameof(Contract.Folding);
+        public const string Unfolding = ContractsClass + nameof(Contract.Unfolding);
         public const string Old = ContractsClass + nameof(Contract.Old);
+        public const string ForAll = ContractsClass + nameof(Contract.ForAll);
 
         // Static extensions
         public const string Implication = "System.Boolean." + nameof(StaticExtension.Implies);

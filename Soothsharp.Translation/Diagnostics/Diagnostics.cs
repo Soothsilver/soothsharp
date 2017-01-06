@@ -158,7 +158,32 @@ namespace Soothsharp.Translation
      "A C# compiler diagnostic prevents correct translation: {0}",
      "Only valid C# programs can be translated to Viper. Fix any errors offered by the C# compiler, then attempt translation again.",
      DiagnosticSeverity.Error);
-        
+        public static SharpsilverDiagnostic SSIL124_QuantifierMustGetLambda =
+   SharpsilverDiagnostic.Create(
+     "SSIL124",
+     "Quantifiers must have a lambda function as an argument.",
+     "The contents of the lambda function are converted into Viper code. You cannot use a non-lambda function here.",
+     DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL125_LambdasMustHaveSingleParameter =
+   SharpsilverDiagnostic.Create(
+     "SSIL125",
+     "Lambda functions must have a single parameter.",
+     "Soothsharp does not allow for lambda functions with more than one parameter.",
+     DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL126_LambdasMustBeExpressions =
+   SharpsilverDiagnostic.Create(
+     "SSIL126",
+     "Lambda functions must have an expression body.",
+     "Soothsharp does not allow for lambda functions with statement (full) bodies, the body of the function must an expression.",
+     DiagnosticSeverity.Error);
+        public static SharpsilverDiagnostic SSIL127_LambdasOnlyInContracts =
+  SharpsilverDiagnostic.Create(
+    "SSIL127",
+    "Lambda functions can only occur within quantifiers.",
+    "Soothsharp does not allow for use of arbitrary lambda functions - you may only use these within quantifiers for syntactic purposes.",
+    DiagnosticSeverity.Error);
+
+
         // ****************************** 200 Backend Verifier Errors
         public static SharpsilverDiagnostic SSIL201_BackendNotFound =
             SharpsilverDiagnostic.Create(
@@ -202,6 +227,8 @@ namespace Soothsharp.Translation
                 "The transcompiler encountered an internal error ({0}).",
                 "Try to undo your most recent change to the code as it may be triggering this error. You may be forced to make do without that C# feature. You can also submit this as a bug report as this error should never be displayed to the user normally.",
                 DiagnosticSeverity.Error);
+
+
 
         public static IEnumerable<SharpsilverDiagnostic> GetAllDiagnostics()
         {
