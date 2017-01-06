@@ -25,10 +25,23 @@ namespace Soothsharp.Translation
             ISymbol symbol = symbolInfo.Symbol;
             TranslationResult contractResult = context.Process.ContractsTranslator.TranslateIdentifierAsContract(symbol, this.Expression, context);
             if (contractResult != null) return contractResult;
-            Identifier lastIdentifier = context.Process.IdentifierTranslator.GetIdentifierReference(symbol);
             var errors = new List<Error>();
-
             var container = Container.Translate(context);
+            if (symbol.GetQualifiedName() == SeqTranslator.SeqLength)
+            {
+                errors.AddRange(container.Errors);
+
+                return TranslationResult.FromSilvernode(
+                    new SimpleSequenceSilvernode(this.OriginalNode,
+                        "|",
+                        container.Silvernode,
+                        "|"
+                      ), errors
+                    );
+            }
+
+            Identifier lastIdentifier = context.Process.IdentifierTranslator.GetIdentifierReference(symbol);
+
             errors.AddRange(container.Errors);
 
             return TranslationResult.FromSilvernode(

@@ -36,6 +36,7 @@ namespace Soothsharp.Translation.Trees.CSharp
             var methodName = methodSymbol.GetQualifiedName();
 
             // Verification conditions
+            bool translateAsAbsoluteValue = false;
             bool translateAsPhpStatement = false;
             bool isImpure = true;
             string languageFeatureName = null;
@@ -80,6 +81,9 @@ namespace Soothsharp.Translation.Trees.CSharp
                 case ContractsTranslator.Unfold:
                     languageFeatureName = "unfold";
                     translateAsPhpStatement = true;
+                    break;
+                case SeqTranslator.SeqGetLength:
+                    translateAsAbsoluteValue = true;
                     break;
             }
 
@@ -135,6 +139,12 @@ namespace Soothsharp.Translation.Trees.CSharp
                     new AssertionLikeSilvernode(languageFeatureName, expressions[0], this.OriginalNode)
                     , errors).AndPrepend(prependors.ToArray());
             }
+            else if (translateAsAbsoluteValue)
+            {
+                return TranslationResult.FromSilvernode(
+                  new AbsoluteValueSilvernode(expressions[0], this.OriginalNode)
+                  , errors).AndPrepend(prependors.ToArray());
+            }
             else
             {
                 // Return result
@@ -174,14 +184,25 @@ namespace Soothsharp.Translation.Trees.CSharp
                     Diagnostics.SSIL124_QuantifierMustGetLambda);
             }
             LambdaSharpnode lambda = (LambdaSharpnode)this.Arguments[0];
-            TranslationResult result = TranslationResult.FromSilvernode(
-                new SimpleSequenceSilvernode(this.OriginalNode,
-                 "forall "
-                
-                ),
-                errors
-                );
-            return result;
+            if (lambda.PrepareForInsertionIntoQuantifier(context))
+            {
+                TranslationResult result = TranslationResult.FromSilvernode(
+                    new SimpleSequenceSilvernode(this.OriginalNode,
+                        quantifierKind == QuantifierKind.ForAll ? "forall " : "exists ",
+                        new IdentifierSilvernode(lambda.VariableIdentifier),
+                        " : ",
+                        new TypeSilvernode(null, lambda.VariableSilverType),
+                        " :: ",
+                        lambda.BodySilvernode
+                        ),
+                    errors
+                    );
+                return result;
+            }
+            else
+            {
+                return lambda.GetErrorTranslationResult();
+            }
         }
 
         private TranslationResult TranslateAsImplication(TranslationContext context)

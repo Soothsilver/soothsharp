@@ -2,7 +2,6 @@
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Soothsharp.Translation.Translators;
 
 namespace Soothsharp.Translation.Trees.CSharp.Highlevel
 {

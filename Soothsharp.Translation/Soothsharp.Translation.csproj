@@ -106,12 +106,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompilationUnit.cs" />
+    <Compile Include="Translators\SeqTranslator.cs" />
     <Compile Include="TranslationConfiguration.cs" />
     <Compile Include="TranslationProcessResult.cs" />
     <Compile Include="Translators\SubroutineBuilder.cs" />
     <Compile Include="Trees\CommonUtils.cs" />
     <Compile Include="Trees\CSharp\Expressions\DiagnosticExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\DirectSilvercodeExpressionSharpnode.cs" />
+    <Compile Include="Trees\CSharp\Expressions\ElementAccessSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\LambdaSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\MemberAccessExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\IncrementExpressionSharpnode.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="Trees\Silver\Highlevel\FunctionSilvernode.cs" />
     <Compile Include="Trees\Silver\Highlevel\SubroutineSilvernode.cs" />
     <Compile Include="Trees\Silver\SimpleSequenceSilvernode.cs" />
+    <Compile Include="Trees\Silver\Expressions\AbsoluteValueSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\AssignmentSilvernode.cs" />
     <Compile Include="Trees\CSharp\Statements\ReturnStatementSharpnode.cs" />
     <Compile Include="Trees\Silver\ComplexSilvernode.cs" />

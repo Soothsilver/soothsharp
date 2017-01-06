@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis;
 using Soothsharp.Translation.Trees.CSharp;
 using Soothsharp.Translation.Trees.Silver;
 
-namespace Soothsharp.Translation.Translators
+namespace Soothsharp.Translation
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     class SubroutineBuilder
@@ -45,10 +45,10 @@ namespace Soothsharp.Translation.Translators
             TranslationResult result = new TranslationResult();
             bool isAbstract = false;
 
-            var attributes = MethodSymbol.GetAttributes();
-            switch (VerificationSettings.ShouldVerify(attributes, Context.VerifyUnmarkedItems)) {
+            var attributes = this.MethodSymbol.GetAttributes();
+            switch (VerificationSettings.ShouldVerify(attributes, this.Context.VerifyUnmarkedItems)) {
                 case VerificationSetting.DoNotVerify:
-                    return TranslationResult.FromSilvernode(new SinglelineCommentSilvernode($"Method {MethodSymbol.GetQualifiedName()} skipped because it was marked [Unverified].", this.OriginalNode));
+                    return TranslationResult.FromSilvernode(new SinglelineCommentSilvernode($"Method {this.MethodSymbol.GetQualifiedName()} skipped because it was marked [Unverified].", this.OriginalNode));
                 case VerificationSetting.Contradiction:
                     return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL113_VerificationSettingsContradiction);
                 case VerificationSetting.Verify:
@@ -64,7 +64,7 @@ namespace Soothsharp.Translation.Translators
                         identifier = new Identifier((string)attribute.ConstructorArguments[0].Value);
                         break;
                     case ContractsTranslator.PredicateAttribute:
-                        if (silverKind == SilverKind.Method && !IsConstructor)
+                        if (silverKind == SilverKind.Method && !this.IsConstructor)
                         {
                             silverKind = SilverKind.Predicate;
                         }
@@ -74,7 +74,7 @@ namespace Soothsharp.Translation.Translators
                         }
                         break;
                     case ContractsTranslator.PureAttribute:
-                        if (silverKind == SilverKind.Method && !IsConstructor)
+                        if (silverKind == SilverKind.Method && !this.IsConstructor)
                         {
                             silverKind = SilverKind.Function;
                         }
@@ -84,7 +84,7 @@ namespace Soothsharp.Translation.Translators
                         }
                         break;
                     case ContractsTranslator.AbstractAttribute:
-                        if (IsConstructor)
+                        if (this.IsConstructor)
                         {
                             return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL117_ConstructorMustNotBeAbstract);
                         }
@@ -93,10 +93,10 @@ namespace Soothsharp.Translation.Translators
                         // Ignore other attributes.
                 }
             }
-            TranslationContext bodyContext = Context;
+            TranslationContext bodyContext = this.Context;
             if (silverKind == SilverKind.Function || silverKind == SilverKind.Predicate)
             {
-                bodyContext = new TranslationContext(Context)
+                bodyContext = new TranslationContext(this.Context)
                 {
                     IsFunctionOrPredicateBlock = true,
                     PurityContext = PurityContext.PureOrFail
@@ -106,32 +106,32 @@ namespace Soothsharp.Translation.Translators
             result.Errors.AddRange(body.Errors);
 
             var silverParameters = new List<ParameterSilvernode>();
-            if (!IsConstructor && !MethodSymbol.IsStatic)
+            if (!this.IsConstructor && !this.MethodSymbol.IsStatic)
             {
                 silverParameters.Add(new ParameterSilvernode(new Identifier(Constants.SilverThis), new TypeSilvernode(null, SilverType.Ref), null));
             }
             for (int i = 0; i < this.Parameters.Count; i++)
             {
                 ParameterSharpnode sharpnode = this.Parameters[i];
-                var symbol = MethodSymbol.Parameters[i];
-                var rrs = sharpnode.Translate(Context, symbol);
+                var symbol = this.MethodSymbol.Parameters[i];
+                var rrs = sharpnode.Translate(this.Context, symbol);
                 silverParameters.Add(rrs.Silvernode as ParameterSilvernode);
                 result.Errors.AddRange(rrs.Errors);
             }
 
             // Prepare silvernodes before composing them
             var silName = new IdentifierSilvernode(identifier);
-            var silOriginalnode = OriginalNode;
+            var silOriginalnode = this.OriginalNode;
             var silParameters = silverParameters;
             string silReturnValueName = Constants.SilverReturnVariableName;
-            if (IsConstructor) silReturnValueName = Constants.SilverThis;
+            if (this.IsConstructor) silReturnValueName = Constants.SilverThis;
             if (silverKind != SilverKind.Method)
             {
                 silReturnValueName = "result"; // "result" is a Silver keyword
             }
 
             Error diagnostic;
-            SilverType silverReturnType = TypeTranslator.TranslateType(IsConstructor ? ConstructorClass : MethodSymbol.ReturnType, null, out diagnostic);
+            SilverType silverReturnType = TypeTranslator.TranslateType(this.IsConstructor ? this.ConstructorClass : this.MethodSymbol.ReturnType, null, out diagnostic);
             if (diagnostic != null) result.Errors.Add(diagnostic);
             var silTypeSilvernode = new TypeSilvernode(null, silverReturnType);
             var silVerificationConditions = body?.VerificationConditions;
@@ -144,9 +144,9 @@ namespace Soothsharp.Translation.Translators
             {
                 return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL119_PredicateMustBeBool);
             }
-            if (IsConstructor)
+            if (this.IsConstructor)
             {
-                silBlock.Prepend(new AssignmentSilvernode(Constants.SilverThis, new CallSilvernode(Context.Process.IdentifierTranslator.GetIdentifierReferenceWithTag(ConstructorClass, Constants.InitializerTag), new List<Silvernode>(), SilverType.Ref, null), null));
+                silBlock.Prepend(new AssignmentSilvernode(Constants.SilverThis, new CallSilvernode(this.Context.Process.IdentifierTranslator.GetIdentifierReferenceWithTag(this.ConstructorClass, Constants.InitializerTag), new List<Silvernode>(), SilverType.Ref, null), null));
             }
             if (silverKind == SilverKind.Method)
             {
@@ -172,13 +172,13 @@ namespace Soothsharp.Translation.Translators
 
         private Identifier GetSubroutineIdentifier()
         {
-            if (IsConstructor)
+            if (this.IsConstructor)
             {
-                return Context.Process.IdentifierTranslator.RegisterAndGetIdentifierWithTag(ConstructorClass, Constants.ConstructorTag);
+                return this.Context.Process.IdentifierTranslator.RegisterAndGetIdentifierWithTag(this.ConstructorClass, Constants.ConstructorTag);
             }
             else
             {
-                return Context.Process.IdentifierTranslator.RegisterAndGetIdentifier(MethodSymbol);
+                return this.Context.Process.IdentifierTranslator.RegisterAndGetIdentifier(this.MethodSymbol);
             }
         }
 

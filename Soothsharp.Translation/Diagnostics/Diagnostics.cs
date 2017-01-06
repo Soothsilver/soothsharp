@@ -182,7 +182,12 @@ namespace Soothsharp.Translation
     "Lambda functions can only occur within quantifiers.",
     "Soothsharp does not allow for use of arbitrary lambda functions - you may only use these within quantifiers for syntactic purposes.",
     DiagnosticSeverity.Error);
-
+        public static SharpsilverDiagnostic SSIL128_IndexersAreOnlyForSeqsAndArrays =
+  SharpsilverDiagnostic.Create(
+    "SSIL128",
+    "Element access works only for Seq types and for arrays.",
+    "",
+    DiagnosticSeverity.Error);
 
         // ****************************** 200 Backend Verifier Errors
         public static SharpsilverDiagnostic SSIL201_BackendNotFound =

@@ -202,6 +202,12 @@ namespace Soothsharp.Translation
                 case SyntaxKind.PointerMemberAccessExpression:
                 case SyntaxKind.PointerIndirectionExpression:
                     return new UnknownExpressionSharpnode(expression, "pointers");
+                case SyntaxKind.SimpleLambdaExpression:
+                    return new LambdaSharpnode(expression as SimpleLambdaExpressionSyntax);
+                case SyntaxKind.ParenthesizedLambdaExpression:
+                    return new LambdaSharpnode(expression as ParenthesizedLambdaExpressionSyntax);
+                case SyntaxKind.ElementAccessExpression:
+                    return new ElementAccessSharpnode(expression as ElementAccessExpressionSyntax);
                 default:
                     return new UnknownExpressionSharpnode(expression);
             }
