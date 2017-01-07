@@ -13,7 +13,7 @@ namespace Soothsharp.Translation.Trees.Silver
 
         public override string ToString()
         {
-            return TypeTranslator.SilverTypeToString(silverType);
+            return this.silverType.ToString();
         }
 
         public bool RepresentsVoid()

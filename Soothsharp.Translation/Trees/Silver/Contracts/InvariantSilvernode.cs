@@ -21,7 +21,7 @@ namespace Soothsharp.Translation.Trees.Silver
         
         public override string ToString()
         {
-            return "invariant (" + Invariant + ")";
+            return "invariant " + Invariant + "";
         }
     }
 }

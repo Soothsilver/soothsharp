@@ -33,6 +33,7 @@ namespace Soothsharp.Translation
                 {
                     node.List.Add("\n");
                 }
+                // TODO trigger an error
             }
 
             Identifier initializer = process.IdentifierTranslator.RegisterAndGetIdentifierWithTag(ClassSymbol, Constants.InitializerTag);

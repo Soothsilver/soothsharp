@@ -28,9 +28,9 @@ namespace Soothsharp.Translation.Trees.Silver
         protected string Tabs()
         {
             string tabs = "";
-            for (int i = 0; i < HowManyTabsAfterEachNewline; i++)
+            for (int i = 0; i < (HowManyTabsAfterEachNewline * Constants.SpacesPerIndentLevel); i++)
             {
-                tabs += "\t";
+                tabs += " ";
             }
             return tabs;
         }

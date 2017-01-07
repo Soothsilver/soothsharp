@@ -1,14 +1,9 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Soothsharp.Translation
 {
     static class TypeTranslator
     {
-        internal static string TranslateTypeToString(ITypeSymbol typeSymbol, TypeSyntax where, out Error error)
-        {
-            return SilverTypeToString(TranslateType(typeSymbol, where, out error));
-        }
         /// <summary>
         /// Translates a C# type into a Silver type.
         /// </summary>
@@ -43,24 +38,14 @@ namespace Soothsharp.Translation
                     return SilverType.Perm;
                 case "System.Void":
                     return SilverType.Void;
+                    
+                case SeqTranslator.SeqClassWithoutEndDot:
+                    INamedTypeSymbol namedType = (INamedTypeSymbol)typeSymbol;
+                    var firstTypeArgument = namedType.TypeArguments[0];
+                    return SilverType.Seq(TranslateType(firstTypeArgument, where, out error));
                 default:
                     return SilverType.Ref;
             }
         }
-
-        internal static string SilverTypeToString(SilverType silverType)
-        {
-            switch (silverType)
-            {
-                case SilverType.Bool: return "Bool";
-                case SilverType.Int: return "Int";
-                case SilverType.Ref: return "Ref";
-                case SilverType.Void: return Constants.SilverErrorString;
-                default:
-                    return Constants.SilverErrorString;
-            }
-        }
-
-       
     }
 }

@@ -37,6 +37,7 @@ namespace Soothsharp.Translation.Trees.CSharp
 
             // Verification conditions
             bool translateAsAbsoluteValue = false;
+            bool translateAsPermissionCreate = false;
             bool translateAsPhpStatement = false;
             bool isImpure = true;
             string languageFeatureName = null;
@@ -82,8 +83,12 @@ namespace Soothsharp.Translation.Trees.CSharp
                     languageFeatureName = "unfold";
                     translateAsPhpStatement = true;
                     break;
-                case SeqTranslator.SeqGetLength:
-                    translateAsAbsoluteValue = true;
+                case ContractsTranslator.PermissionCreate:
+                    languageFeatureName = "!PERMISSION_CREATION!";
+                    translateAsPermissionCreate = true;
+                    break;
+                case ContractsTranslator.PermissionFromLocation:
+                    languageFeatureName = "perm";
                     break;
             }
 
@@ -144,6 +149,16 @@ namespace Soothsharp.Translation.Trees.CSharp
                 return TranslationResult.FromSilvernode(
                   new AbsoluteValueSilvernode(expressions[0], this.OriginalNode)
                   , errors).AndPrepend(prependors.ToArray());
+            }
+            else if (translateAsPermissionCreate)
+            {
+                return TranslationResult.FromSilvernode(
+                 new BinaryExpressionSilvernode(
+                     expressions[0],
+                     "/",
+                     expressions[1],
+                     this.OriginalNode)
+                 , errors).AndPrepend(prependors.ToArray());
             }
             else
             {

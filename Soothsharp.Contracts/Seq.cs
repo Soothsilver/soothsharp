@@ -32,13 +32,7 @@ namespace Soothsharp.Contracts
             this.list = list;
         }
 
-        /// <summary>
-        /// Gets the number of elements in the sequence. This is backed by Viper's absolute value operator (<code>|seq|</code>).
-        /// </summary>
-        public int GetLength()
-        {
-            return list.Count;
-        }
+        
         /// <summary>
         /// Gets the number of elements in the sequence. This is backed by Viper's absolute value operator (<code>|seq|</code>).
         /// </summary>

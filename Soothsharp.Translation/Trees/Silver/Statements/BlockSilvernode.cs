@@ -68,26 +68,6 @@ namespace Soothsharp.Translation.Trees.Silver
                     Statements.InsertRange(i, points);
                     i--;
                 }
-                /*
-                // TODO this does not work well because of sequences
-                // Remove goto's that just go to the immediately following label
-                else if (thisStatement is GotoSilvernode)
-                {
-                    if (i != Statements.Count - 1)
-                    {
-                        GotoSilvernode thisSilvernode = (GotoSilvernode)thisStatement;
-                        Silvernode nextNode = Statements[i + 1];
-                        if (nextNode is LabelSilvernode)
-                        {
-                            LabelSilvernode nextNodeAsLabel = (LabelSilvernode)nextNode;
-                            if (thisSilvernode.Label == nextNodeAsLabel.Label)
-                            {
-                                Statements.RemoveAt(i);
-                                i--;
-                            }
-                        }
-                    }
-                }*/
             }
         }
 

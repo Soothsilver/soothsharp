@@ -122,7 +122,7 @@ namespace Soothsharp.Translation
                 VerboseLog("- Semantic analysis...");
                 SemanticModel semanticModel = compilation.GetSemanticModel(compilationUnit.RoslynTree, false);
 
-                VerboseLog("- Mapping to sharpnodes...");
+                VerboseLog("- CONVERSATION PHASE begins...");
                 Sharpnode cSharpTree;
                 try
                 {
@@ -165,15 +165,14 @@ namespace Soothsharp.Translation
                 //axioms.List.Add(collectedType.GenerateSilvernodeInsideCSharpType());
             }
             
-            VerboseLog("REFERENCED ASSEMBLIES ADDITION PHASE is not yet implemented.");
 
             VerboseLog("OPTIMIZATION PHASE begins...");
             masterTree.OptimizeRecursively();
 
-            VerboseLog("Assigning silvernames to identifiers...");
+            VerboseLog("NAME ASSIGNMENT PHASE begins...");
             this.IdentifierTranslator.AssignTrueNames();
 
-            VerboseLog("Postprocessing...");
+            VerboseLog("POSTPROCESSING PHASE begins...");
             masterTree.Postprocess();
 
             return new TranslationProcessResult(masterTree, masterErrorList);

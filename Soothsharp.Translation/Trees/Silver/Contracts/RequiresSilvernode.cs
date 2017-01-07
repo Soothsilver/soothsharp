@@ -21,7 +21,7 @@ namespace Soothsharp.Translation.Trees.Silver
         
         public override string ToString()
         {
-            return "requires (" + Precondition + ")";
+            return "requires " + Precondition + "";
         }
     }
 }

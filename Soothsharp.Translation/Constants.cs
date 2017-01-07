@@ -8,6 +8,11 @@ namespace Soothsharp.Translation
     public static class Constants
     {
         /// <summary>
+        /// The number of spaces to add to the Viper code for each indent level within methods.
+        /// </summary>
+        public const int SpacesPerIndentLevel = 4;
+
+        /// <summary>
         /// In Silver, methods' return values have names that one used to refer to the return value
         /// inside the method. C# methods don't have this, so this is the name that is always given to 
         /// the return value. The identifier translator guarantees name safety.
