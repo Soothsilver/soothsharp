@@ -183,6 +183,8 @@ namespace Soothsharp.Translation
                             Diagnostics.SSIL109_FeatureNotSupportedBecauseSilver, "double-precision numbers");
                     }
                     return new UnknownExpressionSharpnode(expression);
+                case SyntaxKind.NullLiteralExpression:
+                    return new LiteralExpressionSharpnode(expression as LiteralExpressionSyntax, null);
 
 
                 // Variables

@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using System;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp;
 using Soothsharp.Translation.Trees.Silver;
 
@@ -14,6 +15,11 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
         {
             this.integerValue = literalValue;
             this.kind = LiteralKind.Int32;
+        }
+        public LiteralExpressionSharpnode(LiteralExpressionSyntax literalExpressionSyntax, object nullObject) : base(literalExpressionSyntax)
+        {
+            if (nullObject != null) throw new ArgumentException("The second argument must be null.");
+            this.kind = LiteralKind.Null;
         }
         public LiteralExpressionSharpnode(LiteralExpressionSyntax literalExpressionSyntax, bool literalValue) : base(literalExpressionSyntax)
         {
@@ -31,6 +37,9 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
                     break;
                 case LiteralKind.Int32:
                     sn = new TextSilvernode(integerValue.ToString(), OriginalNode);
+                    break;
+                case LiteralKind.Null:
+                    sn = new TextSilvernode("null", OriginalNode);
                     break;
             }
             if (sn != null)

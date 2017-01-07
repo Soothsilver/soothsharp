@@ -18,6 +18,7 @@ namespace Soothsharp.Translation
         public const string TakeDrop = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.TakeDrop);
         public const string Take = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.Take);
         public const string Drop = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.Drop);
+        public const string OperatorPlus = SeqTranslator.SEQ_CLASS + "operator +";
 
     }
 }
