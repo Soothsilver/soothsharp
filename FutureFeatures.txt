@@ -1,7 +1,7 @@
 TODO:
 arrays, array elements, element access, array creation expression, array length
 
-Seq, ++, Contains, Drop, Take, TakeDrop
+Seq constructor
 Forall and Exists for non-integers
 Forall and Exists: triggers
 

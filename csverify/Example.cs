@@ -12,14 +12,11 @@ namespace Soothsharp.Csverify
   
     class T2
     {
-        Seq<bool> a;
         public void test()
         {
-           Inhale(Acc(this.a));
-
-           Assume(a.Length > 1);
-           Assume(a.TakeDrop(1,2)[0] == false);
-            Assert(a.Contains(false));
+            Seq<bool> seq = new Seq<bool>();
+            Assert(seq.Contains(true));
+            Assert(seq[2] == false);
         }
     }
 }

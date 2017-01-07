@@ -14,7 +14,6 @@ namespace Soothsharp.Translation.Trees.CSharp
             foreach (var argument in syntax.ArgumentList.Arguments)
             {
                 this.Arguments.Add(RoslynToSharpnode.MapExpression(argument.Expression));
-                // TODO name:colon, ref/out...
             }
         }
 
@@ -23,6 +22,11 @@ namespace Soothsharp.Translation.Trees.CSharp
             var constructorSymbol = context.Semantics.GetSymbolInfo(OriginalNode).Symbol as IMethodSymbol;
             var classSymbol = constructorSymbol.ContainingType;
             bool isDefaultConstructor = constructorSymbol.IsImplicitlyDeclared;
+
+            if (classSymbol.GetQualifiedName() == SeqTranslator.SeqClassWithoutEndDot)
+            {
+                return SeqTranslator.Constructor(Arguments, context, classSymbol.TypeArguments[0], this.OriginalNode);
+            }
 
             var identifier = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();
 

@@ -65,6 +65,7 @@ namespace Soothsharp.Contracts
         /// </summary>
         /// <param name="fieldOrPredicateCall">The field or predicate call we may have access to.</param>
         /// <returns></returns>
+        // ReSharper disable once UnusedParameter.Global
         public static Permission FromLocation<T>(T fieldOrPredicateCall)
         {
             return new Permission(0, 0)
