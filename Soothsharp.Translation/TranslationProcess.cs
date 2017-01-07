@@ -18,6 +18,7 @@ namespace Soothsharp.Translation
     {
         internal IdentifierTranslator IdentifierTranslator;
         public ContractsTranslator ContractsTranslator;
+        public ConstantsTranslator ConstantsTranslator;
         internal TranslationConfiguration Configuration;
         private List<CollectedType> collectedTypes = new List<CollectedType>();
         private List<CompilationUnit> compilationUnits = new List<CompilationUnit>();
@@ -34,6 +35,7 @@ namespace Soothsharp.Translation
         private TranslationProcess()
         {
             this.ContractsTranslator = new ContractsTranslator();
+            this.ConstantsTranslator = new ConstantsTranslator();
             this.IdentifierTranslator = new IdentifierTranslator(this);
         }
         List<Error> masterErrorList = new List<Error>();

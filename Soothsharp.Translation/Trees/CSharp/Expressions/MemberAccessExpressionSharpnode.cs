@@ -25,6 +25,9 @@ namespace Soothsharp.Translation
             ISymbol symbol = symbolInfo.Symbol;
             TranslationResult contractResult = context.Process.ContractsTranslator.TranslateIdentifierAsContract(symbol, this.Expression, context);
             if (contractResult != null) return contractResult;
+            TranslationResult constantResult =
+                context.Process.ConstantsTranslator.TranslateIdentifierAsConstant(symbol, this.Expression, context);
+            if (constantResult != null) return constantResult;
             var errors = new List<Error>();
             var container = Container.Translate(context);
             if (symbol.GetQualifiedName() == SeqTranslator.SeqLength)

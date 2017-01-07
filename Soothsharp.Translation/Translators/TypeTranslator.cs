@@ -44,6 +44,10 @@ namespace Soothsharp.Translation
                     var firstTypeArgument = namedType.TypeArguments[0];
                     return SilverType.Seq(TranslateType(firstTypeArgument, where, out error));
                 default:
+                    if (typeSymbol.TypeKind == TypeKind.Enum)
+                    {
+                        return SilverType.Int;
+                    }
                     return SilverType.Ref;
             }
         }

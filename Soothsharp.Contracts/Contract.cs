@@ -179,5 +179,16 @@ namespace Soothsharp.Contracts
         {
             return false;
         }
+        /// <summary>
+        /// This assertion is true if the given assertion holds for at least one integer. 
+        /// This should only be called
+        /// within contracts (the C# body of this method merely returns false).
+        /// </summary>
+        /// <param name="assertion">The assertion that should hold for at least one integer.</param>
+        /// <returns>Always returns false.</returns>
+        public static bool Exists(Func<int, bool> assertion)
+        {
+            return false;
+        }
     }
 }

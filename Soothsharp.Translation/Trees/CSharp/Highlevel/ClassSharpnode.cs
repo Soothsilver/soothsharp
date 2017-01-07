@@ -67,7 +67,9 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
                 if (node is FieldDeclarationSharpnode)
                 {
                     FieldDeclarationSharpnode fieldDeclaration = (FieldDeclarationSharpnode)node;
-                    var typeSymbol = fieldDeclaration.GetSymbol(semantics).Type;
+                    var fieldSymbol = fieldDeclaration.GetSymbol(semantics);
+                    if (fieldSymbol.IsConst) continue; // Constants are inlined.
+                    var typeSymbol = fieldSymbol.Type;
                     Error error;
                     this.TypeIfCollected.InstanceFields.Add(
                         new CollectedField(

@@ -24,11 +24,11 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
                       case Microsoft.CodeAnalysis.CSharp.SyntaxKind.StructDeclaration:
                           return new DiagnosticSharpnode(mbr, Diagnostics.SSIL108_FeatureNotSupported, "structs");
                       case Microsoft.CodeAnalysis.CSharp.SyntaxKind.EnumDeclaration:
-                          return new DiagnosticSharpnode(mbr, Diagnostics.SSIL105_FeatureNotYetSupported, "enums");
+                          return null;
                       default:
                           return new UnexpectedSharpnode(mbr);
                   }
-              }));
+              }).Where(sn => sn != null));
         }
 
         public override TranslationResult Translate(TranslationContext translationContext)

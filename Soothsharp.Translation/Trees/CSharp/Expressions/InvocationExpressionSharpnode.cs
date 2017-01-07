@@ -51,6 +51,8 @@ namespace Soothsharp.Translation.Trees.CSharp
                     return TranslateAsImplication(context);
                 case ContractsTranslator.ForAll:
                     return TranslateAsQuantifier(QuantifierKind.ForAll, context);
+                case ContractsTranslator.Exists:
+                    return TranslateAsQuantifier(QuantifierKind.Exists, context);
                 case ContractsTranslator.ContractAssert:
                     languageFeatureName = "assert";
                     translateAsPhpStatement = true;

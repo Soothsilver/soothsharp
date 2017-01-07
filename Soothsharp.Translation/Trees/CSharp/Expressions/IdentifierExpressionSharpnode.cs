@@ -27,6 +27,9 @@ namespace Soothsharp.Translation
             ISymbol symbol = this.GetIdentifierSymbol(context);
             TranslationResult contractResult = context.Process.ContractsTranslator.TranslateIdentifierAsContract(symbol, IdentifierName, context);
             if (contractResult != null) return contractResult;
+            TranslationResult constantResult =
+                context.Process.ConstantsTranslator.TranslateIdentifierAsConstant(symbol, IdentifierName, context);
+            if (constantResult != null) return constantResult;
 
             var identifierNode = new IdentifierSilvernode(context.Process.IdentifierTranslator.GetIdentifierReference(symbol));
             if (symbol.ContainingSymbol.Kind == SymbolKind.Method)

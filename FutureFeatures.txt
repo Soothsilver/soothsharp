@@ -3,12 +3,12 @@ arrays, array elements, element access, array creation expression, array length
 constant
 static member
 enum
-predicate
 Seq, ++
-Perm(), unfolding, forall, exists, folding
+Forall and Exists for non-integers
+Forall and Exists: triggers
 
 CHECK:
-
+abstract predicate/function/method
 
 THINK DONE:
 fold, unfold
