@@ -12,10 +12,14 @@ namespace Soothsharp.Csverify
   
     class T2
     {
-        public static void test()
+        Seq<bool> a;
+        public void test()
         {
-            Seq<bool> a = null;
-            a = a + a;
+           Inhale(Acc(this.a));
+
+           Assume(a.Length > 1);
+           Assume(a.TakeDrop(1,2)[0] == false);
+            Assert(a.Contains(false));
         }
     }
 }

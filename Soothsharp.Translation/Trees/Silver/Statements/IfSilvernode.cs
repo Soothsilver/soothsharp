@@ -15,7 +15,6 @@ namespace Soothsharp.Translation.Trees.Silver
             StatementSilvernode elseBranch)
             : base(originalNode)
         {
-            OriginalNode = originalNode;
             this.condition = condition;
             this.then = then;
             this.elseBranch = elseBranch;
