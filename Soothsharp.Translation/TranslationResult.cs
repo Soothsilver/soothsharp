@@ -30,7 +30,7 @@ namespace Soothsharp.Translation
         // For methods and loops.
         public List<VerificationConditionSilvernode> VerificationConditions = new List<VerificationConditionSilvernode>();
 
-        public static TranslationResult Error(SyntaxNode node, SharpsilverDiagnostic diagnostic, params Object[] diagnosticArguments)
+        public static TranslationResult Error(SyntaxNode node, SoothsharpDiagnostic diagnostic, params Object[] diagnosticArguments)
         {
             TranslationResult r = new TranslationResult();
             r.Silvernode = new ErrorSilvernode(node);

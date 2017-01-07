@@ -7,13 +7,17 @@ using Soothsharp.Contracts;
 
 namespace Soothsharp.Translation
 {
-    class SeqTranslator
+    internal static class SeqTranslator
     {
-        private const string ContractsNamespace = nameof(Soothsharp) + "." + nameof(Contracts) + ".";
-        private const string SeqClass = ContractsNamespace + nameof(Seq<float>) + ".";
-        public const string SeqClassWithoutEndDot = ContractsNamespace + nameof(Seq<float>);
-        public const string SeqLength = SeqClass + nameof(Seq<float>.Length);
-        public const string SeqAccess = SeqClass + "this";
+        private const string CONTRACTS_NAMESPACE = nameof(Soothsharp) + "." + nameof(Contracts) + ".";
+        private const string SEQ_CLASS = SeqTranslator.CONTRACTS_NAMESPACE + nameof(Seq<float>) + ".";
+        public const string SeqClassWithoutEndDot = SeqTranslator.CONTRACTS_NAMESPACE + nameof(Seq<float>);
+        public const string SeqLength = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.Length);
+        public const string SeqAccess = SeqTranslator.SEQ_CLASS + "this";
+        public const string Contains = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.Contains);
+        public const string TakeDrop = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.TakeDrop);
+        public const string Take = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.Take);
+        public const string Drop = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.Drop);
 
     }
 }

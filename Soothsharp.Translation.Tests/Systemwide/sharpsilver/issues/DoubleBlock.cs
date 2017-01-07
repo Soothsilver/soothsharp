@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sharpsilver.Translation.Tests.Systemwide.sharpsilver.issues
+namespace Soothsharp.Translation.Tests.Systemwide.sootsharp.issues
 {
     class DoubleBlock
     {

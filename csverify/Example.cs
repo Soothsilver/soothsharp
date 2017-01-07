@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Soothsharp.Contracts;
 using static Soothsharp.Contracts.Contract;
+// ReSharper disable All
 
 namespace Soothsharp.Csverify
 {
@@ -25,6 +26,7 @@ namespace Soothsharp.Csverify
             T a = new Csverify.T();
             NeedAccess(a);
             Assert(Permission.FromLocation(a.Field) == Permission.Write);
+            a.Field = 3;
         }
     }
 }

@@ -4,9 +4,9 @@ namespace Soothsharp.Translation.Trees.CSharp
 {
     class DiagnosticSharpnode : Sharpnode
     {
-        private SharpsilverDiagnostic diagnostic;
+        private SoothsharpDiagnostic diagnostic;
         private object[] parameters;
-        public DiagnosticSharpnode(SyntaxNode node, SharpsilverDiagnostic diagnostic, params object[] parameters) : base(node)
+        public DiagnosticSharpnode(SyntaxNode node, SoothsharpDiagnostic diagnostic, params object[] parameters) : base(node)
         {
             this.diagnostic = diagnostic;
             this.parameters = parameters ?? new object[0];

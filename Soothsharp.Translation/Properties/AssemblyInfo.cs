@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Sharpsilver.Translation")]
-[assembly: AssemblyDescription("Class library that contains the bulk of the Sharpsilver transcompiler code")]
+[assembly: AssemblyTitle("Soothsharp.Translation")]
+[assembly: AssemblyDescription("Class library that contains the bulk of the Soothsharp transcompiler code")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Sharpsilver")]
+[assembly: AssemblyProduct("Soothsharp")]
 [assembly: AssemblyCopyright("Copyright © Petr Hudeček 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

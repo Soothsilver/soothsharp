@@ -211,7 +211,7 @@
     <Compile Include="SilverType.cs" />
     <Compile Include="Translators\ContractsTranslator.cs" />
     <Compile Include="Diagnostics\DiagnosticSeverity.cs" />
-    <Compile Include="Diagnostics\SharpsilverDiagnostic.cs" />
+    <Compile Include="Diagnostics\SoothsharpDiagnostic.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Exceptions\TranslationNotSupportedException.cs" />
     <Compile Include="ExtensionMethods.cs" />

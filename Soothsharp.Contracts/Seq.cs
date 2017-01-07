@@ -59,7 +59,7 @@ namespace Soothsharp.Contracts
         /// </summary>  
         /// <param name="drop">The number of elements to drop at the beginning.</param>
         /// <param name="take">The number of elements to take at the beginning.</param>
-        public Seq<T> Take(int drop, int take)
+        public Seq<T> TakeDrop(int drop, int take)
         {
             return new Seq<T>(list.Take(take).Skip(drop).ToList());
         }

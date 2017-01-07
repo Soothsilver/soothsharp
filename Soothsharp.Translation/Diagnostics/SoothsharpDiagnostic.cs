@@ -5,9 +5,9 @@
     /// An instance of this class represents a generic error message, not associated with a particular syntax node or line of code.
     /// That is for the class <see cref="Error"/>. 
     /// </summary>
-    public class SharpsilverDiagnostic
+    public class SoothsharpDiagnostic
     {
-        private SharpsilverDiagnostic(string errorCode, string caption, string details, DiagnosticSeverity severity)
+        private SoothsharpDiagnostic(string errorCode, string caption, string details, DiagnosticSeverity severity)
         {
             this.ErrorCode = errorCode;
             this.Caption = caption;
@@ -34,19 +34,19 @@
         public DiagnosticSeverity Severity { get; }
 
         /// <summary>
-        /// Creates a new <see cref="SharpsilverDiagnostic"/> associated with an error code. 
+        /// Creates a new <see cref="SoothsharpDiagnostic"/> associated with an error code. 
         /// </summary>
         /// <param name="errorCode">The error code.</param>
         /// <param name="caption">The main error text.</param>
         /// <param name="details">Optional details, or null.</param>
         /// <param name="severity">Whether it's an error or a warning.</param>
-        public static SharpsilverDiagnostic Create(
+        public static SoothsharpDiagnostic Create(
             string errorCode, 
             string caption, 
             string details, 
             DiagnosticSeverity severity)
         {
-            SharpsilverDiagnostic sd = new SharpsilverDiagnostic(errorCode, caption, details, severity);
+            SoothsharpDiagnostic sd = new SoothsharpDiagnostic(errorCode, caption, details, severity);
             return sd;
         }
         

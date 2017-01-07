@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Sharpsilver.Contracts;
+using Soothsharp.Contracts;
 
-namespace Sharpsilver.Translation.Tests.Systemwide.sharpsilver.translation
+namespace Soothsharp.Translation.Tests.Systemwide.soothsharp.translation
 {
     class CustomGoto
     {

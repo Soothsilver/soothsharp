@@ -21,7 +21,7 @@ namespace Soothsharp.Translation
             Silvernode = silvernode;
             Errors = errors;
         }
-        public static TranslationProcessResult Error(SyntaxNode syntaxNode, SharpsilverDiagnostic diagnostic, params object[] arguments)
+        public static TranslationProcessResult Error(SyntaxNode syntaxNode, SoothsharpDiagnostic diagnostic, params object[] arguments)
         {
             return new TranslationProcessResult(null, new List<Error> { new Error(diagnostic, syntaxNode, arguments) });
         }

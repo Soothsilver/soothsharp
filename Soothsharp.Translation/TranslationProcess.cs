@@ -98,9 +98,9 @@ namespace Soothsharp.Translation
                 throw new InvalidOperationException("The process was already executed once.");
             }
             executed = true;
-            VerboseLog("Loading mscorlib and Sharpsilver.Contracts...");
+            VerboseLog("Loading mscorlib and Soothsharp.Contracts...");
             var mscorlib = MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location);
-            var contractsLibrary = MetadataReference.CreateFromFile("Soothsharp.Contracts.dll");
+            var contractsLibrary = MetadataReference.CreateFromFile(typeof(Soothsharp.Contracts.Contract).Assembly.Location);
             VerboseLog("Initializing compilation...");
             CSharpCompilation compilation;
             try

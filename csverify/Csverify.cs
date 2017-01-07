@@ -73,7 +73,7 @@ namespace Soothsharp.Cs2Sil
                 .Add("v|version", $"Shows that the version of this program is {version}.", option => showVersion = option != null)
                 .Add("V|verbose", "Enables verbose mode. In verbose mode, additional debugging information is printed and more details are written for each error message.", option => verbose = option != null)
                 .Add("q|quiet", "Enable quiet mode. In quiet mode, only the resulting Silver code or error messages are shown.", option => quiet = option != null)
-                .Add("r|reference=", "Adds the {ASSEMBLY.DLL} file as a reference when doing semantic analysis on the code. mscorlib and Sharpsilver.Contracts are added automatically.", filename => references.Add(filename))
+                .Add("r|reference=", "Adds the {ASSEMBLY.DLL} file as a reference when doing semantic analysis on the code. mscorlib and Soothsharp.Contracts are added automatically.", filename => references.Add(filename))
                 .Add("a|assume=", "Translates the file {CLASS.CS} to Silver and prepends it to the main generated file, but its methods and functions won't be verified - their postconditions will be assumed to be true. ", filename => assumedFiles.Add(filename))   
                 .Add("w|wait", "When the program finishes, it will wait for the user to press any key before terminating.", option => waitAfterwards = option != null)
                 .Add("O|only-annotated", "Only transcompile classes that have the [Verified] attribute, and static methods that have the [Verified] attribute even if their containing classes don't have the [Verified] attribute." , option => onlyAnnotated = option != null)

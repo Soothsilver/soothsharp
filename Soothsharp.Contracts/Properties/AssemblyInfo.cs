@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Sharpsilver.Contracts")]
-[assembly: AssemblyDescription("End-user contracts library for the Sharpsilver transcompiler")]
+[assembly: AssemblyTitle("Soothsharp.Contracts")]
+[assembly: AssemblyDescription("End-user contracts library for the Soothsharp transcompiler")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Sharpsilver.Contracts")]
+[assembly: AssemblyProduct("Soothsharp.Contracts")]
 [assembly: AssemblyCopyright("Copyright © 2016 Petr Hudeček")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

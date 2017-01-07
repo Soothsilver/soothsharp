@@ -11,9 +11,9 @@ namespace Soothsharp.Translation
         /// <summary>
         /// Information about this kind of error.
         /// </summary>
-        public SharpsilverDiagnostic Diagnostic;
+        public SoothsharpDiagnostic Diagnostic;
         /// <summary>
-        /// Arguments to be passed to the <see cref="SharpsilverDiagnostic"/> message.
+        /// Arguments to be passed to the <see cref="SoothsharpDiagnostic"/> message.
         /// </summary>
         public object[] DiagnosticArguments;
         /// <summary>
@@ -44,7 +44,7 @@ namespace Soothsharp.Translation
         }
 
 
-        public Error(SharpsilverDiagnostic diagnostic, SyntaxNode node, params object[] diagnosticArguments)
+        public Error(SoothsharpDiagnostic diagnostic, SyntaxNode node, params object[] diagnosticArguments)
         {
             this.Diagnostic = diagnostic;
             this.DiagnosticArguments = diagnosticArguments;
