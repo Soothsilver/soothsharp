@@ -89,6 +89,9 @@
   <ItemGroup>
     <Content Include="icons\csverify1.ico" />
     <Compile Include="Csverify.cs" />
+    <Content Include="CustomGoto.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Compile Include="Example2.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>

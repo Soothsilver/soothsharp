@@ -105,6 +105,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backends\CarbonNailgunBackend.cs" />
+    <Compile Include="Backends\NailgunBackend.cs" />
+    <Compile Include="Backends\SiliconNailgunBackend.cs" />
     <Compile Include="CompilationUnit.cs" />
     <Compile Include="Translators\ConstantsTranslator.cs" />
     <Compile Include="Translators\SeqTranslator.cs" />

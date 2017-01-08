@@ -8,10 +8,15 @@ using Xunit;
 
 namespace Soothsharp.Translation.Tests
 {
-    public class SystemTest
+    /// <summary>
+    /// The systemwide test runs translation, then verification (using Silicon) and expects either 
+    /// the verification to be successful or the translation or verification to fail with reasons
+    /// specified in comments in the test files.
+    /// </summary>
+    public class SystemwideTest
     {
         [Theory()]
-        [MemberData(nameof(SystemTest.GetTestFiles))]
+        [MemberData(nameof(SystemwideTest.GetTestFiles))]
         public void Sys(string test)
         {
             string dir = AppDomain.CurrentDomain.BaseDirectory;
@@ -62,7 +67,7 @@ namespace Soothsharp.Translation.Tests
             var errors = result.Errors;
             if (!syntaxOnly && result.Errors.Count == 0)
             {
-                IBackend backend = new CarbonBackend();
+                IBackend backend = new CarbonNailgunBackend();
                 var verificationResult = backend.Verify(result.Silvernode);
                 errors = verificationResult.Errors;
             }
@@ -85,7 +90,7 @@ namespace Soothsharp.Translation.Tests
             Assert.True(result.WasTranslationSuccessful, string.Join("\n", result.Errors));
         }
 
-        public static IEnumerable<object[]> GetTestFiles()
+        private static IEnumerable<object[]> GetTestFiles()
         {
             foreach (
                 var filename in
