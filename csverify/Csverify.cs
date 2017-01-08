@@ -5,7 +5,7 @@ using Mono.Options;
 using Soothsharp.Translation.Trees.Silver;
 using Soothsharp.Contracts;
 using Soothsharp.Translation;
-using Soothsharp.Translation.BackendInterface;
+using Soothsharp.Translation.Backends;
 
 // ReSharper disable RedundantDefaultMemberInitializer
 

@@ -102,6 +102,15 @@ namespace Soothsharp.Translation.Trees.CSharp
                 case SeqTranslator.TakeDrop:
                     translationStyle = new InvocationSeqTakeDrop(true, true, this.MethodGroup, this.methodGroupSharpnode);
                     break;
+                case ContractsTranslator.Result:
+                    translationStyle = new InvocationResult();
+                    break;
+                case ContractsTranslator.Folding:
+                    translationStyle = new InvocationFoldingUnfolding(true);
+                    break;
+                case ContractsTranslator.Unfolding:
+                    translationStyle = new InvocationFoldingUnfolding(false);
+                    break;
                 default:
                     translationStyle = new InvocationStandardMethod(this.MethodGroup, this.methodGroupSharpnode, method);
                     break;

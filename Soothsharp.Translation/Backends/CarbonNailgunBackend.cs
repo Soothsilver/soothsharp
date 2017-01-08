@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soothsharp.Translation.BackendInterface
+namespace Soothsharp.Translation.Backends
 {
     public class CarbonNailgunBackend : NailgunBackend
     {

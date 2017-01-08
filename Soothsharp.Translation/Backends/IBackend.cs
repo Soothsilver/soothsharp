@@ -1,6 +1,6 @@
 ﻿using Soothsharp.Translation.Trees.Silver;
 
-namespace Soothsharp.Translation.BackendInterface
+namespace Soothsharp.Translation.Backends
 {
     /// <summary>
     /// A backend class executes its corresponding executable (carbon or silicon), passing its the transcompiler's output. The backend class

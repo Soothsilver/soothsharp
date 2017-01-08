@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Soothsharp.Translation.Trees.Silver;
 
-namespace Soothsharp.Translation.BackendInterface
+namespace Soothsharp.Translation.Backends
 {
     /// <summary>
     /// Connnects to the "silicon" backend verifier.

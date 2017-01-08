@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Soothsharp.Translation.Trees.Silver;
 
-namespace Soothsharp.Translation.BackendInterface
+namespace Soothsharp.Translation.Backends
 {
     /// <summary>
     /// Contains static constants and functions used by both backends.

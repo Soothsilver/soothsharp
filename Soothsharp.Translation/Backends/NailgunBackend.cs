@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Soothsharp.Translation.Trees.Silver;
 
-namespace Soothsharp.Translation.BackendInterface
+namespace Soothsharp.Translation.Backends
 {
     public abstract class NailgunBackend : IBackend
     {

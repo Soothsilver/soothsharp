@@ -3,10 +3,10 @@ arrays, array elements, element access, array creation expression, array length
 
 Forall and Exists for non-integers
 Forall and Exists: triggers
-folding, unfolding, Result<>
 
 CHECK:
 abstract predicate/function/method
+folding, unfolding, Result<>
 
 THINK DONE:
 fold, unfold
@@ -15,5 +15,3 @@ member access, scopes, default constructors, instance fields, local variables, o
 IGNORE:
 local constant declaration
 
-
-A C# declaration may be marked with the [Silvername(name=”[silver-name]”)] attribute which forces the translator to translate the declared symbol into Silver as the identifier [silver-name], even if that would conflict with other names.

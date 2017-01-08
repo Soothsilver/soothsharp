@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Soothsharp.Translation.BackendInterface;
+using Soothsharp.Translation.Backends;
 
 namespace Soothsharp.Translation.Tests
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Soothsharp.Translation.BackendInterface;
+using Soothsharp.Translation.Backends;
 using Xunit;
 
 namespace Soothsharp.Translation.Tests

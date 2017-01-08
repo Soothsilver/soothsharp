@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Soothsharp.Translation.BackendInterface
+namespace Soothsharp.Translation.Backends
 {
     /// <summary>
     /// Represents the result of a backend verification.
