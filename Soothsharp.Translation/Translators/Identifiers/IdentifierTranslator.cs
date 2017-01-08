@@ -71,7 +71,6 @@ namespace Soothsharp.Translation
         };
         private readonly Dictionary<TaggedSymbol, Identifier> registeredGlobalSymbols = new Dictionary<TaggedSymbol, Identifier>();
         private readonly Dictionary<TaggedSymbol, Identifier> references = new Dictionary<TaggedSymbol, Identifier>();
-        public readonly Identifier SystemObject = new Identifier(Constants.SilverSystemObject);
 
         private readonly List<string> usedSilverIdentifiers = new List<string>
         {
@@ -83,7 +82,7 @@ namespace Soothsharp.Translation
             Constants.CSharpTypeDomain,
             Constants.SilverThis,
             ""
-        }.Union(silverKeywords).ToList();
+        }.Union(IdentifierTranslator.silverKeywords).ToList();
 
         // TODO register local symbols, later on, when import mechanisms and local syntax in Silver are more clear to me
 
@@ -104,8 +103,8 @@ namespace Soothsharp.Translation
         public Identifier RegisterAndGetIdentifierWithTag(ISymbol classSymbol, string tag)
         {
             var taggedSymbol = new TaggedSymbol(classSymbol, tag);
-            Identifier identifier = new Identifier(taggedSymbol, this);
-            registeredGlobalSymbols.Add(taggedSymbol, identifier);
+            Identifier identifier = new Identifier(taggedSymbol);
+            this.registeredGlobalSymbols.Add(taggedSymbol, identifier);
             return identifier;
         }
 
@@ -116,12 +115,12 @@ namespace Soothsharp.Translation
         public Identifier GetIdentifierReferenceWithTag(ISymbol method, string tag)
         {
             var taggedSymbol = new TaggedSymbol(method, tag);
-            if (references.ContainsKey(taggedSymbol))
+            if (this.references.ContainsKey(taggedSymbol))
             {
-                return references[taggedSymbol];
+                return this.references[taggedSymbol];
             }
-            Identifier reference = new Identifier(taggedSymbol, this);
-            references.Add(taggedSymbol, reference);
+            Identifier reference = new Identifier(taggedSymbol);
+            this.references.Add(taggedSymbol, reference);
             return reference;
         }
 
@@ -129,19 +128,19 @@ namespace Soothsharp.Translation
         private int temporaryIdentifiersRegisteredCount;
         public Identifier RegisterNewUniqueIdentifier()
         {
-            temporaryIdentifiersRegisteredCount++;
-            return RegisterAndGetIdentifierWithTag(null, "tmp" + temporaryIdentifiersRegisteredCount);
+            this.temporaryIdentifiersRegisteredCount++;
+            return RegisterAndGetIdentifierWithTag(null, "tmp" + this.temporaryIdentifiersRegisteredCount);
         }
 
         public void AssignTrueNames()
         {
-            foreach (var kvp in registeredGlobalSymbols)
+            foreach (var kvp in this.registeredGlobalSymbols)
             {
                 ISymbol symbol = kvp.Value.Symbol.Symbol;
                 string baseSilverName = "";
                 if (symbol != null)
                 {
-                    baseSilverName = Silverize(symbol.GetNameWithoutNamespaces());
+                    baseSilverName = IdentifierTranslator.Silverize(symbol.GetNameWithoutNamespaces());
                     if (kvp.Key.Symbol is IParameterSymbol)
                     {
                         baseSilverName = symbol.GetSimpleName();
@@ -153,23 +152,23 @@ namespace Soothsharp.Translation
                 }
                 string silverName = baseSilverName;
                 int i = 2;
-                while (usedSilverIdentifiers.Contains(silverName))
+                while (this.usedSilverIdentifiers.Contains(silverName))
                 {
                     silverName = baseSilverName + i;
                     i++;
                 }
-                usedSilverIdentifiers.Add(silverName);
+                this.usedSilverIdentifiers.Add(silverName);
                 kvp.Value.Silvername = silverName;
             }
-            foreach (var kvp in references)
+            foreach (var kvp in this.references)
             {
-                if (registeredGlobalSymbols.ContainsKey(kvp.Key))
+                if (this.registeredGlobalSymbols.ContainsKey(kvp.Key))
                 {
-                    kvp.Value.Silvername = registeredGlobalSymbols[kvp.Key].Silvername;
+                    kvp.Value.Silvername = this.registeredGlobalSymbols[kvp.Key].Silvername;
                 }
                 else
                 {
-                    process.AddError(new Error(Diagnostics.SSIL120_UndeclaredNameReferenced, null, kvp.Key.Symbol +
+                    this.process.AddError(new Error(Diagnostics.SSIL120_UndeclaredNameReferenced, null, kvp.Key.Symbol +
                         (String.IsNullOrEmpty(kvp.Key.Tag) ? "" : "_" + kvp.Key.Tag)));
                 }
             }

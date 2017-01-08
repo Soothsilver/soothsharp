@@ -24,7 +24,7 @@ namespace Soothsharp.Translation
 
         public override bool Equals(object obj)
         {
-            return obj is SilverType && this.Equals((SilverType) obj);
+            return obj is SilverType && Equals((SilverType) obj);
         }
 
         public static bool operator==(SilverType one, SilverType other)
@@ -43,7 +43,7 @@ namespace Soothsharp.Translation
 
         public override string ToString()
         {
-            return _silvername;
+            return this._silvername;
         }
 
         /// <summary>

@@ -13,44 +13,44 @@ namespace Soothsharp.Translation.Trees.CSharp
 {
     class LambdaSharpnode : ExpressionSharpnode
     {
-        private Error errorneousResult = null;
+        private Error errorneousResult;
         private ParameterSharpnode parameter;
         private ExpressionSharpnode body;
         public Identifier VariableIdentifier { get; private set; }
         public SilverType VariableSilverType { get; private set; }
         public Silvernode BodySilvernode { get; private set; }
-        private TranslationResult failedResult = null;
+        private TranslationResult failedResult;
 
         public LambdaSharpnode(ParenthesizedLambdaExpressionSyntax syntax) : base(syntax)
         {
            if (syntax.ParameterList.Parameters.Count != 1)
            {
-               errorneousResult = new Soothsharp.Translation.Error(
+               this.errorneousResult = new Error(
                    Diagnostics.SSIL125_LambdasMustHaveSingleParameter, syntax.ParameterList);
                return;
            }
-            parameter = new ParameterSharpnode(syntax.ParameterList.Parameters[0]);
+            this.parameter = new ParameterSharpnode(syntax.ParameterList.Parameters[0]);
             if (syntax.Body is ExpressionSyntax)
             {
-                body = RoslynToSharpnode.MapExpression((ExpressionSyntax) syntax.Body);
+                this.body = RoslynToSharpnode.MapExpression((ExpressionSyntax) syntax.Body);
             }
             else
             {
-                errorneousResult = new Soothsharp.Translation.Error(
+                this.errorneousResult = new Error(
                     Diagnostics.SSIL126_LambdasMustBeExpressions, syntax.Body);
             }
 
         }
         public LambdaSharpnode(SimpleLambdaExpressionSyntax syntax) : base(syntax)
         {
-            parameter = new ParameterSharpnode(syntax.Parameter);
+            this.parameter = new ParameterSharpnode(syntax.Parameter);
             if (syntax.Body is ExpressionSyntax)
             {
-                body = RoslynToSharpnode.MapExpression((ExpressionSyntax)syntax.Body);
+                this.body = RoslynToSharpnode.MapExpression((ExpressionSyntax)syntax.Body);
             }
             else
             {
-                errorneousResult = new Soothsharp.Translation.Error(
+                this.errorneousResult = new Error(
                     Diagnostics.SSIL126_LambdasMustBeExpressions, syntax.Body);
             }
         }
@@ -59,11 +59,9 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            if (errorneousResult != null)
+            if (this.errorneousResult != null)
             {
-                return TranslationResult.Error(errorneousResult.Node,
-                    errorneousResult.Diagnostic,
-                    errorneousResult.DiagnosticArguments);
+                return TranslationResult.Error(this.errorneousResult.Node, this.errorneousResult.Diagnostic, this.errorneousResult.DiagnosticArguments);
             }
             return TranslationResult.Error(this.OriginalNode,
                 Diagnostics.SSIL127_LambdasOnlyInContracts);
@@ -71,32 +69,28 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         public bool PrepareForInsertionIntoQuantifier(TranslationContext context)
         {
-            if (errorneousResult != null)
+            if (this.errorneousResult != null)
             {
-                failedResult = TranslationResult.Error(errorneousResult.Node,
-                errorneousResult.Diagnostic,
-                errorneousResult.DiagnosticArguments);
+                this.failedResult = TranslationResult.Error(this.errorneousResult.Node, this.errorneousResult.Diagnostic, this.errorneousResult.DiagnosticArguments);
                 return false;
             }
-            var parameterSymbol = context.Semantics.GetDeclaredSymbol(parameter.ParameterSyntax);
-            VariableIdentifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(parameterSymbol);
-            VariableSilverType = TypeTranslator.TranslateType(parameterSymbol.Type, this.parameter.OriginalNode,
-                out errorneousResult);
-            if (errorneousResult != null)
+            var parameterSymbol = context.Semantics.GetDeclaredSymbol(this.parameter.ParameterSyntax);
+            this.VariableIdentifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(parameterSymbol);
+            this.VariableSilverType = TypeTranslator.TranslateType(parameterSymbol.Type, this.parameter.OriginalNode,
+                out this.errorneousResult);
+            if (this.errorneousResult != null)
             {
-                failedResult = TranslationResult.Error(errorneousResult.Node,
-                errorneousResult.Diagnostic,
-                errorneousResult.DiagnosticArguments);
+                this.failedResult = TranslationResult.Error(this.errorneousResult.Node, this.errorneousResult.Diagnostic, this.errorneousResult.DiagnosticArguments);
                 return false;
             }
-            TranslationResult res = body.Translate(context.ChangePurityContext(PurityContext.PureOrFail));
+            TranslationResult res = this.body.Translate(context.ChangePurityContext(PurityContext.PureOrFail));
             if (res.WasTranslationSuccessful)
             {
-                BodySilvernode = res.Silvernode;
+                this.BodySilvernode = res.Silvernode;
             }
             else
             {
-                failedResult = res;
+                this.failedResult = res;
                 return false;
             }
             return true;
@@ -104,8 +98,8 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         internal TranslationResult GetErrorTranslationResult()
         {
-            if (failedResult == null) throw new InvalidOperationException("failedResult was null");
-            return failedResult; 
+            if (this.failedResult == null) throw new InvalidOperationException("failedResult was null");
+            return this.failedResult; 
         }
     }
 }

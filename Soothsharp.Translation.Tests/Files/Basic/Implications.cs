@@ -15,9 +15,9 @@ namespace Soothsharp.TranslationTests.Files
     {
         static void Impl(bool a)
         {
-            Requires(a.Implies(true));
+            Contract.Requires(a.Implies(true));
               
-            bool b = a.Implies(M());
+            bool b = a.Implies(Implications.M());
         }
         static Boolean M()
         {

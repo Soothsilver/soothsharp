@@ -4,11 +4,11 @@ namespace Soothsharp.Translation.Trees.Silver
 {
     class EnsuresSilvernode : VerificationConditionSilvernode
     {
-        public Silvernode Postcondition;
+        private Silvernode Postcondition;
 
         public EnsuresSilvernode(Silvernode postcondition, SyntaxNode originalNode) : base(originalNode)
         {
-            Postcondition = postcondition;
+            this.Postcondition = postcondition;
         }
 
         public override int CompareTo(VerificationConditionSilvernode other)
@@ -21,7 +21,7 @@ namespace Soothsharp.Translation.Trees.Silver
         
         public override string ToString()
         {
-            return "ensures " + Postcondition + "";
+            return "ensures " + this.Postcondition + "";
         }
     }
 }

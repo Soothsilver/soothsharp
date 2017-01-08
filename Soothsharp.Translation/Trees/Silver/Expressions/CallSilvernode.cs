@@ -21,7 +21,7 @@ namespace Soothsharp.Translation.Trees.Silver
 
         public override string ToString()
         {
-            return identifier + " (" + String.Join(", ", expressions) + ")";
+            return this.identifier + " (" + String.Join(", ", this.expressions) + ")";
         }
     }
 }

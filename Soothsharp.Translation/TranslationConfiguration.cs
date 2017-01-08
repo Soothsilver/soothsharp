@@ -8,7 +8,7 @@
         /// <summary>
         /// If true, additional information is printed to the console during verification.
         /// </summary>
-        public bool Verbose { get; set; } = false;
+        public bool Verbose { get; set; }
         /// <summary>
         /// If true, classes and methods not annotated with a verification settings attributes, will be considered marked [Verified]. If false, they will be considered marked [Unverified]. By default, TRUE.
         /// </summary>

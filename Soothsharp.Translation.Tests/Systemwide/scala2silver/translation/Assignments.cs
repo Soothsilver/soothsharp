@@ -1,4 +1,6 @@
-﻿using static Soothsharp.Contracts.Contract;
+﻿using Soothsharp.Contracts;
+using static Soothsharp.Contracts.Contract;
+// ReSharper disable All
 
 namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.translation
 {
@@ -8,38 +10,38 @@ namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.translation
         private CellAss c;
         public Assignments()
         {
-            Ensures(Acc(a) && a == 0);
-            Ensures(Acc(c) && Acc(c.Value) && c.Value == 0);
+            Contract.Ensures(Contract.Acc(this.a) && this.a == 0);
+            Contract.Ensures(Contract.Acc(this.c) && Contract.Acc(this.c.Value) && this.c.Value == 0);
 
-            a = 0;
-            c = new CellAss();
+            this.a = 0;
+            this.c = new CellAss();
         }
 
         public static void Test(Assignments ass, CellAss cell)
         {
-            Requires(Acc(ass.a) && Acc(ass.c) && Acc(ass.c.Value) &&
-                              Acc(cell.Value));
+            Contract.Requires(Contract.Acc(ass.a) && Contract.Acc(ass.c) && Contract.Acc(ass.c.Value) &&
+                              Contract.Acc(cell.Value));
             var d = new Assignments();
-            Assert(d.a == 0);
-            Assert(d.c.Value == 0);
+            Contract.Assert(d.a == 0);
+            Contract.Assert(d.c.Value == 0);
             ass.a = 1;
-            Assert(ass.a == 1);
+            Contract.Assert(ass.a == 1);
             ass.c.Value = 2;
-            Assert(ass.c.Value == 2);
+            Contract.Assert(ass.c.Value == 2);
             cell.Value = 3;
-            Assert(cell.Value == 3);
+            Contract.Assert(cell.Value == 3);
             ass.c = cell;
-            Assert(ass.c == cell);
-            Assert(ass.c.Value == 3);
+            Contract.Assert(ass.c == cell);
+            Contract.Assert(ass.c.Value == 3);
             d.a = 4;
-            Assert(d.a == 4);
+            Contract.Assert(d.a == 4);
             d.c.Value = 5;
-            Assert(d.c.Value == 5);
+            Contract.Assert(d.c.Value == 5);
             d.c = ass.c;
-            Assert(d.c == ass.c);
+            Contract.Assert(d.c == ass.c);
             d = ass;
-            Assert(d.a == 1);
-            Assert(d == ass);
+            Contract.Assert(d.a == 1);
+            Contract.Assert(d == ass);
         }
     }
 
@@ -48,8 +50,8 @@ namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.translation
         public int Value;
         public CellAss()
         {
-            Ensures(Acc(Value) && Value == 0);
-            Value = 0;
+            Contract.Ensures(Contract.Acc(this.Value) && this.Value == 0);
+            this.Value = 0;
         }
     }
 }

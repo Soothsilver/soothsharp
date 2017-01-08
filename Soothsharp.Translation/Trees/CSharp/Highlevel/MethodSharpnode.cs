@@ -9,15 +9,13 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
     {
         private MethodDeclarationSyntax methodDeclarationSyntax;
 
-        public TypeSharpnode ReturnType;
-        public List<ParameterSharpnode> Parameters;
-        public BlockSharpnode Body;
+        private List<ParameterSharpnode> Parameters;
+        private BlockSharpnode Body;
 
         public MethodSharpnode(MethodDeclarationSyntax method) : base(method)
         {
             this.methodDeclarationSyntax = method;
             this.Parameters = method.ParameterList.Parameters.Select(parameterSyntax => new ParameterSharpnode(parameterSyntax)).ToList();
-            this.ReturnType = new TypeSharpnode(method.ReturnType);
             this.Body = new BlockSharpnode(method.Body);
         }
 
@@ -28,11 +26,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
             SubroutineBuilder builder = new SubroutineBuilder(
                 method,
                 false,
-                null,
-                Parameters,
-                Body,
-                context,
-                OriginalNode);
+                null, this.Parameters, this.Body,
+                context, this.OriginalNode);
             return builder.TranslateSelf();
         }
     }

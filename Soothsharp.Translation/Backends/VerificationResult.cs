@@ -10,7 +10,7 @@ namespace Soothsharp.Translation.BackendInterface
         /// <summary>
         /// Gets a value that indicates whether the program was successfully verified with no errors.
         /// </summary>
-        public bool VerificationSuccessful => Errors.Count == 0;
+        public bool VerificationSuccessful => this.Errors.Count == 0;
         /// <summary>
         /// Gets or sets the list of errors generated during verification.
         /// </summary>

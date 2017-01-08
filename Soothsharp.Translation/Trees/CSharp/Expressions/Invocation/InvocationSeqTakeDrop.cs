@@ -20,8 +20,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
         {
             this._doTake = doTake;
             this._doDrop = doDrop;
-            this._methodGroup = methodGroup;
-            this._methodGroupSharpnode = methodGroupSharpnode;
+            this.MethodGroup = methodGroup;
+            this.MethodGroupSharpnode = methodGroupSharpnode;
         }
 
         public override void Run(List<ExpressionSharpnode> arguments, SyntaxNode originalNode, TranslationContext context)
@@ -30,16 +30,16 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
             var expressions = ConvertToSilver(arguments, context);
             Silvernode dropAmount = "";
             Silvernode takeAmount = "";
-            if (_doTake && _doDrop)
+            if (this._doTake && this._doDrop)
             {
                 takeAmount = expressions[2];
                 dropAmount = expressions[1];
             }
-            else if (_doTake)
+            else if (this._doTake)
             {
                 takeAmount = expressions[1];
             }
-            else if (_doDrop)
+            else if (this._doDrop)
             {
                 dropAmount = expressions[1];
             }
@@ -47,7 +47,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
             {
                 throw new Exception("Never happens.");
             }
-            Silvernode = new SimpleSequenceSilvernode(originalNode, 
+            this.Silvernode = new SimpleSequenceSilvernode(originalNode, 
                 expressions[0],
                 "[",
                 dropAmount,

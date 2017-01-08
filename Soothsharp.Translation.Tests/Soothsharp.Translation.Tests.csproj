@@ -59,6 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Files\Abstract\SimpleAbstractPredicate.cs" />
+    <Compile Include="Files\Attributes\SigOnly.cs" />
     <Compile Include="Files\Basic\Implications.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -120,6 +122,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y /S /E $(ProjectDir)Files $(SolutionDir)csverify\bin\Debug\Files

@@ -14,10 +14,10 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
 
         public Silvernode Silvernode { get; protected set; }
         public List<StatementSilvernode> Prependors { get; } = new List<StatementSilvernode>();
-        public bool Impure { get; protected set; } = false;
+        protected bool Impure { get; set; }
         protected List<Silvernode> ConvertToSilver(List<ExpressionSharpnode> arguments, TranslationContext context)
         {
-            List<Silvernode> expressions = new List<Silver.Silvernode>();
+            List<Silvernode> expressions = new List<Silvernode>();
             foreach (var argument in arguments)
             {
                 var result = argument.Translate(context);

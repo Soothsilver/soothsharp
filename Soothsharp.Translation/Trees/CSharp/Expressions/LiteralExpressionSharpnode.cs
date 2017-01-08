@@ -36,16 +36,16 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
                     sn = this.booleanValue ? new TextSilvernode("true", this.OriginalNode) : new TextSilvernode("false", this.OriginalNode);
                     break;
                 case LiteralKind.Int32:
-                    sn = new TextSilvernode(integerValue.ToString(), OriginalNode);
+                    sn = new TextSilvernode(this.integerValue.ToString(), this.OriginalNode);
                     break;
                 case LiteralKind.Null:
-                    sn = new TextSilvernode("null", OriginalNode);
+                    sn = new TextSilvernode("null", this.OriginalNode);
                     break;
             }
             if (sn != null)
                 return TranslationResult.FromSilvernode(sn);
             else
-                return TranslationResult.Error(OriginalNode, Diagnostics.SSIL101_UnknownNode, OriginalNode.Kind());
+                return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL101_UnknownNode, this.OriginalNode.Kind());
         }
     }
     enum LiteralKind

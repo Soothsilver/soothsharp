@@ -13,7 +13,7 @@ namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.basic
             Contract.Requires(a.Implies(true));
               
             // ReSharper disable once UnusedVariable
-            bool b = a.Implies(M());
+            bool b = a.Implies(Implications.M());
         }
         static Boolean M()
         {

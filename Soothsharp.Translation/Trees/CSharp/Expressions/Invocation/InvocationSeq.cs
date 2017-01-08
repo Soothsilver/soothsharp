@@ -10,22 +10,22 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
 {
     abstract class InvocationSeq : InvocationTranslation
     {
-        protected ExpressionSyntax _methodGroup;
-        protected ExpressionSharpnode _methodGroupSharpnode;
+        protected ExpressionSyntax MethodGroup;
+        protected ExpressionSharpnode MethodGroupSharpnode;
 
         protected void AddReceiverToList(List<ExpressionSharpnode> arguments)
         {
-            if (this._methodGroupSharpnode is IdentifierExpressionSharpnode)
+            if (this.MethodGroupSharpnode is IdentifierExpressionSharpnode)
             {
-                arguments.Insert(0, new DirectSilvercodeExpressionSharpnode(Constants.SilverThis, this._methodGroup));
+                arguments.Insert(0, new DirectSilvercodeExpressionSharpnode(Constants.SilverThis, this.MethodGroup));
             }
-            else if (this._methodGroupSharpnode is MemberAccessExpressionSharpnode)
+            else if (this.MethodGroupSharpnode is MemberAccessExpressionSharpnode)
             {
-                arguments.Insert(0, ((MemberAccessExpressionSharpnode) this._methodGroupSharpnode).Container);
+                arguments.Insert(0, ((MemberAccessExpressionSharpnode) this.MethodGroupSharpnode).Container);
             }
             else
             {
-                this.Errors.Add(new Error(Diagnostics.SSIL102_UnexpectedNode, this._methodGroup, this._methodGroup.Kind()));
+                this.Errors.Add(new Error(Diagnostics.SSIL102_UnexpectedNode, this.MethodGroup, this.MethodGroup.Kind()));
             }
 
             Error error = null;

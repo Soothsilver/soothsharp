@@ -18,7 +18,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
             // TODO more checks
             var conditionResult = arguments[0].Translate(context.ChangePurityContext(PurityContext.PurityNotRequired));
             Silvernode result = null;
-            switch (_methodName)
+            switch (this._methodName)
             {
                 case ContractsTranslator.ContractEnsures:
                     result = new EnsuresSilvernode(conditionResult.Silvernode, originalNode);
@@ -32,8 +32,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
                 default:
                     throw new System.Exception("This kind of verification condition does not exist.");
             }
-            Silvernode = result;
-            Errors.AddRange(conditionResult.Errors);
+            this.Silvernode = result;
+            this.Errors.AddRange(conditionResult.Errors);
         }
     }
 }

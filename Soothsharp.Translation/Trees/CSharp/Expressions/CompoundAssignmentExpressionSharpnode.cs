@@ -12,26 +12,24 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
             : base(syntax)
         {
             this.operation = operation;
-            Left = RoslynToSharpnode.MapExpression(syntax.Left);
-            Right = RoslynToSharpnode.MapExpression(syntax.Right);
+            this.Left = RoslynToSharpnode.MapExpression(syntax.Left);
+            this.Right = RoslynToSharpnode.MapExpression(syntax.Right);
         }
 
-        public ExpressionSharpnode Right { get; set; }
+        private ExpressionSharpnode Right { get; }
 
-        public ExpressionSharpnode Left { get; set; }
+        private ExpressionSharpnode Left { get; }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var left = Left.Translate(context);
-            var right = Right.Translate(context);
+            var left = this.Left.Translate(context);
+            var right = this.Right.Translate(context);
             IEnumerable<Error> errors = CommonUtils.CombineErrors(left, right);
             return 
                 TranslationResult.FromSilvernode(
                     new AssignmentSilvernode(
                         left.Silvernode,
-                        new BinaryExpressionSilvernode(left.Silvernode, operation, right.Silvernode, OriginalNode),
-                    
-                    OriginalNode), errors);
+                        new BinaryExpressionSilvernode(left.Silvernode, this.operation, right.Silvernode, this.OriginalNode), this.OriginalNode), errors);
 
         }
     }

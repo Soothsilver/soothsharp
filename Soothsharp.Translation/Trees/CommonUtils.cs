@@ -5,7 +5,10 @@ using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation.Trees
 {
-    class CommonUtils
+    /// <summary>
+    /// These utility functions are useful when constructing abstract syntax tree nodes.
+    /// </summary>
+    static class CommonUtils
     {
         public static TranslationResult GetHighlevelSequence(IEnumerable<TranslationResult> results, SyntaxNode parent = null)
         {

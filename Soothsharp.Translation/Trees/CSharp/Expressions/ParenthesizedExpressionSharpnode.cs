@@ -5,18 +5,18 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 {
     public class ParenthesizedExpressionSharpnode : ExpressionSharpnode
     {
-        public ExpressionSharpnode InnerExpression;
+        private ExpressionSharpnode InnerExpression;
 
         public ParenthesizedExpressionSharpnode(ParenthesizedExpressionSyntax syntax) : base(syntax)
         {
-            InnerExpression = RoslynToSharpnode.MapExpression(syntax.Expression);
+            this.InnerExpression = RoslynToSharpnode.MapExpression(syntax.Expression);
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var expressionResult = InnerExpression.Translate(context);
+            var expressionResult = this.InnerExpression.Translate(context);
             return TranslationResult.FromSilvernode(
-                new ParenthesizedExpressionSilvernode(expressionResult.Silvernode as ExpressionSilvernode, OriginalNode),
+                new ParenthesizedExpressionSilvernode(expressionResult.Silvernode as ExpressionSilvernode, this.OriginalNode),
                 expressionResult.Errors);
         }
     }

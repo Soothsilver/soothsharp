@@ -13,13 +13,14 @@ namespace Soothsharp.Translation.Trees.Silver
             this.left = left;
             this.right = right;
         }
-        public override IEnumerable<Silvernode> Children
+
+        protected override IEnumerable<Silvernode> Children
         {
             get
             {
-                yield return left;
+                yield return this.left;
                 yield return " := ";
-                yield return right;
+                yield return this.right;
             }
         }
     }

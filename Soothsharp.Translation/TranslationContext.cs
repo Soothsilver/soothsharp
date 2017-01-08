@@ -42,8 +42,8 @@ namespace Soothsharp.Translation
 
         private TranslationContext(TranslationProcess process, SemanticModel semantics)
         {
-            Process = process;
-            Semantics = semantics;
+            this.Process = process;
+            this.Semantics = semantics;
         }
         public static TranslationContext StartNew(TranslationProcess translationProcess, SemanticModel semantics, bool verifyUnmarkedItems)
         {

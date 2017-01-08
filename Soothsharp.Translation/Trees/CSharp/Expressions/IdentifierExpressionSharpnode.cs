@@ -8,27 +8,27 @@ namespace Soothsharp.Translation
 {
     internal class IdentifierExpressionSharpnode : ExpressionSharpnode
     {
-        public ExpressionSyntax IdentifierName;
+        private ExpressionSyntax IdentifierName;
 
         public IdentifierExpressionSharpnode(ExpressionSyntax syntax) : base(syntax)
         {
-            IdentifierName = syntax;
+            this.IdentifierName = syntax;
         }
 
         public ISymbol GetIdentifierSymbol(TranslationContext context)
         {
-            SymbolInfo symbolInfo = context.Semantics.GetSymbolInfo(IdentifierName);
+            SymbolInfo symbolInfo = context.Semantics.GetSymbolInfo(this.IdentifierName);
             ISymbol symbol = symbolInfo.Symbol;
             return symbol;
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            ISymbol symbol = this.GetIdentifierSymbol(context);
-            TranslationResult contractResult = context.Process.ContractsTranslator.TranslateIdentifierAsContract(symbol, IdentifierName, context);
+            ISymbol symbol = GetIdentifierSymbol(context);
+            TranslationResult contractResult = context.Process.ContractsTranslator.TranslateIdentifierAsContract(symbol, this.IdentifierName, context);
             if (contractResult != null) return contractResult;
             TranslationResult constantResult =
-                context.Process.ConstantsTranslator.TranslateIdentifierAsConstant(symbol, IdentifierName, context);
+                context.Process.ConstantsTranslator.TranslateIdentifierAsConstant(symbol, this.IdentifierName);
             if (constantResult != null) return constantResult;
 
             var identifierNode = new IdentifierSilvernode(context.Process.IdentifierTranslator.GetIdentifierReference(symbol));

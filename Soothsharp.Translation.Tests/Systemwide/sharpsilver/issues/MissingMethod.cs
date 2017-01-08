@@ -12,7 +12,7 @@ namespace Soothsharp.Translation.Tests.Files.Issues
         static void a()
         {
             // expect SSIL204
-            b();
+            MissingMethod.b();
         }
         [Unverified]
         static void b()

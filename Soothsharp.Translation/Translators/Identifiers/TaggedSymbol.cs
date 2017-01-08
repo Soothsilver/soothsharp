@@ -28,10 +28,7 @@ namespace Soothsharp.Translation
             return this.Symbol == other.Symbol &&
                    this.Tag == other.Tag;
         }
-        protected bool Equals(TaggedSymbol other)
-        {
-            return Equals(this.Symbol, other.Symbol) && string.Equals(this.Tag, other.Tag);
-        }
+
         public override int GetHashCode()
         {
             unchecked

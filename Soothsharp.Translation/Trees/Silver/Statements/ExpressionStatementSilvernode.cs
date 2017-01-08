@@ -13,7 +13,7 @@ namespace Soothsharp.Translation.Trees.Silver
             this.expression = expression;
         }
 
-        public override IEnumerable<Silvernode> Children
+        protected override IEnumerable<Silvernode> Children
         {
             get
             {

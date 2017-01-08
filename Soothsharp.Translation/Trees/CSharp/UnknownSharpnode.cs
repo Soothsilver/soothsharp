@@ -11,7 +11,7 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         public override TranslationResult Translate(TranslationContext translationContext)
         {
-            return TranslationResult.Error(OriginalNode, Diagnostics.SSIL101_UnknownNode, OriginalNode.Kind());
+            return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL101_UnknownNode, this.OriginalNode.Kind());
         }
     }
 }

@@ -6,21 +6,21 @@ namespace Soothsharp.Translation.Trees.CSharp.Statements
 {
     class LabeledStatementSharpnode : StatementSharpnode
     {
-        public StatementSharpnode Statement;
-        public LabeledStatementSyntax Self;
+        private StatementSharpnode Statement;
+        private LabeledStatementSyntax Self;
         public LabeledStatementSharpnode(LabeledStatementSyntax stmt) : base(stmt)
         {
-            Self = stmt;
-            Statement = RoslynToSharpnode.MapStatement(stmt.Statement);
+            this.Self = stmt;
+            this.Statement = RoslynToSharpnode.MapStatement(stmt.Statement);
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var symbol = context.Semantics.GetDeclaredSymbol(Self);
+            var symbol = context.Semantics.GetDeclaredSymbol(this.Self);
             var identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(symbol);
-            var statementResult = Statement.Translate(context);
-            StatementsSequenceSilvernode seq = new StatementsSequenceSilvernode(OriginalNode, 
-                new LabelSilvernode(identifier, OriginalNode),
+            var statementResult = this.Statement.Translate(context);
+            StatementsSequenceSilvernode seq = new StatementsSequenceSilvernode(this.OriginalNode, 
+                new LabelSilvernode(identifier, this.OriginalNode),
                 (StatementSilvernode) statementResult.Silvernode 
                 );
             return TranslationResult.FromSilvernode(seq, statementResult.Errors);

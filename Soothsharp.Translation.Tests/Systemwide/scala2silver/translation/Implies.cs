@@ -12,15 +12,15 @@ namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.translation
     {
         public void Main(bool b)
         {
-            Assert(!b.Implies(!b));
-            Assert(!(true.Implies(false)));
-            Assert(true.Implies(true));
-            Assert(false.Implies(false));
-            Assert(false.Implies(true));
-            Assert(Fun(2, 1).Implies(Fun(1, 2)));
-            Assert(!(Fun(1, 2).Implies(Fun(2, 1))));
+            Contract.Assert(!b.Implies(!b));
+            Contract.Assert(!(true.Implies(false)));
+            Contract.Assert(true.Implies(true));
+            Contract.Assert(false.Implies(false));
+            Contract.Assert(false.Implies(true));
+            Contract.Assert(Fun(2, 1).Implies(Fun(1, 2)));
+            Contract.Assert(!(Fun(1, 2).Implies(Fun(2, 1))));
             // expect SSIL204 at next
-            Assert(true.Implies(false));
+            Contract.Assert(true.Implies(false));
         }
 
         [Pure]

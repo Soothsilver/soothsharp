@@ -9,7 +9,7 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         public TypeSharpnode(TypeSyntax originalNode) : base(originalNode)
         {
-            TypeSyntax = originalNode;
+            this.TypeSyntax = originalNode;
         }
 
         public override TranslationResult Translate(TranslationContext context)

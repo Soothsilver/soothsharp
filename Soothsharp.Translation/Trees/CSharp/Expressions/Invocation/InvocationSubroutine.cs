@@ -11,9 +11,9 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
         protected SilverType SilverType;
         public override void PostprocessPurity(TranslationResult result, TranslationContext context)
         {
-            if (Impure)
+            if (this.Impure)
             {
-               result = result.AsImpureAssertion(context, SilverType, "method call");
+               result = result.AsImpureAssertion(context, this.SilverType, "method call");
             }
         }
     }

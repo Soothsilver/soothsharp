@@ -11,7 +11,7 @@ namespace Soothsharp.Translation.Tests.Files.Basic
     {
         static void a()
         {
-            b();
+            MethodCall.b();
         }
         static void b()
         {

@@ -10,15 +10,10 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
 {
     class InvocationPermissionCreate : InvocationTranslation
     {
-
-        public InvocationPermissionCreate() 
-        {
-        }
-
         public override void Run(List<ExpressionSharpnode> arguments, SyntaxNode originalNode, TranslationContext context)
         {
             var expressions = ConvertToSilver(arguments, context);
-            Silvernode = new BinaryExpressionSilvernode(
+            this.Silvernode = new BinaryExpressionSilvernode(
                 expressions[0],
                 "/",
                 expressions[1],

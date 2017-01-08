@@ -7,7 +7,7 @@ namespace Soothsharp.Translation.Trees.CSharp
 {
     public class ObjectCreationExpressionSharpnode : ExpressionSharpnode
     {
-        public List<ExpressionSharpnode> Arguments = new List<ExpressionSharpnode>();
+        private List<ExpressionSharpnode> Arguments = new List<ExpressionSharpnode>();
 
         public ObjectCreationExpressionSharpnode(ObjectCreationExpressionSyntax syntax) : base(syntax)
         {
@@ -19,13 +19,13 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var constructorSymbol = context.Semantics.GetSymbolInfo(OriginalNode).Symbol as IMethodSymbol;
+            var constructorSymbol = context.Semantics.GetSymbolInfo(this.OriginalNode).Symbol as IMethodSymbol;
             var classSymbol = constructorSymbol.ContainingType;
             bool isDefaultConstructor = constructorSymbol.IsImplicitlyDeclared;
 
             if (classSymbol.GetQualifiedName() == SeqTranslator.SeqClassWithoutEndDot)
             {
-                return SeqTranslator.Constructor(Arguments, context, classSymbol.TypeArguments[0], this.OriginalNode);
+                return SeqTranslator.Constructor(this.Arguments, context, classSymbol.TypeArguments[0], this.OriginalNode);
             }
 
             var identifier = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();
@@ -33,7 +33,7 @@ namespace Soothsharp.Translation.Trees.CSharp
             var arguments = new List<Silvernode>();
             var errors = new List<Error>();
             // TODO add purifiable thingies before here
-            foreach(var arg in Arguments)
+            foreach(var arg in this.Arguments)
             {
                 var res = arg.Translate(context.ChangePurityContext(PurityContext.Purifiable));
                 arguments.Add(res.Silvernode);

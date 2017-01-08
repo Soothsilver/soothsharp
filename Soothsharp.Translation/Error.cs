@@ -23,7 +23,7 @@ namespace Soothsharp.Translation
         /// <summary>
         /// Gets the 1-indexed column of the associated syntax node, or else 0.
         /// </summary>
-        public int CsharpColumn
+        private int CsharpColumn
         {
             get
             {

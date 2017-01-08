@@ -17,7 +17,7 @@ namespace Soothsharp.Translation
         {
             get
             {
-                return Errors.All(err => err.Diagnostic.Severity != DiagnosticSeverity.Error);
+                return this.Errors.All(err => err.Diagnostic.Severity != DiagnosticSeverity.Error);
             }
         }
         public List<Error> Errors = new List<Error>();

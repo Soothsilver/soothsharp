@@ -26,13 +26,13 @@ namespace Soothsharp.Translation.Tests
 
         public static void AssertTranslationCorrect(string filesBasicScalapaperexampleCs)
         {
-            var result = Translate(filesBasicScalapaperexampleCs);
+            var result = Utilities.Translate(filesBasicScalapaperexampleCs);
             Assert.True(result.WasTranslationSuccessful, string.Join("\n", result.Errors));
         }
 
         public static void AssertVerificationSuccessful(string filesBasicScalapaperexampleCs)
         {
-            var translationResult = Translate(filesBasicScalapaperexampleCs);
+            var translationResult = Utilities.Translate(filesBasicScalapaperexampleCs);
             Assert.True(translationResult.WasTranslationSuccessful, string.Join("\n", translationResult.Errors));
 
             // Translation ok, let's verify.

@@ -21,19 +21,19 @@ namespace Soothsharp.Translation.Trees.Silver
             this.statementBlock = statementBlock;
         }
 
-        public override IEnumerable<Silvernode> Children
+        protected override IEnumerable<Silvernode> Children
         {
             get
             {
                 yield return "while (";
-                yield return condition;
+                yield return this.condition;
                 yield return ")";
 
                 var children = new List<Silvernode>();
-                if (verificationConditions.Any())
+                if (this.verificationConditions.Any())
                 {
                     children.Add("\n" + Tabs());
-                    children.AddRange(verificationConditions.WithSeparator<Silvernode>("\n" + Tabs()).SelectMany(
+                    children.AddRange(this.verificationConditions.WithSeparator<Silvernode>("\n" + Tabs()).SelectMany(
                         innerCondition
                         =>
                         {
@@ -54,7 +54,7 @@ namespace Soothsharp.Translation.Trees.Silver
                 {
                     yield return a;
                 }
-                yield return statementBlock;
+                yield return this.statementBlock;
             }
         }
     }

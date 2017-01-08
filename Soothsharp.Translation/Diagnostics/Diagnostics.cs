@@ -44,6 +44,7 @@ namespace Soothsharp.Translation
                 "An exception ('{0}') occured during the construction of the Silver abstract syntax tree.",
                 "While this is an internal error of the translator, it mostly occurs when there is a C# syntax or semantic error in your code. Try to fix any other compiler errors and maybe this issue will be resolved.",
                 DiagnosticSeverity.Error);
+        // ReSharper disable once UnusedMember.Global - kept for compatibility and future-proofing
         public static SoothsharpDiagnostic SSIL105_FeatureNotYetSupported =
             SoothsharpDiagnostic.Create(
                 "SSIL105",
@@ -80,6 +81,7 @@ namespace Soothsharp.Translation
               "Syntax is invalid ({0}).",
               "This feature of C# cannot be meaningfully represented in Silver.",
               DiagnosticSeverity.Error);
+        // ReSharper disable once UnusedMember.Global - kept for compatibility
         public static SoothsharpDiagnostic SSIL111_NonStatement =
       SoothsharpDiagnostic.Create(
           "SSIL111",
@@ -226,6 +228,7 @@ namespace Soothsharp.Translation
                 "Try to remove the infringing C# code fragment. You may be forced to make do without that C# feature. You can also submit this as a bug report as this error should never be displayed to the user normally.",
                 DiagnosticSeverity.Error);
 
+        // ReSharper disable once UnusedMember.Global - kept for futureproofing
         public static SoothsharpDiagnostic SSIL302_InternalError =
             SoothsharpDiagnostic.Create(
                 "SSIL302",
@@ -235,6 +238,10 @@ namespace Soothsharp.Translation
 
 
 
+        /// <summary>
+        /// Gets all error descriptions that might be outputted by Soothsharp.
+        /// </summary>
+        // ReSharper disable once UnusedMember.Global - kept for debugging purposes
         public static IEnumerable<SoothsharpDiagnostic> GetAllDiagnostics()
         {
             Type t = typeof(Diagnostics);

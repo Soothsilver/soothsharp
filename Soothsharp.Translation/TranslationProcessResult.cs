@@ -12,14 +12,14 @@ namespace Soothsharp.Translation
         {
             get
             {
-                return Errors.All(err => err.Diagnostic.Severity != DiagnosticSeverity.Error);
+                return this.Errors.All(err => err.Diagnostic.Severity != DiagnosticSeverity.Error);
             }
         }
         public List<Error> Errors { get; } 
         public TranslationProcessResult(Silvernode silvernode, List<Error> errors)
         {
-            Silvernode = silvernode;
-            Errors = errors;
+            this.Silvernode = silvernode;
+            this.Errors = errors;
         }
         public static TranslationProcessResult Error(SyntaxNode syntaxNode, SoothsharpDiagnostic diagnostic, params object[] arguments)
         {

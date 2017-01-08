@@ -25,16 +25,16 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
 
         public override void Run(List<ExpressionSharpnode> arguments, SyntaxNode originalNode, TranslationContext context)
         {
-            var methodSymbol = _method.Symbol as IMethodSymbol;
-            var identifier = context.Process.IdentifierTranslator.GetIdentifierReference(_method.Symbol as IMethodSymbol);
-            IMethodSymbol theMethod = (_method.Symbol as IMethodSymbol);
-            Impure = !(ContractsTranslator.IsMethodPureOrPredicate(theMethod));
+            var methodSymbol = this._method.Symbol as IMethodSymbol;
+            var identifier = context.Process.IdentifierTranslator.GetIdentifierReference(this._method.Symbol as IMethodSymbol);
+            IMethodSymbol theMethod = (this._method.Symbol as IMethodSymbol);
+            this.Impure = !(ContractsTranslator.IsMethodPureOrPredicate(theMethod));
 
             if (!theMethod.IsStatic)
             {
                 if (this.methodGroupSharpnode is IdentifierExpressionSharpnode)
                 {
-                    arguments.Insert(0, new DirectSilvercodeExpressionSharpnode(Constants.SilverThis, methodGroup));
+                    arguments.Insert(0, new DirectSilvercodeExpressionSharpnode(Constants.SilverThis, this.methodGroup));
                 }
                 else if (this.methodGroupSharpnode is MemberAccessExpressionSharpnode)
                 {
@@ -42,20 +42,19 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
                 }
                 else
                 {
-                    Errors.Add(new Error(Diagnostics.SSIL102_UnexpectedNode, methodGroup, methodGroup.Kind()));
+                    this.Errors.Add(new Error(Diagnostics.SSIL102_UnexpectedNode, this.methodGroup, this.methodGroup.Kind()));
                 }
             }
             Error error = null;
-            SilverType = TypeTranslator.TranslateType(methodSymbol.ReturnType, methodGroup, out error);
+            this.SilverType = TypeTranslator.TranslateType(methodSymbol.ReturnType, this.methodGroup, out error);
             if (error != null)
             {
-                Errors.Add(error);
+                this.Errors.Add(error);
             }
             var expressions = ConvertToSilver(arguments, context);
-            Silvernode = new CallSilvernode(
+            this.Silvernode = new CallSilvernode(
                       identifier,
-                      expressions,
-                      SilverType,
+                      expressions, this.SilverType,
                       originalNode
                   );
         }

@@ -11,7 +11,7 @@ namespace Soothsharp.Translation.Tests
     public class SystemTest
     {
         [Theory()]
-        [MemberData(nameof(GetTestFiles))]
+        [MemberData(nameof(SystemTest.GetTestFiles))]
         public void Sys(string test)
         {
             string dir = AppDomain.CurrentDomain.BaseDirectory;
@@ -62,7 +62,7 @@ namespace Soothsharp.Translation.Tests
             var errors = result.Errors;
             if (!syntaxOnly && result.Errors.Count == 0)
             {
-                BackendInterface.IBackend backend = new CarbonBackend();
+                IBackend backend = new CarbonBackend();
                 var verificationResult = backend.Verify(result.Silvernode);
                 errors = verificationResult.Errors;
             }

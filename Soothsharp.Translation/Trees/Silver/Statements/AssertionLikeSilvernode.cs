@@ -5,20 +5,20 @@ namespace Soothsharp.Translation.Trees.Silver
 {
     class AssertionLikeSilvernode : StatementSilvernode
     {
-        public Silvernode Assertion;
-        public string Keyword;
+        private Silvernode Assertion;
+        private string Keyword;
         public AssertionLikeSilvernode(string keyword, Silvernode assertion, SyntaxNode original) : base(original)
         {
-            Assertion = assertion;
-            Keyword = keyword;
+            this.Assertion = assertion;
+            this.Keyword = keyword;
         }
 
-        public override IEnumerable<Silvernode> Children
+        protected override IEnumerable<Silvernode> Children
         {
             get
             {
-                yield return Keyword + " ";
-                yield return Assertion;
+                yield return this.Keyword + " ";
+                yield return this.Assertion;
             }
         }
     }

@@ -14,7 +14,7 @@ namespace Soothsharp.Cs2Sil
     /// <summary>
     /// This class is compiled into the csverify.exe executable which takes C# code files, produces Silver files and verifies them for formal correctness. 
     /// </summary>
-    internal class Csverify
+    public static class Csverify
     {
         /// <summary>
         /// Whether additional messages about the translation process should be printed.

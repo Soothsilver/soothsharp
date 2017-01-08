@@ -4,7 +4,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 {
     public class DirectSilvercodeExpressionSharpnode : ExpressionSharpnode
     {
-        public string Code;
+        private string Code;
         public DirectSilvercodeExpressionSharpnode(string code, ExpressionSyntax originalNode) : base(originalNode)
         {
             this.Code = code;
@@ -12,7 +12,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            return TranslationResult.FromSilvernode(Code);
+            return TranslationResult.FromSilvernode(this.Code);
         }
     }
 }

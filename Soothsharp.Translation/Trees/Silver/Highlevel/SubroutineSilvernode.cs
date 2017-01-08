@@ -7,10 +7,10 @@ namespace Soothsharp.Translation.Trees.Silver
     abstract class SubroutineSilvernode : ComplexSilvernode
     {
         protected IdentifierSilvernode Identifier;
-        protected BlockSilvernode Block;
+        private BlockSilvernode Block;
         protected TypeSilvernode ReturnType;
         protected string ReturnValueName;
-        protected List<VerificationConditionSilvernode> VerificationConditions;
+        private List<VerificationConditionSilvernode> VerificationConditions;
         protected List<ParameterSilvernode> Parameters;
 
         protected SubroutineSilvernode(SyntaxNode originalNode,
@@ -31,11 +31,10 @@ namespace Soothsharp.Translation.Trees.Silver
 
         protected void AddVerificationConditions(List<Silvernode> children)
         {
-            if (VerificationConditions.Any())
+            if (this.VerificationConditions.Any())
             {
                 children.Add("\n");
-                children.AddRange(
-                    VerificationConditions.WithSeparator<Silvernode>("\n").SelectMany(
+                children.AddRange(this.VerificationConditions.WithSeparator<Silvernode>("\n").SelectMany(
                     condition =>
                     {
                         if (condition is TextSilvernode) return new[] { condition };
@@ -51,14 +50,14 @@ namespace Soothsharp.Translation.Trees.Silver
         }
         protected void AddBlock(List<Silvernode> children)
         {
-            if (Block != null)
+            if (this.Block != null)
             {
-                children.Add(Block);
+                children.Add(this.Block);
             }
         }
         protected override void OptimizePost()
         {
-            BlockSilvernode block = Children.FirstOrDefault(s => s is BlockSilvernode) as BlockSilvernode;
+            BlockSilvernode block = this.Children.FirstOrDefault(s => s is BlockSilvernode) as BlockSilvernode;
             if (block != null)
             {
                 int howManyGotos = block.Descendants.Count(sn => sn is GotoSilvernode && ((GotoSilvernode)sn).Label == Constants.SilverMethodEndLabel);

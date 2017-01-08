@@ -11,10 +11,10 @@ namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.basic
     {
         public static void Test()
         {            
-            Test2(-5);
+            Simple.Test2(-5);
         }
 
-        public static global::System.Int32 Test2(int x)
+        public static System.Int32 Test2(int x)
         {
             Contract.Requires(x > 0);
             Contract.Ensures(Contract.IntegerResult == x * x);

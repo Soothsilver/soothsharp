@@ -5,21 +5,21 @@ namespace Soothsharp.Translation.Trees.Silver
 {
     internal class ParameterSilvernode : ComplexSilvernode
     {
-        public TypeSilvernode Type;
-        public Identifier Identifier;
+        private TypeSilvernode Type;
+        private Identifier Identifier;
         public ParameterSilvernode(Identifier identifier, TypeSilvernode type, SyntaxNode node) : base(node)
         {
-            Identifier = identifier;
-            Type = type;
+            this.Identifier = identifier;
+            this.Type = type;
         }
 
-        public override IEnumerable<Silvernode> Children
+        protected override IEnumerable<Silvernode> Children
         {
             get
             {
-                yield return new IdentifierSilvernode(Identifier);
+                yield return new IdentifierSilvernode(this.Identifier);
                 yield return " : ";
-                yield return Type;
+                yield return this.Type;
             }
         }
     }

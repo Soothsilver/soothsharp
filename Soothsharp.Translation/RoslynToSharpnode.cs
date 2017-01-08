@@ -10,7 +10,7 @@ namespace Soothsharp.Translation
     /// <summary>
     /// This class contains static methods that convert Roslyn instances into sharpnode.
     /// </summary>
-    public class RoslynToSharpnode
+    public static class RoslynToSharpnode
     {
         /// <summary>
         /// Converts a Roslyn statement into a sharpnode.

@@ -18,8 +18,8 @@ namespace Soothsharp.Translation.Trees.Silver
 
         public virtual void Postprocess(int tablevel)
         {
-            HowManyTabsAfterEachNewline = tablevel;
-            foreach (var child in Children)
+            this.HowManyTabsAfterEachNewline = tablevel;
+            foreach (var child in this.Children)
             {
                 (child as StatementSilvernode)?.Postprocess(tablevel);
             }
@@ -28,7 +28,7 @@ namespace Soothsharp.Translation.Trees.Silver
         protected string Tabs()
         {
             string tabs = "";
-            for (int i = 0; i < (HowManyTabsAfterEachNewline * Constants.SpacesPerIndentLevel); i++)
+            for (int i = 0; i < (this.HowManyTabsAfterEachNewline * Constants.SpacesPerIndentLevel); i++)
             {
                 tabs += " ";
             }

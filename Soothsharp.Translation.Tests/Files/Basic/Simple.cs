@@ -14,9 +14,9 @@ namespace Soothsharp.TranslationTests.Files
     {
         static void test()
         {            
-            test2(-5);
+            Simple.test2(-5);
         }
-        static System.Int32 test2(int x)
+        static Int32 test2(int x)
         {
             Contract.Requires(x > 0);
             Contract.Ensures(Contract.IntegerResult == x * x);

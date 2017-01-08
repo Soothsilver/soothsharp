@@ -9,14 +9,14 @@ namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.basic
 
         public Fields()
         {
-            variable = 3;
+            this.variable = 3;
 
-            Contract.Assert(variable < 4);
-            Contract.Assert(variable > 2);
+            Contract.Assert(this.variable < 4);
+            Contract.Assert(this.variable > 2);
 
-            value = new C(2);
+            this.value = new C(2);
 
-            Contract.Assert(value.a == 2);
+            Contract.Assert(this.value.a == 2);
         }
     }
 

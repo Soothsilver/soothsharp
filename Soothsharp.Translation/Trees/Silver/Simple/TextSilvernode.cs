@@ -11,7 +11,7 @@ namespace Soothsharp.Translation.Trees.Silver
         }
         public override string ToString()
         {
-            return text;
+            return this.text;
         }
     }
 }

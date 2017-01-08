@@ -7,8 +7,8 @@
         
         public CollectedField(Identifier name, SilverType silverType)
         {
-            Name = name;
-            SilverType = silverType;
+            this.Name = name;
+            this.SilverType = silverType;
         }
     }
 }

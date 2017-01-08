@@ -6,33 +6,32 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 {
     public class ConditionalExpressionSharpnode : ExpressionSharpnode
     {
-        public ExpressionSharpnode Condition;
-        public ExpressionSharpnode WhenTrue;
-        public ExpressionSharpnode WhenFalse;
+        private ExpressionSharpnode Condition;
+        private ExpressionSharpnode WhenTrue;
+        private ExpressionSharpnode WhenFalse;
         public ConditionalExpressionSharpnode(ConditionalExpressionSyntax syntax) : base(syntax)
         {
-            Condition = RoslynToSharpnode.MapExpression(syntax.Condition);
-            WhenTrue = RoslynToSharpnode.MapExpression(syntax.WhenTrue);
-            WhenFalse = RoslynToSharpnode.MapExpression(syntax.WhenFalse);
+            this.Condition = RoslynToSharpnode.MapExpression(syntax.Condition);
+            this.WhenTrue = RoslynToSharpnode.MapExpression(syntax.WhenTrue);
+            this.WhenFalse = RoslynToSharpnode.MapExpression(syntax.WhenFalse);
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
             var errors = new List<Error>();
-            var cres = Condition.Translate(context);
+            var cres = this.Condition.Translate(context);
             var a = cres.Silvernode;
             errors.AddRange(cres.Errors);
-            var trueres = WhenTrue.Translate(context);
+            var trueres = this.WhenTrue.Translate(context);
             var b = trueres.Silvernode;
             errors.AddRange(trueres.Errors);
-            var falseres = WhenFalse.Translate(context);
+            var falseres = this.WhenFalse.Translate(context);
             var c = falseres.Silvernode;
             errors.AddRange(falseres.Errors);
             return TranslationResult.FromSilvernode(new ConditionalExpressionSilvernode(
                 a,
                 b,
-                c,
-                OriginalNode
+                c, this.OriginalNode
                 ),
                 errors);
         }

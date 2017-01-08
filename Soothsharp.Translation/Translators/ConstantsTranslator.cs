@@ -11,7 +11,7 @@ namespace Soothsharp.Translation
 {
     public class ConstantsTranslator
     {
-        public TranslationResult TranslateIdentifierAsConstant(ISymbol symbol, SyntaxNode syntaxNode, TranslationContext context)
+        public TranslationResult TranslateIdentifierAsConstant(ISymbol symbol, SyntaxNode syntaxNode)
         {
             if (symbol is IFieldSymbol)
             {
@@ -19,13 +19,13 @@ namespace Soothsharp.Translation
                 if (field.IsConst && field.HasConstantValue)
                 {
                     return
-                        TranslationResult.FromSilvernode(new TextSilvernode(constantToString(field.ConstantValue), syntaxNode));
+                        TranslationResult.FromSilvernode(new TextSilvernode(ConstantsTranslator.ConstantToString(field.ConstantValue), syntaxNode));
                 }
             }
             return null;
         }
 
-        private string constantToString(object constantValue)
+        private static string ConstantToString(object constantValue)
         {
             if (constantValue is int)
             {

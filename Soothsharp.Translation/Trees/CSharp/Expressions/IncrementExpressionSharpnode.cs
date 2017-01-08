@@ -34,8 +34,7 @@ namespace Soothsharp.Translation.Trees.CSharp
             return TranslationResult.FromSilvernode(
                 new AssignmentSilvernode(
                     translatedExpression.Silvernode, 
-                    new BinaryExpressionSilvernode(translatedExpression.Silvernode, @operator, new TextSilvernode("1"), OriginalNode),
-                    OriginalNode), translatedExpression.Errors);
+                    new BinaryExpressionSilvernode(translatedExpression.Silvernode, @operator, new TextSilvernode("1"), this.OriginalNode), this.OriginalNode), translatedExpression.Errors);
         }
     }
 

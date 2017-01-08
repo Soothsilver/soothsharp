@@ -60,9 +60,6 @@ namespace Soothsharp.Translation
             {
                 switch (attribute.AttributeClass.GetQualifiedName())
                 {
-                    case ContractsTranslator.SilvernameAttribute:
-                        identifier = new Identifier((string)attribute.ConstructorArguments[0].Value);
-                        break;
                     case ContractsTranslator.PredicateAttribute:
                         if (silverKind == SilverKind.Method && !this.IsConstructor)
                         {

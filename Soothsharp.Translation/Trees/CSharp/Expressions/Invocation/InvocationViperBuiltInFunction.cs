@@ -15,19 +15,18 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
         public InvocationViperBuiltInFunction(string keyword, bool isImpure)
         {
             this._keyword = keyword;
-            Impure = isImpure;
+            this.Impure = isImpure;
         }
 
         public override void Run(List<ExpressionSharpnode> arguments, SyntaxNode originalNode, TranslationContext context)
         {
             var expressions = ConvertToSilver(arguments, context);
-            var identifier = new Identifier(_keyword);
-            SilverType = SilverType.Bool;
+            var identifier = new Identifier(this._keyword);
+            this.SilverType = SilverType.Bool;
 
-            Silvernode = new CallSilvernode(
+            this.Silvernode = new CallSilvernode(
                        identifier,
-                       expressions,
-                       SilverType,
+                       expressions, this.SilverType,
                        originalNode
                    );
         }

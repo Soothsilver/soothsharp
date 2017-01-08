@@ -25,11 +25,10 @@ namespace Soothsharp.Translation
         private List<string> referencedAssemblies = new List<string>();
         internal CollectedType AddToCollectedTypes(ClassSharpnode classSharpnode, SemanticModel semanticModel)
         {
-            var name = IdentifierTranslator.RegisterAndGetIdentifier(
+            this.IdentifierTranslator.RegisterAndGetIdentifier(
                 semanticModel.GetDeclaredSymbol(classSharpnode.DeclarationSyntax));
-            var superclassObject = IdentifierTranslator.SystemObject;
-            CollectedType type = new CollectedType(semanticModel.GetDeclaredSymbol(classSharpnode.DeclarationSyntax), name, superclassObject);
-            collectedTypes.Add(type);
+            CollectedType type = new CollectedType(semanticModel.GetDeclaredSymbol(classSharpnode.DeclarationSyntax), classSharpnode.IsStatic);
+            this.collectedTypes.Add(type);
             return type;
         }
         private TranslationProcess()
@@ -41,6 +40,12 @@ namespace Soothsharp.Translation
         List<Error> masterErrorList = new List<Error>();
         private bool executed;
 
+
+        /// <summary>
+        /// Creates a new <see cref="TranslationProcess"/> from a C# syntax tree supplied by Visual Studio. 
+        /// </summary>
+        /// <param name="syntaxTree">The tree to translate.</param>
+        // ReSharper disable once UnusedMember.Global - used by plugin
         public static TranslationProcess CreateFromSyntaxTree(
           SyntaxTree syntaxTree)
         {
@@ -91,25 +96,24 @@ namespace Soothsharp.Translation
 
         internal void AddError(Error error)
         {
-            masterErrorList.Add(error);
+            this.masterErrorList.Add(error);
         }
         public TranslationProcessResult Execute()
         {
-            if (executed)
+            if (this.executed)
             {
                 throw new InvalidOperationException("The process was already executed once.");
             }
-            executed = true;
+            this.executed = true;
             VerboseLog("Loading mscorlib and Soothsharp.Contracts...");
             var mscorlib = MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location);
-            var contractsLibrary = MetadataReference.CreateFromFile(typeof(Soothsharp.Contracts.Contract).Assembly.Location);
+            var contractsLibrary = MetadataReference.CreateFromFile(typeof(Contracts.Contract).Assembly.Location);
             VerboseLog("Initializing compilation...");
             CSharpCompilation compilation;
             try
             {
-                 compilation = CSharpCompilation.Create("translated_assembly",
-                    compilationUnits.Select(unit => unit.RoslynTree),
-                    (new[] { mscorlib, contractsLibrary }).Union(referencedAssemblies.Select(filename => MetadataReference.CreateFromFile(filename)))
+                 compilation = CSharpCompilation.Create("translated_assembly", this.compilationUnits.Select(unit => unit.RoslynTree),
+                    (new[] { mscorlib, contractsLibrary }).Union(this.referencedAssemblies.Select(filename => MetadataReference.CreateFromFile(filename)))
                     );
             } catch (System.IO.IOException exception)
             {
@@ -118,7 +122,7 @@ namespace Soothsharp.Translation
 
             VerboseLog("Processing trees...");
             HighlevelSequenceSilvernode masterTree = new HighlevelSequenceSilvernode(null);
-            foreach (CompilationUnit compilationUnit in compilationUnits)
+            foreach (CompilationUnit compilationUnit in this.compilationUnits)
             {
                 VerboseLog("Processing " + compilationUnit.RoslynTree.FilePath + "...");
                 VerboseLog("- Semantic analysis...");
@@ -132,7 +136,7 @@ namespace Soothsharp.Translation
                 }
                 catch (Exception ex)
                 {
-                    masterErrorList.Add(new Error(Diagnostics.SSIL103_ExceptionConstructingCSharp, compilationUnit.RoslynTree.GetRoot(), ex.ToString()));
+                    this.masterErrorList.Add(new Error(Diagnostics.SSIL103_ExceptionConstructingCSharp, compilationUnit.RoslynTree.GetRoot(), ex.ToString()));
                     continue;
                 }
 
@@ -143,28 +147,21 @@ namespace Soothsharp.Translation
                 TranslationResult translationResult;
                 try
                 {
-                    translationResult = cSharpTree.Translate(TranslationContext.StartNew(this, semanticModel, Configuration.VerifyUnmarkedItems));
+                    translationResult = cSharpTree.Translate(TranslationContext.StartNew(this, semanticModel, this.Configuration.VerifyUnmarkedItems));
                 }
                 catch (Exception ex)
                 {
-                    masterErrorList.Add(new Error(Diagnostics.SSIL104_ExceptionConstructingSilver, compilationUnit.RoslynTree.GetRoot(), ex.ToString()));
+                    this.masterErrorList.Add(new Error(Diagnostics.SSIL104_ExceptionConstructingSilver, compilationUnit.RoslynTree.GetRoot(), ex.ToString()));
                     continue;
                 }
                 masterTree.List.Add(translationResult.Silvernode);
-                masterErrorList.AddRange(translationResult.Errors);
+                this.masterErrorList.AddRange(translationResult.Errors);
             }
 
             VerboseLog("GLOBAL ADDITION PHASE begins...");
-            // Axioms and domains are not necessary now.
-            
-            //HighlevelSequenceSilvernode axioms = new HighlevelSequenceSilvernode(null);
-            //CSharpTypeDomainSilvernode domain = new CSharpTypeDomainSilvernode(axioms);
-
-            // masterTree.List.Add(domain);
-            foreach (var collectedType in collectedTypes)
+            foreach (var collectedType in this.collectedTypes)
             {
                 masterTree.List.Add(collectedType.GenerateGlobalSilvernode(this));
-                //axioms.List.Add(collectedType.GenerateSilvernodeInsideCSharpType());
             }
             
 
@@ -177,12 +174,12 @@ namespace Soothsharp.Translation
             VerboseLog("POSTPROCESSING PHASE begins...");
             masterTree.Postprocess();
 
-            return new TranslationProcessResult(masterTree, masterErrorList);
+            return new TranslationProcessResult(masterTree, this.masterErrorList);
         }
 
         private void VerboseLog(string logline)
         {
-            if (Configuration.Verbose)
+            if (this.Configuration.Verbose)
             {
                 Console.WriteLine("- " + logline);
             }

@@ -7,19 +7,19 @@ namespace Soothsharp.Translation
 {
     internal class WhileStatementSharpnode : StatementSharpnode
     {
-        public ExpressionSharpnode Condition;
-        public StatementSharpnode Statement;
+        private ExpressionSharpnode Condition;
+        private StatementSharpnode Statement;
 
         public WhileStatementSharpnode(WhileStatementSyntax stmt) : base(stmt)
         {
-            Condition = RoslynToSharpnode.MapExpression(stmt.Condition);
-            Statement = RoslynToSharpnode.MapStatement(stmt.Statement);
+            this.Condition = RoslynToSharpnode.MapExpression(stmt.Condition);
+            this.Statement = RoslynToSharpnode.MapStatement(stmt.Statement);
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var conditionResult = Condition.Translate(context);
-            var statementResult = Statement.Translate(context);
+            var conditionResult = this.Condition.Translate(context);
+            var statementResult = this.Statement.Translate(context);
             var statementBlock = ((StatementSilvernode)statementResult.Silvernode).EncloseInBlockIfNotAlready();
             var errors = new List<Error>();
             errors.AddRange(conditionResult.Errors);
@@ -28,8 +28,7 @@ namespace Soothsharp.Translation
                 new WhileSilvernode(
                     conditionResult.Silvernode,
                     statementResult.VerificationConditions,
-                    statementBlock,
-                    OriginalNode
+                    statementBlock, this.OriginalNode
                     ),
                 errors
                 );

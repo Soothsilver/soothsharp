@@ -12,7 +12,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Statements
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            return TranslationResult.FromSilvernode(new TextStatementSilvernode("", OriginalNode));
+            return TranslationResult.FromSilvernode(new TextStatementSilvernode("", this.OriginalNode));
         }
     }
 }

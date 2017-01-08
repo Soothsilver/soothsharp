@@ -6,24 +6,24 @@ namespace Soothsharp.Translation.Trees.CSharp.Statements
 {
     class GotoStatementSharpnode : StatementSharpnode
     {
-        public ExpressionSharpnode Identifier;
+        private ExpressionSharpnode Identifier;
 
         public GotoStatementSharpnode(GotoStatementSyntax stmt) : base(stmt)
         {
-            Identifier = RoslynToSharpnode.MapExpression(stmt.Expression);
+            this.Identifier = RoslynToSharpnode.MapExpression(stmt.Expression);
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            if (!(Identifier is IdentifierExpressionSharpnode))
+            if (!(this.Identifier is IdentifierExpressionSharpnode))
             {
-                return TranslationResult.Error(OriginalNode, Diagnostics.SSIL110_InvalidSyntax, "illegal goto target");
+                return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL110_InvalidSyntax, "illegal goto target");
             }
-            IdentifierExpressionSharpnode identifierExpression = Identifier as IdentifierExpressionSharpnode;
+            IdentifierExpressionSharpnode identifierExpression = this.Identifier as IdentifierExpressionSharpnode;
             ISymbol symbol = identifierExpression.GetIdentifierSymbol(context);
             var identifier = context.Process.IdentifierTranslator.GetIdentifierReference(symbol);
             return TranslationResult.FromSilvernode(
-                new GotoSilvernode(identifier, OriginalNode)
+                new GotoSilvernode(identifier, this.OriginalNode)
                 );
         }
     }

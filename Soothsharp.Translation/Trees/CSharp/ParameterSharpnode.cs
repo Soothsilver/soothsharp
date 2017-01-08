@@ -10,14 +10,12 @@ namespace Soothsharp.Translation.Trees.CSharp
     public class ParameterSharpnode : Sharpnode
     {
         public ParameterSyntax ParameterSyntax;
-        public TypeSharpnode Type;
-        public string Identifier;
+        private TypeSharpnode Type;
 
         public ParameterSharpnode(ParameterSyntax parameterSyntax) : base(parameterSyntax)
         {
             this.ParameterSyntax = parameterSyntax;
             this.Type = new TypeSharpnode(parameterSyntax.Type);
-            this.Identifier = parameterSyntax.Identifier.Text;
         }
 
         public override TranslationResult Translate(TranslationContext context)
@@ -28,10 +26,10 @@ namespace Soothsharp.Translation.Trees.CSharp
         public TranslationResult Translate(TranslationContext context, IParameterSymbol symbol)
         {
             Error err;
-            ISymbol parameterSymbol = context.Semantics.GetDeclaredSymbol(ParameterSyntax);
+            ISymbol parameterSymbol = context.Semantics.GetDeclaredSymbol(this.ParameterSyntax);
             Identifier identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(parameterSymbol);
             ParameterSilvernode ps = new ParameterSilvernode(identifier,
-                new TypeSilvernode(Type.TypeSyntax, TypeTranslator.TranslateType(symbol.Type, Type.TypeSyntax, out err)), OriginalNode);
+                new TypeSilvernode(this.Type.TypeSyntax, TypeTranslator.TranslateType(symbol.Type, this.Type.TypeSyntax, out err)), this.OriginalNode);
             var errlist = new List<Error>();
             if (err != null) errlist.Add(err);
             return TranslationResult.FromSilvernode(ps, errlist);

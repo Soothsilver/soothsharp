@@ -17,7 +17,7 @@ namespace Soothsharp.Translation.Trees.Silver
         /// <summary>
         /// Gets the children of this silvernode, if any. All <see cref="ComplexSilvernode"/>s have children, but other silvernodes cannot.
         /// </summary>
-        public virtual IEnumerable<Silvernode> Children => new Silvernode[0];
+        protected virtual IEnumerable<Silvernode> Children => new Silvernode[0];
 
         /// <summary>
         /// Gets the C# node that was translated into the deepmost silvernode that is present at the specified character offset off the 
@@ -37,7 +37,7 @@ namespace Soothsharp.Translation.Trees.Silver
         {
             if (offset >= this.Size) throw new ArgumentException("The offset must be within this node.", nameof(offset));
             int curoffset = offset;
-            foreach (var child in Children)
+            foreach (var child in this.Children)
             {
                 if (child.Size > curoffset)
                 {
@@ -59,7 +59,7 @@ namespace Soothsharp.Translation.Trees.Silver
         /// <summary>
         /// Gets the length, in characters, of this silvernode.
         /// </summary>
-        protected int Size => ToString().Length;
+        private int Size => ToString().Length;
 
         /// <summary>
         /// Returns a value that indicates whether this silvernode represents a contract ("requires", "ensures" or "invariant").
@@ -75,7 +75,7 @@ namespace Soothsharp.Translation.Trees.Silver
         /// <param name="originalNode">The associated C# node, or null.</param>
         protected Silvernode(SyntaxNode originalNode)
         {
-            OriginalNode = originalNode;
+            this.OriginalNode = originalNode;
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Soothsharp.Translation.Trees.Silver
         /// </summary>
         public virtual void Postprocess()
         {
-            foreach (var child in Children)
+            foreach (var child in this.Children)
             {
                 child.Postprocess();
             }
@@ -122,27 +122,15 @@ namespace Soothsharp.Translation.Trees.Silver
         /// </summary>
         public void OptimizeRecursively()
         {
-            this.OptimizePre();
+            OptimizePre();
             foreach (var child in this.Children)
             {
                 // TODO when the C# syntax is incorrect, the "child" under BlockSilvernode could sometimes be null.
                 child?.OptimizeRecursively();
             }
-            this.OptimizePost();
+            OptimizePost();
         }
 
-        /// <summary>
-        /// Performs the specified actions on this node and all descendant nodes recursively.
-        /// </summary>
-        /// <param name="action">The action to perform on this node and each descendant.</param>
-        public void Recurse(Action<Silvernode> action)
-        {
-            action(this);
-            foreach (var child in this.Children)
-            {
-                child.Recurse(action);
-            }
-        }
         /// <summary>
         /// Gets all descedants, recursively, of this silvernode, excluding this node itself.
         /// </summary>

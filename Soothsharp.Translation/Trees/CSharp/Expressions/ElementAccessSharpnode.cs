@@ -16,10 +16,10 @@ namespace Soothsharp.Translation.Trees.CSharp
         private ExpressionSharpnode Index;
         public ElementAccessSharpnode(ElementAccessExpressionSyntax syntax) : base(syntax)
         {
-            eaes = syntax;
-            Container = RoslynToSharpnode.MapExpression(syntax.Expression);
+            this.eaes = syntax;
+            this.Container = RoslynToSharpnode.MapExpression(syntax.Expression);
             // TODO multiple indicies
-            Index = RoslynToSharpnode.MapExpression(syntax.ArgumentList.Arguments[0].Expression);
+            this.Index = RoslynToSharpnode.MapExpression(syntax.ArgumentList.Arguments[0].Expression);
 
         }
 
@@ -29,8 +29,8 @@ namespace Soothsharp.Translation.Trees.CSharp
             ISymbol symbol = symbolInfo.Symbol;
             string accessorName = symbol.GetQualifiedName();
             var errors = new List<Error>();
-            var container = Container.Translate(context);
-            var index = Index.Translate(context.ChangePurityContext(PurityContext.Purifiable));
+            var container = this.Container.Translate(context);
+            var index = this.Index.Translate(context.ChangePurityContext(PurityContext.Purifiable));
             // TODO purifiable
             if (accessorName == SeqTranslator.SeqAccess)
             {

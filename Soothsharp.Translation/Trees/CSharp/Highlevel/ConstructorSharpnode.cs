@@ -8,8 +8,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
     internal class ConstructorSharpnode : Sharpnode
     {
         private ClassDeclarationSyntax parentClass;
-        public BlockSharpnode Body { get; set; }
-        public List<ParameterSharpnode> Parameters { get; set; }
+        private BlockSharpnode Body { get; }
+        private List<ParameterSharpnode> Parameters { get; }
         private ConstructorDeclarationSyntax methodSyntax;
 
         public ConstructorSharpnode(ConstructorDeclarationSyntax method)
@@ -23,15 +23,6 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
         }
 
 
-        public ConstructorSharpnode(ClassSharpnode theClass)
-           : base(null)
-        {
-            this.parentClass = theClass.DeclarationSyntax;
-            this.Parameters = new List<ParameterSharpnode>();
-            this.Body = new BlockSharpnode(null);
-        }
-
-
         public override TranslationResult Translate(TranslationContext context)
         {
             var methodSymbol = this.methodSyntax != null ? context.Semantics.GetDeclaredSymbol(this.methodSyntax) : null;
@@ -41,9 +32,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
             SubroutineBuilder builder = new SubroutineBuilder(
                 methodSymbol,
                 true,
-                classSymbol,
-                Parameters,
-                Body,
+                classSymbol, this.Parameters, this.Body,
                 context, 
                 this.OriginalNode);
             return builder.TranslateSelf();

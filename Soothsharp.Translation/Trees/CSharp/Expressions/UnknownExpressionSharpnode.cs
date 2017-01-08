@@ -14,13 +14,13 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         public override TranslationResult Translate(TranslationContext translationContext)
         {
-            if (featureName == null)
+            if (this.featureName == null)
             {
-                return TranslationResult.Error(OriginalNode, Diagnostics.SSIL101_UnknownNode, OriginalNode.Kind());
+                return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL101_UnknownNode, this.OriginalNode.Kind());
             } else
             {
-                return TranslationResult.Error(OriginalNode,
-                    Diagnostics.SSIL108_FeatureNotSupported, featureName);
+                return TranslationResult.Error(this.OriginalNode,
+                    Diagnostics.SSIL108_FeatureNotSupported, this.featureName);
             }
         }
     }

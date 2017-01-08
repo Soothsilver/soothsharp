@@ -17,7 +17,7 @@ namespace Soothsharp.Translation.Trees.Silver
 
         public override string ToString()
         {
-            return condition + " ? " + whenTrue + " : " + whenFalse;
+            return this.condition + " ? " + this.whenTrue + " : " + this.whenFalse;
         }
     }
 }

@@ -11,12 +11,12 @@ namespace Soothsharp.Translation.Trees.Silver
             SyntaxNode originalNode) : 
             base(originalNode, silvernode?.Type ?? SilverType.Error)
         {
-            expression = silvernode;
+            this.expression = silvernode;
         }
 
         public override string ToString()
         {
-            return "(" + expression + ")";
+            return "(" + this.expression + ")";
         }
     }
 }

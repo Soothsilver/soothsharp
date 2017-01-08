@@ -4,11 +4,11 @@ namespace Soothsharp.Translation.Trees.Silver
 {
     class InvariantSilvernode : VerificationConditionSilvernode
     {
-        public Silvernode Invariant;
+        private Silvernode Invariant;
 
         public InvariantSilvernode(Silvernode invariant, SyntaxNode originalNode) : base(originalNode)
         {
-            Invariant = invariant;
+            this.Invariant = invariant;
         }
 
         public override int CompareTo(VerificationConditionSilvernode other)
@@ -21,7 +21,7 @@ namespace Soothsharp.Translation.Trees.Silver
         
         public override string ToString()
         {
-            return "invariant " + Invariant + "";
+            return "invariant " + this.Invariant + "";
         }
     }
 }

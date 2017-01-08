@@ -19,7 +19,7 @@ namespace Soothsharp.Translation.Trees.Silver
 
         public override string ToString()
         {
-            return identifier.ToString();
+            return this.identifier.ToString();
         }
     }
 }

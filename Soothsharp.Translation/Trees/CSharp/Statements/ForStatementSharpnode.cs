@@ -7,18 +7,18 @@ namespace Soothsharp.Translation.Trees.CSharp
 {
     internal class ForStatementSharpnode : StatementSharpnode
     {
-        public List<StatementSharpnode> Initializers = new List<StatementSharpnode>();
-        public List<ExpressionSharpnode> Incrementors = new List<ExpressionSharpnode>();
-        public ExpressionSharpnode Condition;
-        public StatementSharpnode Statement;
+        private List<StatementSharpnode> Initializers = new List<StatementSharpnode>();
+        private List<ExpressionSharpnode> Incrementors = new List<ExpressionSharpnode>();
+        private ExpressionSharpnode Condition;
+        private StatementSharpnode Statement;
 
         public ForStatementSharpnode(ForStatementSyntax stmt) : base(stmt)
         {
-            Condition = RoslynToSharpnode.MapExpression(stmt.Condition);
-            Statement = RoslynToSharpnode.MapStatement(stmt.Statement);
+            this.Condition = RoslynToSharpnode.MapExpression(stmt.Condition);
+            this.Statement = RoslynToSharpnode.MapStatement(stmt.Statement);
             // Add declarations
             if (stmt.Declaration != null)
-                Initializers.Add(new LocalDeclarationSharpnode(stmt.Declaration));
+                this.Initializers.Add(new LocalDeclarationSharpnode(stmt.Declaration));
             // Add initializers
             /*
             if (stmt.Initializers != null) {
@@ -29,19 +29,19 @@ namespace Soothsharp.Translation.Trees.CSharp
             }*/
             foreach (var incrementor in stmt.Incrementors)
             {
-                Incrementors.Add(RoslynToSharpnode.MapExpression(incrementor));
+                this.Incrementors.Add(RoslynToSharpnode.MapExpression(incrementor));
             }
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var conditionResult = Condition.Translate(context);
-            var statementResult = Statement.Translate(context);
+            var conditionResult = this.Condition.Translate(context);
+            var statementResult = this.Statement.Translate(context);
             var statementBlock = ((StatementSilvernode) statementResult.Silvernode).EncloseInBlockIfNotAlready();
           
             var errors = new List<Error>();
             errors.AddRange(conditionResult.Errors);
-            foreach (var incrementor in Incrementors)
+            foreach (var incrementor in this.Incrementors)
             {
                 var incrementorResult = incrementor.Translate(context);
                 statementBlock.Add(incrementorResult.Silvernode as StatementSilvernode);
@@ -54,11 +54,10 @@ namespace Soothsharp.Translation.Trees.CSharp
                 new WhileSilvernode(
                     conditionResult.Silvernode,
                     statementResult.VerificationConditions,
-                    statementBlock,
-                    OriginalNode
+                    statementBlock, this.OriginalNode
                     );
-            var sequence = new StatementsSequenceSilvernode(OriginalNode);
-            foreach (var initializer in Initializers)
+            var sequence = new StatementsSequenceSilvernode(this.OriginalNode);
+            foreach (var initializer in this.Initializers)
             {
                 var initializerResult = initializer.Translate(context);
                 errors.AddRange(initializerResult.Errors);

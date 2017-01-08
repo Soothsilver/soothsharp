@@ -25,16 +25,16 @@ namespace Soothsharp.Translation.Trees.Silver
             params Silvernode[] topLevelSilvernodes)
             : base(originalNode)
         {
-            List = new List<Silvernode>(topLevelSilvernodes);
+            this.List = new List<Silvernode>(topLevelSilvernodes);
         }
 
-        public override IEnumerable<Silvernode> Children
+        protected override IEnumerable<Silvernode> Children
         {
             get {
-                for (int i = 0; i < List.Count; i++)
+                for (int i = 0; i < this.List.Count; i++)
                 {
-                    yield return List[i];
-                    if (i != List.Count - 1)
+                    yield return this.List[i];
+                    if (i != this.List.Count - 1)
                     {
                         yield return new NewlineSilvernode();
                     }
@@ -44,7 +44,7 @@ namespace Soothsharp.Translation.Trees.Silver
 
         protected override void OptimizePre()
         {
-            List.RemoveAll(silvernode => silvernode.ToString() == "");
+            this.List.RemoveAll(silvernode => silvernode.ToString() == "");
 
         }
     }

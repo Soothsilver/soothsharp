@@ -20,7 +20,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
         public override void Run(List<ExpressionSharpnode> arguments, SyntaxNode originalNode, TranslationContext context)
         {
             var expressions = ConvertToSilver(arguments, context);
-            Silvernode = new AssertionLikeSilvernode(_keyword, expressions[0], originalNode);
+            this.Silvernode = new AssertionLikeSilvernode(this._keyword, expressions[0], originalNode);
         }
     }
 }

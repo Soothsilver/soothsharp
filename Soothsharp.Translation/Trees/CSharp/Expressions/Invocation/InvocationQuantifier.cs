@@ -23,24 +23,23 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
             int numArguments = arguments.Count;
             if (numArguments != 1)
             {
-                Errors.Add(new Error(Diagnostics.SSIL301_InternalLocalizedError,
+                this.Errors.Add(new Error(Diagnostics.SSIL301_InternalLocalizedError,
                     originalNode,
                     "incorrect number of arguments for a quantifier expression"));
-                Silvernode = new ErrorSilvernode(originalNode);
+                this.Silvernode = new ErrorSilvernode(originalNode);
                 return;
             }
             if (!(arguments[0] is LambdaSharpnode))
             {
-                Errors.Add(new Error(Diagnostics.SSIL124_QuantifierMustGetLambda,
+                this.Errors.Add(new Error(Diagnostics.SSIL124_QuantifierMustGetLambda,
                       originalNode));
-                Silvernode = new ErrorSilvernode(originalNode);
+                this.Silvernode = new ErrorSilvernode(originalNode);
                 return;
             }
             LambdaSharpnode lambda = (LambdaSharpnode)arguments[0];
             if (lambda.PrepareForInsertionIntoQuantifier(context))
             {
-                Silvernode = new SimpleSequenceSilvernode(originalNode,
-                    kind == QuantifierKind.ForAll ? "forall " : "exists ",
+                this.Silvernode = new SimpleSequenceSilvernode(originalNode, this.kind == QuantifierKind.ForAll ? "forall " : "exists ",
                     new IdentifierSilvernode(lambda.VariableIdentifier),
                     " : ",
                     new TypeSilvernode(null, lambda.VariableSilverType),
@@ -51,8 +50,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
             else
             {
                 var res = lambda.GetErrorTranslationResult();
-                Silvernode = res.Silvernode;
-                Errors.AddRange(res.Errors);
+                this.Silvernode = res.Silvernode;
+                this.Errors.AddRange(res.Errors);
             }
         }
     }

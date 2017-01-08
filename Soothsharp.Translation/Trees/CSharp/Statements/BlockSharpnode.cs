@@ -8,13 +8,13 @@ namespace Soothsharp.Translation.Trees.CSharp
 {
     internal class BlockSharpnode : StatementSharpnode
     {
-        public BlockSyntax BlockSyntax;
-        public List<StatementSharpnode> Statements;
+        private BlockSyntax BlockSyntax;
+        private List<StatementSharpnode> Statements;
 
         public BlockSharpnode(BlockSyntax originalNode) : base(originalNode)
         {
-            BlockSyntax = originalNode;
-            Statements = originalNode.Statements.Select(RoslynToSharpnode.MapStatement).ToList();
+            this.BlockSyntax = originalNode;
+            this.Statements = originalNode.Statements.Select(RoslynToSharpnode.MapStatement).ToList();
         }
 
         public override TranslationResult Translate(TranslationContext context)
@@ -23,7 +23,7 @@ namespace Soothsharp.Translation.Trees.CSharp
             var verificationConditions = new List<VerificationConditionSilvernode>();
             var diagnostics = new List<Error>();
             bool inFunctionOrPredicateBlockReturnStatementAlreadyOccured = false;
-            foreach(var statement in Statements)
+            foreach(var statement in this.Statements)
             {
                 var statementResult = statement.Translate(context);
                 if (statementResult.Silvernode != null)
@@ -71,7 +71,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                 }
                 diagnostics.AddRange(statementResult.Errors);
             }
-            BlockSilvernode block = new BlockSilvernode(BlockSyntax, statements);
+            BlockSilvernode block = new BlockSilvernode(this.BlockSyntax, statements);
             verificationConditions.Sort();
             return new TranslationResult
             {

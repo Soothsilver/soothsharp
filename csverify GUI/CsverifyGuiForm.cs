@@ -11,8 +11,16 @@ using System.Windows.Forms;
 
 namespace csverify_GUI
 {
+    /// <summary>
+    /// This graphical interface form allows users to run csverify.exe on files without
+    /// needing to know the command line optinos.
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class CsverifyGuiForm : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CsverifyGuiForm"/> class.
+        /// </summary>
         public CsverifyGuiForm()
         {
             InitializeComponent();

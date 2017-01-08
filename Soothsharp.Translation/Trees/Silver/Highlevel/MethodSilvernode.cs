@@ -22,22 +22,23 @@ namespace Soothsharp.Translation.Trees.Silver
                   block)
         {
         }
-        public override IEnumerable<Silvernode> Children
+
+        protected override IEnumerable<Silvernode> Children
         {
             get
             {
                 var children = new List<Silvernode>();
                 children.Add("method ");
-                children.Add(Identifier);
+                children.Add(this.Identifier);
                 children.Add(" (");
-                children.AddRange(Parameters.WithSeparator<Silvernode>(new TextSilvernode(", ")));
+                children.AddRange(this.Parameters.WithSeparator<Silvernode>(new TextSilvernode(", ")));
                 children.Add(")");
-                if (!ReturnType.RepresentsVoid())
+                if (!this.ReturnType.RepresentsVoid())
                 {
                     children.Add(" returns (");
-                    children.Add(ReturnValueName);
+                    children.Add(this.ReturnValueName);
                     children.Add(" : ");
-                    children.Add(ReturnType);
+                    children.Add(this.ReturnType);
                     children.Add(")");
                 }
                 AddVerificationConditions(children);

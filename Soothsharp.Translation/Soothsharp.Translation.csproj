@@ -163,7 +163,6 @@
     <Compile Include="Trees\Silver\Expressions\ExpressionSilvernode.cs" />
     <Compile Include="Trees\Silver\Highlevel\HighlevelSequenceSilvernode.cs" />
     <Compile Include="Trees\Silver\Simple\NewlineSilvernode.cs" />
-    <Compile Include="Trees\Silver\Statements\ErrorStatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\AssertionLikeSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\StatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\TextStatementSilvernode.cs" />
@@ -208,17 +207,14 @@
     <Compile Include="Trees\Silver\Silvernode.cs" />
     <Compile Include="Trees\Silver\Contracts\VerificationConditionSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\WhileSilvernode.cs" />
-    <Compile Include="Trees\Spansize.cs" />
     <Compile Include="Backends\BackendUtils.cs" />
     <Compile Include="Backends\CarbonBackend.cs" />
-    <Compile Include="Backends\Verifier.cs" />
     <Compile Include="Backends\IBackend.cs" />
     <Compile Include="Backends\SiliconBackend.cs" />
     <Compile Include="Backends\VerificationResult.cs" />
     <Compile Include="Trees\CSharp\Expressions\CompoundAssignmentExpressionSharpnode.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Trees\CSharp\Expressions\IdentifierExpressionSharpnode.cs" />
-    <Compile Include="Trees\Silver\Highlevel\CSharpTypeDomainSilvernode.cs" />
     <Compile Include="Diagnostics\Diagnostics.cs" />
     <Compile Include="Trees\CSharp\Highlevel\FieldDeclarationSharpnode.cs" />
     <Compile Include="Translators\Identifiers\Identifier.cs" />

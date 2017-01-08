@@ -8,7 +8,7 @@ namespace Soothsharp.Translation.Trees.Silver
 
         protected ExpressionSilvernode(SyntaxNode node, SilverType type) : base(node)
         {
-            Type = type;
+            this.Type = type;
         }
     }
 }

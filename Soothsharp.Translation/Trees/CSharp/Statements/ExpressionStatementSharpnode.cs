@@ -5,7 +5,7 @@ namespace Soothsharp.Translation.Trees.CSharp
 {
     class ExpressionStatementSharpnode : StatementSharpnode
     {
-        public ExpressionSharpnode Expression;
+        private ExpressionSharpnode Expression;
 
         public ExpressionStatementSharpnode(ExpressionStatementSyntax originalNode) : base(originalNode)
         {
@@ -15,7 +15,7 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var exResult = Expression.Translate(context);
+            var exResult = this.Expression.Translate(context);
             if (exResult.Silvernode.IsVerificationCondition())
             {
                 return exResult;
@@ -27,7 +27,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                 if (call.Type != SilverType.Void)
                 {
                     var tempVar = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();
-                    var sequence = new StatementsSequenceSilvernode(OriginalNode,
+                    var sequence = new StatementsSequenceSilvernode(this.OriginalNode,
                         new VarStatementSilvernode(tempVar, call.Type, null),
                         new AssignmentSilvernode(
                             new IdentifierSilvernode(tempVar),
@@ -53,7 +53,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                 return exResult;
             }
 
-            return TranslationResult.Error(Expression.OriginalNode, Diagnostics.SSIL107_ThisExpressionCannotBeStatement);
+            return TranslationResult.Error(this.Expression.OriginalNode, Diagnostics.SSIL107_ThisExpressionCannotBeStatement);
         }
     }
 }

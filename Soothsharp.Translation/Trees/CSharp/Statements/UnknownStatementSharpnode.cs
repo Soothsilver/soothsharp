@@ -19,9 +19,9 @@ namespace Soothsharp.Translation.Trees.CSharp
         {
             if (this.reason != null)
             {
-                return TranslationResult.Error(OriginalNode, Diagnostics.SSIL108_FeatureNotSupported, this.reason);
+                return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL108_FeatureNotSupported, this.reason);
             }
-            return TranslationResult.Error(OriginalNode, Diagnostics.SSIL101_UnknownNode, OriginalNode.Kind());
+            return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL101_UnknownNode, this.OriginalNode.Kind());
         }
     }
 }

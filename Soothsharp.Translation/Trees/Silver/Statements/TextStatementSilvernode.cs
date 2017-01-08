@@ -10,11 +10,12 @@ namespace Soothsharp.Translation.Trees.Silver
         {
             this.text = text;
         }
-        public override IEnumerable<Silvernode> Children
+
+        protected override IEnumerable<Silvernode> Children
         {
             get
             {
-                yield return text;
+                yield return this.text;
             }
         }
 

@@ -12,16 +12,16 @@ namespace Soothsharp.Translation.Trees.Silver
     {
         public StatementsSequenceSilvernode(SyntaxNode node, params StatementSilvernode[] nodes) : base(node)
         {
-            List.AddRange(nodes);
+            this.List.AddRange(nodes);
         }
 
-        public override IEnumerable<Silvernode> Children => List.WithSeparator<Silvernode>("\n" + Tabs());
+        protected override IEnumerable<Silvernode> Children => this.List.WithSeparator<Silvernode>("\n" + Tabs());
 
         public List<StatementSilvernode> List = new List<StatementSilvernode>();
 
         protected override void OptimizePre()
         {
-            List.RemoveAll(sn => String.IsNullOrEmpty(sn.ToString()));
+            this.List.RemoveAll(sn => String.IsNullOrEmpty(sn.ToString()));
         }
     }
 }

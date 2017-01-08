@@ -8,16 +8,16 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
     public class BinaryExpressionSharpnode : ExpressionSharpnode
     {
         private readonly BinaryExpressionSyntax _syntax;
-        public string Operator;
-        public ExpressionSharpnode Left;
-        public ExpressionSharpnode Right;
+        private string Operator;
+        private ExpressionSharpnode Left;
+        private ExpressionSharpnode Right;
 
         public BinaryExpressionSharpnode(BinaryExpressionSyntax syntax, string @operator) : base(syntax)
         {
             this._syntax = syntax;
-            Operator = @operator;
-            Left = RoslynToSharpnode.MapExpression(syntax.Left);
-            Right = RoslynToSharpnode.MapExpression(syntax.Right);
+            this.Operator = @operator;
+            this.Left = RoslynToSharpnode.MapExpression(syntax.Left);
+            this.Right = RoslynToSharpnode.MapExpression(syntax.Right);
         }
 
         public override TranslationResult Translate(TranslationContext context)
@@ -25,11 +25,11 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
             SymbolInfo symbolInfo = context.Semantics.GetSymbolInfo(this._syntax);
             ISymbol symbol = symbolInfo.Symbol;
             string qualifiedName = symbol.GetQualifiedName();
-            string operatorName = qualifiedName == SeqTranslator.OperatorPlus ? "++" : Operator;
-            var left = Left.Translate(context);
-            var right = Right.Translate(context);
+            string operatorName = qualifiedName == SeqTranslator.OperatorPlus ? "++" : this.Operator;
+            var left = this.Left.Translate(context);
+            var right = this.Right.Translate(context);
             IEnumerable<Error> errors = CommonUtils.CombineErrors(left, right);
-            return TranslationResult.FromSilvernode(new BinaryExpressionSilvernode(left.Silvernode, operatorName, right.Silvernode, OriginalNode), errors);
+            return TranslationResult.FromSilvernode(new BinaryExpressionSilvernode(left.Silvernode, operatorName, right.Silvernode, this.OriginalNode), errors);
         }
     }
 }

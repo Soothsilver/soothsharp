@@ -28,9 +28,7 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            List<StatementSilvernode> prependors = new List<StatementSilvernode>();
-
-            var method = context.Semantics.GetSymbolInfo(MethodGroup);
+            var method = context.Semantics.GetSymbolInfo(this.MethodGroup);
             var methodSymbol = method.Symbol as IMethodSymbol;
             if (methodSymbol == null)
             {
@@ -49,10 +47,10 @@ namespace Soothsharp.Translation.Trees.CSharp
                     translationStyle = new InvocationVerificationCondition(methodName);
                     break;
                 case ContractsTranslator.Implication:
-                    translationStyle = new InvocationImplicationEquivalence("==>", MethodGroup);
+                    translationStyle = new InvocationImplicationEquivalence("==>", this.MethodGroup);
                     break;
                 case ContractsTranslator.Equivalence:
-                    translationStyle = new InvocationImplicationEquivalence("<==>", MethodGroup);
+                    translationStyle = new InvocationImplicationEquivalence("<==>", this.MethodGroup);
                     break;
                 case ContractsTranslator.ForAll:
                     translationStyle = new InvocationQuantifier(QuantifierKind.ForAll);
@@ -93,10 +91,10 @@ namespace Soothsharp.Translation.Trees.CSharp
                     translationStyle = new InvocationViperBuiltInFunction("perm", false);
                     break;
                 case SeqTranslator.Contains:
-                    translationStyle = new InvocationSeqContains(MethodGroup, methodGroupSharpnode);
+                    translationStyle = new InvocationSeqContains(this.MethodGroup, this.methodGroupSharpnode);
                     break;
                 case SeqTranslator.Drop:
-                    translationStyle = new InvocationSeqTakeDrop(false, true, MethodGroup, methodGroupSharpnode);
+                    translationStyle = new InvocationSeqTakeDrop(false, true, this.MethodGroup, this.methodGroupSharpnode);
                     break;
                 case SeqTranslator.Take:
                     translationStyle = new InvocationSeqTakeDrop(true, false, this.MethodGroup, this.methodGroupSharpnode);
@@ -105,7 +103,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                     translationStyle = new InvocationSeqTakeDrop(true, true, this.MethodGroup, this.methodGroupSharpnode);
                     break;
                 default:
-                    translationStyle = new InvocationStandardMethod(MethodGroup, methodGroupSharpnode, method);
+                    translationStyle = new InvocationStandardMethod(this.MethodGroup, this.methodGroupSharpnode, method);
                     break;
             }
 

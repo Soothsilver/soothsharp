@@ -20,7 +20,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
         /// If this sharpnode's type was already collected by the translation process, then this contains a reference to the type. Use this
         /// to fill in instance fields, for example.
         /// </summary>
-        public CollectedType TypeIfCollected;
+        private CollectedType TypeIfCollected;
         
 
         public ClassSharpnode(ClassDeclarationSyntax node) : base(node)
@@ -62,7 +62,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
             }
 
             this.TypeIfCollected = translationProcess.AddToCollectedTypes(this, semantics);
-            foreach (Sharpnode node in children)
+            foreach (Sharpnode node in this.children)
             {
                 if (node is FieldDeclarationSharpnode)
                 {

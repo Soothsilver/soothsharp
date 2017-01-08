@@ -30,18 +30,18 @@ namespace Soothsharp.Translation.Trees.Silver
             }
         }
 
-        public override IEnumerable<Silvernode> Children
+        protected override IEnumerable<Silvernode> Children
         {
             get
             {
                 yield return "if (";
-                yield return condition;
+                yield return this.condition;
                 yield return ") ";
                 yield return this.then;
-                if (elseBranch != null)
+                if (this.elseBranch != null)
                 {
                     yield return " else ";
-                    yield return elseBranch;
+                    yield return this.elseBranch;
                 }
             }
         }

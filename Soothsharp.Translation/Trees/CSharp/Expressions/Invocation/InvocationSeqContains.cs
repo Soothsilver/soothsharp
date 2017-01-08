@@ -13,15 +13,15 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
     {
         public InvocationSeqContains(ExpressionSyntax methodGroup, ExpressionSharpnode methodGroupSharpnode)
         {
-            this._methodGroup = methodGroup;
-            this._methodGroupSharpnode = methodGroupSharpnode;
+            this.MethodGroup = methodGroup;
+            this.MethodGroupSharpnode = methodGroupSharpnode;
         }
 
         public override void Run(List<ExpressionSharpnode> arguments, SyntaxNode originalNode, TranslationContext context)
         {
             AddReceiverToList(arguments);
             var expressions = ConvertToSilver(arguments, context);
-            Silvernode = new SimpleSequenceSilvernode(originalNode,
+            this.Silvernode = new SimpleSequenceSilvernode(originalNode,
                 expressions[1],
                 " in ",
                 expressions[0]);

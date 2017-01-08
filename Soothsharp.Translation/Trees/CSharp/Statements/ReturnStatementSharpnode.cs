@@ -6,19 +6,19 @@ namespace Soothsharp.Translation.Trees.CSharp.Statements
 {
     class ReturnStatementSharpnode : StatementSharpnode
     {
-        public ExpressionSharpnode Expression;
+        private ExpressionSharpnode Expression;
 
         public ReturnStatementSharpnode(ReturnStatementSyntax stmt) : base(stmt)
         {
             if (stmt.Expression != null)
             {
-                Expression = RoslynToSharpnode.MapExpression(stmt.Expression);
+                this.Expression = RoslynToSharpnode.MapExpression(stmt.Expression);
             }
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var expr = Expression.Translate(context);
+            var expr = this.Expression.Translate(context);
             var errors = new List<Error>();
             errors.AddRange(expr.Errors);
 
@@ -27,15 +27,14 @@ namespace Soothsharp.Translation.Trees.CSharp.Statements
                 return TranslationResult.FromSilvernode(expr.Silvernode, errors);
             }
 
-            StatementsSequenceSilvernode statements = new StatementsSequenceSilvernode(OriginalNode);
+            StatementsSequenceSilvernode statements = new StatementsSequenceSilvernode(this.OriginalNode);
             statements.List.Add(
                 new AssignmentSilvernode(
-                    new TextSilvernode(Constants.SilverReturnVariableName, OriginalNode),
-                    expr.Silvernode,
-                    OriginalNode
+                    new TextSilvernode(Constants.SilverReturnVariableName, this.OriginalNode),
+                    expr.Silvernode, this.OriginalNode
                 ));
             statements.List.Add(
-                new GotoSilvernode(Constants.SilverMethodEndLabel, OriginalNode)
+                new GotoSilvernode(Constants.SilverMethodEndLabel, this.OriginalNode)
             );
             return TranslationResult.FromSilvernode(statements, errors);
         }

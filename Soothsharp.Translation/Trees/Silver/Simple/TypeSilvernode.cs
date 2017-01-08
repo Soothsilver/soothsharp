@@ -18,7 +18,7 @@ namespace Soothsharp.Translation.Trees.Silver
 
         public bool RepresentsVoid()
         {
-            return silverType == SilverType.Void;
+            return this.silverType == SilverType.Void;
         }
     }
 }

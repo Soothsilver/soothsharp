@@ -39,6 +39,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csverify GUI", "csverify GU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{97BB8BD6-2390-4F16-B4E5-9F1AC9921D11}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Viper", "Viper", "{68A02F6F-BF24-477F-B9FA-30B5052619FD}"
+	ProjectSection(SolutionItems) = preProject
+		Viper\carbon.jar = Viper\carbon.jar
+		Viper\nailgun-server-0.9.1.jar = Viper\nailgun-server-0.9.1.jar
+		Viper\ng.exe = Viper\ng.exe
+		Viper\silicon.jar = Viper\silicon.jar
+		Viper\startviperserver.bat = Viper\startviperserver.bat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

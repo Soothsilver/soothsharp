@@ -19,30 +19,29 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
 
         public override void Run(List<ExpressionSharpnode> arguments, SyntaxNode originalNode, TranslationContext context)
         {
-            if (MethodGroup is MemberAccessExpressionSyntax)
+            if (this.MethodGroup is MemberAccessExpressionSyntax)
             {
-                MemberAccessExpressionSyntax memberAccess = MethodGroup as MemberAccessExpressionSyntax;
+                MemberAccessExpressionSyntax memberAccess = this.MethodGroup as MemberAccessExpressionSyntax;
                 var leftExpression = RoslynToSharpnode.MapExpression(memberAccess.Expression);
                 // TODO verify the purity
                 var leftExpressionResult = leftExpression.Translate(context);
                 var rightExpressionResult = arguments[0].Translate(context);
                 Silvernode implies = new BinaryExpressionSilvernode(
-                    leftExpressionResult.Silvernode,
-                    _operator,
+                    leftExpressionResult.Silvernode, this._operator,
                     rightExpressionResult.Silvernode,
                     originalNode
                     );
-                Errors.AddRange(leftExpressionResult.Errors);
-                Errors.AddRange(rightExpressionResult.Errors);
-                Prependors.AddRange(leftExpressionResult.PrependTheseSilvernodes);
-                Prependors.AddRange(rightExpressionResult.PrependTheseSilvernodes);
-                Silvernode = implies;
+                this.Errors.AddRange(leftExpressionResult.Errors);
+                this.Errors.AddRange(rightExpressionResult.Errors);
+                this.Prependors.AddRange(leftExpressionResult.PrependTheseSilvernodes);
+                this.Prependors.AddRange(rightExpressionResult.PrependTheseSilvernodes);
+                this.Silvernode = implies;
             }
             else
             {
-                Errors.Add(new Error(Diagnostics.SSIL110_InvalidSyntax, originalNode,
+                this.Errors.Add(new Error(Diagnostics.SSIL110_InvalidSyntax, originalNode,
                     "member access expression expected"));
-                Silvernode = new TextSilvernode(Constants.SilverErrorString, originalNode);
+                this.Silvernode = new TextSilvernode(Constants.SilverErrorString, originalNode);
             }
         }
     }

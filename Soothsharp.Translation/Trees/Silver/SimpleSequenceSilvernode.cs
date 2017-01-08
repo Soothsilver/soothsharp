@@ -11,12 +11,12 @@ namespace Soothsharp.Translation.Trees.Silver
         public SimpleSequenceSilvernode(SyntaxNode originalNode, params Silvernode[] topLevelSilvernodes)
             : base(originalNode)
         {
-            List = new List<Silvernode>(topLevelSilvernodes);
+            this.List = new List<Silvernode>(topLevelSilvernodes);
         }
 
-        public override IEnumerable<Silvernode> Children
+        protected override IEnumerable<Silvernode> Children
         {
-            get { return List.SelectMany(s => new[] { s }); }
+            get { return this.List.SelectMany(s => new[] { s }); }
         }
     }
 }

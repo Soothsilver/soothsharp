@@ -11,7 +11,7 @@ namespace Soothsharp.Translation.Tests
     public class TranslationTest
     {
         [Theory()]
-        [MemberData(nameof(GetTestFiles))]
+        [MemberData(nameof(TranslationTest.GetTestFiles))]
         public void TransOnly(string test)
         { 
             

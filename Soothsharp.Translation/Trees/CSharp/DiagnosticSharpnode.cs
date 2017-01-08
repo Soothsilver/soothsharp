@@ -14,7 +14,7 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         public override TranslationResult Translate(TranslationContext translationContext)
         {
-            return TranslationResult.Error(OriginalNode, diagnostic, parameters);
+            return TranslationResult.Error(this.OriginalNode, this.diagnostic, this.parameters);
         }
     }
 }

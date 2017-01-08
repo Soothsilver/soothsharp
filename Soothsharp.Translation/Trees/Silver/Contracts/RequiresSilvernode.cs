@@ -4,11 +4,11 @@ namespace Soothsharp.Translation.Trees.Silver
 {
     class RequiresSilvernode : VerificationConditionSilvernode
     {
-        public Silvernode Precondition;
+        private Silvernode Precondition;
 
         public RequiresSilvernode(Silvernode precondition, SyntaxNode originalNode) : base(originalNode)
         {
-            Precondition = precondition;
+            this.Precondition = precondition;
         }
 
         public override int CompareTo(VerificationConditionSilvernode other)
@@ -21,7 +21,7 @@ namespace Soothsharp.Translation.Trees.Silver
         
         public override string ToString()
         {
-            return "requires " + Precondition + "";
+            return "requires " + this.Precondition + "";
         }
     }
 }

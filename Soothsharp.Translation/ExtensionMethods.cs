@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 namespace Soothsharp.Translation
@@ -9,18 +8,18 @@ namespace Soothsharp.Translation
     /// </summary>
     public static class ExtensionMethods
     {
-        public static readonly SymbolDisplayFormat QualifiedNameDisplayFormat =
+        private static readonly SymbolDisplayFormat qualifiedNameDisplayFormat =
             new SymbolDisplayFormat(
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
                 memberOptions: SymbolDisplayMemberOptions.IncludeContainingType);
-    
-        public static readonly SymbolDisplayFormat WithoutNamespacesNameDisplayFormat =
+
+        private static readonly SymbolDisplayFormat withoutNamespacesNameDisplayFormat =
             new SymbolDisplayFormat(
                
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
                 memberOptions: SymbolDisplayMemberOptions.IncludeContainingType);
 
-        public static readonly SymbolDisplayFormat SimpleSymbolFormat =
+        private static readonly SymbolDisplayFormat simpleSymbolFormat =
             new SymbolDisplayFormat(
                 parameterOptions: SymbolDisplayParameterOptions.IncludeName
                 );
@@ -32,7 +31,7 @@ namespace Soothsharp.Translation
         /// <returns>The fully qualified name of the symbol.</returns>
         public static string GetQualifiedName(this ISymbol symbol)
         {
-            return symbol.ToDisplayString(QualifiedNameDisplayFormat);
+            return symbol.ToDisplayString(ExtensionMethods.qualifiedNameDisplayFormat);
         } 
         /// <summary>
         /// Gets a partially qualified name of the C# symbol that does not include namespaces (for example, Int32) .
@@ -41,21 +40,11 @@ namespace Soothsharp.Translation
         /// <returns>The fully qualified name of the symbol.</returns>
         public static string GetNameWithoutNamespaces(this ISymbol symbol)
         {
-            return symbol.ToDisplayString(WithoutNamespacesNameDisplayFormat);
+            return symbol.ToDisplayString(ExtensionMethods.withoutNamespacesNameDisplayFormat);
         }
         public static string GetSimpleName(this ISymbol symbol)
         {
-            return symbol.ToDisplayString(SimpleSymbolFormat);
-        }
-        /// <summary>
-        /// Increases line indent by one tab to the right for all lines in the input.
-        /// </summary>
-        /// <param name="input">Text that should be tabified to the right.</param>
-        /// <returns>The input, with each line indented one more tab to the right.</returns>
-        public static string AscendTab(this string input)
-        {
-            string[] lines = input.Split('\n'); 
-            return String.Join("\n", lines.Select(line => "\t" + line));
+            return symbol.ToDisplayString(ExtensionMethods.simpleSymbolFormat);
         }
 
         /// <summary>

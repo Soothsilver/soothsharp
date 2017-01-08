@@ -5,19 +5,19 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 {
     public class PrefixUnaryExpressionSharpnode : ExpressionSharpnode
     {
-        public string Operator;
-        public ExpressionSharpnode Expression;
+        private string Operator;
+        private ExpressionSharpnode Expression;
 
         public PrefixUnaryExpressionSharpnode(PrefixUnaryExpressionSyntax syntax, string @operator) : base(syntax)
         {
-            Operator = @operator;
-            Expression = RoslynToSharpnode.MapExpression(syntax.Operand);
+            this.Operator = @operator;
+            this.Expression = RoslynToSharpnode.MapExpression(syntax.Operand);
         }
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var left = Expression.Translate(context);
-            return TranslationResult.FromSilvernode(new PrefixUnaryExpressionSilvernode(Operator, left.Silvernode, OriginalNode), left.Errors);
+            var left = this.Expression.Translate(context);
+            return TranslationResult.FromSilvernode(new PrefixUnaryExpressionSilvernode(this.Operator, left.Silvernode, this.OriginalNode), left.Errors);
         }
     }
 }

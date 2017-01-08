@@ -14,14 +14,14 @@ namespace Soothsharp.Translation.Trees.Silver
             this.type = type;
         }
 
-        public override IEnumerable<Silvernode> Children
+        protected override IEnumerable<Silvernode> Children
         {
             get
             {
                 yield return "var ";
-                yield return identifier.ToString();
+                yield return this.identifier.ToString();
                 yield return " : ";
-                yield return type.ToString();
+                yield return this.type.ToString();
             }
         }
     }

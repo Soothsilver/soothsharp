@@ -1,9 +1,9 @@
 TODO:
 arrays, array elements, element access, array creation expression, array length
 
-Seq constructor
 Forall and Exists for non-integers
 Forall and Exists: triggers
+folding, unfolding, Result<>
 
 CHECK:
 abstract predicate/function/method

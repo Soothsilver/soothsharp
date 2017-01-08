@@ -11,7 +11,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
 
         public IFieldSymbol GetSymbol(SemanticModel semanticModel)
         {
-            var symbol = semanticModel.GetDeclaredSymbol(fieldDeclarationSyntax.Declaration.Variables.First());
+            var symbol = semanticModel.GetDeclaredSymbol(this.fieldDeclarationSyntax.Declaration.Variables.First());
             IFieldSymbol fieldsymbol = (IFieldSymbol)symbol;
             return fieldsymbol;
         }
@@ -26,7 +26,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
         public override TranslationResult Translate(TranslationContext context)
         {
             // This is not translated.
-            return TranslationResult.FromSilvernode(new EmptySilvernode(fieldDeclarationSyntax));
+            return TranslationResult.FromSilvernode(new EmptySilvernode(this.fieldDeclarationSyntax));
         }
     }
 }
