@@ -81,14 +81,20 @@ namespace Soothsharp.Translation
                         }
                         break;
                     case ContractsTranslator.AbstractAttribute:
+                    case ContractsTranslator.SignatureOnlyAttribute:
                         if (this.IsConstructor)
                         {
                             return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL117_ConstructorMustNotBeAbstract);
                         }
                         isAbstract = true;
                         break;
+
                         // Ignore other attributes.
                 }
+            }
+            if (Context.MarkEverythingAbstract)
+            {
+                isAbstract = true;
             }
             TranslationContext bodyContext = this.Context;
             if (silverKind == SilverKind.Function || silverKind == SilverKind.Predicate)

@@ -24,7 +24,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
         {
             SymbolInfo symbolInfo = context.Semantics.GetSymbolInfo(this._syntax);
             ISymbol symbol = symbolInfo.Symbol;
-            string qualifiedName = symbol.GetQualifiedName();
+            string qualifiedName = symbol?.GetQualifiedName();
             string operatorName = qualifiedName == SeqTranslator.OperatorPlus ? "++" : this.Operator;
             var left = this.Left.Translate(context);
             var right = this.Right.Translate(context);

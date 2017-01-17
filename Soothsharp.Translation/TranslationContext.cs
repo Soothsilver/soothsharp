@@ -22,6 +22,11 @@ namespace Soothsharp.Translation
         // ReSharper disable once RedundantDefaultMemberInitializer
         public bool VerifyUnmarkedItems { get; private set; } = false;
         /// <summary>
+        /// Gets a value indicating whether method bodies should be ignored (except for contracts) and translated
+        /// as abstract Viper subroutines.
+        /// </summary>
+        public bool MarkEverythingAbstract { get; private set; } = false;
+        /// <summary>
         /// Gets the semantic model of the C# compilation.
         /// </summary>
         public SemanticModel Semantics { get; }
@@ -38,6 +43,7 @@ namespace Soothsharp.Translation
             this.Semantics = copyFrom.Semantics;
             this.IsFunctionOrPredicateBlock = copyFrom.IsFunctionOrPredicateBlock;
             this.VerifyUnmarkedItems = copyFrom.VerifyUnmarkedItems;
+            this.MarkEverythingAbstract = copyFrom.MarkEverythingAbstract;
         }
 
         private TranslationContext(TranslationProcess process, SemanticModel semantics)
@@ -45,11 +51,12 @@ namespace Soothsharp.Translation
             this.Process = process;
             this.Semantics = semantics;
         }
-        public static TranslationContext StartNew(TranslationProcess translationProcess, SemanticModel semantics, bool verifyUnmarkedItems)
+        public static TranslationContext StartNew(TranslationProcess translationProcess, SemanticModel semantics, bool verifyUnmarkedItems, CompilationUnitVerificationStyle style)
         {
             return new TranslationContext(translationProcess, semantics)
             {
-                VerifyUnmarkedItems = verifyUnmarkedItems
+                VerifyUnmarkedItems = verifyUnmarkedItems,
+                MarkEverythingAbstract = style == CompilationUnitVerificationStyle.ContractsOnly
             };
         }
 

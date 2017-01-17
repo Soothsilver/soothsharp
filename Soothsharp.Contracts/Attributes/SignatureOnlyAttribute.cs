@@ -9,7 +9,7 @@ namespace Soothsharp.Contracts
     /// If the annotated node is a class, then this attribute applies to all of its methods instead.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
-    public class SignatureOnly : Attribute
+    public class SignatureOnlyAttribute : Attribute
 
     {
     }

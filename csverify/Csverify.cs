@@ -57,7 +57,7 @@ namespace Soothsharp.Cs2Sil
         /// Name and short description of this assembly.
         /// </summary>
         private static string header = AppDomain.CurrentDomain.FriendlyName + " " + version + "\n" +
-            "Verifies C# code files for correctness with respect to specified verification conditions.";
+            "Verifies C# code files for correctness with respect to specified contracts.";
 
         private static int Main(string[] args)
         {
@@ -214,7 +214,10 @@ namespace Soothsharp.Cs2Sil
                         {
                             Console.WriteLine("Details: " + error.Diagnostic.Details);
                         }
-                        Console.WriteLine("Node source: " + error.Node.GetText().ToString().Trim());
+                        if (error.Node != null)
+                        {
+                            Console.WriteLine("Node source: " + error.Node.GetText().ToString().Trim());
+                        }
                         Console.WriteLine();
                     }
                 }

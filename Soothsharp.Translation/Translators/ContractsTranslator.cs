@@ -50,6 +50,7 @@ namespace Soothsharp.Translation
         public const string VerifiedAttribute = ContractsTranslator.ContractsNamespace + nameof(Contracts.VerifiedAttribute);
         public const string UnverifiedAttribute = ContractsTranslator.ContractsNamespace + nameof(Contracts.UnverifiedAttribute);
         public const string AbstractAttribute = ContractsTranslator.ContractsNamespace + nameof(Contracts.AbstractAttribute);
+        public const string SignatureOnlyAttribute = ContractsTranslator.ContractsNamespace + nameof(Contracts.SignatureOnlyAttribute);
 
 
         public TranslationResult TranslateIdentifierAsContract(ISymbol symbol, SyntaxNode originalNode, TranslationContext context)

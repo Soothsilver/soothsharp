@@ -108,12 +108,13 @@ namespace Soothsharp.Translation
             VerboseLog("Loading mscorlib and Soothsharp.Contracts...");
             var mscorlib = MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location);
             var contractsLibrary = MetadataReference.CreateFromFile(typeof(Contracts.Contract).Assembly.Location);
+            var systemCore = MetadataReference.CreateFromFile(typeof(System.Linq.ParallelQuery).Assembly.Location);
             VerboseLog("Initializing compilation...");
             CSharpCompilation compilation;
             try
             {
                  compilation = CSharpCompilation.Create("translated_assembly", this.compilationUnits.Select(unit => unit.RoslynTree),
-                    (new[] { mscorlib, contractsLibrary }).Union(this.referencedAssemblies.Select(filename => MetadataReference.CreateFromFile(filename)))
+                    (new[] { mscorlib, contractsLibrary, systemCore }).Union(this.referencedAssemblies.Select(filename => MetadataReference.CreateFromFile(filename)))
                     );
             } catch (System.IO.IOException exception)
             {
@@ -128,34 +129,55 @@ namespace Soothsharp.Translation
                 VerboseLog("- Semantic analysis...");
                 SemanticModel semanticModel = compilation.GetSemanticModel(compilationUnit.RoslynTree, false);
 
-                VerboseLog("- CONVERSATION PHASE begins...");
+                VerboseLog("- CONVERSION PHASE begins...");
                 Sharpnode cSharpTree;
+#if RELEASE
                 try
                 {
+#endif
                     cSharpTree = new CompilationUnitSharpnode(compilationUnit.RoslynTree.GetRoot() as CompilationUnitSyntax);
-                }
+#if RELEASE
+            }
                 catch (Exception ex)
                 {
                     this.masterErrorList.Add(new Error(Diagnostics.SSIL103_ExceptionConstructingCSharp, compilationUnit.RoslynTree.GetRoot(), ex.ToString()));
                     continue;
                 }
+#endif
 
                 VerboseLog("- COLLECTION PHASE begins...");
                 cSharpTree.CollectTypesInto(this, semanticModel);
 
                 VerboseLog("- MAIN PHASE begins...");
                 TranslationResult translationResult;
+                var diags = semanticModel.GetDiagnostics().ToList();
+                bool skipTranslatingThisTree = false;
+                foreach(var diag in diags)
+                {
+                    if (diag.Severity != Microsoft.CodeAnalysis.DiagnosticSeverity.Error) continue;
+                    masterErrorList.Add(new Error(Diagnostics.SSIL123_ThereIsThisCSharpError, null, diag.ToString()));
+                    skipTranslatingThisTree = true;
+                }
+                if (!skipTranslatingThisTree)
+                {
+#if RELEASE
                 try
                 {
-                    translationResult = cSharpTree.Translate(TranslationContext.StartNew(this, semanticModel, this.Configuration.VerifyUnmarkedItems));
+#endif
+                    translationResult =
+                        cSharpTree.Translate(TranslationContext.StartNew(this, semanticModel,
+                            this.Configuration.VerifyUnmarkedItems, compilationUnit.Style));
+#if RELEASE
                 }
                 catch (Exception ex)
                 {
                     this.masterErrorList.Add(new Error(Diagnostics.SSIL104_ExceptionConstructingSilver, compilationUnit.RoslynTree.GetRoot(), ex.ToString()));
                     continue;
                 }
-                masterTree.List.Add(translationResult.Silvernode);
-                this.masterErrorList.AddRange(translationResult.Errors);
+#endif
+                    masterTree.List.Add(translationResult.Silvernode);
+                    this.masterErrorList.AddRange(translationResult.Errors);
+                }
             }
 
             VerboseLog("GLOBAL ADDITION PHASE begins...");

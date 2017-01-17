@@ -14,6 +14,11 @@ namespace Soothsharp.Translation
         public static SilverType TranslateType(ITypeSymbol typeSymbol, SyntaxNode where, out Error error)
         {
             error = null;
+            if (typeSymbol == null)
+            {
+                error = new Error(Diagnostics.SSIL204_OtherLocalizedError, where, "Unknown type (is the type declared in a file submitted to Soothsharp?)");
+                return SilverType.Error;
+            }
             switch(typeSymbol.GetQualifiedName())
             {
                 case "System.Int32":

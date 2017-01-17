@@ -8,7 +8,7 @@ namespace Soothsharp.Translation
     public class CompilationUnit
     {
         public CSharpSyntaxTree RoslynTree { get; private set; }
-        private CompilationUnitVerificationStyle Style { get; set; }
+        public CompilationUnitVerificationStyle Style { get;  private set; }
 
         private CompilationUnit(CSharpSyntaxTree tree, CompilationUnitVerificationStyle style)
         {
