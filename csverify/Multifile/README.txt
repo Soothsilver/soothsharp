@@ -1,1 +1,0 @@
-﻿These are meant to be loaded into csverify.exe at the same time.

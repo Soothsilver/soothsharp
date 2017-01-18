@@ -89,21 +89,11 @@
   <ItemGroup>
     <Content Include="icons\csverify1.ico" />
     <Compile Include="Csverify.cs" />
+    <Compile Include="Examples\Test.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="ExitCode.cs" />
-    <Compile Include="Multifile\Assume_Main.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Multifile\Assume_Side.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Multifile\Multiple_Main.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Multifile\Multiple_Side.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Multifile\README.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

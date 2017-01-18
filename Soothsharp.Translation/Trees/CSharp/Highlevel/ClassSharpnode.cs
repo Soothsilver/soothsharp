@@ -69,6 +69,12 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
                     FieldDeclarationSharpnode fieldDeclaration = (FieldDeclarationSharpnode)node;
                     var fieldSymbol = fieldDeclaration.GetSymbol(semantics);
                     if (fieldSymbol.IsConst) continue; // Constants are inlined.
+                    if (fieldSymbol.IsStatic)
+                    {
+                        translationProcess.AddError(new Translation.Error(Diagnostics.SSIL108_FeatureNotSupported,
+                            node.OriginalNode, "static fields"));
+                        continue;
+                    }
                     var typeSymbol = fieldSymbol.Type;
                     Error error;
                     this.TypeIfCollected.InstanceFields.Add(
