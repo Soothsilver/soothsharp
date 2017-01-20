@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
+using Soothsharp.Translation.Translators;
 using Soothsharp.Translation.Trees.CSharp;
 using Soothsharp.Translation.Trees.CSharp.Highlevel;
 using Soothsharp.Translation.Trees.Silver;
@@ -23,6 +24,7 @@ namespace Soothsharp.Translation
         private List<CollectedType> collectedTypes = new List<CollectedType>();
         private List<CompilationUnit> compilationUnits = new List<CompilationUnit>();
         private List<string> referencedAssemblies = new List<string>();
+        public ArraysTranslator ArraysTranslator;
         internal CollectedType AddToCollectedTypes(ClassSharpnode classSharpnode, SemanticModel semanticModel)
         {
             this.IdentifierTranslator.RegisterAndGetIdentifier(
@@ -36,6 +38,7 @@ namespace Soothsharp.Translation
             this.ContractsTranslator = new ContractsTranslator();
             this.ConstantsTranslator = new ConstantsTranslator();
             this.IdentifierTranslator = new IdentifierTranslator(this);
+            this.ArraysTranslator = new Translators.ArraysTranslator();
         }
         List<Error> masterErrorList = new List<Error>();
         private bool executed;
@@ -184,6 +187,10 @@ namespace Soothsharp.Translation
             foreach (var collectedType in this.collectedTypes)
             {
                 masterTree.List.Add(collectedType.GenerateGlobalSilvernode(this));
+            }
+            if (this.ArraysTranslator.ArraysWereUsed)
+            {
+                masterTree.List.Add(this.ArraysTranslator.GenerateGlobalSilvernode());
             }
             
 

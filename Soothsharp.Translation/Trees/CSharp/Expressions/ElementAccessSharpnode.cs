@@ -27,15 +27,15 @@ namespace Soothsharp.Translation.Trees.CSharp
         {
             SymbolInfo symbolInfo = context.Semantics.GetSymbolInfo(this.eaes);
             ISymbol symbol = symbolInfo.Symbol;
-            string accessorName = symbol.GetQualifiedName();
+            string accessorName = symbol?.GetQualifiedName();
             var errors = new List<Error>();
             var container = this.Container.Translate(context);
             var index = this.Index.Translate(context.ChangePurityContext(PurityContext.Purifiable));
+            errors.AddRange(container.Errors);
+            errors.AddRange(index.Errors);
             // TODO purifiable
             if (accessorName == SeqTranslator.SeqAccess)
             {
-                errors.AddRange(container.Errors);
-                errors.AddRange(index.Errors);
                 return TranslationResult.FromSilvernode(
                     new SimpleSequenceSilvernode(this.OriginalNode,
                         container.Silvernode,
@@ -47,8 +47,19 @@ namespace Soothsharp.Translation.Trees.CSharp
             }
             else
             {
-                return TranslationResult.Error(this.OriginalNode,
-                    Diagnostics.SSIL128_IndexersAreOnlyForSeqsAndArrays);
+                var typeInfo = context.Semantics.GetTypeInfo(Container.OriginalNode);
+                var t = typeInfo.Type;
+                if (t.Kind == SymbolKind.ArrayType)
+                {
+                    // ASSUME READ
+                    return null;
+                }
+                else
+                {
+                    //      if (ssContainer as IExpressionSym
+                    return TranslationResult.Error(this.OriginalNode,
+                        Diagnostics.SSIL128_IndexersAreOnlyForSeqsAndArrays);
+                }
             }
         }
     }

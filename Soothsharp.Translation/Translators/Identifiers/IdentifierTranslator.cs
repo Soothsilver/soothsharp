@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Soothsharp.Translation.Translators;
 
 namespace Soothsharp.Translation
 {
@@ -67,7 +68,13 @@ namespace Soothsharp.Translation
             "Int",
             "Bool",
             "Perm",
-            "Ref"
+            "Ref",
+            "res",
+            "this",
+            ArraysTranslator.IntegerArrayContents,
+            ArraysTranslator.IntegerArrayRead,
+            ArraysTranslator.IntegerArrayWrite,
+            ArraysTranslator.IntegerArrayAccess
         };
         private readonly Dictionary<TaggedSymbol, Identifier> registeredGlobalSymbols = new Dictionary<TaggedSymbol, Identifier>();
         private readonly Dictionary<TaggedSymbol, Identifier> references = new Dictionary<TaggedSymbol, Identifier>();

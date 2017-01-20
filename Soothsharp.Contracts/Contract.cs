@@ -101,9 +101,7 @@ namespace Soothsharp.Contracts
         public static void Fold(bool predicateCall)
         {
         }
-
-     
-
+        
         /// <summary>
         /// Unfolds the specified predicate with the given arguments. 
         /// </summary>

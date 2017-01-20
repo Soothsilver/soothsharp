@@ -57,10 +57,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                 case PurityContext.PureOrFail:
                     return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL114_NotPureContext, "Object creation is inherently impure.");
             }
-
-            return TranslationResult.FromSilvernode(
-                new NewStarSilvernode(this.OriginalNode)
-                );
+            throw new System.Exception("This should never be reached.");
         }
 
     }
