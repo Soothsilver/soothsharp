@@ -29,6 +29,8 @@ namespace Soothsharp.Translation
 
         // For methods and loops.
         public List<VerificationConditionSilvernode> VerificationConditions = new List<VerificationConditionSilvernode>();
+        public TranslationResult Arrays_Container;
+        public TranslationResult Arrays_Index;
 
         public static TranslationResult Error(SyntaxNode node, SoothsharpDiagnostic diagnostic, params Object[] diagnosticArguments)
         {

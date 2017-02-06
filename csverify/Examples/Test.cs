@@ -11,7 +11,7 @@ namespace Soothsharp.Csverify.Examples
     {
         static void AA()
         {
-            int[] pole = new[] {2, 4, 6};
+            int[] pole = {2, 4};
             Contract.Assert(pole[1] == 4);
         }
         

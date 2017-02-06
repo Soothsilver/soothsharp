@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Soothsharp.Translation.Translators;
 using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation.Trees.CSharp
@@ -52,7 +53,17 @@ namespace Soothsharp.Translation.Trees.CSharp
                 if (t.Kind == SymbolKind.ArrayType)
                 {
                     // ASSUME READ
-                    return null;
+                    var readsilvernode = new SimpleSequenceSilvernode(this.OriginalNode,
+                        container.Silvernode,
+                        ".",
+                        ArraysTranslator.IntegerArrayContents,
+                        "[",
+                        index.Silvernode,
+                        "]");
+                    TranslationResult read = TranslationResult.FromSilvernode(readsilvernode, errors);
+                    read.Arrays_Container = container;
+                    read.Arrays_Index = index;
+                    return read;
                 }
                 else
                 {
