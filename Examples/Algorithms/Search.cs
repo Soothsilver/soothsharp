@@ -9,7 +9,19 @@ using static Soothsharp.Contracts.Contract;
 namespace Soothsharp.Examples.Algorithms
 {
     public static class Search
-    {    /// <summary>
+    {
+
+
+        /// <summary>
+        /// Gets the smallest integer in the sequence.
+        /// </summary>
+        /// <param name="xs">The sequence to search.</param>
+        public static int GetSmallestNumber(Seq<int> xs)
+        {
+            throw new NotImplementedException();
+        }
+
+         /// <summary>
          /// Searches a sorted sequence of integers for a value. If the value is found, this method returns
          /// the index of the value in the sequence. If the value is not present, the method returns -1.
          /// </summary>

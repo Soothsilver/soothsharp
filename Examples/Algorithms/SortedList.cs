@@ -33,8 +33,12 @@ namespace Soothsharp.Examples.Algorithms
         /// <returns>Index of the new element that this method adds to the list.</returns>
         public int Insert(int element)
         {
-            Requires(Acc(Elements) /*&&Sorted*/);
-            Ensures(Acc(Elements) /*&&Sorted*/);
+            Requires(Acc(Elements) &&
+                ForAll((i)=>ForAll((j)=> (0 <= i && i < j && j < Elements.Length).Implies(Elements[i] <= Elements[j])))
+                );
+            Ensures(Acc(Elements) &&
+                ForAll((i) => ForAll((j) => (0 <= i && i < j && j < Elements.Length).Implies(Elements[i] <= Elements[j])))
+                );
             Ensures(0 <= IntegerResult && IntegerResult <= Old(Elements.Length));
             Ensures(Elements ==
                     Old(Elements).Take(IntegerResult) + new Seq<int>(element) + Old(Elements).Drop(IntegerResult));
@@ -43,13 +47,13 @@ namespace Soothsharp.Examples.Algorithms
             while (index < Elements.Length && Elements[index] < element)
             {
                 Invariant(Acc(Elements, Permission.Half));
-                Invariant(0 <= index && index < this.Elements.Length);
+                Invariant(0 <= index && index <= this.Elements.Length);
                 Invariant(ForAll((i) => (0 <= i && i < index).Implies(Elements[i] < element)));
 
                 index++;
             }
 
-            Elements = Old(Elements).Take(IntegerResult) + new Seq<int>(element) + Old(Elements).Drop(IntegerResult);
+            Elements = Elements.Take(index) + new Seq<int>(element) + Elements.Drop(index);
             return index;
         }
     }

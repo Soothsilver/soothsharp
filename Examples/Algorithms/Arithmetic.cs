@@ -48,5 +48,14 @@ namespace Soothsharp.Examples.Algorithms
                 return a;
             }
         }
+
+        [Pure]
+        public static int Abs(int number)
+        {
+            Contract.Ensures(number > 0 ? Contract.IntegerResult == number : Contract.IntegerResult == -number);
+            Contract.Ensures(number >= 0);
+
+            return (number > 0 ? number : -number);
+        }
     }
 }
