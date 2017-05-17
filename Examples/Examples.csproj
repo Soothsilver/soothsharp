@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\Arithmetic.cs" />
     <Compile Include="Multifile\Assume_Main.cs" />
     <Compile Include="Multifile\Assume_Side.cs" />
     <Compile Include="Multifile\Multiple_Main.cs" />
