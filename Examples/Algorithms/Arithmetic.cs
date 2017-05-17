@@ -7,7 +7,7 @@ using Soothsharp.Contracts;
 
 namespace Soothsharp.Examples.Algorithms
 {
-    public class Arithmetic
+    public static class Arithmetic
     {
         /// <summary>
         /// Returns the greater of two numbers.
