@@ -18,14 +18,30 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var left = this.Left.Translate(context); // TODO what if there are calls?
+            var left = this.Left.Translate(new TranslationContext(context)
+            {
+                LValueNeeded = true
+            }); // TODO what if there are calls?
             var right = this.Right.Translate(context.ChangePurityContext(PurityContext.Purifiable));
 
-            IEnumerable<Error> errors = CommonUtils.CombineErrors(left, right);
+            List<Error> errors = CommonUtils.CombineErrors(left, right).ToList();
 
-            var assignment = new AssignmentSilvernode(left.Silvernode, right.Silvernode, this.OriginalNode);
-            var sequence = new StatementsSequenceSilvernode(null, right.PrependTheseSilvernodes.Union(new[] { assignment }).ToArray());
-
+            StatementsSequenceSilvernode sequence;
+            if (left.Arrays_Container != null)
+            {
+                errors.AddRange(left.Arrays_Container.Errors);
+                errors.AddRange(left.Arrays_Index.Errors);
+                var arrayWrite = context.Process.ArraysTranslator.ArrayWrite(this.OriginalNode, left.Arrays_Container.Silvernode,
+                    left.Arrays_Index.Silvernode, right.Silvernode);
+                sequence = new StatementsSequenceSilvernode(null,
+                    right.PrependTheseSilvernodes.Concat(new[] {arrayWrite}).ToArray());
+            }
+            else
+            {
+                var assignment = new AssignmentSilvernode(left.Silvernode, right.Silvernode, this.OriginalNode);
+                sequence = new StatementsSequenceSilvernode(null,
+                    right.PrependTheseSilvernodes.Concat(new[] {assignment}).ToArray());
+            }
             return TranslationResult.FromSilvernode(sequence, errors);
         }
     }

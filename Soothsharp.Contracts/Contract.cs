@@ -158,6 +158,16 @@ namespace Soothsharp.Contracts
         {
             return true;
         }
+
+        public static bool AccArray<T>(T[] array)
+        {
+            return true;
+        }
+        public static bool AccArray<T>(T[] array, Permission permission)
+        {
+            return true;
+        }
+
         /// <summary>
         /// Atomic spatial assertion that provides the specified permission to the specified location.
         /// </summary>

@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="CompareTest.cs" />
     <Compile Include="Syntax\Abstract\SimpleAbstractPredicate.cs" />
+    <Compile Include="Syntax\Arrays\BasicTest.cs" />
     <Compile Include="Syntax\Attributes\SigOnly.cs" />
     <Compile Include="Syntax\Basic\Implications.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

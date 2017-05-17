@@ -16,6 +16,7 @@ namespace Soothsharp.Translation
         public const string ContractRequires = ContractsTranslator.ContractsClass + nameof(Contract.Requires);
         public const string ContractInvariant = ContractsTranslator.ContractsClass + nameof(Contract.Invariant);
         public const string ContractAcc = ContractsTranslator.ContractsClass + nameof(Contract.Acc);
+        public const string ContractAccArray = ContractsTranslator.ContractsClass + nameof(Contract.AccArray);
         public const string ContractAssert = ContractsTranslator.ContractsClass + nameof(Contract.Assert);
         public const string ContractAssume = ContractsTranslator.ContractsClass + nameof(Contract.Assume);
         public const string ContractInhale = ContractsTranslator.ContractsClass + nameof(Contract.Inhale);

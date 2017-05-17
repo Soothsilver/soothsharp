@@ -119,6 +119,7 @@
     <Compile Include="Trees\CSharp\Expressions\DiagnosticExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\DirectSilvercodeExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\ElementAccessSharpnode.cs" />
+    <Compile Include="Trees\CSharp\Expressions\Invocation\InvocationAccArray.cs" />
     <Compile Include="Trees\CSharp\Expressions\Invocation\InvocationFoldingUnfolding.cs" />
     <Compile Include="Trees\CSharp\Expressions\Invocation\InvocationResult.cs" />
     <Compile Include="Trees\CSharp\Expressions\Invocation\InvocationSeq.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Trees\Silver\Highlevel\HighlevelSequenceSilvernode.cs" />
     <Compile Include="Trees\Silver\Simple\NewlineSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\AssertionLikeSilvernode.cs" />
+    <Compile Include="Trees\Silver\Statements\SimpleSequenceStatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\StatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\TextStatementSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\VarStatementSilvernode.cs" />

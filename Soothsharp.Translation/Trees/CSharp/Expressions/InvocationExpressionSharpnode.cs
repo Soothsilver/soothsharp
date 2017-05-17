@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp;
 using Soothsharp.Translation.Trees.CSharp;
 using Soothsharp.Translation.Trees.CSharp.Expressions;
+using Soothsharp.Translation.Trees.CSharp.Expressions.Invocation;
 using Soothsharp.Translation.Trees.CSharp.Invocation;
 using Soothsharp.Translation.Trees.Silver;
 
@@ -73,7 +74,9 @@ namespace Soothsharp.Translation.Trees.CSharp
                 case ContractsTranslator.ContractAcc:
                     translationStyle = new InvocationViperBuiltInFunction("acc", false);
                     break;
-
+                case ContractsTranslator.ContractAccArray:
+                    translationStyle = new InvocationAccArray();
+                    break;
                 case ContractsTranslator.Old:
                     translationStyle = new InvocationViperBuiltInFunction("old", false);
                     break;

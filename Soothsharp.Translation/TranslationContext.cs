@@ -31,6 +31,7 @@ namespace Soothsharp.Translation
         /// </summary>
         public SemanticModel Semantics { get; }
         public bool IsFunctionOrPredicateBlock { get; set; }
+        public bool LValueNeeded { get; set; }
 
         /// <summary>
         /// Creates a new translation context as a copy of a previous one.
@@ -43,6 +44,7 @@ namespace Soothsharp.Translation
             this.Semantics = copyFrom.Semantics;
             this.IsFunctionOrPredicateBlock = copyFrom.IsFunctionOrPredicateBlock;
             this.VerifyUnmarkedItems = copyFrom.VerifyUnmarkedItems;
+            this.LValueNeeded = copyFrom.LValueNeeded;
             this.MarkEverythingAbstract = copyFrom.MarkEverythingAbstract;
         }
 

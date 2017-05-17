@@ -4,11 +4,11 @@ using Microsoft.CodeAnalysis;
 
 namespace Soothsharp.Translation.Trees.Silver
 {
-    public class SimpleSequenceSilvernode : ComplexSilvernode
+    public class SimpleSequenceStatementSilvernode : StatementSilvernode
     {
         public List<Silvernode> List;
 
-        public SimpleSequenceSilvernode(SyntaxNode originalNode, params Silvernode[] topLevelSilvernodes)
+        public SimpleSequenceStatementSilvernode(SyntaxNode originalNode, params Silvernode[] topLevelSilvernodes)
             : base(originalNode)
         {
             this.List = new List<Silvernode>(topLevelSilvernodes);

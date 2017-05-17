@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
+using Soothsharp.Translation.Translators;
 using Soothsharp.Translation.Trees.CSharp;
 using Soothsharp.Translation.Trees.Silver;
 
@@ -37,6 +38,13 @@ namespace Soothsharp.Translation
                 return TranslationResult.FromSilvernode(
                     new AbsoluteValueSilvernode(container.Silvernode, this.OriginalNode), errors
                     );
+            }
+            if (symbol.GetQualifiedName() == ArraysTranslator.ArrayLength)
+            {
+                errors.AddRange(container.Errors);
+                return TranslationResult.FromSilvernode(
+                   new AbsoluteValueSilvernode(new SimpleSequenceSilvernode(null, container.Silvernode, ".", ArraysTranslator.IntegerArrayContents), this.OriginalNode), errors
+                   );
             }
 
             Identifier lastIdentifier = context.Process.IdentifierTranslator.GetIdentifierReference(symbol);

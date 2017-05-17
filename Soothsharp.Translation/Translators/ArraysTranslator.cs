@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation.Translators
@@ -21,10 +22,23 @@ define {ArraysTranslator.IntegerArrayWrite}(array, index, value) {{ assert index
 define {ArraysTranslator.IntegerArrayRead}(array, index) array.{ArraysTranslator.IntegerArrayContents}[index]";
 
         public bool ArraysWereUsed { get; set; } = true;
+        public const string ArrayLength = nameof(System) + "." + nameof(System.Array) + "." + nameof(System.Array.Length);
 
         public Silvernode GenerateGlobalSilvernode()
         {
             return new TextSilvernode(IntegerArrayGlobalSilvertext, null);
+        }
+
+        public SimpleSequenceStatementSilvernode ArrayWrite(SyntaxNode originalNode, Silvernode container, Silvernode index, Silvernode value)
+        {
+            return new SimpleSequenceStatementSilvernode(originalNode,
+                IntegerArrayWrite + "(",
+                container,
+                ", ",
+                index,
+                ", ",
+                value,
+                ")");
         }
     }
 }
