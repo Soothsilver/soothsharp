@@ -28,10 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soothsharp.Translation.Test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2578FD01-0944-4C21-A863-9D01272ED5F8}"
 	ProjectSection(SolutionItems) = preProject
-		actual-silver-syntax.txt = actual-silver-syntax.txt
 		FutureFeatures.txt = FutureFeatures.txt
 		LICENSE.txt = LICENSE.txt
-		OldFutureChangelog.txt = OldFutureChangelog.txt
 		README.md = README.md
 	EndProjectSection
 EndProject
