@@ -200,6 +200,9 @@
             this.lbCodeFiles.Size = new System.Drawing.Size(461, 169);
             this.lbCodeFiles.TabIndex = 5;
             this.lbCodeFiles.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lbCodeFiles_ItemCheck);
+            this.lbCodeFiles.Click += new System.EventHandler(this.lbCodeFiles_Click);
+            this.lbCodeFiles.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lbCodeFiles_KeyUp);
+            this.lbCodeFiles.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbCodeFiles_MouseUp);
             // 
             // label1
             // 

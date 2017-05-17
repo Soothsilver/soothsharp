@@ -95,5 +95,20 @@ namespace csverify_GUI
         {
             UpdateCommandLine();
         }
+
+        private void lbCodeFiles_Click(object sender, EventArgs e)
+        {
+            UpdateCommandLine();
+        }
+
+        private void lbCodeFiles_KeyUp(object sender, KeyEventArgs e)
+        {
+            UpdateCommandLine();
+        }
+
+        private void lbCodeFiles_MouseUp(object sender, MouseEventArgs e)
+        {
+            UpdateCommandLine();
+        }
     }
 }
