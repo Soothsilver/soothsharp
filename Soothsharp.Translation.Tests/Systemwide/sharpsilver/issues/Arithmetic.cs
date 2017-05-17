@@ -38,8 +38,8 @@ namespace Soothsharp.Examples.Algorithms
         public static int Min(int a, int b)
         {
             Contract.Ensures(a < b ? Contract.IntegerResult == a : Contract.IntegerResult == b);
-            int max = Max(a, b);
-            if (a == max)
+
+            if (a == Max(a, b))
             {
                 return b;
             }

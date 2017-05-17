@@ -42,6 +42,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Viper", "Viper", "{68A02F6F-BF24-477F-B9FA-30B5052619FD}"
 	ProjectSection(SolutionItems) = preProject
 		Viper\carbon.jar = Viper\carbon.jar
+		INSTALL.txt = INSTALL.txt
 		Viper\nailgun-server-0.9.1.jar = Viper\nailgun-server-0.9.1.jar
 		Viper\ng.exe = Viper\ng.exe
 		Viper\silicon.jar = Viper\silicon.jar

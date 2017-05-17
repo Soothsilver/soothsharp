@@ -1,0 +1,1 @@
+Add this folder to your PATH environment variable. The translator will expect this files to be found in PATH, it is not sufficient for them to be in the verifier's directory.

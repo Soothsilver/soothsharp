@@ -25,6 +25,7 @@ namespace Soothsharp.Translation.Backends
             BackendUtils.harmlessLines.Add(new Regex(@"\(c\) 2013 ETH Zurich .*"));
             BackendUtils.harmlessLines.Add(new Regex("carbon 1.0.*"));
             BackendUtils.harmlessLines.Add(new Regex("No errors found."));
+            BackendUtils.harmlessLines.Add(new Regex("might not work with Z3 version 4.4.1"));
             BackendUtils.harmlessLines.Add(new Regex("The following errors were found:"));
         }
 

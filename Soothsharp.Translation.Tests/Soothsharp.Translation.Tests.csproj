@@ -75,6 +75,9 @@
     <Compile Include="Syntax\Basic\MethodCall.cs" />
     <Compile Include="Systemwide\scala2silver\translation\Constructors.cs" />
     <Compile Include="Systemwide\scala2silver\translation\Constants.cs" />
+    <Compile Include="Systemwide\sharpsilver\issues\Arithmetic.cs" />
+    <Compile Include="Systemwide\sharpsilver\issues\Search.cs" />
+    <Compile Include="Systemwide\sharpsilver\issues\Sort.cs" />
     <Compile Include="Systemwide\sharpsilver\issues\MissingMethod.cs" />
     <Compile Include="Syntax\Issues\SimplePostCondition.cs" />
     <Compile Include="Syntax\Syntax\For.cs">
