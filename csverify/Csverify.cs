@@ -256,7 +256,7 @@ namespace Soothsharp.Cs2Sil
                 {
                     IBackend backend;
                     if (useSilicon) backend = new SiliconNailgunBackend();// new SiliconBackend();
-                    else backend = new CarbonBackend();
+                    else backend = new CarbonNailgunBackend(); // new CarbonBackend();
 
                     var verificationResult = backend.Verify(result.Silvernode);
                     if (verbose)
