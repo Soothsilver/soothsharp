@@ -1,7 +1,7 @@
 (get-info :version)
 ; (:version "4.4.1")
 ; Input file is C:\Users\Soothsilver\AppData\Local\Temp\tmp2078.tmp
-; Started: 2017-05-17 17:19:14
+; Started: 2017-05-17 20:31:38
 ; Silicon.buildVersion: 1.1-SNAPSHOT 0e750e485a3f default 2017/01/04 14:11:46
 ; ------------------------------------------------------------
 ; Preamble start
@@ -414,1396 +414,95 @@
     )))
 ; Preamble end
 ; ------------------------------------------------------------
-; ---------- Arithmetic_Max ----------
-(declare-const a@0 Int)
-(declare-const b@1 Int)
-(declare-const res@2 Int)
+; ---------- SortedList_ctor ----------
+(declare-const this@0 $Ref)
 (push) ; 1
 (push) ; 2
-(declare-const $t@3 $Snap)
-(assert (= $t@3 $Snap.unit))
-; [eval] (a > b ? res == a : res == b)
-; [eval] a > b
-(push) ; 3
-(set-option :timeout 250)
-(push) ; 4
-(assert (not (not (> a@0 b@1))))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-(assert (not (> a@0 b@1)))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-; [then-branch 0] a@0 > b@1
-(assert (> a@0 b@1))
-; [eval] res == a
-(pop) ; 4
-(push) ; 4
-; [else-branch 0] !a@0 > b@1
-(assert (not (> a@0 b@1)))
-; [eval] res == b
-(pop) ; 4
-(pop) ; 3
-; Joined path conditions
-; Joined path conditions
-(assert (ite (> a@0 b@1) (= res@2 a@0) (= res@2 b@1)))
 (pop) ; 2
 (push) ; 2
-; [eval] a < b
-(push) ; 3
-(assert (not (not (< a@0 b@1))))
-(check-sat)
-; unknown
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 3
-(assert (not (< a@0 b@1)))
-(check-sat)
-; unknown
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 3
-; [then-branch 1] a@0 < b@1
-(assert (< a@0 b@1))
 ; [exec]
-; res := b
+; this := SortedList_init()
+(declare-const this@1 $Ref)
+(assert (not (= this@1 $Ref.null)))
+(declare-const $t@2 $Seq<Int>)
 ; [exec]
-; label end
-; [eval] (a > b ? res == a : res == b)
-; [eval] a > b
-(push) ; 4
-(push) ; 5
-(assert (not (not (> a@0 b@1))))
-(check-sat)
-; unsat
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-; [dead then-branch 2] a@0 > b@1
-(push) ; 5
-; [else-branch 2] !a@0 > b@1
-(assert (not (> a@0 b@1)))
-; [eval] res == b
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-(declare-const $deadThen@4 Bool)
-(set-option :timeout 0)
-(push) ; 4
-(assert (not (ite (> a@0 b@1) $deadThen@4 true)))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (ite (> a@0 b@1) $deadThen@4 true))
-(pop) ; 3
-(push) ; 3
-; [else-branch 1] !a@0 < b@1
-(assert (not (< a@0 b@1)))
-(pop) ; 3
-; [eval] !(a < b)
-; [eval] a < b
-(set-option :timeout 250)
-(push) ; 3
-(assert (not (< a@0 b@1)))
-(check-sat)
-; unknown
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 3
-(assert (not (not (< a@0 b@1))))
-(check-sat)
-; unknown
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 3
-; [then-branch 3] !a@0 < b@1
-(assert (not (< a@0 b@1)))
-; [exec]
-; res := a
-; [exec]
-; label end
-; [eval] (a > b ? res == a : res == b)
-; [eval] a > b
-(push) ; 4
-(push) ; 5
-(assert (not (not (> a@0 b@1))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (> a@0 b@1)))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 4] a@0 > b@1
-(assert (> a@0 b@1))
-; [eval] res == a
-(pop) ; 5
-(push) ; 5
-; [else-branch 4] !a@0 > b@1
-(assert (not (> a@0 b@1)))
-; [eval] res == b
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(set-option :timeout 0)
-(push) ; 4
-(assert (not (ite (> a@0 b@1) true (= a@0 b@1))))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (ite (> a@0 b@1) true (= a@0 b@1)))
-(pop) ; 3
-(push) ; 3
-; [else-branch 3] a@0 < b@1
-(assert (< a@0 b@1))
-(pop) ; 3
+; this.SortedList_Elements := Seq[Int]()
+; [eval] Seq[Int]()
 (pop) ; 2
 (pop) ; 1
-; ---------- Arithmetic_Min ----------
-(declare-const a2@5 Int)
-(declare-const b2@6 Int)
-(declare-const res@7 Int)
-(declare-const max@8 Int)
-(declare-const _tmp1@9 Int)
+; ---------- SortedList_Insert ----------
+(declare-const this@3 $Ref)
+(declare-const element@4 Int)
+(declare-const res@5 Int)
+(declare-const index@6 Int)
 (push) ; 1
+(assert (not (= this@3 $Ref.null)))
+(declare-const $t@7 $Seq<Int>)
 (push) ; 2
-(declare-const $t@10 $Snap)
-(assert (= $t@10 $Snap.unit))
-; [eval] (a2 < b2 ? res == a2 : res == b2)
-; [eval] a2 < b2
-(push) ; 3
-(set-option :timeout 250)
-(push) ; 4
-(assert (not (not (< a2@5 b2@6))))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-(assert (not (< a2@5 b2@6)))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-; [then-branch 5] a2@5 < b2@6
-(assert (< a2@5 b2@6))
-; [eval] res == a2
-(pop) ; 4
-(push) ; 4
-; [else-branch 5] !a2@5 < b2@6
-(assert (not (< a2@5 b2@6)))
-; [eval] res == b2
-(pop) ; 4
-(pop) ; 3
-; Joined path conditions
-; Joined path conditions
-(assert (ite (< a2@5 b2@6) (= res@7 a2@5) (= res@7 b2@6)))
-(pop) ; 2
-(push) ; 2
-; [exec]
-; _tmp1 := Arithmetic_Max(a2, b2)
-(declare-const res@11 Int)
-(declare-const $t@12 $Snap)
-(assert (= $t@12 $Snap.unit))
-; [eval] (a > b ? res == a : res == b)
-; [eval] a > b
-(push) ; 3
-(push) ; 4
-(assert (not (not (> a2@5 b2@6))))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-(assert (not (> a2@5 b2@6)))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-; [then-branch 6] a2@5 > b2@6
-(assert (> a2@5 b2@6))
-; [eval] res == a
-(pop) ; 4
-(push) ; 4
-; [else-branch 6] !a2@5 > b2@6
-(assert (not (> a2@5 b2@6)))
-; [eval] res == b
-(pop) ; 4
-(pop) ; 3
-; Joined path conditions
-; Joined path conditions
-(assert (ite (> a2@5 b2@6) (= res@11 a2@5) (= res@11 b2@6)))
-; [exec]
-; max := _tmp1
-; [eval] a2 == max
-(push) ; 3
-(assert (not (not (= a2@5 res@11))))
-(check-sat)
-; unknown
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 3
-(assert (not (= a2@5 res@11)))
-(check-sat)
-; unknown
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 3
-; [then-branch 7] a2@5 == res@11
-(assert (= a2@5 res@11))
-; [exec]
-; res := b2
-; [exec]
-; label end
-; [eval] (a2 < b2 ? res == a2 : res == b2)
-; [eval] a2 < b2
-(push) ; 4
-(push) ; 5
-(assert (not (not (< a2@5 b2@6))))
-(check-sat)
-; unsat
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-; [dead then-branch 8] a2@5 < b2@6
-(push) ; 5
-; [else-branch 8] !a2@5 < b2@6
-(assert (not (< a2@5 b2@6)))
-; [eval] res == b2
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-(declare-const $deadThen@13 Bool)
-(set-option :timeout 0)
-(push) ; 4
-(assert (not (ite (< a2@5 b2@6) $deadThen@13 true)))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (ite (< a2@5 b2@6) $deadThen@13 true))
-(pop) ; 3
-(push) ; 3
-; [else-branch 7] a2@5 != res@11
-(assert (not (= a2@5 res@11)))
-(pop) ; 3
-; [eval] !(a2 == max)
-; [eval] a2 == max
-(set-option :timeout 250)
-(push) ; 3
-(assert (not (= a2@5 res@11)))
-(check-sat)
-; unknown
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 3
-(assert (not (not (= a2@5 res@11))))
-(check-sat)
-; unknown
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 3
-; [then-branch 9] a2@5 != res@11
-(assert (not (= a2@5 res@11)))
-; [exec]
-; res := a2
-; [exec]
-; label end
-; [eval] (a2 < b2 ? res == a2 : res == b2)
-; [eval] a2 < b2
-(push) ; 4
-(push) ; 5
-(assert (not (not (< a2@5 b2@6))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (< a2@5 b2@6)))
-(check-sat)
-; unsat
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 10] a2@5 < b2@6
-(assert (< a2@5 b2@6))
-; [eval] res == a2
-(pop) ; 5
-; [dead else-branch 10] !a2@5 < b2@6
-(pop) ; 4
-; Joined path conditions
-(declare-const $deadElse@14 Bool)
-(set-option :timeout 0)
-(push) ; 4
-(assert (not (ite (< a2@5 b2@6) true $deadElse@14)))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (ite (< a2@5 b2@6) true $deadElse@14))
-(pop) ; 3
-(push) ; 3
-; [else-branch 9] a2@5 == res@11
-(assert (= a2@5 res@11))
-(pop) ; 3
-(pop) ; 2
-(pop) ; 1
-; ---------- Search_BinarySearch ----------
-(declare-const xs@15 $Seq<Int>)
-(declare-const key@16 Int)
-(declare-const res@17 Int)
-(declare-const low@18 Int)
-(declare-const high@19 Int)
-(declare-const index@20 Int)
-(push) ; 1
-(declare-const $t@21 $Snap)
-(assert (= $t@21 $Snap.unit))
-; [eval] (forall i: Int :: (forall j: Int :: 0 <= i && (j < |xs| && i < j) ==> xs[i] < xs[j]))
-(declare-const i@22 Int)
-(push) ; 2
-; [eval] (forall j: Int :: 0 <= i && (j < |xs| && i < j) ==> xs[i] < xs[j])
-(declare-const j@23 Int)
-(push) ; 3
-; [eval] 0 <= i && (j < |xs| && i < j) ==> xs[i] < xs[j]
-; [eval] 0 <= i && (j < |xs| && i < j)
-; [eval] 0 <= i
-; [eval] 0 <= i ==> j < |xs| && i < j
-; [eval] 0 <= i
-(push) ; 4
-(set-option :timeout 250)
-(push) ; 5
-(assert (not (not (<= 0 i@22))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (<= 0 i@22)))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 11] 0 <= i@22
-(assert (<= 0 i@22))
-; [eval] j < |xs| && i < j
-; [eval] j < |xs|
-; [eval] |xs|
-; [eval] j < |xs| ==> i < j
-; [eval] j < |xs|
-; [eval] |xs|
-(push) ; 6
-(push) ; 7
-(assert (not (not (< j@23 ($Seq.length xs@15)))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-(assert (not (< j@23 ($Seq.length xs@15))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-; [then-branch 12] j@23 < |xs@15|
-(assert (< j@23 ($Seq.length xs@15)))
-; [eval] i < j
-(pop) ; 7
-(push) ; 7
-; [else-branch 12] !j@23 < |xs@15|
-(assert (not (< j@23 ($Seq.length xs@15))))
-(pop) ; 7
-(pop) ; 6
-; Joined path conditions
-; Joined path conditions
-(pop) ; 5
-(push) ; 5
-; [else-branch 11] !0 <= i@22
-(assert (not (<= 0 i@22)))
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(push) ; 4
-(push) ; 5
-(assert (not (not
-  (and
-    (<= 0 i@22)
-    (implies
-      (<= 0 i@22)
-      (and
-        (< j@23 ($Seq.length xs@15))
-        (implies (< j@23 ($Seq.length xs@15)) (< i@22 j@23))))))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (and
-  (<= 0 i@22)
-  (implies
-    (<= 0 i@22)
-    (and
-      (< j@23 ($Seq.length xs@15))
-      (implies (< j@23 ($Seq.length xs@15)) (< i@22 j@23)))))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 13] 0 <= i@22 && 0 <= i@22 ==> j@23 < |xs@15| && j@23 < |xs@15| ==> i@22 < j@23
-(assert (and
-  (<= 0 i@22)
-  (implies
-    (<= 0 i@22)
-    (and
-      (< j@23 ($Seq.length xs@15))
-      (implies (< j@23 ($Seq.length xs@15)) (< i@22 j@23))))))
-; [eval] xs[i] < xs[j]
-; [eval] xs[i]
-; [eval] xs[j]
-(pop) ; 5
-(push) ; 5
-; [else-branch 13] !0 <= i@22 && 0 <= i@22 ==> j@23 < |xs@15| && j@23 < |xs@15| ==> i@22 < j@23
-(assert (not
-  (and
-    (<= 0 i@22)
-    (implies
-      (<= 0 i@22)
-      (and
-        (< j@23 ($Seq.length xs@15))
-        (implies (< j@23 ($Seq.length xs@15)) (< i@22 j@23)))))))
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(pop) ; 3
-; Nested auxiliary terms
-(pop) ; 2
-; Nested auxiliary terms
-(assert (forall ((i@22 Int)) (!
-  (forall ((j@23 Int)) (!
-    (implies
-      (and
-        (<= 0 i@22)
-        (implies
-          (<= 0 i@22)
-          (and
-            (< j@23 ($Seq.length xs@15))
-            (implies (< j@23 ($Seq.length xs@15)) (< i@22 j@23)))))
-      (< ($Seq.index xs@15 i@22) ($Seq.index xs@15 j@23)))
-    :pattern (($Seq.index xs@15 j@23))
-    :qid |prog.l30|))
-  :pattern (($Seq.index xs@15 i@22))
-  :qid |prog.l30|)))
-(push) ; 2
-(declare-const $t@24 $Snap)
-(assert (= $t@24 ($Snap.combine $Snap.unit $Snap.unit)))
-; [eval] -1 <= res && res < |xs|
-; [eval] -1 <= res
-; [eval] -1
-; [eval] -1 <= res ==> res < |xs|
-; [eval] -1 <= res
-; [eval] -1
-(push) ; 3
-(push) ; 4
-(assert (not (not (<= (- 0 1) res@17))))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-(assert (not (<= (- 0 1) res@17)))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-; [then-branch 14] -1 <= res@17
-(assert (<= (- 0 1) res@17))
-; [eval] res < |xs|
-; [eval] |xs|
-(pop) ; 4
-(push) ; 4
-; [else-branch 14] !-1 <= res@17
-(assert (not (<= (- 0 1) res@17)))
-(pop) ; 4
-(pop) ; 3
-; Joined path conditions
-; Joined path conditions
-(assert (and
-  (<= (- 0 1) res@17)
-  (implies (<= (- 0 1) res@17) (< res@17 ($Seq.length xs@15)))))
-; [eval] 0 <= res ==> xs[res] == key
+(declare-const $t@8 $Snap)
+(declare-const $t@9 $Seq<Int>)
+(assert (= $t@8 ($Snap.combine ($SortWrappers.$Seq<Int>To$Snap $t@9) $Snap.unit)))
+; [eval] 0 <= res && res <= old(|this.SortedList_Elements|)
+; [eval] 0 <= res
+; [eval] 0 <= res ==> res <= old(|this.SortedList_Elements|)
 ; [eval] 0 <= res
 (push) ; 3
+(set-option :timeout 250)
 (push) ; 4
-(assert (not (not (<= 0 res@17))))
+(assert (not (not (<= 0 res@5))))
 (check-sat)
 ; unknown
 (pop) ; 4
 ; 0,00s
 ; (get-info :all-statistics)
 (push) ; 4
-(assert (not (<= 0 res@17)))
+(assert (not (<= 0 res@5)))
 (check-sat)
 ; unknown
 (pop) ; 4
 ; 0,00s
 ; (get-info :all-statistics)
 (push) ; 4
-; [then-branch 15] 0 <= res@17
-(assert (<= 0 res@17))
-; [eval] xs[res] == key
-; [eval] xs[res]
+; [then-branch 0] 0 <= res@5
+(assert (<= 0 res@5))
+; [eval] res <= old(|this.SortedList_Elements|)
+; [eval] old(|this.SortedList_Elements|)
+; [eval] |this.SortedList_Elements|
 (pop) ; 4
 (push) ; 4
-; [else-branch 15] !0 <= res@17
-(assert (not (<= 0 res@17)))
-(pop) ; 4
-(pop) ; 3
-; Joined path conditions
-; Joined path conditions
-(assert (implies (<= 0 res@17) (= ($Seq.index xs@15 res@17) key@16)))
-; [eval] -1 == res ==> (forall i2: Int :: 0 <= i2 && i2 < |xs| ==> xs[i2] != key)
-; [eval] -1 == res
-; [eval] -1
-(push) ; 3
-(push) ; 4
-(assert (not (not (= (- 0 1) res@17))))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-(assert (not (= (- 0 1) res@17)))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-; [then-branch 16] -1 == res@17
-(assert (= (- 0 1) res@17))
-; [eval] (forall i2: Int :: 0 <= i2 && i2 < |xs| ==> xs[i2] != key)
-(declare-const i2@25 Int)
-(push) ; 5
-; [eval] 0 <= i2 && i2 < |xs| ==> xs[i2] != key
-; [eval] 0 <= i2 && i2 < |xs|
-; [eval] 0 <= i2
-; [eval] 0 <= i2 ==> i2 < |xs|
-; [eval] 0 <= i2
-(push) ; 6
-(push) ; 7
-(assert (not (not (<= 0 i2@25))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-(assert (not (<= 0 i2@25)))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-; [then-branch 17] 0 <= i2@25
-(assert (<= 0 i2@25))
-; [eval] i2 < |xs|
-; [eval] |xs|
-(pop) ; 7
-(push) ; 7
-; [else-branch 17] !0 <= i2@25
-(assert (not (<= 0 i2@25)))
-(pop) ; 7
-(pop) ; 6
-; Joined path conditions
-; Joined path conditions
-(push) ; 6
-(push) ; 7
-(assert (not (not (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 ($Seq.length xs@15)))))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-(assert (not (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 ($Seq.length xs@15))))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-; [then-branch 18] 0 <= i2@25 && 0 <= i2@25 ==> i2@25 < |xs@15|
-(assert (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 ($Seq.length xs@15)))))
-; [eval] xs[i2] != key
-; [eval] xs[i2]
-(pop) ; 7
-(push) ; 7
-; [else-branch 18] !0 <= i2@25 && 0 <= i2@25 ==> i2@25 < |xs@15|
-(assert (not (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 ($Seq.length xs@15))))))
-(pop) ; 7
-(pop) ; 6
-; Joined path conditions
-; Joined path conditions
-(pop) ; 5
-; Nested auxiliary terms
-(pop) ; 4
-(push) ; 4
-; [else-branch 16] -1 != res@17
-(assert (not (= (- 0 1) res@17)))
+; [else-branch 0] !0 <= res@5
+(assert (not (<= 0 res@5)))
 (pop) ; 4
 (pop) ; 3
 ; Joined path conditions
 ; Joined path conditions
-(assert (implies
-  (= (- 0 1) res@17)
-  (forall ((i2@25 Int)) (!
-    (implies
-      (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 ($Seq.length xs@15))))
-      (not (= ($Seq.index xs@15 i2@25) key@16)))
-    :pattern (($Seq.index xs@15 i2@25))
-    :qid |prog.l33|))))
+(assert (and (<= 0 res@5) (implies (<= 0 res@5) (<= res@5 ($Seq.length $t@7)))))
+; [eval] this.SortedList_Elements == old(this.SortedList_Elements)[..res] ++ Seq(element) ++ old(this.SortedList_Elements)[res..]
+; [eval] old(this.SortedList_Elements)[..res] ++ Seq(element) ++ old(this.SortedList_Elements)[res..]
+; [eval] old(this.SortedList_Elements)[..res] ++ Seq(element)
+; [eval] old(this.SortedList_Elements)[..res]
+; [eval] old(this.SortedList_Elements)
+; [eval] Seq(element)
+(assert (= ($Seq.length ($Seq.singleton element@4)) 1))
+; [eval] old(this.SortedList_Elements)[res..]
+; [eval] old(this.SortedList_Elements)
+(assert ($Seq.equal
+  $t@9
+  ($Seq.append
+    ($Seq.append ($Seq.take $t@7 res@5) ($Seq.singleton element@4))
+    ($Seq.drop $t@7 res@5))))
 (pop) ; 2
 (push) ; 2
 ; [exec]
-; low := 0
-; [exec]
-; high := |xs|
-; [eval] |xs|
-; [exec]
-; index := -1
-; [eval] -1
-; loop at tmp2078.tmp@41.2
-(declare-const mid@26 Int)
-(declare-const low@27 Int)
-(declare-const high@28 Int)
-(declare-const index@29 Int)
+; index := 0
+; loop at tmp2078.tmp@13.2
+(declare-const index@10 Int)
 (push) ; 3
 ; Loop: Check specs well-definedness
-(declare-const $t@30 $Snap)
-(assert (= $t@30 ($Snap.combine $Snap.unit $Snap.unit)))
-; [eval] 0 <= low && (low <= high && high <= |xs|)
-; [eval] 0 <= low
-; [eval] 0 <= low ==> low <= high && high <= |xs|
-; [eval] 0 <= low
-(push) ; 4
-(push) ; 5
-(assert (not (not (<= 0 low@27))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (<= 0 low@27)))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 19] 0 <= low@27
-(assert (<= 0 low@27))
-; [eval] low <= high && high <= |xs|
-; [eval] low <= high
-; [eval] low <= high ==> high <= |xs|
-; [eval] low <= high
-(push) ; 6
-(push) ; 7
-(assert (not (not (<= low@27 high@28))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-(assert (not (<= low@27 high@28)))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-; [then-branch 20] low@27 <= high@28
-(assert (<= low@27 high@28))
-; [eval] high <= |xs|
-; [eval] |xs|
-(pop) ; 7
-(push) ; 7
-; [else-branch 20] !low@27 <= high@28
-(assert (not (<= low@27 high@28)))
-(pop) ; 7
-(pop) ; 6
-; Joined path conditions
-; Joined path conditions
-(pop) ; 5
-(push) ; 5
-; [else-branch 19] !0 <= low@27
-(assert (not (<= 0 low@27)))
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(assert (and
-  (<= 0 low@27)
-  (implies
-    (<= 0 low@27)
-    (and
-      (<= low@27 high@28)
-      (implies (<= low@27 high@28) (<= high@28 ($Seq.length xs@15)))))))
-; [eval] index == -1 ==> (forall i3: Int :: 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key)
-; [eval] index == -1
-; [eval] -1
-(push) ; 4
-(push) ; 5
-(assert (not (not (= index@29 (- 0 1)))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (= index@29 (- 0 1))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 21] index@29 == -1
-(assert (= index@29 (- 0 1)))
-; [eval] (forall i3: Int :: 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key)
-(declare-const i3@31 Int)
-(push) ; 6
-; [eval] 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key
-; [eval] 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high))
-; [eval] 0 <= i3
-; [eval] 0 <= i3 ==> i3 < |xs| && !(low <= i3 && i3 < high)
-; [eval] 0 <= i3
-(push) ; 7
-(push) ; 8
-(assert (not (not (<= 0 i3@31))))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-(assert (not (<= 0 i3@31)))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-; [then-branch 22] 0 <= i3@31
-(assert (<= 0 i3@31))
-; [eval] i3 < |xs| && !(low <= i3 && i3 < high)
-; [eval] i3 < |xs|
-; [eval] |xs|
-; [eval] i3 < |xs| ==> !(low <= i3 && i3 < high)
-; [eval] i3 < |xs|
-; [eval] |xs|
-(push) ; 9
-(push) ; 10
-(assert (not (not (< i3@31 ($Seq.length xs@15)))))
-(check-sat)
-; unknown
-(pop) ; 10
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 10
-(assert (not (< i3@31 ($Seq.length xs@15))))
-(check-sat)
-; unknown
-(pop) ; 10
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 10
-; [then-branch 23] i3@31 < |xs@15|
-(assert (< i3@31 ($Seq.length xs@15)))
-; [eval] !(low <= i3 && i3 < high)
-; [eval] low <= i3 && i3 < high
-; [eval] low <= i3
-; [eval] low <= i3 ==> i3 < high
-; [eval] low <= i3
-(push) ; 11
-(push) ; 12
-(assert (not (not (<= low@27 i3@31))))
-(check-sat)
-; unknown
-(pop) ; 12
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 12
-(assert (not (<= low@27 i3@31)))
-(check-sat)
-; unknown
-(pop) ; 12
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 12
-; [then-branch 24] low@27 <= i3@31
-(assert (<= low@27 i3@31))
-; [eval] i3 < high
-(pop) ; 12
-(push) ; 12
-; [else-branch 24] !low@27 <= i3@31
-(assert (not (<= low@27 i3@31)))
-(pop) ; 12
-(pop) ; 11
-; Joined path conditions
-; Joined path conditions
-(pop) ; 10
-(push) ; 10
-; [else-branch 23] !i3@31 < |xs@15|
-(assert (not (< i3@31 ($Seq.length xs@15))))
-(pop) ; 10
-(pop) ; 9
-; Joined path conditions
-; Joined path conditions
-(pop) ; 8
-(push) ; 8
-; [else-branch 22] !0 <= i3@31
-(assert (not (<= 0 i3@31)))
-(pop) ; 8
-(pop) ; 7
-; Joined path conditions
-; Joined path conditions
-(push) ; 7
-(push) ; 8
-(assert (not (not
-  (and
-    (<= 0 i3@31)
-    (implies
-      (<= 0 i3@31)
-      (and
-        (< i3@31 ($Seq.length xs@15))
-        (implies
-          (< i3@31 ($Seq.length xs@15))
-          (not
-            (and (<= low@27 i3@31) (implies (<= low@27 i3@31) (< i3@31 high@28)))))))))))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-(assert (not (and
-  (<= 0 i3@31)
-  (implies
-    (<= 0 i3@31)
-    (and
-      (< i3@31 ($Seq.length xs@15))
-      (implies
-        (< i3@31 ($Seq.length xs@15))
-        (not
-          (and (<= low@27 i3@31) (implies (<= low@27 i3@31) (< i3@31 high@28))))))))))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-; [then-branch 25] 0 <= i3@31 && 0 <= i3@31 ==> i3@31 < |xs@15| && i3@31 < |xs@15| ==> !low@27 <= i3@31 && low@27 <= i3@31 ==> i3@31 < high@28
-(assert (and
-  (<= 0 i3@31)
-  (implies
-    (<= 0 i3@31)
-    (and
-      (< i3@31 ($Seq.length xs@15))
-      (implies
-        (< i3@31 ($Seq.length xs@15))
-        (not
-          (and (<= low@27 i3@31) (implies (<= low@27 i3@31) (< i3@31 high@28)))))))))
-; [eval] xs[i3] != key
-; [eval] xs[i3]
-(pop) ; 8
-(push) ; 8
-; [else-branch 25] !0 <= i3@31 && 0 <= i3@31 ==> i3@31 < |xs@15| && i3@31 < |xs@15| ==> !low@27 <= i3@31 && low@27 <= i3@31 ==> i3@31 < high@28
-(assert (not
-  (and
-    (<= 0 i3@31)
-    (implies
-      (<= 0 i3@31)
-      (and
-        (< i3@31 ($Seq.length xs@15))
-        (implies
-          (< i3@31 ($Seq.length xs@15))
-          (not
-            (and (<= low@27 i3@31) (implies (<= low@27 i3@31) (< i3@31 high@28))))))))))
-(pop) ; 8
-(pop) ; 7
-; Joined path conditions
-; Joined path conditions
-(pop) ; 6
-; Nested auxiliary terms
-(pop) ; 5
-(push) ; 5
-; [else-branch 21] index@29 != -1
-(assert (not (= index@29 (- 0 1))))
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(assert (implies
-  (= index@29 (- 0 1))
-  (forall ((i3@31 Int)) (!
-    (implies
-      (and
-        (<= 0 i3@31)
-        (implies
-          (<= 0 i3@31)
-          (and
-            (< i3@31 ($Seq.length xs@15))
-            (implies
-              (< i3@31 ($Seq.length xs@15))
-              (not
-                (and
-                  (<= low@27 i3@31)
-                  (implies (<= low@27 i3@31) (< i3@31 high@28))))))))
-      (not (= ($Seq.index xs@15 i3@31) key@16)))
-    :pattern (($Seq.index xs@15 i3@31))
-    :qid |prog.l43|))))
-; [eval] -1 <= index && index < |xs|
-; [eval] -1 <= index
-; [eval] -1
-; [eval] -1 <= index ==> index < |xs|
-; [eval] -1 <= index
-; [eval] -1
-(push) ; 4
-(push) ; 5
-(assert (not (not (<= (- 0 1) index@29))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (<= (- 0 1) index@29)))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 26] -1 <= index@29
-(assert (<= (- 0 1) index@29))
-; [eval] index < |xs|
-; [eval] |xs|
-(pop) ; 5
-(push) ; 5
-; [else-branch 26] !-1 <= index@29
-(assert (not (<= (- 0 1) index@29)))
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(assert (and
-  (<= (- 0 1) index@29)
-  (implies (<= (- 0 1) index@29) (< index@29 ($Seq.length xs@15)))))
-; [eval] 0 <= index ==> xs[index] == key
-; [eval] 0 <= index
-(push) ; 4
-(push) ; 5
-(assert (not (not (<= 0 index@29))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (<= 0 index@29)))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 27] 0 <= index@29
-(assert (<= 0 index@29))
-; [eval] xs[index] == key
-; [eval] xs[index]
-(pop) ; 5
-(push) ; 5
-; [else-branch 27] !0 <= index@29
-(assert (not (<= 0 index@29)))
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(assert (implies (<= 0 index@29) (= ($Seq.index xs@15 index@29) key@16)))
-(declare-const $t@32 $Snap)
-(assert (= $t@32 $Snap.unit))
-; [eval] low < high && index == -1
-; [eval] low < high
-; [eval] low < high ==> index == -1
-; [eval] low < high
-(push) ; 4
-(push) ; 5
-(assert (not (not (< low@27 high@28))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (< low@27 high@28)))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 28] low@27 < high@28
-(assert (< low@27 high@28))
-; [eval] index == -1
-; [eval] -1
-(pop) ; 5
-(push) ; 5
-; [else-branch 28] !low@27 < high@28
-(assert (not (< low@27 high@28)))
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(assert (and (< low@27 high@28) (implies (< low@27 high@28) (= index@29 (- 0 1)))))
-(check-sat)
-; unknown
-(pop) ; 3
-(push) ; 3
-; Loop: Establish loop invariant
-; [eval] 0 <= low && (low <= high && high <= |xs|)
-; [eval] 0 <= low
-; [eval] 0 <= low ==> low <= high && high <= |xs|
-; [eval] 0 <= low
-(push) ; 4
-(push) ; 5
-(assert (not false))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 29] True
-; [eval] low <= high && high <= |xs|
-; [eval] low <= high
-; [eval] low <= high ==> high <= |xs|
-; [eval] low <= high
-(push) ; 6
-(push) ; 7
-(assert (not (not (<= 0 ($Seq.length xs@15)))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-(assert (not (<= 0 ($Seq.length xs@15))))
-(check-sat)
-; unsat
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-; [then-branch 30] 0 <= |xs@15|
-(assert (<= 0 ($Seq.length xs@15)))
-; [eval] high <= |xs|
-; [eval] |xs|
-(pop) ; 7
-; [dead else-branch 30] !0 <= |xs@15|
-(pop) ; 6
-; Joined path conditions
-(pop) ; 5
-; [dead else-branch 29] False
-(pop) ; 4
-; Joined path conditions
+(declare-const $t@11 $Snap)
+(declare-const $t@12 $Seq<Int>)
+(assert (= $t@11 ($Snap.combine ($SortWrappers.$Seq<Int>To$Snap $t@12) $Snap.unit)))
 (set-option :timeout 0)
-(push) ; 4
-(assert (not (<= 0 ($Seq.length xs@15))))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (<= 0 ($Seq.length xs@15)))
-; [eval] index == -1 ==> (forall i3: Int :: 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key)
-; [eval] index == -1
-; [eval] -1
-(push) ; 4
-(set-option :timeout 250)
-(push) ; 5
-(assert (not false))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 31] True
-; [eval] (forall i3: Int :: 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key)
-(declare-const i3@33 Int)
-(push) ; 6
-; [eval] 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key
-; [eval] 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high))
-; [eval] 0 <= i3
-; [eval] 0 <= i3 ==> i3 < |xs| && !(low <= i3 && i3 < high)
-; [eval] 0 <= i3
-(push) ; 7
-(push) ; 8
-(assert (not (not (<= 0 i3@33))))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-(assert (not (<= 0 i3@33)))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-; [then-branch 32] 0 <= i3@33
-(assert (<= 0 i3@33))
-; [eval] i3 < |xs| && !(low <= i3 && i3 < high)
-; [eval] i3 < |xs|
-; [eval] |xs|
-; [eval] i3 < |xs| ==> !(low <= i3 && i3 < high)
-; [eval] i3 < |xs|
-; [eval] |xs|
-(push) ; 9
-(push) ; 10
-(assert (not (not (< i3@33 ($Seq.length xs@15)))))
-(check-sat)
-; unknown
-(pop) ; 10
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 10
-(assert (not (< i3@33 ($Seq.length xs@15))))
-(check-sat)
-; unknown
-(pop) ; 10
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 10
-; [then-branch 33] i3@33 < |xs@15|
-(assert (< i3@33 ($Seq.length xs@15)))
-; [eval] !(low <= i3 && i3 < high)
-; [eval] low <= i3 && i3 < high
-; [eval] low <= i3
-; [eval] low <= i3 ==> i3 < high
-; [eval] low <= i3
-(push) ; 11
-(push) ; 12
-(assert (not (not (<= 0 i3@33))))
-(check-sat)
-; unknown
-(pop) ; 12
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 12
-; [then-branch 34] 0 <= i3@33
-; [eval] i3 < high
-(pop) ; 12
-; [dead else-branch 34] !0 <= i3@33
-(pop) ; 11
-; Joined path conditions
-(pop) ; 10
-(push) ; 10
-; [else-branch 33] !i3@33 < |xs@15|
-(assert (not (< i3@33 ($Seq.length xs@15))))
-(pop) ; 10
-(pop) ; 9
-; Joined path conditions
-; Joined path conditions
-(pop) ; 8
-(push) ; 8
-; [else-branch 32] !0 <= i3@33
-(assert (not (<= 0 i3@33)))
-(pop) ; 8
-(pop) ; 7
-; Joined path conditions
-; Joined path conditions
-(push) ; 7
-(push) ; 8
-(assert (not (not
-  (and
-    (<= 0 i3@33)
-    (implies
-      (<= 0 i3@33)
-      (and
-        (< i3@33 ($Seq.length xs@15))
-        (implies
-          (< i3@33 ($Seq.length xs@15))
-          (not
-            (and
-              (<= 0 i3@33)
-              (implies (<= 0 i3@33) (< i3@33 ($Seq.length xs@15))))))))))))
-(check-sat)
-; unsat
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-; [dead then-branch 35] 0 <= i3@33 && 0 <= i3@33 ==> i3@33 < |xs@15| && i3@33 < |xs@15| ==> !0 <= i3@33 && 0 <= i3@33 ==> i3@33 < |xs@15|
-(push) ; 8
-; [else-branch 35] !0 <= i3@33 && 0 <= i3@33 ==> i3@33 < |xs@15| && i3@33 < |xs@15| ==> !0 <= i3@33 && 0 <= i3@33 ==> i3@33 < |xs@15|
-(assert (not
-  (and
-    (<= 0 i3@33)
-    (implies
-      (<= 0 i3@33)
-      (and
-        (< i3@33 ($Seq.length xs@15))
-        (implies
-          (< i3@33 ($Seq.length xs@15))
-          (not
-            (and
-              (<= 0 i3@33)
-              (implies (<= 0 i3@33) (< i3@33 ($Seq.length xs@15)))))))))))
-(pop) ; 8
-(pop) ; 7
-; Joined path conditions
-; [eval] xs[i3]
-(pop) ; 6
-; Nested auxiliary terms
-(pop) ; 5
-; [dead else-branch 31] False
-(pop) ; 4
-; Joined path conditions
-; [eval] -1 <= index && index < |xs|
-; [eval] -1 <= index
-; [eval] -1
-; [eval] -1 <= index ==> index < |xs|
-; [eval] -1 <= index
-; [eval] -1
-(push) ; 4
-(push) ; 5
-(assert (not false))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 36] True
-; [eval] index < |xs|
-; [eval] |xs|
-(pop) ; 5
-; [dead else-branch 36] False
-(pop) ; 4
-; Joined path conditions
-(set-option :timeout 0)
-(push) ; 4
-(assert (not (< (- 0 1) ($Seq.length xs@15))))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (< (- 0 1) ($Seq.length xs@15)))
-; [eval] 0 <= index ==> xs[index] == key
-; [eval] 0 <= index
-(push) ; 4
-; [dead then-branch 37] False
-(push) ; 5
-; [else-branch 37] True
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-(pop) ; 3
-; Loop: Verify loop body
-(push) ; 3
-(assert (and (< low@27 high@28) (implies (< low@27 high@28) (= index@29 (- 0 1)))))
-(assert (= $t@32 $Snap.unit))
-(assert (implies (<= 0 index@29) (= ($Seq.index xs@15 index@29) key@16)))
-(assert (and
-  (<= (- 0 1) index@29)
-  (implies (<= (- 0 1) index@29) (< index@29 ($Seq.length xs@15)))))
-(assert (implies
-  (= index@29 (- 0 1))
-  (forall ((i3@31 Int)) (!
-    (implies
-      (and
-        (<= 0 i3@31)
-        (implies
-          (<= 0 i3@31)
-          (and
-            (< i3@31 ($Seq.length xs@15))
-            (implies
-              (< i3@31 ($Seq.length xs@15))
-              (not
-                (and
-                  (<= low@27 i3@31)
-                  (implies (<= low@27 i3@31) (< i3@31 high@28))))))))
-      (not (= ($Seq.index xs@15 i3@31) key@16)))
-    :pattern (($Seq.index xs@15 i3@31))
-    :qid |prog.l43|))))
-(assert (and
-  (<= 0 low@27)
-  (implies
-    (<= 0 low@27)
-    (and
-      (<= low@27 high@28)
-      (implies (<= low@27 high@28) (<= high@28 ($Seq.length xs@15)))))))
-(assert (= $t@30 ($Snap.combine $Snap.unit $Snap.unit)))
-; [exec]
-; mid := (low + high) \ 2
-; [eval] (low + high) \ 2
-; [eval] low + high
 (push) ; 4
 (assert (not (not (= 2 0))))
 (check-sat)
@@ -1811,1586 +510,253 @@
 (pop) ; 4
 ; 0,00s
 ; (get-info :all-statistics)
-(declare-const mid@34 Int)
-(assert (= mid@34 (div (+ low@27 high@28) 2)))
-; [eval] xs[mid] < key
-; [eval] xs[mid]
+(assert (implies (< $Perm.No (/ (to_real 1) (to_real 2))) (not (= this@3 $Ref.null))))
+; [eval] 0 <= index && index < |this.SortedList_Elements|
+; [eval] 0 <= index
+; [eval] 0 <= index ==> index < |this.SortedList_Elements|
+; [eval] 0 <= index
+(push) ; 4
 (set-option :timeout 250)
-(push) ; 4
-(assert (not (not (< ($Seq.index xs@15 mid@34) key@16))))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-(assert (not (< ($Seq.index xs@15 mid@34) key@16)))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-; [then-branch 38] xs@15[mid@34] < key@16
-(assert (< ($Seq.index xs@15 mid@34) key@16))
-; [exec]
-; low := mid + 1
-; [eval] mid + 1
-(declare-const low@35 Int)
-(assert (= low@35 (+ mid@34 1)))
-; [eval] 0 <= low && (low <= high && high <= |xs|)
-; [eval] 0 <= low
-; [eval] 0 <= low ==> low <= high && high <= |xs|
-; [eval] 0 <= low
 (push) ; 5
-(push) ; 6
-(assert (not (not (<= 0 low@35))))
+(assert (not (not (<= 0 index@10))))
 (check-sat)
 ; unknown
-(pop) ; 6
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 6
-(assert (not (<= 0 low@35)))
-(check-sat)
-; unsat
-(pop) ; 6
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 6
-; [then-branch 39] 0 <= low@35
-(assert (<= 0 low@35))
-; [eval] low <= high && high <= |xs|
-; [eval] low <= high
-; [eval] low <= high ==> high <= |xs|
-; [eval] low <= high
-(push) ; 7
-(push) ; 8
-(assert (not (not (<= low@35 high@28))))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-(assert (not (<= low@35 high@28)))
-(check-sat)
-; unsat
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-; [then-branch 40] low@35 <= high@28
-(assert (<= low@35 high@28))
-; [eval] high <= |xs|
-; [eval] |xs|
-(pop) ; 8
-; [dead else-branch 40] !low@35 <= high@28
-(pop) ; 7
-; Joined path conditions
-(pop) ; 6
-; [dead else-branch 39] !0 <= low@35
-(pop) ; 5
-; Joined path conditions
-(set-option :timeout 0)
-(push) ; 5
-(assert (not (and
-  (<= 0 low@35)
-  (implies
-    (<= 0 low@35)
-    (and
-      (<= low@35 high@28)
-      (implies (<= low@35 high@28) (<= high@28 ($Seq.length xs@15))))))))
-(check-sat)
-; unsat
 (pop) ; 5
 ; 0,00s
 ; (get-info :all-statistics)
-(assert (and
-  (<= 0 low@35)
-  (implies
-    (<= 0 low@35)
-    (and
-      (<= low@35 high@28)
-      (implies (<= low@35 high@28) (<= high@28 ($Seq.length xs@15)))))))
-; [eval] index == -1 ==> (forall i3: Int :: 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key)
-; [eval] index == -1
-; [eval] -1
 (push) ; 5
-(set-option :timeout 250)
+(assert (not (<= 0 index@10)))
+(check-sat)
+; unknown
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 5
+; [then-branch 1] 0 <= index@10
+(assert (<= 0 index@10))
+; [eval] index < |this.SortedList_Elements|
+; [eval] |this.SortedList_Elements|
+(pop) ; 5
+(push) ; 5
+; [else-branch 1] !0 <= index@10
+(assert (not (<= 0 index@10)))
+(pop) ; 5
+(pop) ; 4
+; Joined path conditions
+; Joined path conditions
+(assert (and (<= 0 index@10) (implies (<= 0 index@10) (< index@10 ($Seq.length $t@12)))))
+; [eval] (forall i: Int :: 0 <= i && i < index ==> this.SortedList_Elements[i] < element)
+(declare-const i@13 Int)
+(push) ; 4
+; [eval] 0 <= i && i < index ==> this.SortedList_Elements[i] < element
+; [eval] 0 <= i && i < index
+; [eval] 0 <= i
+; [eval] 0 <= i ==> i < index
+; [eval] 0 <= i
+(push) ; 5
 (push) ; 6
-(assert (not (not (= index@29 (- 0 1)))))
+(assert (not (not (<= 0 i@13))))
 (check-sat)
 ; unknown
 (pop) ; 6
 ; 0,00s
 ; (get-info :all-statistics)
 (push) ; 6
-(assert (not (= index@29 (- 0 1))))
+(assert (not (<= 0 i@13)))
 (check-sat)
-; unsat
+; unknown
 (pop) ; 6
 ; 0,00s
 ; (get-info :all-statistics)
 (push) ; 6
-; [then-branch 41] index@29 == -1
-(assert (= index@29 (- 0 1)))
-; [eval] (forall i3: Int :: 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key)
-(declare-const i3@36 Int)
-(push) ; 7
-; [eval] 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key
-; [eval] 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high))
-; [eval] 0 <= i3
-; [eval] 0 <= i3 ==> i3 < |xs| && !(low <= i3 && i3 < high)
-; [eval] 0 <= i3
-(push) ; 8
-(push) ; 9
-(assert (not (not (<= 0 i3@36))))
-(check-sat)
-; unknown
-(pop) ; 9
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 9
-(assert (not (<= 0 i3@36)))
-(check-sat)
-; unknown
-(pop) ; 9
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 9
-; [then-branch 42] 0 <= i3@36
-(assert (<= 0 i3@36))
-; [eval] i3 < |xs| && !(low <= i3 && i3 < high)
-; [eval] i3 < |xs|
-; [eval] |xs|
-; [eval] i3 < |xs| ==> !(low <= i3 && i3 < high)
-; [eval] i3 < |xs|
-; [eval] |xs|
-(push) ; 10
-(push) ; 11
-(assert (not (not (< i3@36 ($Seq.length xs@15)))))
-(check-sat)
-; unknown
-(pop) ; 11
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 11
-(assert (not (< i3@36 ($Seq.length xs@15))))
-(check-sat)
-; unknown
-(pop) ; 11
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 11
-; [then-branch 43] i3@36 < |xs@15|
-(assert (< i3@36 ($Seq.length xs@15)))
-; [eval] !(low <= i3 && i3 < high)
-; [eval] low <= i3 && i3 < high
-; [eval] low <= i3
-; [eval] low <= i3 ==> i3 < high
-; [eval] low <= i3
-(push) ; 12
-(push) ; 13
-(assert (not (not (<= low@35 i3@36))))
-(check-sat)
-; unknown
-(pop) ; 13
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 13
-(assert (not (<= low@35 i3@36)))
-(check-sat)
-; unknown
-(pop) ; 13
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 13
-; [then-branch 44] low@35 <= i3@36
-(assert (<= low@35 i3@36))
-; [eval] i3 < high
-(pop) ; 13
-(push) ; 13
-; [else-branch 44] !low@35 <= i3@36
-(assert (not (<= low@35 i3@36)))
-(pop) ; 13
-(pop) ; 12
+; [then-branch 2] 0 <= i@13
+(assert (<= 0 i@13))
+; [eval] i < index
+(pop) ; 6
+(push) ; 6
+; [else-branch 2] !0 <= i@13
+(assert (not (<= 0 i@13)))
+(pop) ; 6
+(pop) ; 5
 ; Joined path conditions
 ; Joined path conditions
-(pop) ; 11
-(push) ; 11
-; [else-branch 43] !i3@36 < |xs@15|
-(assert (not (< i3@36 ($Seq.length xs@15))))
-(pop) ; 11
-(pop) ; 10
-; Joined path conditions
-; Joined path conditions
-(pop) ; 9
-(push) ; 9
-; [else-branch 42] !0 <= i3@36
-(assert (not (<= 0 i3@36)))
-(pop) ; 9
-(pop) ; 8
-; Joined path conditions
-; Joined path conditions
-(push) ; 8
-(push) ; 9
-(assert (not (not
-  (and
-    (<= 0 i3@36)
-    (implies
-      (<= 0 i3@36)
-      (and
-        (< i3@36 ($Seq.length xs@15))
-        (implies
-          (< i3@36 ($Seq.length xs@15))
-          (not
-            (and (<= low@35 i3@36) (implies (<= low@35 i3@36) (< i3@36 high@28)))))))))))
+(push) ; 5
+(push) ; 6
+(assert (not (not (and (<= 0 i@13) (implies (<= 0 i@13) (< i@13 index@10))))))
 (check-sat)
 ; unknown
-(pop) ; 9
+(pop) ; 6
 ; 0,00s
 ; (get-info :all-statistics)
-(push) ; 9
-(assert (not (and
-  (<= 0 i3@36)
-  (implies
-    (<= 0 i3@36)
-    (and
-      (< i3@36 ($Seq.length xs@15))
-      (implies
-        (< i3@36 ($Seq.length xs@15))
-        (not
-          (and (<= low@35 i3@36) (implies (<= low@35 i3@36) (< i3@36 high@28))))))))))
+(push) ; 6
+(assert (not (and (<= 0 i@13) (implies (<= 0 i@13) (< i@13 index@10)))))
 (check-sat)
 ; unknown
-(pop) ; 9
+(pop) ; 6
 ; 0,00s
 ; (get-info :all-statistics)
-(push) ; 9
-; [then-branch 45] 0 <= i3@36 && 0 <= i3@36 ==> i3@36 < |xs@15| && i3@36 < |xs@15| ==> !low@35 <= i3@36 && low@35 <= i3@36 ==> i3@36 < high@28
-(assert (and
-  (<= 0 i3@36)
-  (implies
-    (<= 0 i3@36)
-    (and
-      (< i3@36 ($Seq.length xs@15))
-      (implies
-        (< i3@36 ($Seq.length xs@15))
-        (not
-          (and (<= low@35 i3@36) (implies (<= low@35 i3@36) (< i3@36 high@28)))))))))
-; [eval] xs[i3] != key
-; [eval] xs[i3]
-(pop) ; 9
-(push) ; 9
-; [else-branch 45] !0 <= i3@36 && 0 <= i3@36 ==> i3@36 < |xs@15| && i3@36 < |xs@15| ==> !low@35 <= i3@36 && low@35 <= i3@36 ==> i3@36 < high@28
-(assert (not
-  (and
-    (<= 0 i3@36)
-    (implies
-      (<= 0 i3@36)
-      (and
-        (< i3@36 ($Seq.length xs@15))
-        (implies
-          (< i3@36 ($Seq.length xs@15))
-          (not
-            (and (<= low@35 i3@36) (implies (<= low@35 i3@36) (< i3@36 high@28))))))))))
-(pop) ; 9
-(pop) ; 8
+(push) ; 6
+; [then-branch 3] 0 <= i@13 && 0 <= i@13 ==> i@13 < index@10
+(assert (and (<= 0 i@13) (implies (<= 0 i@13) (< i@13 index@10))))
+; [eval] this.SortedList_Elements[i] < element
+; [eval] this.SortedList_Elements[i]
+(pop) ; 6
+(push) ; 6
+; [else-branch 3] !0 <= i@13 && 0 <= i@13 ==> i@13 < index@10
+(assert (not (and (<= 0 i@13) (implies (<= 0 i@13) (< i@13 index@10)))))
+(pop) ; 6
+(pop) ; 5
 ; Joined path conditions
 ; Joined path conditions
-(pop) ; 7
+(pop) ; 4
 ; Nested auxiliary terms
-(pop) ; 6
-; [dead else-branch 41] index@29 != -1
-(pop) ; 5
-; Joined path conditions
-(set-option :timeout 0)
-(push) ; 5
-(assert (not (implies
-  (= index@29 (- 0 1))
-  (forall ((i3@36 Int)) (!
-    (implies
-      (and
-        (<= 0 i3@36)
-        (implies
-          (<= 0 i3@36)
-          (and
-            (< i3@36 ($Seq.length xs@15))
-            (implies
-              (< i3@36 ($Seq.length xs@15))
-              (not
-                (and
-                  (<= low@35 i3@36)
-                  (implies (<= low@35 i3@36) (< i3@36 high@28))))))))
-      (not (= ($Seq.index xs@15 i3@36) key@16)))
-    :pattern (($Seq.index xs@15 i3@36))
-    :qid |prog.l43|)))))
-(check-sat)
-; unsat
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(assert (implies
-  (= index@29 (- 0 1))
-  (forall ((i3@36 Int)) (!
-    (implies
-      (and
-        (<= 0 i3@36)
-        (implies
-          (<= 0 i3@36)
-          (and
-            (< i3@36 ($Seq.length xs@15))
-            (implies
-              (< i3@36 ($Seq.length xs@15))
-              (not
-                (and
-                  (<= low@35 i3@36)
-                  (implies (<= low@35 i3@36) (< i3@36 high@28))))))))
-      (not (= ($Seq.index xs@15 i3@36) key@16)))
-    :pattern (($Seq.index xs@15 i3@36))
-    :qid |prog.l43|))))
-; [eval] -1 <= index && index < |xs|
-; [eval] -1 <= index
-; [eval] -1
-; [eval] -1 <= index ==> index < |xs|
-; [eval] -1 <= index
-; [eval] -1
-(push) ; 5
-(set-option :timeout 250)
-(push) ; 6
-(assert (not (not (<= (- 0 1) index@29))))
-(check-sat)
-; unknown
-(pop) ; 6
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 6
-(assert (not (<= (- 0 1) index@29)))
-(check-sat)
-; unsat
-(pop) ; 6
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 6
-; [then-branch 46] -1 <= index@29
-(assert (<= (- 0 1) index@29))
-; [eval] index < |xs|
-; [eval] |xs|
-(pop) ; 6
-; [dead else-branch 46] !-1 <= index@29
-(pop) ; 5
-; Joined path conditions
-; [eval] 0 <= index ==> xs[index] == key
-; [eval] 0 <= index
-(push) ; 5
-(push) ; 6
-(assert (not (not (<= 0 index@29))))
-(check-sat)
-; unsat
-(pop) ; 6
-; 0,00s
-; (get-info :all-statistics)
-; [dead then-branch 47] 0 <= index@29
-(push) ; 6
-; [else-branch 47] !0 <= index@29
-(assert (not (<= 0 index@29)))
-(pop) ; 6
-(pop) ; 5
-; Joined path conditions
-(pop) ; 4
-(push) ; 4
-; [else-branch 38] !xs@15[mid@34] < key@16
-(assert (not (< ($Seq.index xs@15 mid@34) key@16)))
-(pop) ; 4
-; [eval] !(xs[mid] < key)
-; [eval] xs[mid] < key
-; [eval] xs[mid]
-(push) ; 4
-(assert (not (< ($Seq.index xs@15 mid@34) key@16)))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-(assert (not (not (< ($Seq.index xs@15 mid@34) key@16))))
-(check-sat)
-; unknown
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 4
-; [then-branch 48] !xs@15[mid@34] < key@16
-(assert (not (< ($Seq.index xs@15 mid@34) key@16)))
-; [eval] key < xs[mid]
-; [eval] xs[mid]
-(push) ; 5
-(assert (not (not (< key@16 ($Seq.index xs@15 mid@34)))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (< key@16 ($Seq.index xs@15 mid@34))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 49] key@16 < xs@15[mid@34]
-(assert (< key@16 ($Seq.index xs@15 mid@34)))
-; [exec]
-; high := mid
-; [eval] 0 <= low && (low <= high && high <= |xs|)
-; [eval] 0 <= low
-; [eval] 0 <= low ==> low <= high && high <= |xs|
-; [eval] 0 <= low
-(push) ; 6
-(push) ; 7
-(assert (not (not (<= 0 low@27))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-(assert (not (<= 0 low@27)))
-(check-sat)
-; unsat
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-; [then-branch 50] 0 <= low@27
-(assert (<= 0 low@27))
-; [eval] low <= high && high <= |xs|
-; [eval] low <= high
-; [eval] low <= high ==> high <= |xs|
-; [eval] low <= high
-(push) ; 8
-(push) ; 9
-(assert (not (not (<= low@27 mid@34))))
-(check-sat)
-; unknown
-(pop) ; 9
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 9
-(assert (not (<= low@27 mid@34)))
-(check-sat)
-; unsat
-(pop) ; 9
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 9
-; [then-branch 51] low@27 <= mid@34
-(assert (<= low@27 mid@34))
-; [eval] high <= |xs|
-; [eval] |xs|
-(pop) ; 9
-; [dead else-branch 51] !low@27 <= mid@34
-(pop) ; 8
-; Joined path conditions
-(pop) ; 7
-; [dead else-branch 50] !0 <= low@27
-(pop) ; 6
-; Joined path conditions
-(set-option :timeout 0)
-(push) ; 6
-(assert (not (and
-  (<= 0 low@27)
+(assert (forall ((i@13 Int)) (!
   (implies
-    (<= 0 low@27)
-    (and
-      (<= low@27 mid@34)
-      (implies (<= low@27 mid@34) (<= mid@34 ($Seq.length xs@15))))))))
+    (and (<= 0 i@13) (implies (<= 0 i@13) (< i@13 index@10)))
+    (< ($Seq.index $t@12 i@13) element@4))
+  :pattern (($Seq.index $t@12 i@13))
+  :qid |prog.l16|)))
+(declare-const $t@14 $Snap)
+(assert (= $t@14 $Snap.unit))
+; [eval] index < |this.SortedList_Elements| && this.SortedList_Elements[index] < element
+; [eval] index < |this.SortedList_Elements|
+; [eval] |this.SortedList_Elements|
+; [eval] index < |this.SortedList_Elements| ==> this.SortedList_Elements[index] < element
+; [eval] index < |this.SortedList_Elements|
+; [eval] |this.SortedList_Elements|
+(push) ; 4
+(push) ; 5
+(assert (not (not (< index@10 ($Seq.length $t@12)))))
 (check-sat)
-; unsat
-(pop) ; 6
+; unknown
+(pop) ; 5
 ; 0,00s
 ; (get-info :all-statistics)
+(push) ; 5
+(assert (not (< index@10 ($Seq.length $t@12))))
+(check-sat)
+; unsat
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 5
+; [then-branch 4] index@10 < |$t@12|
+(assert (< index@10 ($Seq.length $t@12)))
+; [eval] this.SortedList_Elements[index] < element
+; [eval] this.SortedList_Elements[index]
+(pop) ; 5
+; [dead else-branch 4] !index@10 < |$t@12|
+(pop) ; 4
+; Joined path conditions
 (assert (and
-  (<= 0 low@27)
+  (< index@10 ($Seq.length $t@12))
   (implies
-    (<= 0 low@27)
-    (and
-      (<= low@27 mid@34)
-      (implies (<= low@27 mid@34) (<= mid@34 ($Seq.length xs@15)))))))
-; [eval] index == -1 ==> (forall i3: Int :: 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key)
-; [eval] index == -1
-; [eval] -1
-(push) ; 6
-(set-option :timeout 250)
-(push) ; 7
-(assert (not (not (= index@29 (- 0 1)))))
+    (< index@10 ($Seq.length $t@12))
+    (< ($Seq.index $t@12 index@10) element@4))))
 (check-sat)
 ; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-(assert (not (= index@29 (- 0 1))))
-(check-sat)
-; unsat
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-; [then-branch 52] index@29 == -1
-(assert (= index@29 (- 0 1)))
-; [eval] (forall i3: Int :: 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key)
-(declare-const i3@37 Int)
-(push) ; 8
-; [eval] 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key
-; [eval] 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high))
-; [eval] 0 <= i3
-; [eval] 0 <= i3 ==> i3 < |xs| && !(low <= i3 && i3 < high)
-; [eval] 0 <= i3
-(push) ; 9
-(push) ; 10
-(assert (not (not (<= 0 i3@37))))
-(check-sat)
-; unknown
-(pop) ; 10
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 10
-(assert (not (<= 0 i3@37)))
-(check-sat)
-; unknown
-(pop) ; 10
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 10
-; [then-branch 53] 0 <= i3@37
-(assert (<= 0 i3@37))
-; [eval] i3 < |xs| && !(low <= i3 && i3 < high)
-; [eval] i3 < |xs|
-; [eval] |xs|
-; [eval] i3 < |xs| ==> !(low <= i3 && i3 < high)
-; [eval] i3 < |xs|
-; [eval] |xs|
-(push) ; 11
-(push) ; 12
-(assert (not (not (< i3@37 ($Seq.length xs@15)))))
-(check-sat)
-; unknown
-(pop) ; 12
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 12
-(assert (not (< i3@37 ($Seq.length xs@15))))
-(check-sat)
-; unknown
-(pop) ; 12
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 12
-; [then-branch 54] i3@37 < |xs@15|
-(assert (< i3@37 ($Seq.length xs@15)))
-; [eval] !(low <= i3 && i3 < high)
-; [eval] low <= i3 && i3 < high
-; [eval] low <= i3
-; [eval] low <= i3 ==> i3 < high
-; [eval] low <= i3
-(push) ; 13
-(push) ; 14
-(assert (not (not (<= low@27 i3@37))))
-(check-sat)
-; unknown
-(pop) ; 14
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 14
-(assert (not (<= low@27 i3@37)))
-(check-sat)
-; unknown
-(pop) ; 14
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 14
-; [then-branch 55] low@27 <= i3@37
-(assert (<= low@27 i3@37))
-; [eval] i3 < high
-(pop) ; 14
-(push) ; 14
-; [else-branch 55] !low@27 <= i3@37
-(assert (not (<= low@27 i3@37)))
-(pop) ; 14
-(pop) ; 13
-; Joined path conditions
-; Joined path conditions
-(pop) ; 12
-(push) ; 12
-; [else-branch 54] !i3@37 < |xs@15|
-(assert (not (< i3@37 ($Seq.length xs@15))))
-(pop) ; 12
-(pop) ; 11
-; Joined path conditions
-; Joined path conditions
-(pop) ; 10
-(push) ; 10
-; [else-branch 53] !0 <= i3@37
-(assert (not (<= 0 i3@37)))
-(pop) ; 10
-(pop) ; 9
-; Joined path conditions
-; Joined path conditions
-(push) ; 9
-(push) ; 10
-(assert (not (not
-  (and
-    (<= 0 i3@37)
-    (implies
-      (<= 0 i3@37)
-      (and
-        (< i3@37 ($Seq.length xs@15))
-        (implies
-          (< i3@37 ($Seq.length xs@15))
-          (not
-            (and (<= low@27 i3@37) (implies (<= low@27 i3@37) (< i3@37 mid@34)))))))))))
-(check-sat)
-; unknown
-(pop) ; 10
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 10
-(assert (not (and
-  (<= 0 i3@37)
-  (implies
-    (<= 0 i3@37)
-    (and
-      (< i3@37 ($Seq.length xs@15))
-      (implies
-        (< i3@37 ($Seq.length xs@15))
-        (not
-          (and (<= low@27 i3@37) (implies (<= low@27 i3@37) (< i3@37 mid@34))))))))))
-(check-sat)
-; unknown
-(pop) ; 10
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 10
-; [then-branch 56] 0 <= i3@37 && 0 <= i3@37 ==> i3@37 < |xs@15| && i3@37 < |xs@15| ==> !low@27 <= i3@37 && low@27 <= i3@37 ==> i3@37 < mid@34
-(assert (and
-  (<= 0 i3@37)
-  (implies
-    (<= 0 i3@37)
-    (and
-      (< i3@37 ($Seq.length xs@15))
-      (implies
-        (< i3@37 ($Seq.length xs@15))
-        (not
-          (and (<= low@27 i3@37) (implies (<= low@27 i3@37) (< i3@37 mid@34)))))))))
-; [eval] xs[i3] != key
-; [eval] xs[i3]
-(pop) ; 10
-(push) ; 10
-; [else-branch 56] !0 <= i3@37 && 0 <= i3@37 ==> i3@37 < |xs@15| && i3@37 < |xs@15| ==> !low@27 <= i3@37 && low@27 <= i3@37 ==> i3@37 < mid@34
-(assert (not
-  (and
-    (<= 0 i3@37)
-    (implies
-      (<= 0 i3@37)
-      (and
-        (< i3@37 ($Seq.length xs@15))
-        (implies
-          (< i3@37 ($Seq.length xs@15))
-          (not
-            (and (<= low@27 i3@37) (implies (<= low@27 i3@37) (< i3@37 mid@34))))))))))
-(pop) ; 10
-(pop) ; 9
-; Joined path conditions
-; Joined path conditions
-(pop) ; 8
-; Nested auxiliary terms
-(pop) ; 7
-; [dead else-branch 52] index@29 != -1
-(pop) ; 6
-; Joined path conditions
-(set-option :timeout 0)
-(push) ; 6
-(assert (not (implies
-  (= index@29 (- 0 1))
-  (forall ((i3@37 Int)) (!
-    (implies
-      (and
-        (<= 0 i3@37)
-        (implies
-          (<= 0 i3@37)
-          (and
-            (< i3@37 ($Seq.length xs@15))
-            (implies
-              (< i3@37 ($Seq.length xs@15))
-              (not
-                (and
-                  (<= low@27 i3@37)
-                  (implies (<= low@27 i3@37) (< i3@37 mid@34))))))))
-      (not (= ($Seq.index xs@15 i3@37) key@16)))
-    :pattern (($Seq.index xs@15 i3@37))
-    :qid |prog.l43|)))))
-(check-sat)
-; unsat
-(pop) ; 6
-; 0,00s
-; (get-info :all-statistics)
-(assert (implies
-  (= index@29 (- 0 1))
-  (forall ((i3@37 Int)) (!
-    (implies
-      (and
-        (<= 0 i3@37)
-        (implies
-          (<= 0 i3@37)
-          (and
-            (< i3@37 ($Seq.length xs@15))
-            (implies
-              (< i3@37 ($Seq.length xs@15))
-              (not
-                (and
-                  (<= low@27 i3@37)
-                  (implies (<= low@27 i3@37) (< i3@37 mid@34))))))))
-      (not (= ($Seq.index xs@15 i3@37) key@16)))
-    :pattern (($Seq.index xs@15 i3@37))
-    :qid |prog.l43|))))
-; [eval] -1 <= index && index < |xs|
-; [eval] -1 <= index
-; [eval] -1
-; [eval] -1 <= index ==> index < |xs|
-; [eval] -1 <= index
-; [eval] -1
-(push) ; 6
-(set-option :timeout 250)
-(push) ; 7
-(assert (not (not (<= (- 0 1) index@29))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-(assert (not (<= (- 0 1) index@29)))
-(check-sat)
-; unsat
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-; [then-branch 57] -1 <= index@29
-(assert (<= (- 0 1) index@29))
-; [eval] index < |xs|
-; [eval] |xs|
-(pop) ; 7
-; [dead else-branch 57] !-1 <= index@29
-(pop) ; 6
-; Joined path conditions
-; [eval] 0 <= index ==> xs[index] == key
-; [eval] 0 <= index
-(push) ; 6
-(push) ; 7
-(assert (not (not (<= 0 index@29))))
-(check-sat)
-; unsat
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-; [dead then-branch 58] 0 <= index@29
-(push) ; 7
-; [else-branch 58] !0 <= index@29
-(assert (not (<= 0 index@29)))
-(pop) ; 7
-(pop) ; 6
-; Joined path conditions
-(pop) ; 5
-(push) ; 5
-; [else-branch 49] !key@16 < xs@15[mid@34]
-(assert (not (< key@16 ($Seq.index xs@15 mid@34))))
-(pop) ; 5
-; [eval] !(key < xs[mid])
-; [eval] key < xs[mid]
-; [eval] xs[mid]
-(push) ; 5
-(assert (not (< key@16 ($Seq.index xs@15 mid@34))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (not (< key@16 ($Seq.index xs@15 mid@34)))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 59] !key@16 < xs@15[mid@34]
-(assert (not (< key@16 ($Seq.index xs@15 mid@34))))
-; [exec]
-; index := mid
-; [exec]
-; high := mid
-; [eval] 0 <= low && (low <= high && high <= |xs|)
-; [eval] 0 <= low
-; [eval] 0 <= low ==> low <= high && high <= |xs|
-; [eval] 0 <= low
-(push) ; 6
-(push) ; 7
-(assert (not (not (<= 0 low@27))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-(assert (not (<= 0 low@27)))
-(check-sat)
-; unsat
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-; [then-branch 60] 0 <= low@27
-(assert (<= 0 low@27))
-; [eval] low <= high && high <= |xs|
-; [eval] low <= high
-; [eval] low <= high ==> high <= |xs|
-; [eval] low <= high
-(push) ; 8
-(push) ; 9
-(assert (not (not (<= low@27 mid@34))))
-(check-sat)
-; unknown
-(pop) ; 9
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 9
-(assert (not (<= low@27 mid@34)))
-(check-sat)
-; unsat
-(pop) ; 9
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 9
-; [then-branch 61] low@27 <= mid@34
-(assert (<= low@27 mid@34))
-; [eval] high <= |xs|
-; [eval] |xs|
-(pop) ; 9
-; [dead else-branch 61] !low@27 <= mid@34
-(pop) ; 8
-; Joined path conditions
-(pop) ; 7
-; [dead else-branch 60] !0 <= low@27
-(pop) ; 6
-; Joined path conditions
-(set-option :timeout 0)
-(push) ; 6
-(assert (not (and
-  (<= 0 low@27)
-  (implies
-    (<= 0 low@27)
-    (and
-      (<= low@27 mid@34)
-      (implies (<= low@27 mid@34) (<= mid@34 ($Seq.length xs@15))))))))
-(check-sat)
-; unsat
-(pop) ; 6
-; 0,00s
-; (get-info :all-statistics)
-(assert (and
-  (<= 0 low@27)
-  (implies
-    (<= 0 low@27)
-    (and
-      (<= low@27 mid@34)
-      (implies (<= low@27 mid@34) (<= mid@34 ($Seq.length xs@15)))))))
-; [eval] index == -1 ==> (forall i3: Int :: 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key)
-; [eval] index == -1
-; [eval] -1
-(push) ; 6
-(set-option :timeout 250)
-(push) ; 7
-(assert (not (not (= mid@34 (- 0 1)))))
-(check-sat)
-; unsat
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-; [dead then-branch 62] mid@34 == -1
-(push) ; 7
-; [else-branch 62] mid@34 != -1
-(assert (not (= mid@34 (- 0 1))))
-(pop) ; 7
-(pop) ; 6
-; Joined path conditions
-; [eval] -1 <= index && index < |xs|
-; [eval] -1 <= index
-; [eval] -1
-; [eval] -1 <= index ==> index < |xs|
-; [eval] -1 <= index
-; [eval] -1
-(push) ; 6
-(push) ; 7
-(assert (not (not (<= (- 0 1) mid@34))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-(assert (not (<= (- 0 1) mid@34)))
-(check-sat)
-; unsat
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-; [then-branch 63] -1 <= mid@34
-(assert (<= (- 0 1) mid@34))
-; [eval] index < |xs|
-; [eval] |xs|
-(pop) ; 7
-; [dead else-branch 63] !-1 <= mid@34
-(pop) ; 6
-; Joined path conditions
-(set-option :timeout 0)
-(push) ; 6
-(assert (not (and
-  (<= (- 0 1) mid@34)
-  (implies (<= (- 0 1) mid@34) (< mid@34 ($Seq.length xs@15))))))
-(check-sat)
-; unsat
-(pop) ; 6
-; 0,00s
-; (get-info :all-statistics)
-(assert (and
-  (<= (- 0 1) mid@34)
-  (implies (<= (- 0 1) mid@34) (< mid@34 ($Seq.length xs@15)))))
-; [eval] 0 <= index ==> xs[index] == key
-; [eval] 0 <= index
-(push) ; 6
-(set-option :timeout 250)
-(push) ; 7
-(assert (not (not (<= 0 mid@34))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-(assert (not (<= 0 mid@34)))
-(check-sat)
-; unsat
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-; [then-branch 64] 0 <= mid@34
-(assert (<= 0 mid@34))
-; [eval] xs[index] == key
-; [eval] xs[index]
-(pop) ; 7
-; [dead else-branch 64] !0 <= mid@34
-(pop) ; 6
-; Joined path conditions
-(set-option :timeout 0)
-(push) ; 6
-(assert (not (implies (<= 0 mid@34) (= ($Seq.index xs@15 mid@34) key@16))))
-(check-sat)
-; unsat
-(pop) ; 6
-; 0,00s
-; (get-info :all-statistics)
-(assert (implies (<= 0 mid@34) (= ($Seq.index xs@15 mid@34) key@16)))
-(pop) ; 5
-(push) ; 5
-; [else-branch 59] key@16 < xs@15[mid@34]
-(assert (< key@16 ($Seq.index xs@15 mid@34)))
-(pop) ; 5
-(pop) ; 4
-(push) ; 4
-; [else-branch 48] xs@15[mid@34] < key@16
-(assert (< ($Seq.index xs@15 mid@34) key@16))
-(pop) ; 4
 (pop) ; 3
-; Loop: Continue after loop
 (push) ; 3
-(assert (< (- 0 1) ($Seq.length xs@15)))
-(assert (<= 0 ($Seq.length xs@15)))
-(declare-const $t@38 $Snap)
-(assert (= $t@38 ($Snap.combine $Snap.unit $Snap.unit)))
-; [eval] 0 <= low && (low <= high && high <= |xs|)
-; [eval] 0 <= low
-; [eval] 0 <= low ==> low <= high && high <= |xs|
-; [eval] 0 <= low
+; Loop: Establish loop invariant
+(set-option :timeout 0)
 (push) ; 4
+(assert (not (not (= 2 0))))
+(check-sat)
+; unsat
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 4
+(assert (not (<= (/ (to_real 1) (to_real 2)) $Perm.Write)))
+(check-sat)
+; unsat
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(assert (<= (/ (to_real 1) (to_real 2)) $Perm.Write))
 (set-option :timeout 250)
-(push) ; 5
-(assert (not (not (<= 0 low@27))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (<= 0 low@27)))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 65] 0 <= low@27
-(assert (<= 0 low@27))
-; [eval] low <= high && high <= |xs|
-; [eval] low <= high
-; [eval] low <= high ==> high <= |xs|
-; [eval] low <= high
-(push) ; 6
-(push) ; 7
-(assert (not (not (<= low@27 high@28))))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-(assert (not (<= low@27 high@28)))
-(check-sat)
-; unknown
-(pop) ; 7
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 7
-; [then-branch 66] low@27 <= high@28
-(assert (<= low@27 high@28))
-; [eval] high <= |xs|
-; [eval] |xs|
-(pop) ; 7
-(push) ; 7
-; [else-branch 66] !low@27 <= high@28
-(assert (not (<= low@27 high@28)))
-(pop) ; 7
-(pop) ; 6
-; Joined path conditions
-; Joined path conditions
-(pop) ; 5
-(push) ; 5
-; [else-branch 65] !0 <= low@27
-(assert (not (<= 0 low@27)))
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(assert (and
-  (<= 0 low@27)
-  (implies
-    (<= 0 low@27)
-    (and
-      (<= low@27 high@28)
-      (implies (<= low@27 high@28) (<= high@28 ($Seq.length xs@15)))))))
-; [eval] index == -1 ==> (forall i3: Int :: 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key)
-; [eval] index == -1
-; [eval] -1
 (push) ; 4
-(push) ; 5
-(assert (not (not (= index@29 (- 0 1)))))
+(assert (not (or
+  (= (- $Perm.Write (/ (to_real 1) (to_real 2))) $Perm.No)
+  (< (- $Perm.Write (/ (to_real 1) (to_real 2))) $Perm.No))))
 (check-sat)
 ; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (= index@29 (- 0 1))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 67] index@29 == -1
-(assert (= index@29 (- 0 1)))
-; [eval] (forall i3: Int :: 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key)
-(declare-const i3@39 Int)
-(push) ; 6
-; [eval] 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high)) ==> xs[i3] != key
-; [eval] 0 <= i3 && (i3 < |xs| && !(low <= i3 && i3 < high))
-; [eval] 0 <= i3
-; [eval] 0 <= i3 ==> i3 < |xs| && !(low <= i3 && i3 < high)
-; [eval] 0 <= i3
-(push) ; 7
-(push) ; 8
-(assert (not (not (<= 0 i3@39))))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-(assert (not (<= 0 i3@39)))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-; [then-branch 68] 0 <= i3@39
-(assert (<= 0 i3@39))
-; [eval] i3 < |xs| && !(low <= i3 && i3 < high)
-; [eval] i3 < |xs|
-; [eval] |xs|
-; [eval] i3 < |xs| ==> !(low <= i3 && i3 < high)
-; [eval] i3 < |xs|
-; [eval] |xs|
-(push) ; 9
-(push) ; 10
-(assert (not (not (< i3@39 ($Seq.length xs@15)))))
-(check-sat)
-; unknown
-(pop) ; 10
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 10
-(assert (not (< i3@39 ($Seq.length xs@15))))
-(check-sat)
-; unknown
-(pop) ; 10
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 10
-; [then-branch 69] i3@39 < |xs@15|
-(assert (< i3@39 ($Seq.length xs@15)))
-; [eval] !(low <= i3 && i3 < high)
-; [eval] low <= i3 && i3 < high
-; [eval] low <= i3
-; [eval] low <= i3 ==> i3 < high
-; [eval] low <= i3
-(push) ; 11
-(push) ; 12
-(assert (not (not (<= low@27 i3@39))))
-(check-sat)
-; unknown
-(pop) ; 12
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 12
-(assert (not (<= low@27 i3@39)))
-(check-sat)
-; unknown
-(pop) ; 12
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 12
-; [then-branch 70] low@27 <= i3@39
-(assert (<= low@27 i3@39))
-; [eval] i3 < high
-(pop) ; 12
-(push) ; 12
-; [else-branch 70] !low@27 <= i3@39
-(assert (not (<= low@27 i3@39)))
-(pop) ; 12
-(pop) ; 11
-; Joined path conditions
-; Joined path conditions
-(pop) ; 10
-(push) ; 10
-; [else-branch 69] !i3@39 < |xs@15|
-(assert (not (< i3@39 ($Seq.length xs@15))))
-(pop) ; 10
-(pop) ; 9
-; Joined path conditions
-; Joined path conditions
-(pop) ; 8
-(push) ; 8
-; [else-branch 68] !0 <= i3@39
-(assert (not (<= 0 i3@39)))
-(pop) ; 8
-(pop) ; 7
-; Joined path conditions
-; Joined path conditions
-(push) ; 7
-(push) ; 8
-(assert (not (not
-  (and
-    (<= 0 i3@39)
-    (implies
-      (<= 0 i3@39)
-      (and
-        (< i3@39 ($Seq.length xs@15))
-        (implies
-          (< i3@39 ($Seq.length xs@15))
-          (not
-            (and (<= low@27 i3@39) (implies (<= low@27 i3@39) (< i3@39 high@28)))))))))))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-(assert (not (and
-  (<= 0 i3@39)
-  (implies
-    (<= 0 i3@39)
-    (and
-      (< i3@39 ($Seq.length xs@15))
-      (implies
-        (< i3@39 ($Seq.length xs@15))
-        (not
-          (and (<= low@27 i3@39) (implies (<= low@27 i3@39) (< i3@39 high@28))))))))))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-; [then-branch 71] 0 <= i3@39 && 0 <= i3@39 ==> i3@39 < |xs@15| && i3@39 < |xs@15| ==> !low@27 <= i3@39 && low@27 <= i3@39 ==> i3@39 < high@28
-(assert (and
-  (<= 0 i3@39)
-  (implies
-    (<= 0 i3@39)
-    (and
-      (< i3@39 ($Seq.length xs@15))
-      (implies
-        (< i3@39 ($Seq.length xs@15))
-        (not
-          (and (<= low@27 i3@39) (implies (<= low@27 i3@39) (< i3@39 high@28)))))))))
-; [eval] xs[i3] != key
-; [eval] xs[i3]
-(pop) ; 8
-(push) ; 8
-; [else-branch 71] !0 <= i3@39 && 0 <= i3@39 ==> i3@39 < |xs@15| && i3@39 < |xs@15| ==> !low@27 <= i3@39 && low@27 <= i3@39 ==> i3@39 < high@28
-(assert (not
-  (and
-    (<= 0 i3@39)
-    (implies
-      (<= 0 i3@39)
-      (and
-        (< i3@39 ($Seq.length xs@15))
-        (implies
-          (< i3@39 ($Seq.length xs@15))
-          (not
-            (and (<= low@27 i3@39) (implies (<= low@27 i3@39) (< i3@39 high@28))))))))))
-(pop) ; 8
-(pop) ; 7
-; Joined path conditions
-; Joined path conditions
-(pop) ; 6
-; Nested auxiliary terms
-(pop) ; 5
-(push) ; 5
-; [else-branch 67] index@29 != -1
-(assert (not (= index@29 (- 0 1))))
-(pop) ; 5
 (pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(assert (implies
-  (= index@29 (- 0 1))
-  (forall ((i3@39 Int)) (!
-    (implies
-      (and
-        (<= 0 i3@39)
-        (implies
-          (<= 0 i3@39)
-          (and
-            (< i3@39 ($Seq.length xs@15))
-            (implies
-              (< i3@39 ($Seq.length xs@15))
-              (not
-                (and
-                  (<= low@27 i3@39)
-                  (implies (<= low@27 i3@39) (< i3@39 high@28))))))))
-      (not (= ($Seq.index xs@15 i3@39) key@16)))
-    :pattern (($Seq.index xs@15 i3@39))
-    :qid |prog.l43|))))
-; [eval] -1 <= index && index < |xs|
-; [eval] -1 <= index
-; [eval] -1
-; [eval] -1 <= index ==> index < |xs|
-; [eval] -1 <= index
-; [eval] -1
-(push) ; 4
-(push) ; 5
-(assert (not (not (<= (- 0 1) index@29))))
-(check-sat)
-; unknown
-(pop) ; 5
 ; 0,00s
 ; (get-info :all-statistics)
-(push) ; 5
-(assert (not (<= (- 0 1) index@29)))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 72] -1 <= index@29
-(assert (<= (- 0 1) index@29))
-; [eval] index < |xs|
-; [eval] |xs|
-(pop) ; 5
-(push) ; 5
-; [else-branch 72] !-1 <= index@29
-(assert (not (<= (- 0 1) index@29)))
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(assert (and
-  (<= (- 0 1) index@29)
-  (implies (<= (- 0 1) index@29) (< index@29 ($Seq.length xs@15)))))
-; [eval] 0 <= index ==> xs[index] == key
+; [eval] 0 <= index && index < |this.SortedList_Elements|
+; [eval] 0 <= index
+; [eval] 0 <= index ==> index < |this.SortedList_Elements|
 ; [eval] 0 <= index
 (push) ; 4
 (push) ; 5
-(assert (not (not (<= 0 index@29))))
+(assert (not false))
 (check-sat)
 ; unknown
 (pop) ; 5
 ; 0,00s
 ; (get-info :all-statistics)
 (push) ; 5
-(assert (not (<= 0 index@29)))
-(check-sat)
-; unknown
+; [then-branch 5] True
+; [eval] index < |this.SortedList_Elements|
+; [eval] |this.SortedList_Elements|
 (pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 73] 0 <= index@29
-(assert (<= 0 index@29))
-; [eval] xs[index] == key
-; [eval] xs[index]
-(pop) ; 5
-(push) ; 5
-; [else-branch 73] !0 <= index@29
-(assert (not (<= 0 index@29)))
-(pop) ; 5
+; [dead else-branch 5] False
 (pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(assert (implies (<= 0 index@29) (= ($Seq.index xs@15 index@29) key@16)))
-; [eval] !(low < high && index == -1)
-; [eval] low < high && index == -1
-; [eval] low < high
-; [eval] low < high ==> index == -1
-; [eval] low < high
-(push) ; 4
-(push) ; 5
-(assert (not (not (< low@27 high@28))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (< low@27 high@28)))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 74] low@27 < high@28
-(assert (< low@27 high@28))
-; [eval] index == -1
-; [eval] -1
-(pop) ; 5
-(push) ; 5
-; [else-branch 74] !low@27 < high@28
-(assert (not (< low@27 high@28)))
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-; Joined path conditions
-(assert (not (and (< low@27 high@28) (implies (< low@27 high@28) (= index@29 (- 0 1))))))
-(check-sat)
-; unknown
-; [exec]
-; res := index
-; [eval] -1 <= res && res < |xs|
-; [eval] -1 <= res
-; [eval] -1
-; [eval] -1 <= res ==> res < |xs|
-; [eval] -1 <= res
-; [eval] -1
-(push) ; 4
-(push) ; 5
-(assert (not (not (<= (- 0 1) index@29))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (<= (- 0 1) index@29)))
-(check-sat)
-; unsat
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 75] -1 <= index@29
-(assert (<= (- 0 1) index@29))
-; [eval] res < |xs|
-; [eval] |xs|
-(pop) ; 5
-; [dead else-branch 75] !-1 <= index@29
-(pop) ; 4
-; Joined path conditions
-; [eval] 0 <= res ==> xs[res] == key
-; [eval] 0 <= res
-(push) ; 4
-(push) ; 5
-(assert (not (not (<= 0 index@29))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (<= 0 index@29)))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 76] 0 <= index@29
-(assert (<= 0 index@29))
-; [eval] xs[res] == key
-; [eval] xs[res]
-(pop) ; 5
-(push) ; 5
-; [else-branch 76] !0 <= index@29
-(assert (not (<= 0 index@29)))
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
-; Joined path conditions
-; [eval] -1 == res ==> (forall i2: Int :: 0 <= i2 && i2 < |xs| ==> xs[i2] != key)
-; [eval] -1 == res
-; [eval] -1
-(push) ; 4
-(push) ; 5
-(assert (not (not (= (- 0 1) index@29))))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-(assert (not (= (- 0 1) index@29)))
-(check-sat)
-; unknown
-(pop) ; 5
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 5
-; [then-branch 77] -1 == index@29
-(assert (= (- 0 1) index@29))
-; [eval] (forall i2: Int :: 0 <= i2 && i2 < |xs| ==> xs[i2] != key)
-(declare-const i2@40 Int)
-(push) ; 6
-; [eval] 0 <= i2 && i2 < |xs| ==> xs[i2] != key
-; [eval] 0 <= i2 && i2 < |xs|
-; [eval] 0 <= i2
-; [eval] 0 <= i2 ==> i2 < |xs|
-; [eval] 0 <= i2
-(push) ; 7
-(push) ; 8
-(assert (not (not (<= 0 i2@40))))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-(assert (not (<= 0 i2@40)))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-; [then-branch 78] 0 <= i2@40
-(assert (<= 0 i2@40))
-; [eval] i2 < |xs|
-; [eval] |xs|
-(pop) ; 8
-(push) ; 8
-; [else-branch 78] !0 <= i2@40
-(assert (not (<= 0 i2@40)))
-(pop) ; 8
-(pop) ; 7
-; Joined path conditions
-; Joined path conditions
-(push) ; 7
-(push) ; 8
-(assert (not (not (and (<= 0 i2@40) (implies (<= 0 i2@40) (< i2@40 ($Seq.length xs@15)))))))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-(assert (not (and (<= 0 i2@40) (implies (<= 0 i2@40) (< i2@40 ($Seq.length xs@15))))))
-(check-sat)
-; unknown
-(pop) ; 8
-; 0,00s
-; (get-info :all-statistics)
-(push) ; 8
-; [then-branch 79] 0 <= i2@40 && 0 <= i2@40 ==> i2@40 < |xs@15|
-(assert (and (<= 0 i2@40) (implies (<= 0 i2@40) (< i2@40 ($Seq.length xs@15)))))
-; [eval] xs[i2] != key
-; [eval] xs[i2]
-(pop) ; 8
-(push) ; 8
-; [else-branch 79] !0 <= i2@40 && 0 <= i2@40 ==> i2@40 < |xs@15|
-(assert (not (and (<= 0 i2@40) (implies (<= 0 i2@40) (< i2@40 ($Seq.length xs@15))))))
-(pop) ; 8
-(pop) ; 7
-; Joined path conditions
-; Joined path conditions
-(pop) ; 6
-; Nested auxiliary terms
-(pop) ; 5
-(push) ; 5
-; [else-branch 77] -1 != index@29
-(assert (not (= (- 0 1) index@29)))
-(pop) ; 5
-(pop) ; 4
-; Joined path conditions
 ; Joined path conditions
 (set-option :timeout 0)
 (push) ; 4
-(assert (not (implies
-  (= (- 0 1) index@29)
-  (forall ((i2@40 Int)) (!
-    (implies
-      (and (<= 0 i2@40) (implies (<= 0 i2@40) (< i2@40 ($Seq.length xs@15))))
-      (not (= ($Seq.index xs@15 i2@40) key@16)))
-    :pattern (($Seq.index xs@15 i2@40))
-    :qid |prog.l33|)))))
+(assert (not (< 0 ($Seq.length $t@7))))
 (check-sat)
-; unsat
+; unknown
 (pop) ; 4
 ; 0,00s
 ; (get-info :all-statistics)
-(assert (implies
-  (= (- 0 1) index@29)
-  (forall ((i2@40 Int)) (!
-    (implies
-      (and (<= 0 i2@40) (implies (<= 0 i2@40) (< i2@40 ($Seq.length xs@15))))
-      (not (= ($Seq.index xs@15 i2@40) key@16)))
-    :pattern (($Seq.index xs@15 i2@40))
-    :qid |prog.l33|))))
+; [eval] 0 <= index && index < |this.SortedList_Elements|
+; [eval] 0 <= index
+; [eval] 0 <= index ==> index < |this.SortedList_Elements|
+; [eval] 0 <= index
+(push) ; 4
+(set-option :timeout 250)
+(push) ; 5
+(assert (not false))
+(check-sat)
+; unknown
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 5
+; [then-branch 6] True
+; [eval] index < |this.SortedList_Elements|
+; [eval] |this.SortedList_Elements|
+(pop) ; 5
+; [dead else-branch 6] False
+(pop) ; 4
+; Joined path conditions
+(set-option :timeout 0)
+(push) ; 4
+(assert (not (< 0 ($Seq.length $t@7))))
+(check-sat)
+; unknown
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
 (pop) ; 3
+(pop) ; 2
+(pop) ; 1
+; ---------- SortedList_init ----------
+(declare-const this@15 $Ref)
+(push) ; 1
+(push) ; 2
+(assert (not (= this@15 $Ref.null)))
+(declare-const $t@16 $Seq<Int>)
+(pop) ; 2
+(push) ; 2
+; [exec]
+; this := new(SortedList_Elements, arrayContents)
+(declare-const this@17 $Ref)
+(assert (not (= this@17 $Ref.null)))
+(declare-const SortedList_Elements@18 $Seq<Int>)
+(declare-const arrayContents@19 $Seq<Int>)
 (pop) ; 2
 (pop) ; 1

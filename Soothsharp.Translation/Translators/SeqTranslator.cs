@@ -47,10 +47,18 @@ namespace Soothsharp.Translation
             }
             else
             {
-                result = new SimpleSequenceSilvernode(originalNode,
-                   "Seq(",
-                   string.Join(", ", silvernodes),
-                   ")");
+                List<Silvernode> args = new List<Trees.Silver.Silvernode>();
+                args.Add("Seq(");
+                for (int i = 0; i < silvernodes.Count; i++)
+                {
+                    args.Add(silvernodes[i]);
+                    if (i != silvernodes.Count - 1)
+                    {
+                        args.Add(", ");
+                    }
+                }
+                args.Add(")");
+                result = new SimpleSequenceSilvernode(originalNode, args.ToArray());
             }
             return TranslationResult.FromSilvernode(result, errors);
         }
