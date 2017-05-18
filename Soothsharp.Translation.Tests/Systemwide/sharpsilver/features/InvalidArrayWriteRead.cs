@@ -10,7 +10,7 @@ using static Soothsharp.Contracts.Contract;
 
 namespace Soothsharp.Translation.Tests.Syntax.Arrays
 {
-    static class InvalidArrayWriteRead
+    class InvalidArrayWriteRead
     {
         public static void ModifyArray(int[] array)
         {
@@ -18,6 +18,7 @@ namespace Soothsharp.Translation.Tests.Syntax.Arrays
             Contract.Requires(array.Length == 2);
 
             int invalidRead = array[8];
+            InvalidArrayWriteRead[] d = new InvalidArrayWriteRead[] {null};
             array[16] = 50;
         }
     }
