@@ -8,26 +8,52 @@ using static Soothsharp.Contracts.Contract;
 
 namespace Soothsharp.Examples.Algorithms
 {
+    /// <summary>
+    /// Contains some search-related algorithms.
+    /// </summary>
     public static class Search
     {
-
-
         /// <summary>
-        /// Gets the smallest integer in the sequence.
+        /// Gets the smallest integer in the sequence. Requires the sequence to contain at least one integer.
         /// </summary>
         /// <param name="xs">The sequence to search.</param>
+        /// <remarks>
+        /// Source: Original for Soothsharp.
+        /// </remarks>
         public static int GetSmallestNumber(Seq<int> xs)
         {
-            throw new NotImplementedException();
+            Contract.Requires(xs.Length >= 1);
+            Contract.Ensures(xs.Contains(Contract.IntegerResult));
+            Contract.Ensures(ForAll((i) => (0 <= i && i < xs.Length).Implies(xs[i] >= Contract.IntegerResult)));
+
+            int smallest = xs[0];
+
+            for (int index = 1; index < xs.Length; index++)
+            {
+                Contract.Invariant(xs.Contains(smallest));
+                Contract.Invariant(index >= 0);
+                Contract.Invariant(ForAll((i) => (0 <= i && i < index).Implies(xs[i] >= smallest)));
+
+                int current = xs[index];
+                if (current < smallest)
+                {
+                    smallest = current;
+                }
+            }
+
+            return smallest;
         }
 
-         /// <summary>
-         /// Searches a sorted sequence of integers for a value. If the value is found, this method returns
-         /// the index of the value in the sequence. If the value is not present, the method returns -1.
-         /// </summary>
-         /// <param name="xs">The sorted immutable sequence of integers.</param>
-         /// <param name="key">The value to search for in the sequence.</param>
-         /// <returns>Index of the value in the sequence, or -1 if the value is not present.</returns>
+        /// <summary>
+        /// Searches a sorted sequence of integers for a value. If the value is found, this method returns
+        /// the index of the value in the sequence. If the value is not present, the method returns -1.
+        /// </summary>
+        /// <param name="xs">The sorted immutable sequence of integers.</param>
+        /// <param name="key">The value to search for in the sequence.</param>
+        /// <returns>Index of the value in the sequence, or -1 if the value is not present.</returns>
+        /// <remarks>
+        /// Source: http://viper.ethz.ch/examples/binary-search-seq.html
+        /// </remarks>
         public static int BinarySearch(Seq<int> xs, int key)
         {
             // As a precondition, we assume the sequence is sorted:

@@ -15,9 +15,19 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
         public override TranslationResult Translate(TranslationContext context)
         {
             var expressionResult = this.InnerExpression.Translate(context);
-            return TranslationResult.FromSilvernode(
-                new ParenthesizedExpressionSilvernode(expressionResult.Silvernode as ExpressionSilvernode, this.OriginalNode),
-                expressionResult.Errors);
+            if (expressionResult.Silvernode is ExpressionSilvernode)
+            {
+                return TranslationResult.FromSilvernode(
+                    new ParenthesizedExpressionSilvernode(expressionResult.Silvernode as ExpressionSilvernode,
+                        this.OriginalNode),
+                    expressionResult.Errors);
+            }
+            else
+            {
+                return TranslationResult.FromSilvernode(
+                     expressionResult.Silvernode,
+                    expressionResult.Errors);
+            }
         }
     }
 }

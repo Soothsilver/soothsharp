@@ -11,7 +11,7 @@ namespace Soothsharp.Examples.Algorithms
     /// <summary>
     /// A verifiably sorted list of integers.
     /// </summary>
-    public class SortedList
+    public class SortedListIssue
     {
         /// <summary>
         /// Gets the list of integers in the list, in ascending order.
@@ -21,7 +21,7 @@ namespace Soothsharp.Examples.Algorithms
         /// <summary>
         /// Initializes the sorted list. It will start out empty.
         /// </summary>
-        public SortedList()
+        public SortedListIssue()
         {
             Elements = new Seq<int>();
         }

@@ -59,6 +59,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\ArithmeticTests.cs" />
+    <Compile Include="Algorithms\GraphTests.cs" />
+    <Compile Include="Algorithms\SearchTests.cs" />
+    <Compile Include="Algorithms\SeqUtilsTests.cs" />
+    <Compile Include="Algorithms\SortedListTests.cs" />
+    <Compile Include="Algorithms\SortingTests.cs" />
+    <Compile Include="Algorithms\TupleTests.cs" />
     <Compile Include="CompareTest.cs" />
     <Compile Include="Syntax\Abstract\SimpleAbstractPredicate.cs" />
     <Compile Include="Systemwide\sharpsilver\features\InvalidArrayWriteRead.cs" />
@@ -78,6 +85,7 @@
     <Compile Include="Systemwide\scala2silver\translation\Constructors.cs" />
     <Compile Include="Systemwide\scala2silver\translation\Constants.cs" />
     <Compile Include="Systemwide\sharpsilver\issues\Arithmetic.cs" />
+    <Compile Include="Systemwide\sharpsilver\issues\ReturnPrepending.cs" />
     <Compile Include="Systemwide\sharpsilver\issues\Search.cs" />
     <Compile Include="Systemwide\sharpsilver\issues\SeqParam.cs" />
     <Compile Include="Systemwide\sharpsilver\issues\Sort.cs" />
@@ -116,6 +124,10 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Examples\Examples.csproj">
+      <Project>{97bb8bd6-2390-4f16-b4e5-9f1ac9921d11}</Project>
+      <Name>Examples</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Soothsharp.Contracts\Soothsharp.Contracts.csproj">
       <Project>{b2ff4360-c774-41ce-98fc-60494f6efc60}</Project>
       <Name>Soothsharp.Contracts</Name>

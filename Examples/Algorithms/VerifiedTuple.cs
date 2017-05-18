@@ -10,12 +10,12 @@ namespace Soothsharp.Examples.Algorithms
     /// <summary>
     /// Represents two related integers.
     /// </summary>
-    public class Tuple
+    public class VerifiedTuple
     {
         public int First;
         public int Second;
 
-        public Tuple(int first, int second)
+        public VerifiedTuple(int first, int second)
         {
             Ensures(Acc(First) && Acc(Second));
 

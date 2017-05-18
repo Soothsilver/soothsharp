@@ -31,6 +31,9 @@ namespace Soothsharp.Examples.Algorithms
         /// </summary>
         /// <param name="element">The integer to add to the list.</param>
         /// <returns>Index of the new element that this method adds to the list.</returns>
+        /// <remarks>
+        /// Source: http://viper.ethz.ch/examples/sorted-list-immutable-sequence.html
+        /// </remarks>
         public int Insert(int element)
         {
             Requires(Acc(Elements) &&

@@ -46,7 +46,7 @@
     <Compile Include="Algorithms\SeqUtils.cs" />
     <Compile Include="Algorithms\SortedList.cs" />
     <Compile Include="Algorithms\Sorting.cs" />
-    <Compile Include="Algorithms\Tuple.cs" />
+    <Compile Include="Algorithms\VerifiedTuple.cs" />
     <Compile Include="Multifile\Assume_Main.cs" />
     <Compile Include="Multifile\Assume_Side.cs" />
     <Compile Include="Multifile\Multiple_Main.cs" />

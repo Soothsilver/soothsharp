@@ -8,7 +8,7 @@ using static Soothsharp.Contracts.Contract;
 
 namespace Soothsharp.Examples.Algorithms
 {
-    public static class Search
+    public static class SearchIssue
     {    /// <summary>
          /// Searches a sorted sequence of integers for a value. If the value is found, this method returns
          /// the index of the value in the sequence. If the value is not present, the method returns -1.
