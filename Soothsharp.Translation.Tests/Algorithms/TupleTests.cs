@@ -10,6 +10,7 @@ namespace Soothsharp.Translation.Tests.Algorithms
 {
     public class TupleTests
     {
+        [Fact]
         public void Test()
         {
             VerifiedTuple t = new VerifiedTuple(10, 20);

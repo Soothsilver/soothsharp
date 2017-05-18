@@ -11,6 +11,11 @@ namespace Soothsharp.Examples.Algorithms
     {
         public Seq<Node> AdjacentNodes;
 
+        public Node()
+        {
+            this.AdjacentNodes = new Seq<Algorithms.Node>();
+        }
+
         public Node(Seq<Node> neighbours)
         {
             this.AdjacentNodes = neighbours;

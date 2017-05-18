@@ -10,7 +10,7 @@ namespace Soothsharp.Contracts
     /// Represents a finite immutable mathematical sequence of objects. This class is translated into Viper as Viper's Seq type.
     /// </summary>
     /// <typeparam name="T">Type of the objects in the sequence</typeparam>
-    public class Seq<T>
+    public class Seq<T> where T : new()
     {
         private List<T> list = new List<T>(1);
 
@@ -21,6 +21,11 @@ namespace Soothsharp.Contracts
         public Seq(params T[] elements)
         {
             list = new List<T>(elements);
+        }
+
+        public Seq()
+        {
+            list = new List<T>();
         }
 
         /// <summary>
@@ -77,7 +82,7 @@ namespace Soothsharp.Contracts
         /// Gets the item at the specified index.
         /// </summary>
         /// <param name="index">The index.</param>
-        public T this[int index] => list[index];
+        public T this[int index] => (index >= 0 && list.Count > index) ? list[index] : new T();
 
         /// <summary>
         /// Concatenates two sequences.

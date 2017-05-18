@@ -10,6 +10,7 @@ namespace Soothsharp.Translation.Tests.Algorithms
 {
     public class ArithmeticTests
     {
+        [Fact]
         public void MaxTest()
         {
             Assert.Equal(2, Arithmetic.Max(2, 1));
@@ -17,6 +18,7 @@ namespace Soothsharp.Translation.Tests.Algorithms
             Assert.Equal(3, Arithmetic.Max(3, -8));
         }
 
+        [Fact]
         public void MinTest()
         {
             Assert.Equal(-4, Arithmetic.Min(7, -4));
@@ -24,6 +26,7 @@ namespace Soothsharp.Translation.Tests.Algorithms
             Assert.Equal(2, Arithmetic.Min(2, 4));
         }
 
+        [Fact]
         public void AbsTest()
         {
             Assert.Equal(4, Arithmetic.Abs(-4));

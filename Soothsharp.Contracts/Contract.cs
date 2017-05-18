@@ -22,9 +22,9 @@ namespace Soothsharp.Contracts
         /// </summary>
         /// <typeparam name="T">Return type of the method.</typeparam>
         /// <returns>Value returned by the method.</returns>
-        public static T Result<T>()
+        public static T Result<T>() where T : new()
         {
-            return default(T);
+            return new T();
         }
 
         /// <summary>
@@ -33,9 +33,9 @@ namespace Soothsharp.Contracts
         /// <typeparam name="T">Type of the variable.</typeparam>
         /// <param name="value">Variable whose value at start of method should be returned.</param>
         /// <returns>Value of the variable as it was at start of method.</returns>
-        public static T Old<T>(T value)
+        public static T Old<T>(T value) where T : new()
         {
-            return default(T);
+            return new T();
         }
 
         /// <summary>

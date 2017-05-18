@@ -10,6 +10,7 @@ namespace Soothsharp.Translation.Tests.Algorithms
 {
     public class SeqUtilsTests
     {
+        [Fact]
         public void TransformTest()
         {
             Assert.Equal(2, SeqUtils.ArrayToSeq(new[] {1, 8}).Length);
