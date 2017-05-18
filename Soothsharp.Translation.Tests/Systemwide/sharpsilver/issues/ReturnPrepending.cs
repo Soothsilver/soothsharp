@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Soothsharp.Contracts;
 
-namespace Soothsharp.Translation.Tests.Systemwide.sharpsilver.issues
+namespace Soothsharp.Translation.Tests
 {
     public static class SeqUtilsIssue
     {

@@ -9,7 +9,7 @@ using Soothsharp.Translation.Backends;
 
 // ReSharper disable RedundantDefaultMemberInitializer
 
-namespace Soothsharp.Cs2Sil
+namespace Soothsharp.Frontend
 {
     /// <summary>
     /// This class is compiled into the csverify.exe executable which takes C# code files, produces Silver files and verifies them for formal correctness. 

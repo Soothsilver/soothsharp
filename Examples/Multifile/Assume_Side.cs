@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Soothsharp.Contracts;
 using static Soothsharp.Contracts.Contract;
 
-namespace Soothsharp.Csverify.Multifile
+namespace Soothsharp.Examples.Multifile
 {
     class Assume_Side
     {

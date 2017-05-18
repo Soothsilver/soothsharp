@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sharpsilTesting
+namespace Soothsharp.Translation.Tests
 {
     [Verified]
     static class SimplePostcondition

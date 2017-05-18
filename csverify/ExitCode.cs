@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soothsharp.Cs2Sil
+namespace Soothsharp.Frontend
 {
     /// <summary>
     /// Represents the return code of a csverify.exe execution
