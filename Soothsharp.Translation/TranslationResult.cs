@@ -39,6 +39,13 @@ namespace Soothsharp.Translation
             r.Errors.Add(new Error(diagnostic, node,diagnosticArguments));
             return r;
         }
+        public static TranslationResult Error(Error error)
+        {
+            TranslationResult r = new TranslationResult();
+            r.Silvernode = new ErrorSilvernode(error.Node);
+            r.Errors.Add(error);
+            return r;
+        }
 
         public TranslationResult AndPrepend(params StatementSilvernode[] silvernodes)
         {

@@ -1,7 +1,7 @@
 (get-info :version)
 ; (:version "4.4.1")
-; Input file is C:\Users\Soothsilver\AppData\Local\Temp\tmp2078.tmp
-; Started: 2017-05-17 23:59:31
+; Input file is C:\Users\Soothsilver\AppData\Local\Temp\tmp919D.tmp
+; Started: 2017-05-18 07:14:08
 ; Silicon.buildVersion: 1.1-SNAPSHOT 0e750e485a3f default 2017/01/04 14:11:46
 ; ------------------------------------------------------------
 ; Preamble start
@@ -414,122 +414,46 @@
     )))
 ; Preamble end
 ; ------------------------------------------------------------
-; ---------- BasicTest_ModifyArray ----------
+; ---------- InvalidArrayWriteRead_ModifyArray ----------
 (declare-const array@0 $Ref)
-(declare-const f@1 Int)
-(declare-const s@2 Int)
+(declare-const invalidRead@1 Int)
 (push) ; 1
-(declare-const $t@3 $Snap)
-(declare-const $t@4 $Seq<Int>)
-(assert (= $t@3 ($Snap.combine ($SortWrappers.$Seq<Int>To$Snap $t@4) $Snap.unit)))
+(declare-const $t@2 $Snap)
+(declare-const $t@3 $Seq<Int>)
+(assert (= $t@2 ($Snap.combine ($SortWrappers.$Seq<Int>To$Snap $t@3) $Snap.unit)))
 (assert (not (= array@0 $Ref.null)))
-; [eval] |array.arrayContents| >= 2
+; [eval] |array.arrayContents| == 2
 ; [eval] |array.arrayContents|
-(assert (>= ($Seq.length $t@4) 2))
+(assert (= ($Seq.length $t@3) 2))
 (push) ; 2
 (pop) ; 2
 (push) ; 2
 ; [exec]
-; f := array.arrayContents[0]
-; [eval] array.arrayContents[0]
+; invalidRead := array.arrayContents[8]
+; [eval] array.arrayContents[8]
 ; [exec]
-; s := array.arrayContents[1]
-; [eval] array.arrayContents[1]
+; assert 16 >= 0
+; [eval] 16 >= 0
 ; [exec]
-; assert 0 >= 0
-; [eval] 0 >= 0
-; [exec]
-; assert 0 < |array.arrayContents|
-; [eval] 0 < |array.arrayContents|
+; assert 16 < |array.arrayContents|
+; [eval] 16 < |array.arrayContents|
 ; [eval] |array.arrayContents|
 (set-option :timeout 0)
 (push) ; 3
-(assert (not (< 0 ($Seq.length $t@4))))
+(assert (not (< 16 ($Seq.length $t@3))))
 (check-sat)
-; unsat
+; unknown
 (pop) ; 3
-; 0,01s
+; 0,00s
 ; (get-info :all-statistics)
-(assert (< 0 ($Seq.length $t@4)))
-; [exec]
-; array.arrayContents := array.arrayContents[..0] ++ Seq(s) ++ array.arrayContents[0 + 1..]
-; [eval] array.arrayContents[..0] ++ Seq(s) ++ array.arrayContents[0 + 1..]
-; [eval] array.arrayContents[..0] ++ Seq(s)
-; [eval] array.arrayContents[..0]
-; [eval] Seq(s)
-(assert (= ($Seq.length ($Seq.singleton ($Seq.index $t@4 1))) 1))
-; [eval] array.arrayContents[0 + 1..]
-; [eval] 0 + 1
-; [exec]
-; assert 1 >= 0
-; [eval] 1 >= 0
-; [exec]
-; assert 1 < |array.arrayContents|
-; [eval] 1 < |array.arrayContents|
+; [eval] 16 < |array.arrayContents|
 ; [eval] |array.arrayContents|
 (push) ; 3
-(assert (not (<
-  1
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append ($Seq.take $t@4 0) ($Seq.singleton ($Seq.index $t@4 1)))
-      ($Seq.drop $t@4 1))))))
-(check-sat)
-; unsat
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(assert (<
-  1
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append ($Seq.take $t@4 0) ($Seq.singleton ($Seq.index $t@4 1)))
-      ($Seq.drop $t@4 1)))))
-; [exec]
-; array.arrayContents := array.arrayContents[..1] ++ Seq(f) ++ array.arrayContents[1 + 1..]
-; [eval] array.arrayContents[..1] ++ Seq(f) ++ array.arrayContents[1 + 1..]
-; [eval] array.arrayContents[..1] ++ Seq(f)
-; [eval] array.arrayContents[..1]
-; [eval] Seq(f)
-(assert (= ($Seq.length ($Seq.singleton ($Seq.index $t@4 0))) 1))
-; [eval] array.arrayContents[1 + 1..]
-; [eval] 1 + 1
-; [exec]
-; assert f == s
-; [eval] f == s
-(push) ; 3
-(assert (not (= ($Seq.index $t@4 0) ($Seq.index $t@4 1))))
+(assert (not (< 16 ($Seq.length $t@3))))
 (check-sat)
 ; unknown
 (pop) ; 3
 ; 0,00s
 ; (get-info :all-statistics)
-; [eval] f == s
-(push) ; 3
-(assert (not (= ($Seq.index $t@4 0) ($Seq.index $t@4 1))))
-(check-sat)
-; unknown
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(pop) ; 2
-(pop) ; 1
-; ---------- BasicTest_Main ----------
-(declare-const array2@5 $Ref)
-(declare-const read@6 Int)
-(push) ; 1
-(push) ; 2
-(pop) ; 2
-(push) ; 2
-; [exec]
-; array2 := null
-; [exec]
-; read := array2.arrayContents[2]
-; [eval] array2.arrayContents[2]
-(set-option :timeout 250)
-(check-sat)
-; unknown
-(check-sat)
-; unknown
 (pop) ; 2
 (pop) ; 1

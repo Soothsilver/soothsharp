@@ -156,6 +156,12 @@ namespace Soothsharp.Translation
                     return new InvocationExpressionSharpnode(expression as InvocationExpressionSyntax);
                 case SyntaxKind.ObjectCreationExpression:
                     return new ObjectCreationExpressionSharpnode(expression as ObjectCreationExpressionSyntax);
+                case SyntaxKind.ArrayCreationExpression:
+                    return new ArrayCreationSharpnode(expression as ArrayCreationExpressionSyntax);
+                case SyntaxKind.ArrayInitializerExpression:
+                    return new ArrayCreationSharpnode(expression as InitializerExpressionSyntax);
+                case SyntaxKind.ImplicitArrayCreationExpression:
+                    return new ArrayCreationSharpnode(expression as ImplicitArrayCreationExpressionSyntax);
 
                 // Keywords
                 case SyntaxKind.ThisExpression:

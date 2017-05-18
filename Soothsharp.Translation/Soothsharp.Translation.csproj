@@ -116,6 +116,7 @@
     <Compile Include="TranslationProcessResult.cs" />
     <Compile Include="Translators\SubroutineBuilder.cs" />
     <Compile Include="Trees\CommonUtils.cs" />
+    <Compile Include="Trees\CSharp\Expressions\ArrayCreationSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\DiagnosticExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\DirectSilvercodeExpressionSharpnode.cs" />
     <Compile Include="Trees\CSharp\Expressions\ElementAccessSharpnode.cs" />
