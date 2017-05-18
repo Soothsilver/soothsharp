@@ -24,6 +24,10 @@ namespace Soothsharp.Examples.Algorithms
         public SortedList()
         {
             Elements = new Seq<int>();
+
+
+            Ensures(Acc(Elements));
+            Ensures(Elements.Length == 0);
         }
 
         /// <summary>
@@ -45,6 +49,8 @@ namespace Soothsharp.Examples.Algorithms
             Ensures(0 <= IntegerResult && IntegerResult <= Old(Elements.Length));
             Ensures(Elements ==
                     Old(Elements).Take(IntegerResult) + new Seq<int>(element) + Old(Elements).Drop(IntegerResult));
+            Ensures(Elements.Contains(element));
+            Ensures(ForAll(i => Old(Elements).Contains(i).Implies(Elements.Contains(i))));
 
             int index = 0;
             while (index < Elements.Length && Elements[index] < element)

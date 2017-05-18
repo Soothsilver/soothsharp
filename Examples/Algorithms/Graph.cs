@@ -4,39 +4,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Soothsharp.Contracts;
+using static Soothsharp.Contracts.Contract;
+using static Soothsharp.Contracts.Permission;
 
 namespace Soothsharp.Examples.Algorithms
 {
-    class Node
+    public class Node
     {
-        public Seq<Node> AdjacentNodes;
+        public Node Next;
 
-        public Node()
+        [Predicate]
+        public static bool AccessAllTree(Node self, Node end)
         {
-            this.AdjacentNodes = new Seq<Algorithms.Node>();
+            return (self != end).Implies( Acc(self.Next) && Acc(AccessAllTree(self.Next, end)));
         }
 
-        public Node(Seq<Node> neighbours)
+        [Pure]
+        public bool CanReachOneBeforeTheOther(Node target, Node finalStop)
+        { 
+            Contract.Requires(AccessAllTree(this, finalStop));
+
+            return Unfolding(Acc(AccessAllTree(this, finalStop)), this == target ? true : (this == finalStop ? false : Next.CanReachOneBeforeTheOther(target, finalStop)));
+        }
+
+        /*
+        [Predicate]
+        public static bool Good(Node node)
         {
-            this.AdjacentNodes = neighbours;
+            return Acc(node.Bottom) && Acc(node.Right);
         }
 
         /// <summary>
         /// Determines whether it's possible to reach the target node from this node.
         /// </summary>
         /// <param name="target">The target to reach.</param>
+        [Pure]
         public bool CanReachNode(Node target)
         {
-            throw new NotImplementedException();
-        }
+            Requires(Good(this));
 
-        /// <summary>
-        /// Gets the number of nodes that must be traversed in order to reach the target from this node, including the target.
-        /// </summary>
-        /// <param name="target">The target.</param>
-        public int DistanceToNode(Node target)
-        {
-            throw new NotImplementedException();
-        }
+
+            Ensures(Unfolding(Good(this), (Bottom != null && Bottom.CanReachNode(target)))); //|| (Right != null && Right.CanReachNode(target)) || this == target);
+
+            return true; //(Bottom != null && Bottom.CanReachNode(target)) || (Right != null && Right.CanReachNode(target)) ||
+                   //this == target;
+        }*/
     }
 }
