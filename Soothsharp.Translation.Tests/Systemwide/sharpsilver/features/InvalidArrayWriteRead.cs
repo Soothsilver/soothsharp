@@ -18,7 +18,6 @@ namespace Soothsharp.Translation.Tests.Syntax.Arrays
             Contract.Requires(array.Length == 2);
 
             int invalidRead = array[8];
-            InvalidArrayWriteRead[] d = new InvalidArrayWriteRead[] {null};
             array[16] = 50;
         }
     }

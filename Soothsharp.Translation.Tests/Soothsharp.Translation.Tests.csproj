@@ -67,7 +67,9 @@
     <Compile Include="Algorithms\SortingTests.cs" />
     <Compile Include="Algorithms\TupleTests.cs" />
     <Compile Include="CompareTest.cs" />
-    <Compile Include="Compare\Simple\Simple.cs" />
+    <Compile Include="Compare\Simple\Simple.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Syntax\Abstract\SimpleAbstractPredicate.cs" />
     <Compile Include="Systemwide\sharpsilver\features\InvalidArrayWriteRead.cs" />
     <Compile Include="Systemwide\sharpsilver\features\ArraysTest.cs" />
@@ -84,7 +86,9 @@
     </Compile>
     <Compile Include="Syntax\Basic\MethodCall.cs" />
     <Compile Include="Systemwide\scala2silver\translation\Constructors.cs" />
-    <Compile Include="Systemwide\scala2silver\translation\Constants.cs" />
+    <Compile Include="Systemwide\scala2silver\basic\Constants.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Systemwide\sharpsilver\issues\Arithmetic.cs" />
     <Compile Include="Systemwide\sharpsilver\issues\ReturnPrepending.cs" />
     <Compile Include="Systemwide\sharpsilver\issues\Search.cs" />
@@ -140,7 +144,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Compare\Simple\Simple.vpr" />
+    <None Include="Compare\Simple\Simple.vpr">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

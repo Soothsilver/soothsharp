@@ -5,48 +5,48 @@ using System.Text;
 using System.Threading.Tasks;
 using Soothsharp.Contracts;
 
-namespace Soothsharp.Examples.Algorithms
+namespace Soothsharp.Tests.Examples.Algorithms
 {
-    public static class IssueInArithmetic
+    public static class Arithmetic
     {
         /// <summary>
-        /// Returns the greater of two numbers.
+        /// [Pure] Returns the greater of two numbers.
         /// </summary>
         /// <param name="a">The first number to compare.</param>
         /// <param name="b">The second number to compare.</param>
         /// <returns>The greater number.</returns>
+        [Pure]
         public static int Max(int a, int b)
         {
             Contract.Ensures(a > b ? Contract.IntegerResult == a : Contract.IntegerResult == b);
 
-            if (a < b)
-            {
-                return b;
-            }
-            else
-            {
-                return a;
-            }
+            return a < b ? b : a;
         }
 
         /// <summary>
-        /// Returns the lesser of two numbers.
+        /// [Pure] Returns the lesser of two numbers.
         /// </summary>
         /// <param name="a">The first number to compare.</param>
         /// <param name="b">The second number to compare.</param>
         /// <returns>The lesser number.</returns>
+        [Pure]
         public static int Min(int a, int b)
         {
             Contract.Ensures(a < b ? Contract.IntegerResult == a : Contract.IntegerResult == b);
+            return a == Max(a, b) ? b : a;
+        }
 
-            if (a == Max(a, b))
-            {
-                return b;
-            }
-            else
-            {
-                return a;
-            }
+        /// <summary>
+        /// [Pure] Gets the absolute value of an integer.
+        /// </summary>
+        /// <param name="number">The integer.</param>
+        [Pure]
+        public static int Abs(int number)
+        {
+            Contract.Ensures(number > 0 ? Contract.IntegerResult == number : Contract.IntegerResult == -number);
+            Contract.Ensures(Contract.IntegerResult >= 0);
+
+            return (number > 0 ? number : -number);
         }
     }
 }

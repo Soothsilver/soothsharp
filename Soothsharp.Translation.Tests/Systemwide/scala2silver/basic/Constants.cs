@@ -26,6 +26,7 @@ namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.translation
             return b != null && 3 < 5;
         }
 
+        [Unverified]
         public void Main()
         {
             Fold(Acc(P(), Permission.Write));
