@@ -29,6 +29,15 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
             var left = this.Left.Translate(context);
             var right = this.Right.Translate(context);
             IEnumerable<Error> errors = CommonUtils.CombineErrors(left, right);
+
+            // Special case for Contract.Truth:
+            if (this.Operator == "&&" &&
+                left.Silvernode != null && left.Silvernode.ToString().Trim() == "true")
+            {
+                return TranslationResult.FromSilvernode(right.Silvernode, errors);
+            }
+
+
             return TranslationResult.FromSilvernode(new BinaryExpressionSilvernode(left.Silvernode, operatorName, right.Silvernode, this.OriginalNode), errors);
         }
     }
