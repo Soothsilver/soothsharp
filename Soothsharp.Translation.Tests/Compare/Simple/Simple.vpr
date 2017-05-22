@@ -12,4 +12,9 @@ method Simple_Test2 (x : Int) returns (res : Int)
 field arrayContents : Seq[Int]
 define arrayAccessPermission(array) acc(array.arrayContents)
 define arrayWrite(array, index, value) { assert index >= 0; assert index < |array.arrayContents|; array.arrayContents := array.arrayContents[..index] ++ Seq(value) ++ array.arrayContents[(index+1)..]; }
-define arrayRead(array, index) array.arrayContents[index]
+function arrayRead(array : Ref, index : Int) : Int
+    requires acc(array.arrayContents, wildcard)
+    requires |array.arrayContents| > index
+{
+    array.arrayContents[index]
+}

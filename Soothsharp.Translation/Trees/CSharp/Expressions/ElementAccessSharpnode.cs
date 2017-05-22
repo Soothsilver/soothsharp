@@ -53,17 +53,12 @@ namespace Soothsharp.Translation.Trees.CSharp
                 if (t.Kind == SymbolKind.ArrayType)
                 {
                     // ASSUME READ
-                    var readsilvernode = new SimpleSequenceSilvernode(this.OriginalNode,
-                        container.Silvernode,
-                        ".",
-                        ArraysTranslator.IntegerArrayContents,
-                        "[",
-                        index.Silvernode,
-                        "]");
+                    var readsilvernode = context.Process.ArraysTranslator.ArrayRead(this.OriginalNode, container.Silvernode,
+                        index.Silvernode); 
                     TranslationResult read = TranslationResult.FromSilvernode(readsilvernode, errors);
                     read.Arrays_Container = container;
                     read.Arrays_Index = index;
-                    return read;
+                    return read; 
                 }
                 else
                 {

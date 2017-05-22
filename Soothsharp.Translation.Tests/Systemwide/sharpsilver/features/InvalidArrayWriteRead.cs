@@ -12,12 +12,18 @@ namespace Soothsharp.Translation.Tests.Syntax.Arrays
 {
     class InvalidArrayWriteRead
     {
-        public static void ModifyArray(int[] array)
+        public static void ArrayRead(int[] array)
         {
             Contract.Requires(AccArray(array));
             Contract.Requires(array.Length == 2);
 
             int invalidRead = array[8];
+        }
+        public static void ArrayWrote(int[] array)
+        {
+            Contract.Requires(AccArray(array));
+            Contract.Requires(array.Length == 2);
+            
             array[16] = 50;
         }
     }

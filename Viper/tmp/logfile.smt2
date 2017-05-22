@@ -1,7 +1,7 @@
 (get-info :version)
 ; (:version "4.4.0")
 ; Input file is D:\TEMP\tmpC56E.tmp
-; Started: 2017-05-22 19:36:35
+; Started: 2017-05-22 20:15:29
 ; Silicon.buildVersion: 1.1-SNAPSHOT 0e750e485a3f default 2017/01/04 14:11:46
 ; ------------------------------------------------------------
 ; Preamble start
@@ -78,6 +78,9 @@
 (declare-fun $Set.subset ($Set<$Snap> $Set<$Snap>) Bool)
 (declare-fun $Set.equal ($Set<$Snap> $Set<$Snap>) Bool)
 ; Declaring program functions
+(declare-fun arrayRead ($Snap $Ref Int) Int)
+(declare-fun arrayRead%limited ($Snap $Ref Int) Int)
+(declare-fun arrayRead%stateless ($Ref Int) Bool)
 ; Snapshot variable to be used during function verification
 (declare-fun s@$ () $Snap)
 ; Declaring predicate trigger functions
@@ -414,27 +417,139 @@
     )))
 ; Preamble end
 ; ------------------------------------------------------------
-; ---------- Simple_Test ----------
-(declare-const _tmp1@0 Int)
+; ---------- FUNCTION arrayRead----------
+(declare-fun array@0 () $Ref)
+(declare-fun index@1 () Int)
+(declare-fun result@2 () Int)
+; ----- Well-definedness of specifications -----
 (push) ; 1
+(declare-const $k@3 $Perm)
+(assert ($Perm.isReadVar $k@3 $Perm.Write))
+(assert (<= $Perm.No $k@3))
+(assert (implies (< $Perm.No $k@3) (not (= array@0 $Ref.null))))
+(assert (= ($Snap.second s@$) $Snap.unit))
+; [eval] |array.arrayContents| > index
+; [eval] |array.arrayContents|
+(set-option :timeout 0)
+(push) ; 2
+(assert (not (not (= $k@3 $Perm.No))))
+(check-sat)
+; unsat
+(pop) ; 2
+; 0,00s
+; (get-info :all-statistics)
+(assert (not (= $k@3 $Perm.No)))
+(assert (> ($Seq.length ($SortWrappers.$SnapTo$Seq<Int> ($Snap.first s@$))) index@1))
+(pop) ; 1
+(assert (forall ((s@$ $Snap) (array@0 $Ref) (index@1 Int)) (!
+  (= (arrayRead%limited s@$ array@0 index@1) (arrayRead s@$ array@0 index@1))
+  :pattern ((arrayRead s@$ array@0 index@1))
+  )))
+(assert (forall ((s@$ $Snap) (array@0 $Ref) (index@1 Int)) (!
+  (arrayRead%stateless array@0 index@1)
+  :pattern ((arrayRead%limited s@$ array@0 index@1))
+  )))
+; ---------- FUNCTION arrayRead (verify) ----------
+(push) ; 1
+(assert (> ($Seq.length ($SortWrappers.$SnapTo$Seq<Int> ($Snap.first s@$))) index@1))
+(assert (not (= $k@3 $Perm.No)))
+(assert (= ($Snap.second s@$) $Snap.unit))
+(assert (implies (< $Perm.No $k@3) (not (= array@0 $Ref.null))))
+(assert (<= $Perm.No $k@3))
+(assert ($Perm.isReadVar $k@3 $Perm.Write))
+; [eval] array.arrayContents[index]
+(assert (=
+  result@2
+  ($Seq.index ($SortWrappers.$SnapTo$Seq<Int> ($Snap.first s@$)) index@1)))
+(pop) ; 1
+(assert (forall ((s@$ $Snap) (array@0 $Ref) (index@1 Int)) (!
+  (let ((result@2 (arrayRead%limited s@$ array@0 index@1))) (implies
+    (> ($Seq.length ($SortWrappers.$SnapTo$Seq<Int> ($Snap.first s@$))) index@1)
+    (=
+      (arrayRead s@$ array@0 index@1)
+      ($Seq.index ($SortWrappers.$SnapTo$Seq<Int> ($Snap.first s@$)) index@1))))
+  :pattern ((arrayRead s@$ array@0 index@1))
+  )))
+; ---------- InvalidArrayWriteRead_ArrayRead ----------
+(declare-const array@4 $Ref)
+(declare-const invalidRead@5 Int)
+(push) ; 1
+(declare-const $t@6 $Snap)
+(declare-const $t@7 $Seq<Int>)
+(assert (= $t@6 ($Snap.combine ($SortWrappers.$Seq<Int>To$Snap $t@7) $Snap.unit)))
+(assert (not (= array@4 $Ref.null)))
+; [eval] |array.arrayContents| == 2
+; [eval] |array.arrayContents|
+(assert (= ($Seq.length $t@7) 2))
 (push) ; 2
 (pop) ; 2
 (push) ; 2
 ; [exec]
-; _tmp1 := Simple_Test2(-5)
-; [eval] -5
-; [eval] x > 0
-(set-option :timeout 0)
+; invalidRead := arrayRead(array, 8)
+; [eval] arrayRead(array, 8)
 (push) ; 3
-(assert (not false))
+(declare-const $k@8 $Perm)
+(assert ($Perm.isReadVar $k@8 $Perm.Write))
+(push) ; 4
+(assert (not (or (= $k@8 $Perm.No) true)))
+(check-sat)
+; unsat
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(assert (< $k@8 $Perm.Write))
+; [eval] |array.arrayContents| > 8
+; [eval] |array.arrayContents|
+(push) ; 4
+(assert (not (> ($Seq.length $t@7) 8)))
+(check-sat)
+; unknown
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+; [eval] |array.arrayContents| > 8
+; [eval] |array.arrayContents|
+(push) ; 4
+(assert (not (> ($Seq.length $t@7) 8)))
+(check-sat)
+; unknown
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(pop) ; 3
+(pop) ; 2
+(pop) ; 1
+; ---------- InvalidArrayWriteRead_ArrayWrote ----------
+(declare-const array2@9 $Ref)
+(push) ; 1
+(declare-const $t@10 $Snap)
+(declare-const $t@11 $Seq<Int>)
+(assert (= $t@10 ($Snap.combine ($SortWrappers.$Seq<Int>To$Snap $t@11) $Snap.unit)))
+(assert (not (= array2@9 $Ref.null)))
+; [eval] |array2.arrayContents| == 2
+; [eval] |array2.arrayContents|
+(assert (= ($Seq.length $t@11) 2))
+(push) ; 2
+(pop) ; 2
+(push) ; 2
+; [exec]
+; assert 16 >= 0
+; [eval] 16 >= 0
+; [exec]
+; assert 16 < |array2.arrayContents|
+; [eval] 16 < |array2.arrayContents|
+; [eval] |array2.arrayContents|
+(push) ; 3
+(assert (not (< 16 ($Seq.length $t@11))))
 (check-sat)
 ; unknown
 (pop) ; 3
 ; 0,00s
 ; (get-info :all-statistics)
-; [eval] x > 0
+; [eval] 16 < |array2.arrayContents|
+; [eval] |array2.arrayContents|
 (push) ; 3
-(assert (not false))
+(assert (not (< 16 ($Seq.length $t@11))))
 (check-sat)
 ; unknown
 (pop) ; 3
@@ -442,28 +557,16 @@
 ; (get-info :all-statistics)
 (pop) ; 2
 (pop) ; 1
-; ---------- Simple_Test2 ----------
-(declare-const x@1 Int)
-(declare-const res@2 Int)
+; ---------- InvalidArrayWriteRead_init ----------
+(declare-const this@12 $Ref)
 (push) ; 1
-(declare-const $t@3 $Snap)
-(assert (= $t@3 $Snap.unit))
-; [eval] x > 0
-(assert (> x@1 0))
 (push) ; 2
-(declare-const $t@4 $Snap)
-(assert (= $t@4 $Snap.unit))
-; [eval] res == x * x
-; [eval] x * x
-(assert (= res@2 (* x@1 x@1)))
 (pop) ; 2
 (push) ; 2
 ; [exec]
-; res := x * x
-; [eval] x * x
-(declare-const res@5 Int)
-(assert (= res@5 (* x@1 x@1)))
-; [eval] res == x * x
-; [eval] x * x
+; this := new(arrayContents)
+(declare-const this@13 $Ref)
+(assert (not (= this@13 $Ref.null)))
+(declare-const arrayContents@14 $Seq<Int>)
 (pop) ; 2
 (pop) ; 1

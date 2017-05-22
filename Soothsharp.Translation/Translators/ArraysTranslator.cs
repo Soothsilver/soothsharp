@@ -19,7 +19,12 @@ namespace Soothsharp.Translation.Translators
 field {ArraysTranslator.IntegerArrayContents} : Seq[Int]
 define {ArraysTranslator.IntegerArrayAccess}(array) acc(array.{ArraysTranslator.IntegerArrayContents})
 define {ArraysTranslator.IntegerArrayWrite}(array, index, value) {{ assert index >= 0; assert index < |array.{ArraysTranslator.IntegerArrayContents}|; array.{ArraysTranslator.IntegerArrayContents} := array.{ArraysTranslator.IntegerArrayContents}[..index] ++ Seq(value) ++ array.{ArraysTranslator.IntegerArrayContents}[(index+1)..]; }}
-define {ArraysTranslator.IntegerArrayRead}(array, index) array.{ArraysTranslator.IntegerArrayContents}[index]";
+function {ArraysTranslator.IntegerArrayRead}(array : Ref, index : Int) : Int
+    requires acc(array.{ArraysTranslator.IntegerArrayContents}, wildcard)
+    requires |array.{ArraysTranslator.IntegerArrayContents}| > index
+{{
+    array.{ArraysTranslator.IntegerArrayContents}[index]
+}}";
 
         public bool ArraysWereUsed { get; set; } = true;
         public const string ArrayLength = nameof(System) + "." + nameof(System.Array) + "." + nameof(System.Array.Length);
@@ -38,6 +43,16 @@ define {ArraysTranslator.IntegerArrayRead}(array, index) array.{ArraysTranslator
                 index,
                 ", ",
                 value,
+                ")");
+        }
+
+        public Silvernode ArrayRead(SyntaxNode originalNode, Silvernode containerSilvernode, Silvernode indexSilvernode)
+        {
+            return new SimpleSequenceSilvernode(originalNode,
+                IntegerArrayRead + "(",
+                containerSilvernode,
+                ", ",
+                indexSilvernode,
                 ")");
         }
     }
