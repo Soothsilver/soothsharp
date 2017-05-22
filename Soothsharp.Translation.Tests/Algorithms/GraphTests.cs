@@ -19,8 +19,8 @@ namespace Soothsharp.Translation.Tests.Algorithms
             Node b = new Node();
             Node a = new Node();
             c.Next = finalStop;
-            b.Next = finalStop;
-            a.Next = finalStop;
+            b.Next = c;
+            a.Next = b;
 
             Assert.True(a.CanReachOneBeforeTheOther(c, finalStop));
             Assert.True(b.CanReachOneBeforeTheOther(c, finalStop));

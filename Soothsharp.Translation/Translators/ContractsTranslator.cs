@@ -22,6 +22,7 @@ namespace Soothsharp.Translation
         public const string ContractInhale = ContractsTranslator.ContractsClass + nameof(Contract.Inhale);
         public const string ContractExhale = ContractsTranslator.ContractsClass + nameof(Contract.Exhale);
         private const string ContractIntResult = ContractsTranslator.ContractsClass + nameof(Contract.IntegerResult);
+        public const string ContractTruth = ContractsTranslator.ContractsClass + nameof(Contract.Truth);
         public const string Result = ContractsTranslator.ContractsClass + nameof(Contract.Result);
         public const string Fold = ContractsTranslator.ContractsClass + nameof(Contract.Fold);
         public const string Unfold = ContractsTranslator.ContractsClass + nameof(Contract.Unfold);
@@ -59,6 +60,9 @@ namespace Soothsharp.Translation
             string silvertext = null;
             switch(symbol.GetQualifiedName())
             {
+                case ContractsTranslator.ContractTruth:
+                    silvertext = "true";
+                    break;
                 case ContractsTranslator.ContractIntResult:
                     silvertext = context.IsFunctionOrPredicateBlock ? "result" : Constants.SilverReturnVariableName;
                     break;

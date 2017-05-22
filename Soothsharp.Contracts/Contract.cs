@@ -198,5 +198,14 @@ namespace Soothsharp.Contracts
         {
             return false;
         }
+
+        /// <summary>
+        /// Use this as the first value in a conjunction in a contract to have C# runtime not evaluate that contract. In C#, this will always evaluate to "false". In Viper, however, this will evaluate to "true"
+        /// and allow that contract to function.
+        /// </summary>
+        /// <remarks>
+        /// See the thesis for more details.
+        /// </remarks>
+        public static bool Truth => false;
     }
 }

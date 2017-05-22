@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Soothsharp.Contracts;
 using static Soothsharp.Contracts.Contract;
 using static Soothsharp.Contracts.Permission;
+// ReSharper disable SimplifyConditionalTernaryExpression
 
 namespace Soothsharp.Examples.Algorithms
 {
@@ -22,9 +23,9 @@ namespace Soothsharp.Examples.Algorithms
         [Pure]
         public bool CanReachOneBeforeTheOther(Node target, Node finalStop)
         { 
-            Contract.Requires(AccessAllTree(this, finalStop));
+            Contract.Requires(Truth && AccessAllTree(this, finalStop));
 
-            return Unfolding(Acc(AccessAllTree(this, finalStop)), this == target ? true : (this == finalStop ? false : Next.CanReachOneBeforeTheOther(target, finalStop)));
+            return Unfolding(Truth && Acc(AccessAllTree(this, finalStop)), this == target ? true : (this == finalStop ? false : Next.CanReachOneBeforeTheOther(target, finalStop)));
         }
 
         /*
