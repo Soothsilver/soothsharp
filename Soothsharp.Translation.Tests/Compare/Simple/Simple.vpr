@@ -1,0 +1,10 @@
+﻿method Simple_Test () {
+        var _tmp1 : Int
+        _tmp1 := Simple_Test2 (-5)
+}
+method Simple_Test2 (x : Int) returns (res : Int)
+        requires x > 0
+        ensures res == x * x
+{
+        res := x * x
+}

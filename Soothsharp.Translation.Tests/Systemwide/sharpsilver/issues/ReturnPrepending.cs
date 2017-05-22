@@ -9,9 +9,11 @@ namespace Soothsharp.Translation.Tests
 {
     public static class SeqUtilsIssue
     {
-        public static int[] SeqToArray(Seq<int> sequence)
+        public static Seq<int> ReturnSequence()
         {
-            return new int[] {32};
+            Contract.Ensures(Contract.Result<Seq<int>>().Length == 1);
+
+            return new Seq<int>(20);
         }
     }
 }

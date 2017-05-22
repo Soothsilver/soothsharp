@@ -19,6 +19,10 @@ namespace Soothsharp.Translation.Tests
         [MemberData(nameof(SystemwideTest.GetTestFiles))]
         public void Sys(string test)
         {
+            if (test.Contains("Simple"))
+            {
+
+            }
             string dir = AppDomain.CurrentDomain.BaseDirectory;
             string fullFilename = System.IO.Path.Combine(dir, test);
             string csharpCode = System.IO.File.ReadAllText(fullFilename);
@@ -36,6 +40,7 @@ namespace Soothsharp.Translation.Tests
             var expectedErrorcodes = new List<Tuple<string,int>>();
             bool syntaxOnly = false;
             int lineNumber = 0;
+            IBackend backend = new CarbonNailgunBackend();
             foreach (string line in lines)
             {
                 lineNumber++;
@@ -44,6 +49,20 @@ namespace Soothsharp.Translation.Tests
                 {
                     string[] words = trimmed.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     if (words.Length < 2) continue;
+                    if (words[1] == "use")
+                    {
+                        if (words.Length >= 3)
+                        {
+                            if (words[2] == "silicon")
+                            {
+                                backend = new SiliconNailgunBackend();
+                            }
+                            else if (words[2] == "carbon")
+                            {
+                                backend = new CarbonNailgunBackend();
+                            }
+                        }
+                    }
                     if (words[1] == "syntax") syntaxOnly = true;
                     if (words[1] == "expect" && words.Length >= 3)
                     {
@@ -67,7 +86,6 @@ namespace Soothsharp.Translation.Tests
             var errors = result.Errors;
             if (!syntaxOnly && result.Errors.Count == 0)
             {
-                IBackend backend = new CarbonNailgunBackend();
                 var verificationResult = backend.Verify(result.Silvernode);
                 errors = verificationResult.Errors;
             }

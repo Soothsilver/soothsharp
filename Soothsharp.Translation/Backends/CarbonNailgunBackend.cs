@@ -8,7 +8,7 @@ namespace Soothsharp.Translation.Backends
 {
     public class CarbonNailgunBackend : NailgunBackend
     {
-        public CarbonNailgunBackend() : base("viper.carbon.CarbonRunner")
+        public CarbonNailgunBackend() : base("viper.carbon.Carbon")
         {
         }
     }

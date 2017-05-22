@@ -67,6 +67,7 @@
     <Compile Include="Algorithms\SortingTests.cs" />
     <Compile Include="Algorithms\TupleTests.cs" />
     <Compile Include="CompareTest.cs" />
+    <Compile Include="Compare\Simple\Simple.cs" />
     <Compile Include="Syntax\Abstract\SimpleAbstractPredicate.cs" />
     <Compile Include="Systemwide\sharpsilver\features\InvalidArrayWriteRead.cs" />
     <Compile Include="Systemwide\sharpsilver\features\ArraysTest.cs" />
@@ -139,10 +140,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Compare\Simple\Simple.vpr" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Compare\" />
     <Folder Include="Syntax\Arrays\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
