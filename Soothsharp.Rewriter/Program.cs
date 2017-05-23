@@ -12,6 +12,9 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Soothsharp.Rewriter
 {
+    /// <summary>
+    /// This rewriter program removes all contracts from C# code.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
@@ -45,6 +48,9 @@ namespace Soothsharp.Rewriter
 
         private static void RewriteCode(string input)
         {
+            // Inspiration:
+            // https://github.com/dotnet/roslyn/wiki/Getting-Started-C%23-Syntax-Transformation
+
             CSharpSyntaxTree tree = (CSharpSyntaxTree) CSharpSyntaxTree.ParseText(input);
             var mscorlib = MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location);
             var contractsLibrary = MetadataReference.CreateFromFile(typeof(Contracts.Contract).Assembly.Location);
@@ -82,9 +88,12 @@ namespace Soothsharp.Rewriter
         {
             SemanticModel = model;
         }
-
+        
         public override SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
         {
+            // The first argument of "unfolding" and "folding" is only relevant in Viper code, not in C#, 
+            // the second argument, however, is executable code, so we leave that.
+
             var symbol = SemanticModel.GetSymbolInfo(node.Expression).Symbol;
             var name = symbol.GetQualifiedName();
 
@@ -97,6 +106,8 @@ namespace Soothsharp.Rewriter
         }
         public override SyntaxNode VisitExpressionStatement(ExpressionStatementSyntax node)
         {
+            // Contracts are removed from the syntax tree.
+
             var symbol = SemanticModel.GetSymbolInfo(node.Expression).Symbol;
             var name = symbol.GetQualifiedName();
             if (ForbiddenStatements.Contains(name))
