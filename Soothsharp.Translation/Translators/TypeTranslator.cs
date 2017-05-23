@@ -47,7 +47,7 @@ namespace Soothsharp.Translation
                 case SeqTranslator.SeqClassWithoutEndDot:
                     INamedTypeSymbol namedType = (INamedTypeSymbol)typeSymbol;
                     var firstTypeArgument = namedType.TypeArguments[0];
-                    return SilverType.Seq(TypeTranslator.TranslateType(firstTypeArgument, where, out error));
+                    return SilverType.Seq(TranslateType(firstTypeArgument, where, out error));
                 default:
                     if (typeSymbol.TypeKind == TypeKind.Enum)
                     {

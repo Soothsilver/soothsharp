@@ -5,7 +5,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 {
     public class ParenthesizedExpressionSharpnode : ExpressionSharpnode
     {
-        private ExpressionSharpnode InnerExpression;
+        private readonly ExpressionSharpnode InnerExpression;
 
         public ParenthesizedExpressionSharpnode(ParenthesizedExpressionSyntax syntax) : base(syntax)
         {
@@ -18,7 +18,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
             if (expressionResult.Silvernode is ExpressionSilvernode)
             {
                 return TranslationResult.FromSilvernode(
-                    new ParenthesizedExpressionSilvernode(expressionResult.Silvernode as ExpressionSilvernode,
+                    new ParenthesizedExpressionSilvernode((ExpressionSilvernode) expressionResult.Silvernode,
                         this.OriginalNode),
                     expressionResult.Errors);
             }

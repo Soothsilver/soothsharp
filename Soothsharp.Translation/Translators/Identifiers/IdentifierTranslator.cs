@@ -89,7 +89,7 @@ namespace Soothsharp.Translation
             Constants.CSharpTypeDomain,
             Constants.SilverThis,
             ""
-        }.Union(IdentifierTranslator.silverKeywords).ToList();
+        }.Union(silverKeywords).ToList();
 
         // TODO register local symbols, later on, when import mechanisms and local syntax in Silver are more clear to me
 
@@ -147,7 +147,7 @@ namespace Soothsharp.Translation
                 string baseSilverName = "";
                 if (symbol != null)
                 {
-                    baseSilverName = IdentifierTranslator.Silverize(symbol.GetNameWithoutNamespaces());
+                    baseSilverName = Silverize(symbol.GetNameWithoutNamespaces());
                     if (kvp.Key.Symbol is IParameterSymbol)
                     {
                         baseSilverName = symbol.GetSimpleName();

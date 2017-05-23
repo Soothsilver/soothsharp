@@ -17,7 +17,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions.Invocation
             var expressions = ConvertToSilver(arguments, context);
             this.SilverType = SilverType.Bool;
 
-            List<Silvernode> silverArguments = new List<Silver.Silvernode>();
+            List<Silvernode> silverArguments = new List<Silvernode>();
             if (arguments.Count >= 1)
             {
                 silverArguments.Add(new SimpleSequenceSilvernode(arguments[0].OriginalNode, expressions[0], ".",

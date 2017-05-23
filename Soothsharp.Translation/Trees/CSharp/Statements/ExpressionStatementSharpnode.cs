@@ -5,7 +5,7 @@ namespace Soothsharp.Translation.Trees.CSharp
 {
     class ExpressionStatementSharpnode : StatementSharpnode
     {
-        private ExpressionSharpnode Expression;
+        private readonly ExpressionSharpnode Expression;
 
         public ExpressionStatementSharpnode(ExpressionStatementSyntax originalNode) : base(originalNode)
         {
@@ -23,7 +23,7 @@ namespace Soothsharp.Translation.Trees.CSharp
             else if (exResult.Silvernode is CallSilvernode)
             {
                 // It is a method call -- and the result is ignored.
-                CallSilvernode call = (exResult.Silvernode) as CallSilvernode;
+                CallSilvernode call = (CallSilvernode) (exResult.Silvernode);
                 if (call.Type != SilverType.Void)
                 {
                     var tempVar = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();

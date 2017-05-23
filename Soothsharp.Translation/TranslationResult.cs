@@ -34,6 +34,7 @@ namespace Soothsharp.Translation
 
         public static TranslationResult Error(SyntaxNode node, SoothsharpDiagnostic diagnostic, params Object[] diagnosticArguments)
         {
+            // ReSharper disable once UseObjectOrCollectionInitializer
             TranslationResult r = new TranslationResult();
             r.Silvernode = new ErrorSilvernode(node);
             r.Errors.Add(new Error(diagnostic, node,diagnosticArguments));
@@ -41,6 +42,7 @@ namespace Soothsharp.Translation
         }
         public static TranslationResult Error(Error error)
         {
+            // ReSharper disable once UseObjectOrCollectionInitializer
             TranslationResult r = new TranslationResult();
             r.Silvernode = new ErrorSilvernode(error.Node);
             r.Errors.Add(error);
@@ -61,6 +63,7 @@ namespace Soothsharp.Translation
         /// <returns></returns>
         public static TranslationResult FromSilvernode(Silvernode node, IEnumerable<Error> errors = null)
         {
+            // ReSharper disable once UseObjectOrCollectionInitializer
             TranslationResult result = new TranslationResult();
             result.Silvernode = node;
             if (errors != null)

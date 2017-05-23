@@ -19,8 +19,8 @@ namespace Soothsharp.Contracts
 #pragma warning disable CS0414
         private SpecialPermission special = SpecialPermission.NotSpecial;
 #pragma warning restore CS0414
-        private int numerator;
-        private int denominator;
+        private readonly int numerator;
+        private readonly int denominator;
 
         /// <summary>
         /// Creates a fractional permission.

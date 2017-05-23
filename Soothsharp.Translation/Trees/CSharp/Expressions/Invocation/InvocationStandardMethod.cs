@@ -12,8 +12,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
 {
     class InvocationStandardMethod : InvocationSubroutine
     {
-        private ExpressionSyntax methodGroup;
-        private ExpressionSharpnode methodGroupSharpnode;
+        private readonly ExpressionSyntax methodGroup;
+        private readonly ExpressionSharpnode methodGroupSharpnode;
         private readonly SymbolInfo _method;
 
         public InvocationStandardMethod(ExpressionSyntax methodGroup, ExpressionSharpnode methodGroupSharpnode, SymbolInfo method)
@@ -45,7 +45,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
                     this.Errors.Add(new Error(Diagnostics.SSIL102_UnexpectedNode, this.methodGroup, this.methodGroup.Kind()));
                 }
             }
-            Error error = null;
+            Error error;
             this.SilverType = TypeTranslator.TranslateType(methodSymbol.ReturnType, this.methodGroup, out error);
             if (error != null)
             {

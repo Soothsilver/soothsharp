@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Soothsharp.Contracts;
 using static Soothsharp.Contracts.Contract;
+// ReSharper disable All
 
 namespace Soothsharp.Rewriter
 {
@@ -12,6 +13,11 @@ namespace Soothsharp.Rewriter
     class ExampleFile
     {
         private bool autoFalse;
+
+        public ExampleFile()
+        {
+            this.autoFalse = true;
+        }
 
         [Predicate]
         public static bool IsTwo(int number)
@@ -26,6 +32,7 @@ namespace Soothsharp.Rewriter
             Contract.Requires(IsTwo(3));
             Contract.Ensures(false);
 
+            this.autoFalse = false;
 
             Fold(IsTwo(3));
 

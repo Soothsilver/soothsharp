@@ -27,12 +27,6 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
             {
                 this.Errors.Add(new Error(Diagnostics.SSIL102_UnexpectedNode, this.MethodGroup, this.MethodGroup.Kind()));
             }
-
-            Error error = null;
-            if (error != null)
-            {
-                this.Errors.Add(error);
-            }
         }
     }
 }

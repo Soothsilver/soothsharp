@@ -14,7 +14,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
     {
         public ClassDeclarationSyntax DeclarationSyntax { get; }
         public bool IsStatic;
-        private List<Sharpnode> children = new List<Sharpnode>();
+        private readonly List<Sharpnode> children = new List<Sharpnode>();
 
         /// <summary>
         /// If this sharpnode's type was already collected by the translation process, then this contains a reference to the type. Use this
@@ -71,7 +71,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
                     if (fieldSymbol.IsConst) continue; // Constants are inlined.
                     if (fieldSymbol.IsStatic)
                     {
-                        translationProcess.AddError(new Translation.Error(Diagnostics.SSIL108_FeatureNotSupported,
+                        translationProcess.AddError(new Error(Diagnostics.SSIL108_FeatureNotSupported,
                             node.OriginalNode, "static fields"));
                         continue;
                     }

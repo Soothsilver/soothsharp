@@ -159,10 +159,22 @@ namespace Soothsharp.Contracts
             return true;
         }
 
+        /// <summary>
+        /// Atomic spatial assertion that provides permission to access all elements of the array.
+        /// </summary>
+        /// <param name="array">The array to access.</param>
+        /// <typeparam name="T">Type of the array's elements. Only Int32 is supported.</typeparam>
         public static bool AccArray<T>(T[] array)
         {
             return true;
         }
+
+        /// <summary>
+        /// Atomic spatial assertion that provides a specified permission to access all elements of the array.
+        /// </summary>
+        /// <param name="array">The array to access.</param>
+        /// <param name="permission">The permission we have to the array</param>
+        /// <typeparam name="T">Type of the array's elements. Only Int32 is supported.</typeparam>
         public static bool AccArray<T>(T[] array, Permission permission)
         {
             return true;

@@ -19,7 +19,7 @@ namespace Soothsharp.Translation
                 if (field.IsConst && field.HasConstantValue)
                 {
                     return
-                        TranslationResult.FromSilvernode(new TextSilvernode(ConstantsTranslator.ConstantToString(field.ConstantValue), syntaxNode));
+                        TranslationResult.FromSilvernode(new TextSilvernode(ConstantToString(field.ConstantValue), syntaxNode));
                 }
             }
             return null;

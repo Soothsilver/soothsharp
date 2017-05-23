@@ -176,16 +176,16 @@ namespace Soothsharp.Translation
                     object value = (((LiteralExpressionSyntax) expression).Token.Value);
                     if (value is int)
                     {
-                        return new LiteralExpressionSharpnode(expression as LiteralExpressionSyntax, (int) value);
+                        return new LiteralExpressionSharpnode((LiteralExpressionSyntax) expression, (int) value);
                     }
                     if (value is float)
                     {
-                        return new DiagnosticExpressionSharpnode(expression as LiteralExpressionSyntax,
+                        return new DiagnosticExpressionSharpnode((LiteralExpressionSyntax) expression,
                             Diagnostics.SSIL109_FeatureNotSupportedBecauseSilver, "floating-point numbers");
                     }
                     if (value is double)
                     {
-                        return new DiagnosticExpressionSharpnode(expression as LiteralExpressionSyntax,
+                        return new DiagnosticExpressionSharpnode((LiteralExpressionSyntax) expression,
                             Diagnostics.SSIL109_FeatureNotSupportedBecauseSilver, "double-precision numbers");
                     }
                     return new UnknownExpressionSharpnode(expression);

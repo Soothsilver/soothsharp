@@ -14,7 +14,7 @@
             this.Silvername = silvername;
         }
 
-        public string Silvername { get; set; } = Identifier.SILVERNAME_NOT_YET_ASSIGNED;
+        public string Silvername { get; set; } = SILVERNAME_NOT_YET_ASSIGNED;
 
         private const string SILVERNAME_NOT_YET_ASSIGNED = "!silvername-not-yet-assigned!";
 

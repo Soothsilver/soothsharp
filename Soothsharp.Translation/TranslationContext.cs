@@ -25,7 +25,7 @@ namespace Soothsharp.Translation
         /// Gets a value indicating whether method bodies should be ignored (except for contracts) and translated
         /// as abstract Viper subroutines.
         /// </summary>
-        public bool MarkEverythingAbstract { get; private set; } = false;
+        public bool MarkEverythingAbstract { get; private set; }
         /// <summary>
         /// Gets the semantic model of the C# compilation.
         /// </summary>

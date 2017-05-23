@@ -48,7 +48,7 @@ namespace Soothsharp.Frontend
         /// <summary>
         /// Current version of this assembly.
         /// </summary>
-        private static string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        private static readonly string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         /// <summary>
         /// Whether line numbers should be printed when printed the resultant Silver code
         /// </summary>
@@ -56,7 +56,7 @@ namespace Soothsharp.Frontend
         /// <summary>
         /// Name and short description of this assembly.
         /// </summary>
-        private static string header = AppDomain.CurrentDomain.FriendlyName + " " + version + "\n" +
+        private static readonly string header = AppDomain.CurrentDomain.FriendlyName + " " + version + "\n" +
             "Verifies C# code files for correctness with respect to specified contracts.";
 
         private static int Main(string[] args)

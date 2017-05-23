@@ -16,22 +16,22 @@ namespace Soothsharp.Translation.Translators
         public const string IntegerArrayContents = "arrayContents";
         public readonly string IntegerArrayGlobalSilvertext =
             $@"
-field {ArraysTranslator.IntegerArrayContents} : Seq[Int]
-define {ArraysTranslator.IntegerArrayAccess}(array) acc(array.{ArraysTranslator.IntegerArrayContents})
-define {ArraysTranslator.IntegerArrayWrite}(array, index, value) {{ assert index >= 0; assert index < |array.{ArraysTranslator.IntegerArrayContents}|; array.{ArraysTranslator.IntegerArrayContents} := array.{ArraysTranslator.IntegerArrayContents}[..index] ++ Seq(value) ++ array.{ArraysTranslator.IntegerArrayContents}[(index+1)..]; }}
-function {ArraysTranslator.IntegerArrayRead}(array : Ref, index : Int) : Int
-    requires acc(array.{ArraysTranslator.IntegerArrayContents}, wildcard)
-    requires |array.{ArraysTranslator.IntegerArrayContents}| > index
+field {IntegerArrayContents} : Seq[Int]
+define {IntegerArrayAccess}(array) acc(array.{IntegerArrayContents})
+define {IntegerArrayWrite}(array, index, value) {{ assert index >= 0; assert index < |array.{IntegerArrayContents}|; array.{IntegerArrayContents} := array.{IntegerArrayContents}[..index] ++ Seq(value) ++ array.{IntegerArrayContents}[(index+1)..]; }}
+function {IntegerArrayRead}(array : Ref, index : Int) : Int
+    requires acc(array.{IntegerArrayContents}, wildcard)
+    requires |array.{IntegerArrayContents}| > index
 {{
-    array.{ArraysTranslator.IntegerArrayContents}[index]
+    array.{IntegerArrayContents}[index]
 }}";
 
         public bool ArraysWereUsed { get; set; } = true;
-        public const string ArrayLength = nameof(System) + "." + nameof(System.Array) + "." + nameof(System.Array.Length);
+        public const string ArrayLength = nameof(System) + "." + nameof(Array) + "." + nameof(Array.Length);
 
         public Silvernode GenerateGlobalSilvernode()
         {
-            return new TextSilvernode(IntegerArrayGlobalSilvertext, null);
+            return new TextSilvernode(IntegerArrayGlobalSilvertext);
         }
 
         public SimpleSequenceStatementSilvernode ArrayWrite(SyntaxNode originalNode, Silvernode container, Silvernode index, Silvernode value)

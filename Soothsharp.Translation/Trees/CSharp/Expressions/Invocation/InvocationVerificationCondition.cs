@@ -17,7 +17,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
         {
             // TODO more checks
             var conditionResult = arguments[0].Translate(context.ChangePurityContext(PurityContext.PurityNotRequired));
-            Silvernode result = null;
+            Silvernode result;
             switch (this._methodName)
             {
                 case ContractsTranslator.ContractEnsures:

@@ -12,14 +12,14 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 {
     class ArrayCreationSharpnode : ExpressionSharpnode
     {
-        private List<ExpressionSharpnode> Arguments = new List<ExpressionSharpnode>();
-        private Error error = null;
+        private readonly List<ExpressionSharpnode> Arguments = new List<ExpressionSharpnode>();
+        private Error error;
 
         private void LoadFrom(InitializerExpressionSyntax syntax)
         {
             if (syntax == null)
             {
-                error = new Translation.Error(Diagnostics.SSIL108_FeatureNotSupported, this.OriginalNode,
+                error = new Error(Diagnostics.SSIL108_FeatureNotSupported, this.OriginalNode,
                     "rank-initialized arrays");
                 return;
             }
@@ -50,10 +50,11 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
             {
                 return TranslationResult.Error(error);
             }
-            List<Error> errors = new List<Translation.Error>();
+            List<Error> errors = new List<Error>();
     
             var temporaryHoldingVariable = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();
 
+            // ReSharper disable once UseObjectOrCollectionInitializer
             var arguments = new List<Silvernode>();
 
             // TODO add purifiable thingies before here
@@ -86,7 +87,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
                 case PurityContext.PureOrFail:
                     return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL114_NotPureContext, "Array creation is inherently impure.");
             }
-            throw new System.Exception("This should never be reached.");
+            throw new Exception("This should never be reached.");
         }
     }
 }

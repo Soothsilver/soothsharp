@@ -31,7 +31,7 @@ namespace Soothsharp.Translation
         /// <returns>The fully qualified name of the symbol.</returns>
         public static string GetQualifiedName(this ISymbol symbol)
         {
-            return symbol.ToDisplayString(ExtensionMethods.qualifiedNameDisplayFormat);
+            return symbol.ToDisplayString(qualifiedNameDisplayFormat);
         } 
         /// <summary>
         /// Gets a partially qualified name of the C# symbol that does not include namespaces (for example, Int32) .
@@ -40,11 +40,11 @@ namespace Soothsharp.Translation
         /// <returns>The fully qualified name of the symbol.</returns>
         public static string GetNameWithoutNamespaces(this ISymbol symbol)
         {
-            return symbol.ToDisplayString(ExtensionMethods.withoutNamespacesNameDisplayFormat);
+            return symbol.ToDisplayString(withoutNamespacesNameDisplayFormat);
         }
         public static string GetSimpleName(this ISymbol symbol)
         {
-            return symbol.ToDisplayString(ExtensionMethods.simpleSymbolFormat);
+            return symbol.ToDisplayString(simpleSymbolFormat);
         }
 
         /// <summary>
@@ -56,8 +56,9 @@ namespace Soothsharp.Translation
         public static IEnumerable<T> WithSeparator<T>(this IEnumerable<T> sequence, T separator)
         {
             int i = 0;
-            int count = sequence.Count();
-            foreach (var t in sequence)
+            var enumerable = sequence as IList<T> ?? sequence.ToList();
+            int count = enumerable.Count;
+            foreach (var t in enumerable)
             {
                 yield return t;
                 if (i != count - 1)

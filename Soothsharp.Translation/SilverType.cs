@@ -29,7 +29,7 @@ namespace Soothsharp.Translation
 
         public static bool operator==(SilverType one, SilverType other)
         {
-            if (Object.ReferenceEquals(one, other))
+            if (ReferenceEquals(one, other))
             {
                 return true;
             }

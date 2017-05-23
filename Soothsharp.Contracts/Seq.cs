@@ -12,7 +12,7 @@ namespace Soothsharp.Contracts
     /// <typeparam name="T">Type of the objects in the sequence</typeparam>
     public class Seq<T> where T : new()
     {
-        private List<T> list = new List<T>(1);
+        private readonly List<T> list;
 
         /// <summary>
         /// Initializes a new sequence.
@@ -23,6 +23,9 @@ namespace Soothsharp.Contracts
             list = new List<T>(elements);
         }
 
+        /// <summary>
+        /// Initializes a new empty sequence.
+        /// </summary>
         public Seq()
         {
             list = new List<T>();

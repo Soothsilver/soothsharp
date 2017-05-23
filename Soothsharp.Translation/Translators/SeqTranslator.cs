@@ -13,15 +13,15 @@ namespace Soothsharp.Translation
     internal static class SeqTranslator
     {
         private const string CONTRACTS_NAMESPACE = nameof(Soothsharp) + "." + nameof(Contracts) + ".";
-        private const string SEQ_CLASS = SeqTranslator.CONTRACTS_NAMESPACE + nameof(Seq<float>) + ".";
-        public const string SeqClassWithoutEndDot = SeqTranslator.CONTRACTS_NAMESPACE + nameof(Seq<float>);
-        public const string SeqLength = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.Length);
-        public const string SeqAccess = SeqTranslator.SEQ_CLASS + "this";
-        public const string Contains = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.Contains);
-        public const string TakeDrop = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.TakeDrop);
-        public const string Take = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.Take);
-        public const string Drop = SeqTranslator.SEQ_CLASS + nameof(Seq<float>.Drop);
-        public const string OperatorPlus = SeqTranslator.SEQ_CLASS + "operator +";
+        private const string SEQ_CLASS = CONTRACTS_NAMESPACE + nameof(Seq<float>) + ".";
+        public const string SeqClassWithoutEndDot = CONTRACTS_NAMESPACE + nameof(Seq<float>);
+        public const string SeqLength = SEQ_CLASS + nameof(Seq<float>.Length);
+        public const string SeqAccess = SEQ_CLASS + "this";
+        public const string Contains = SEQ_CLASS + nameof(Seq<float>.Contains);
+        public const string TakeDrop = SEQ_CLASS + nameof(Seq<float>.TakeDrop);
+        public const string Take = SEQ_CLASS + nameof(Seq<float>.Take);
+        public const string Drop = SEQ_CLASS + nameof(Seq<float>.Drop);
+        public const string OperatorPlus = SEQ_CLASS + "operator +";
 
         public static TranslationResult Constructor(List<ExpressionSharpnode> arguments, TranslationContext context, ITypeSymbol typeArgument, SyntaxNode originalNode)
         {
@@ -47,7 +47,8 @@ namespace Soothsharp.Translation
             }
             else
             {
-                List<Silvernode> args = new List<Trees.Silver.Silvernode>();
+                // ReSharper disable once UseObjectOrCollectionInitializer
+                List<Silvernode> args = new List<Silvernode>();
                 args.Add("Seq(");
                 for (int i = 0; i < silvernodes.Count; i++)
                 {

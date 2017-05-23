@@ -18,10 +18,15 @@ namespace Soothsharp.Translation.Backends
             File.WriteAllText(filename, silvercode);
             try
             {
-                Process p = new Process();
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.CreateNoWindow = true;
+                Process p = new Process
+                {
+                    StartInfo =
+                    {
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true
+                    }
+                };
                 p.StartInfo.RedirectStandardOutput = true;
                 var enviromentPath = Environment.GetEnvironmentVariable("PATH");
                 Debug.Assert(enviromentPath != null, "enviromentPath != null");
@@ -34,9 +39,11 @@ namespace Soothsharp.Translation.Backends
                 p.Start();
 
                 string output = p.StandardOutput.ReadToEnd();
-                VerificationResult r = new VerificationResult();
-                r.OriginalOutput = output;
-                r.Errors = BackendUtils.ConvertErrorMessages(output, silvernode);
+                VerificationResult r = new VerificationResult
+                {
+                    OriginalOutput = output,
+                    Errors = BackendUtils.ConvertErrorMessages(output, silvernode)
+                };
                 return r;
             }
             catch (Exception)

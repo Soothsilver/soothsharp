@@ -17,10 +17,10 @@ namespace Soothsharp.Translation.Backends
         }
         public VerificationResult Verify(Silvernode silvernode)
         {
-            if (!NailgunBackend.nailgunInitialized)
+            if (!nailgunInitialized)
             {
                 ReadyNailgun();
-                NailgunBackend.nailgunInitialized = true;
+                nailgunInitialized = true;
             }
 
             string silvercode = silvernode.ToString();
@@ -28,11 +28,16 @@ namespace Soothsharp.Translation.Backends
             File.WriteAllText(filename, silvercode);
             try
             {
-                Process p = new Process();
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.CreateNoWindow = true;
-                p.StartInfo.RedirectStandardError = true;
+                Process p = new Process
+                {
+                    StartInfo =
+                    {
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true,
+                        RedirectStandardError = true
+                    }
+                };
                 var enviromentPath = Environment.GetEnvironmentVariable("PATH");
                 Debug.Assert(enviromentPath != null, "enviromentPath != null");
                 var paths = enviromentPath.Split(';');
@@ -44,9 +49,11 @@ namespace Soothsharp.Translation.Backends
                 p.Start();
                 string output = p.StandardOutput.ReadToEnd();
                 p.WaitForExit();
-                VerificationResult r = new VerificationResult();
-                r.OriginalOutput = output;
-                r.Errors = BackendUtils.ConvertErrorMessages(output, silvernode);
+                VerificationResult r = new VerificationResult
+                {
+                    OriginalOutput = output,
+                    Errors = BackendUtils.ConvertErrorMessages(output, silvernode)
+                };
                 return r;
             }
             catch (Exception)
@@ -57,11 +64,16 @@ namespace Soothsharp.Translation.Backends
 
         private static void ReadyNailgun()
         {
-            Process p = new Process();
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.CreateNoWindow = true;
-            p.StartInfo.RedirectStandardError = true;
+            Process p = new Process
+            {
+                StartInfo =
+                {
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true,
+                    RedirectStandardError = true
+                }
+            };
             var enviromentPath = Environment.GetEnvironmentVariable("PATH");
             Debug.Assert(enviromentPath != null, "enviromentPath != null");
             var paths = enviromentPath.Split(';');
@@ -69,7 +81,7 @@ namespace Soothsharp.Translation.Backends
                 .Select(x => Path.Combine(x, "startviperserver.bat"))
                 .FirstOrDefault(File.Exists) ?? "startviperserver.bat";
             p.StartInfo.FileName = exePath;
-            p.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(exePath);
+            p.StartInfo.WorkingDirectory = Path.GetDirectoryName(exePath);
             p.Start();
             System.Threading.Thread.Sleep(500);// TODO improve this
         }

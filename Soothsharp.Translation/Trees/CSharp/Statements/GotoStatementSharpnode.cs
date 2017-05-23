@@ -6,7 +6,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Statements
 {
     class GotoStatementSharpnode : StatementSharpnode
     {
-        private ExpressionSharpnode Identifier;
+        private readonly ExpressionSharpnode Identifier;
 
         public GotoStatementSharpnode(GotoStatementSyntax stmt) : base(stmt)
         {
@@ -19,7 +19,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Statements
             {
                 return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL110_InvalidSyntax, "illegal goto target");
             }
-            IdentifierExpressionSharpnode identifierExpression = this.Identifier as IdentifierExpressionSharpnode;
+            IdentifierExpressionSharpnode identifierExpression = (IdentifierExpressionSharpnode) this.Identifier;
             ISymbol symbol = identifierExpression.GetIdentifierSymbol(context);
             var identifier = context.Process.IdentifierTranslator.GetIdentifierReference(symbol);
             return TranslationResult.FromSilvernode(

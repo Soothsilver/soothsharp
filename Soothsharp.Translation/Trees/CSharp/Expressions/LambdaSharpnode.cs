@@ -14,8 +14,8 @@ namespace Soothsharp.Translation.Trees.CSharp
     class LambdaSharpnode : ExpressionSharpnode
     {
         private Error errorneousResult;
-        private ParameterSharpnode parameter;
-        private ExpressionSharpnode body;
+        private readonly ParameterSharpnode parameter;
+        private readonly ExpressionSharpnode body;
         public Identifier VariableIdentifier { get; private set; }
         public SilverType VariableSilverType { get; private set; }
         public Silvernode BodySilvernode { get; private set; }

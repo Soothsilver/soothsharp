@@ -8,7 +8,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
 {
     class InvocationImplicationEquivalence : InvocationTranslation
     {
-        private string _operator;
+        private readonly string _operator;
         private readonly ExpressionSyntax MethodGroup;
 
         public InvocationImplicationEquivalence(string @operator, ExpressionSyntax methodGroup)
@@ -21,7 +21,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
         {
             if (this.MethodGroup is MemberAccessExpressionSyntax)
             {
-                MemberAccessExpressionSyntax memberAccess = this.MethodGroup as MemberAccessExpressionSyntax;
+                MemberAccessExpressionSyntax memberAccess = (MemberAccessExpressionSyntax) this.MethodGroup;
                 var leftExpression = RoslynToSharpnode.MapExpression(memberAccess.Expression);
                 // TODO verify the purity
                 var leftExpressionResult = leftExpression.Translate(context);

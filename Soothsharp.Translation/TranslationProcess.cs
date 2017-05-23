@@ -8,6 +8,9 @@ using Soothsharp.Translation.Translators;
 using Soothsharp.Translation.Trees.CSharp;
 using Soothsharp.Translation.Trees.CSharp.Highlevel;
 using Soothsharp.Translation.Trees.Silver;
+// ReSharper disable UseObjectOrCollectionInitializer
+// ReSharper disable JoinDeclarationAndInitializer
+// ReSharper disable TooWideLocalVariableScope
 
 namespace Soothsharp.Translation
 {
@@ -21,9 +24,9 @@ namespace Soothsharp.Translation
         public ContractsTranslator ContractsTranslator;
         public ConstantsTranslator ConstantsTranslator;
         internal TranslationConfiguration Configuration;
-        private List<CollectedType> collectedTypes = new List<CollectedType>();
-        private List<CompilationUnit> compilationUnits = new List<CompilationUnit>();
-        private List<string> referencedAssemblies = new List<string>();
+        private readonly List<CollectedType> collectedTypes = new List<CollectedType>();
+        private readonly List<CompilationUnit> compilationUnits = new List<CompilationUnit>();
+        private readonly List<string> referencedAssemblies = new List<string>();
         public ArraysTranslator ArraysTranslator;
         internal CollectedType AddToCollectedTypes(ClassSharpnode classSharpnode, SemanticModel semanticModel)
         {
@@ -38,9 +41,10 @@ namespace Soothsharp.Translation
             this.ContractsTranslator = new ContractsTranslator();
             this.ConstantsTranslator = new ConstantsTranslator();
             this.IdentifierTranslator = new IdentifierTranslator(this);
-            this.ArraysTranslator = new Translators.ArraysTranslator();
+            this.ArraysTranslator = new ArraysTranslator();
         }
-        List<Error> masterErrorList = new List<Error>();
+
+        readonly List<Error> masterErrorList = new List<Error>();
         private bool executed;
 
 
@@ -111,7 +115,7 @@ namespace Soothsharp.Translation
             VerboseLog("Loading mscorlib and Soothsharp.Contracts...");
             var mscorlib = MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location);
             var contractsLibrary = MetadataReference.CreateFromFile(typeof(Contracts.Contract).Assembly.Location);
-            var systemCore = MetadataReference.CreateFromFile(typeof(System.Linq.ParallelQuery).Assembly.Location);
+            var systemCore = MetadataReference.CreateFromFile(typeof(ParallelQuery).Assembly.Location);
             VerboseLog("Initializing compilation...");
             CSharpCompilation compilation;
             try

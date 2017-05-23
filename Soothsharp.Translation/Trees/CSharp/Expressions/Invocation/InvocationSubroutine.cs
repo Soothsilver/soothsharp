@@ -13,7 +13,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
         {
             if (this.Impure)
             {
-               result = result.AsImpureAssertion(context, this.SilverType, "method call");
+               result.AsImpureAssertion(context, this.SilverType, "method call");
             }
         }
     }

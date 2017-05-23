@@ -26,6 +26,7 @@ namespace Soothsharp.Translation.Trees.Silver
         {
             get
             {
+                // ReSharper disable once UseObjectOrCollectionInitializer
                 var children = new List<Silvernode>();
                 children.Add("predicate ");
                 children.Add(this.Identifier);

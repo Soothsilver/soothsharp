@@ -10,13 +10,13 @@ namespace Soothsharp.Translation
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     class SubroutineBuilder
     {
-        private BlockSharpnode BodySharpnode;
-        private bool IsConstructor;
-        private IMethodSymbol MethodSymbol;
-        private List<ParameterSharpnode> Parameters;
-        private TranslationContext Context;
-        private INamedTypeSymbol ConstructorClass;
-        private SyntaxNode OriginalNode;
+        private readonly BlockSharpnode BodySharpnode;
+        private readonly bool IsConstructor;
+        private readonly IMethodSymbol MethodSymbol;
+        private readonly List<ParameterSharpnode> Parameters;
+        private readonly TranslationContext Context;
+        private readonly INamedTypeSymbol ConstructorClass;
+        private readonly SyntaxNode OriginalNode;
 
         public SubroutineBuilder(
             IMethodSymbol symbol,
@@ -137,7 +137,7 @@ namespace Soothsharp.Translation
             SilverType silverReturnType = TypeTranslator.TranslateType(this.IsConstructor ? this.ConstructorClass : this.MethodSymbol.ReturnType, null, out diagnostic);
             if (diagnostic != null) result.Errors.Add(diagnostic);
             var silTypeSilvernode = new TypeSilvernode(null, silverReturnType);
-            var silVerificationConditions = body?.VerificationConditions;
+            var silVerificationConditions = body.VerificationConditions;
             var silBlock = body.Silvernode as BlockSilvernode;
             if (silverReturnType == SilverType.Void && silverKind == SilverKind.Function)
             {
