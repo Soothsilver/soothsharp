@@ -51,6 +51,7 @@
     <Compile Include="Multifile\Assume_Side.cs" />
     <Compile Include="Multifile\Multiple_Main.cs" />
     <Compile Include="Multifile\Multiple_Side.cs" />
+    <Compile Include="Performance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Thesis_Example1_Maximum_Correct.cs" />
     <Compile Include="Thesis_Example3_Permissions.cs" />

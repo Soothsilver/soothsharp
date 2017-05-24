@@ -215,6 +215,7 @@ namespace Soothsharp.Translation
             if (this.Configuration.Verbose)
             {
                 Console.WriteLine("- " + logline);
+                Console.WriteLine(DateTime.Now.ToLongTimeString());
             }
         }
     }
