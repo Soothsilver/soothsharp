@@ -12,7 +12,7 @@ namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.translation
     {
         public void Main(bool b)
         {
-            Contract.Assert(!b.Implies(!b));
+            Contract.Assert((!b).Implies(!b));
             Contract.Assert(!(true.Implies(false)));
             Contract.Assert(true.Implies(true));
             Contract.Assert(false.Implies(false));

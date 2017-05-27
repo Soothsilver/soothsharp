@@ -31,8 +31,37 @@ namespace Soothsharp.Translation.Trees.CSharp
                     if (statementResult.Silvernode.IsVerificationCondition())
                     {
                         verificationConditions.Add(statementResult.Silvernode as VerificationConditionSilvernode);
-                        // TODO trigger warning if father is not method (if this is requires or ensures)
-                        // TODO trigger warning if father is not loop (if this is inavariant)
+                        if (statementResult.Silvernode is RequiresSilvernode ||
+                            statementResult.Silvernode is EnsuresSilvernode)
+                        {
+                            if (this.BlockSyntax.Parent is MethodDeclarationSyntax ||
+                                this.BlockSyntax.Parent is ConstructorDeclarationSyntax)
+                            {
+
+                            }
+                            else
+                            {
+                                diagnostics.Add(new Translation.Error(
+                                    Diagnostics.SSIL129_MethodContractsAreOnlyForMethods,
+                                    statementResult.Silvernode.OriginalNode));
+                            }
+                        }
+                        if (statementResult.Silvernode is InvariantSilvernode)
+                        {
+                            if (this.BlockSyntax.Parent is ForStatementSyntax ||
+                                this.BlockSyntax.Parent is WhileStatementSyntax ||
+                                this.BlockSyntax.Parent is DoStatementSyntax)
+                            {
+
+                            }
+                            else
+                            {
+
+                                diagnostics.Add(new Translation.Error(
+                                    Diagnostics.SSIL130_InvariantsAreOnlyForLoops,
+                                    statementResult.Silvernode.OriginalNode));
+                            }
+                        }
                     }
                     else
                     {

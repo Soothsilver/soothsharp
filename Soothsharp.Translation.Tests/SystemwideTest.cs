@@ -89,6 +89,7 @@ namespace Soothsharp.Translation.Tests
                 var verificationResult = backend.Verify(result.Silvernode);
                 errors = verificationResult.Errors;
             }
+            bool someKindOfFailureIsExpected = expectedErrorcodes.Any();
             Assert.True(expectedErrorcodes.Count == errors.Count, "Expected error count: " + expectedErrorcodes.Count + "\nActual errors: " + errors.Count + "\n" + string.Join("\n", errors));
             foreach (var error in errors)
             {
@@ -105,7 +106,7 @@ namespace Soothsharp.Translation.Tests
                 }
             }
 
-            Assert.True(result.WasTranslationSuccessful, string.Join("\n", result.Errors));
+            Assert.True(result.WasTranslationSuccessful || someKindOfFailureIsExpected, string.Join("\n", result.Errors) + "\nExpected:\n" + string.Join("\n", expectedErrorcodes));
         }
 
         private static IEnumerable<object[]> GetTestFiles()

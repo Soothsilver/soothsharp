@@ -19,7 +19,7 @@ namespace Soothsharp.Translation.Tests.Syntax.Arrays
             int s = array[1];
             array[0] = s;
             array[1] = f;
-            Contracts.Contract.Assert(f == array[1]);
+            Contract.Assert(f == array[1]);
         }
 
         public static void Main()

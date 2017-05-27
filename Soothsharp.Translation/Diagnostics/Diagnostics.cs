@@ -191,6 +191,20 @@ namespace Soothsharp.Translation
     "",
     DiagnosticSeverity.Error);
 
+        public static SoothsharpDiagnostic SSIL129_MethodContractsAreOnlyForMethods =
+            SoothsharpDiagnostic.Create(
+                "SSIL129",
+                "Method contracts (Requires and Ensures) must be in a method body, outside of any inner blocks or loops.",
+                "It is an error for a Requires or Ensures call to be within a loop. Only invariants are contracts permitted within a loop.",
+                DiagnosticSeverity.Error);
+
+        public static SoothsharpDiagnostic SSIL130_InvariantsAreOnlyForLoops=
+            SoothsharpDiagnostic.Create(
+                "SSIL130",
+                "Invariants must be within loops.",
+                "It is an error for an Invariant call to be elsewhere than within the code block of a loop (for, while or do).",
+                DiagnosticSeverity.Error);
+
         // ****************************** 200 Backend Verifier Errors
         public static SoothsharpDiagnostic SSIL201_BackendNotFound =
             SoothsharpDiagnostic.Create(
