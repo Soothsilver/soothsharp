@@ -11,7 +11,11 @@ namespace Soothsharp.Translation.Trees.CSharp
         {
             this.Expression = RoslynToSharpnode.MapExpression(originalNode.Expression);
         }
-        
+        public ExpressionStatementSharpnode(ExpressionSyntax originalNode) : base(originalNode)
+        {
+            this.Expression = RoslynToSharpnode.MapExpression(originalNode);
+        }
+
 
         public override TranslationResult Translate(TranslationContext context)
         {

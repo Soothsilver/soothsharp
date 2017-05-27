@@ -20,13 +20,13 @@ namespace Soothsharp.Translation.Trees.CSharp
             if (stmt.Declaration != null)
                 this.Initializers.Add(new LocalDeclarationSharpnode(stmt.Declaration));
             // Add initializers
-            /*
+            
             if (stmt.Initializers != null) {
                 foreach (var initializer in stmt.Initializers)
                 {
                     Initializers.Add(new ExpressionStatementSharpnode(initializer));
                 }
-            }*/
+            }
             foreach (var incrementor in stmt.Incrementors)
             {
                 this.Incrementors.Add(RoslynToSharpnode.MapExpression(incrementor));

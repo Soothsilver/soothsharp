@@ -126,6 +126,7 @@
     </Content>
     <Compile Include="SyntaxTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Systemwide\syntax\ForLoop.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 (get-info :version)
 ; (:version "4.4.0")
 ; Input file is D:\TEMP\tmpC60B.tmp
-; Started: 2017-05-27 07:44:33
+; Started: 2017-05-27 08:00:56
 ; Silicon.buildVersion: 1.1-SNAPSHOT 0e750e485a3f default 2017/01/04 14:11:46
 ; ------------------------------------------------------------
 ; Preamble start
@@ -470,88 +470,164 @@
       ($Seq.index ($SortWrappers.$SnapTo$Seq<Int> ($Snap.first s@$)) index@1))))
   :pattern ((arrayRead s@$ array@0 index@1))
   )))
-; ---------- DoStatement_a ----------
+; ---------- ForLoop_a ----------
 (declare-const this@4 $Ref)
-(declare-const a@5 Int)
+(declare-const res@5 Int)
+(declare-const result2@6 Int)
+(declare-const a@7 Int)
 (push) ; 1
 (push) ; 2
+(declare-const $t@8 $Snap)
+(assert (= $t@8 $Snap.unit))
+; [eval] res == 1 + 2 + 3 + 4
+; [eval] 1 + 2 + 3 + 4
+; [eval] 1 + 2 + 3
+; [eval] 1 + 2
+(assert (= res@5 10))
 (pop) ; 2
 (push) ; 2
 ; [exec]
-; a := 1
+; result2 := 0
 ; [exec]
-; a := a + 1
-; [eval] a + 1
-; loop at tmpC60B.tmp@5.1
-(declare-const a@6 Int)
+; a := 0
+; loop at tmpC60B.tmp@8.2
+(declare-const a@9 Int)
+(declare-const result2@10 Int)
 (push) ; 3
 ; Loop: Check specs well-definedness
-(declare-const $t@7 $Snap)
-(assert (= $t@7 $Snap.unit))
-; [eval] a <= 3
-(assert (<= a@6 3))
-(declare-const $t@8 $Snap)
-(assert (= $t@8 $Snap.unit))
-; [eval] a != 3
-(assert (not (= a@6 3)))
+(declare-const $t@11 $Snap)
+(assert (= $t@11 $Snap.unit))
+; [eval] result2 == (1 + a) * a \ 2
+; [eval] (1 + a) * a \ 2
+; [eval] (1 + a) * a
+; [eval] 1 + a
+(push) ; 4
+(assert (not (not (= 2 0))))
+(check-sat)
+; unsat
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(assert (= result2@10 (div (* (+ 1 a@9) a@9) 2)))
+(declare-const $t@12 $Snap)
+(assert (= $t@12 $Snap.unit))
+; [eval] a != 4
+(assert (not (= a@9 4)))
 (set-option :timeout 250)
 (check-sat)
 ; unknown
 (pop) ; 3
 (push) ; 3
 ; Loop: Establish loop invariant
-; [eval] a <= 3
-(pop) ; 3
-; Loop: Verify loop body
-(push) ; 3
-(assert (not (= a@6 3)))
-(assert (= $t@8 $Snap.unit))
-(assert (<= a@6 3))
-(assert (= $t@7 $Snap.unit))
-; [exec]
-; a := a + 1
-; [eval] a + 1
-(declare-const a@9 Int)
-(assert (= a@9 (+ a@6 1)))
-; [eval] a <= 3
+; [eval] result2 == (1 + a) * a \ 2
+; [eval] (1 + a) * a \ 2
+; [eval] (1 + a) * a
+; [eval] 1 + a
 (set-option :timeout 0)
 (push) ; 4
-(assert (not (<= a@9 3)))
+(assert (not (not (= 2 0))))
 (check-sat)
 ; unsat
 (pop) ; 4
 ; 0,00s
 ; (get-info :all-statistics)
-(assert (<= a@9 3))
+(push) ; 4
+(assert (not (= 0 (div 0 2))))
+(check-sat)
+; unsat
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(assert (= 0 (div 0 2)))
+(pop) ; 3
+; Loop: Verify loop body
+(push) ; 3
+(assert (not (= a@9 4)))
+(assert (= $t@12 $Snap.unit))
+(assert (= result2@10 (div (* (+ 1 a@9) a@9) 2)))
+(assert (= $t@11 $Snap.unit))
+; [exec]
+; result2 := result2 + (a + 1)
+; [eval] result2 + (a + 1)
+; [eval] a + 1
+(declare-const result2@13 Int)
+(assert (= result2@13 (+ result2@10 (+ a@9 1))))
+; [exec]
+; a := a + 1
+; [eval] a + 1
+(declare-const a@14 Int)
+(assert (= a@14 (+ a@9 1)))
+; [eval] result2 == (1 + a) * a \ 2
+; [eval] (1 + a) * a \ 2
+; [eval] (1 + a) * a
+; [eval] 1 + a
+(push) ; 4
+(assert (not (not (= 2 0))))
+(check-sat)
+; unsat
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 4
+(assert (not (= result2@13 (div (* (+ 1 a@14) a@14) 2))))
+(check-sat)
+; unsat
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(assert (= result2@13 (div (* (+ 1 a@14) a@14) 2)))
 (pop) ; 3
 ; Loop: Continue after loop
 (push) ; 3
-(declare-const $t@10 $Snap)
-(assert (= $t@10 ($Snap.combine $Snap.unit $Snap.unit)))
-; [eval] a <= 3
-(assert (<= a@6 3))
-; [eval] !(a != 3)
-; [eval] a != 3
-(assert (= a@6 3))
+(assert (= 0 (div 0 2)))
+(declare-const $t@15 $Snap)
+(assert (= $t@15 ($Snap.combine $Snap.unit $Snap.unit)))
+; [eval] result2 == (1 + a) * a \ 2
+; [eval] (1 + a) * a \ 2
+; [eval] (1 + a) * a
+; [eval] 1 + a
+(push) ; 4
+(assert (not (not (= 2 0))))
+(check-sat)
+; unsat
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(assert (= result2@10 (div (* (+ 1 a@9) a@9) 2)))
+; [eval] !(a != 4)
+; [eval] a != 4
+(assert (= a@9 4))
 (set-option :timeout 250)
 (check-sat)
 ; unknown
 ; [exec]
-; assert a == 3
-; [eval] a == 3
+; res := result2
+; [eval] res == 1 + 2 + 3 + 4
+; [eval] 1 + 2 + 3 + 4
+; [eval] 1 + 2 + 3
+; [eval] 1 + 2
+(set-option :timeout 0)
+(push) ; 4
+(assert (not (= result2@10 10)))
+(check-sat)
+; unsat
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(assert (= result2@10 10))
 (pop) ; 3
 (pop) ; 2
 (pop) ; 1
-; ---------- DoStatement_init ----------
-(declare-const this@11 $Ref)
+; ---------- ForLoop_init ----------
+(declare-const this@16 $Ref)
 (push) ; 1
 (push) ; 2
 (pop) ; 2
 (push) ; 2
 ; [exec]
 ; this := new(arrayContents)
-(declare-const this@12 $Ref)
-(assert (not (= this@12 $Ref.null)))
-(declare-const arrayContents@13 $Seq<Int>)
+(declare-const this@17 $Ref)
+(assert (not (= this@17 $Ref.null)))
+(declare-const arrayContents@18 $Seq<Int>)
 (pop) ; 2
 (pop) ; 1
