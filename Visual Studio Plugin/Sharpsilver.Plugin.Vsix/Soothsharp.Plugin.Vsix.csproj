@@ -13,8 +13,8 @@
     <ProjectGuid>{D8A79F6F-A0F5-4F57-AB27-01A8BAF36DEC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sharpsilver.Plugin.Vsix</RootNamespace>
-    <AssemblyName>Sharpsilver.Plugin.Vsix</AssemblyName>
+    <RootNamespace>Soothsharp.Plugin.Vsix</RootNamespace>
+    <AssemblyName>Soothsharp.Plugin.Vsix</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
@@ -55,13 +55,15 @@
     <ProjectReference Include="..\..\Soothsharp.Translation\Soothsharp.Translation.csproj">
       <Project>{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}</Project>
       <Name>Soothsharp.Translation</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
       <!-->     <IncludeOutputGroupsInVSIX>VSIXContainerProjectOutputGroup%3bBuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     -->
     </ProjectReference>
-    <ProjectReference Include="..\Sharpsilver.Plugin\Sharpsilver.Plugin.csproj">
+    <ProjectReference Include="..\Sharpsilver.Plugin\Soothsharp.Plugin.csproj">
       <Project>{2FB8FCA9-89E2-4B72-AD19-6C1BADDEBC62}</Project>
-      <Name>Sharpsilver.Plugin</Name>
+      <Name>Soothsharp.Plugin</Name>
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>

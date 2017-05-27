@@ -7,19 +7,19 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Sharpsilver.Translation;
-using Sharpsilver.Translation.BackendInterface;
+using Soothsharp.Translation;
+using Soothsharp.Translation.Backends;
 
-namespace Sharpsilver.Plugin
+namespace Soothsharp.Plugin
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class SharpsilverVisualStudioPluginAnalyzer : DiagnosticAnalyzer
+    public class SoothsharpVisualStudioPluginAnalyzer : DiagnosticAnalyzer
     {
         private Dictionary<string, DiagnosticDescriptor> rules;
 
         private IEnumerable<DiagnosticDescriptor> GetRules()
         {
-            var diagnostics = Sharpsilver.Translation.Diagnostics.GetAllDiagnostics().ToList();
+            var diagnostics = Soothsharp.Translation.Diagnostics.GetAllDiagnostics().ToList();
             bool firstTime = rules == null;
             if (firstTime) rules = new Dictionary<string, DiagnosticDescriptor>();
             foreach (var diagnostic in diagnostics)
@@ -28,7 +28,7 @@ namespace Sharpsilver.Plugin
                     diagnostic.ErrorCode,
                     diagnostic.Caption,
                     diagnostic.Caption,
-                    "Sharpsilver.Translation",
+                    "Soothsharp.Translation",
                     transformSeverity(diagnostic.Severity),
                     true,
                     description: diagnostic.Details);
@@ -60,7 +60,7 @@ namespace Sharpsilver.Plugin
 
         private void WholeTreeVerificationAnalysis(SyntaxTreeAnalysisContext treeContext)
         {
-            
+            return; // TODO Not yet.
             if (treeContext.Tree.GetText().ToString().Length < 10)
             {
                 return;
