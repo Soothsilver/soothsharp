@@ -15,7 +15,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
 
         public override void Run(List<ExpressionSharpnode> arguments, SyntaxNode originalNode, TranslationContext context)
         {
-            // TODO more checks
+            // TODO (future) This might still fail perhaps. More checks are required?
             var conditionResult = arguments[0].Translate(context.ChangePurityContext(PurityContext.PurityNotRequired));
             Silvernode result;
             switch (this._methodName)

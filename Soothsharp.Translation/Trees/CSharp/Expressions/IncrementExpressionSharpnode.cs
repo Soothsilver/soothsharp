@@ -7,7 +7,6 @@ namespace Soothsharp.Translation.Trees.CSharp
     {
         private IncrementExpressionDirection direction;
 #pragma warning disable 414
-        // TODO make this work
         // TODO makes this work as an expression
         private IncrementExpressionOrder order;
 #pragma warning restore 414
@@ -30,7 +29,6 @@ namespace Soothsharp.Translation.Trees.CSharp
         {
             var translatedExpression = this.expression.Translate(context);
             // Statement form only.
-            // TODO what if it's not a Silver lvalue?
             string @operator = this.direction == IncrementExpressionDirection.Increment ? "+" : "-";
             return TranslationResult.FromSilvernode(
                 new AssignmentSilvernode(

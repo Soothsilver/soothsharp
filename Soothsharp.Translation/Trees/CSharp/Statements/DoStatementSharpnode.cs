@@ -26,7 +26,8 @@ namespace Soothsharp.Translation
             errors.AddRange(statementResult.Errors);
             return TranslationResult.FromSilvernode(
                 new SimpleSequenceSilvernode(this.OriginalNode,
-                statementBlock,
+                new StatementsSequenceSilvernode(statementBlock.OriginalNode,
+                statementBlock.Statements.ToArray()),
                 "\n",
                 new WhileSilvernode(
                     conditionResult.Silvernode,
@@ -35,7 +36,6 @@ namespace Soothsharp.Translation
                     )
                 ), errors
                 );
-            // TODO add a unit test for the do statement
         }
     }
 }

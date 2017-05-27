@@ -71,8 +71,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Syntax\Abstract\SimpleAbstractPredicate.cs" />
-    <Compile Include="Systemwide\Contracts\BadInvariant.cs" />
-    <Compile Include="Systemwide\Contracts\BadRequires.cs" />
+    <Compile Include="Systemwide\syntax\DoStatement.cs" />
+    <Compile Include="Systemwide\syntax\BadInvariant.cs" />
+    <Compile Include="Systemwide\syntax\BadRequires.cs" />
     <Compile Include="Systemwide\sharpsilver\features\InvalidArrayWriteRead.cs" />
     <Compile Include="Systemwide\sharpsilver\features\ArraysTest.cs" />
     <Compile Include="Syntax\Attributes\SigOnly.cs" />
