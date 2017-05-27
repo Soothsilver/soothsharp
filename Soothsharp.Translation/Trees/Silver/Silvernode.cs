@@ -125,7 +125,6 @@ namespace Soothsharp.Translation.Trees.Silver
             OptimizePre();
             foreach (var child in this.Children)
             {
-                // TODO when the C# syntax is incorrect, the "child" under BlockSilvernode could sometimes be null.
                 child?.OptimizeRecursively();
             }
             OptimizePost();

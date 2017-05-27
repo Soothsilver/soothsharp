@@ -58,7 +58,7 @@ namespace Soothsharp.Translation
                     new IdentifierSilvernode(lastIdentifier, this.Expression.Name)
                   ), errors
                 );
-            // TODO methods
+            // TODO what if I access something on the result of a method, such as GetSomething().Hello?
         }
     }
 }

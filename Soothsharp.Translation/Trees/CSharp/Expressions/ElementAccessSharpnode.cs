@@ -19,7 +19,7 @@ namespace Soothsharp.Translation.Trees.CSharp
         {
             this.eaes = syntax;
             this.Container = RoslynToSharpnode.MapExpression(syntax.Expression);
-            // TODO multiple indicies
+            // Only single-dimensional arrays are supported.
             this.Index = RoslynToSharpnode.MapExpression(syntax.ArgumentList.Arguments[0].Expression);
 
         }

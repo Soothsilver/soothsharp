@@ -31,7 +31,8 @@ namespace Soothsharp.Translation.Trees.CSharp
                     if (statementResult.Silvernode.IsVerificationCondition())
                     {
                         verificationConditions.Add(statementResult.Silvernode as VerificationConditionSilvernode);
-                        // TODO trigger warning if father is not method
+                        // TODO trigger warning if father is not method (if this is requires or ensures)
+                        // TODO trigger warning if father is not loop (if this is inavariant)
                     }
                     else
                     {

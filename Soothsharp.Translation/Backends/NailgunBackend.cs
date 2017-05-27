@@ -83,7 +83,9 @@ namespace Soothsharp.Translation.Backends
             p.StartInfo.FileName = exePath;
             p.StartInfo.WorkingDirectory = Path.GetDirectoryName(exePath);
             p.Start();
-            System.Threading.Thread.Sleep(500);// TODO improve this
+            System.Threading.Thread.Sleep(500);
+            // TODO (future) This is unsafe. We should somehow wait until the Nailgun server
+            // it initialized. But how?
         }
     }
 }

@@ -18,8 +18,6 @@ namespace Soothsharp.Translation.Trees.Silver
             this.condition = condition;
             this.then = then;
             this.elseBranch = elseBranch;
-            // TODO do this for Sharpnodes, rather.
-            // TODO (elsewhere) issue a warning when verification conditions are not top-level
             if (!(this.then is BlockSilvernode))
             {
                 this.then = new BlockSilvernode(null, new List<StatementSilvernode> { then });

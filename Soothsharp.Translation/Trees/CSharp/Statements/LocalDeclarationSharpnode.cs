@@ -75,7 +75,6 @@ namespace Soothsharp.Translation.Trees.CSharp.Statements
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            // TODO add things when classes are added etc.
             var symbol = context.Semantics.GetDeclaredSymbol(this.variable);
             var identifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(symbol);
 

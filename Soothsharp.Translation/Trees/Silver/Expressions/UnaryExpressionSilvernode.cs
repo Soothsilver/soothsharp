@@ -15,8 +15,7 @@ namespace Soothsharp.Translation.Trees.Silver
 
         public override string ToString()
         {
-            // TODO handle parentheses correctly
-            return this.Operator + this.operand;
+            return "(" + this.Operator + this.operand + ")";
         }
     }
 }

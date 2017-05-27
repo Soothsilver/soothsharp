@@ -35,7 +35,7 @@ namespace Soothsharp.Translation
                     )
                 ), errors
                 );
-            // TODO test
+            // TODO add a unit test for the do statement
         }
     }
 }

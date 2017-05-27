@@ -31,7 +31,6 @@ namespace Soothsharp.Translation
                 {
                     node.List.Add("\n");
                 }
-                // TODO trigger an error?
             }
 
             if (!this._isStatic)

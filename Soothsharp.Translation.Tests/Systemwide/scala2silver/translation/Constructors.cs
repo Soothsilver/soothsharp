@@ -17,13 +17,7 @@ namespace Soothsharp.Translation.Tests.Systemwide.scala2silver.translation
         bool b;
         int paramTrue;
         int paramFalse;
-
-        // IGNORE
-        // TODO field invariant
-#pragma warning disable CS0414
-        int a = 3;
-#pragma warning restore CS0414
-
+        
         public Constructors(int _param, bool _b, int _paramTrue, int _paramFalse)
         {
             this.param = _param;

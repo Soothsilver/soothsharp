@@ -10,7 +10,6 @@ namespace Soothsharp.Translation.Trees.Silver
 
         public BinaryExpressionSilvernode(Silvernode left, string @operator, Silvernode right, SyntaxNode originalNode) : base(originalNode, SilverType.Int)
         {
-            //TODO handle types correctly
             this.Operator = @operator;
             this.left = left;
             this.right = right;
@@ -18,8 +17,7 @@ namespace Soothsharp.Translation.Trees.Silver
 
         public override string ToString()
         {
-            // TODO handle parentheses correctly
-            return this.left + " " + this.Operator + " " + this.right;
+            return "(" + this.left + " " + this.Operator + " " + this.right + ")";
         }
     }
 }

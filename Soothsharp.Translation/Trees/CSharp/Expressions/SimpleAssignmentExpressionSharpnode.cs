@@ -21,7 +21,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
             var left = this.Left.Translate(new TranslationContext(context)
             {
                 LValueNeeded = true
-            }); // TODO what if there are calls?
+            }); // TODO what if there Something().Hello = 4
             var right = this.Right.Translate(context.ChangePurityContext(PurityContext.Purifiable));
 
             List<Error> errors = CommonUtils.CombineErrors(left, right).ToList();

@@ -23,7 +23,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
             {
                 MemberAccessExpressionSyntax memberAccess = (MemberAccessExpressionSyntax) this.MethodGroup;
                 var leftExpression = RoslynToSharpnode.MapExpression(memberAccess.Expression);
-                // TODO verify the purity
+                // There are some Viper purity requirements here, but they are checked by the verifier,
+                // so we don't need to check them.
                 var leftExpressionResult = leftExpression.Translate(context);
                 var rightExpressionResult = arguments[0].Translate(context);
                 Silvernode implies = new BinaryExpressionSilvernode(

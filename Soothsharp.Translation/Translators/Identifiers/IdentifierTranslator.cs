@@ -91,8 +91,6 @@ namespace Soothsharp.Translation
             ""
         }.Union(silverKeywords).ToList();
 
-        // TODO register local symbols, later on, when import mechanisms and local syntax in Silver are more clear to me
-
         private static string Silverize(string identifier)
         {
             char[] charArray = identifier.Replace('.', '_').ToCharArray();
