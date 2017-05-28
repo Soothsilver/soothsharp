@@ -22,6 +22,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 
         public override TranslationResult Translate(TranslationContext context)
         {
+            // TODO prepend
             var left = this.Left.Translate(context);
             var right = this.Right.Translate(context);
             IEnumerable<Error> errors = CommonUtils.CombineErrors(left, right);

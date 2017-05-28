@@ -28,12 +28,13 @@ namespace Soothsharp.Translation
           
             var silvernodes = new List<Silvernode>();
             var errors = new List<Error>();
-            // TODO add purifiable thingies before here
+            List<StatementSilvernode> prepend = new List<Trees.Silver.StatementSilvernode>();
             foreach (var arg in arguments)
             {
                 var res = arg.Translate(context.ChangePurityContext(PurityContext.Purifiable));
                 silvernodes.Add(res.Silvernode);
                 errors.AddRange(res.Errors);
+                prepend.AddRange(res.PrependTheseSilvernodes);
             }
             Silvernode result;
             if (arguments.Count == 0)
@@ -61,7 +62,7 @@ namespace Soothsharp.Translation
                 args.Add(")");
                 result = new SimpleSequenceSilvernode(originalNode, args.ToArray());
             }
-            return TranslationResult.FromSilvernode(result, errors);
+            return TranslationResult.FromSilvernode(result, errors).AndPrepend(prepend);
         }
     }
 }

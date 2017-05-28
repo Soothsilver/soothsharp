@@ -205,6 +205,14 @@ namespace Soothsharp.Translation
                 "It is an error for an Invariant call to be elsewhere than within the code block of a loop (for, while or do).",
                 DiagnosticSeverity.Error);
 
+        // TODO (future): Expand this diagnostic so that it triggers more consistently (not just for binary expressions, but assignments, method calls...)
+        public static SoothsharpDiagnostic SSIL131_AssignmentsNotInsideExpressions =
+            SoothsharpDiagnostic.Create(
+                "SSIL131",
+                "Assignment expressions must be outermost.",
+                "In Viper, expressions with side-effects (such as an assignment) are statements and so can't be within other expressions.",
+                DiagnosticSeverity.Error);
+
         // ****************************** 200 Backend Verifier Errors
         public static SoothsharpDiagnostic SSIL201_BackendNotFound =
             SoothsharpDiagnostic.Create(

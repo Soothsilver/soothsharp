@@ -18,6 +18,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 
         public override TranslationResult Translate(TranslationContext context)
         {
+
+            // TODO proper prepend
             var left = this.Left.Translate(new TranslationContext(context)
             {
                 LValueNeeded = true

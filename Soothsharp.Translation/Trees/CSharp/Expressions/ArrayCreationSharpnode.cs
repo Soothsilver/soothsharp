@@ -56,8 +56,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 
             // ReSharper disable once UseObjectOrCollectionInitializer
             var arguments = new List<Silvernode>();
-
-            // TODO add purifiable thingies before here
+            var prepend = new List<StatementSilvernode>();
             arguments.Add("Seq(");
             foreach (var arg in this.Arguments)
             {
@@ -68,21 +67,25 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
                     arguments.Add(", ");
                 }
                 errors.AddRange(res.Errors);
+                prepend.AddRange(res.PrependTheseSilvernodes);
             }
             arguments.Add(")");
 
             Silvernode arrayConstruction = new SimpleSequenceSilvernode(null, arguments.ToArray());
-
+            prepend.AddRange(new StatementSilvernode[] {
+                new VarStatementSilvernode(temporaryHoldingVariable, SilverType.Ref, this.OriginalNode),
+                new SimpleSequenceStatementSilvernode(this.OriginalNode,
+                    new IdentifierSilvernode(temporaryHoldingVariable), " := ", "new(",
+                    ArraysTranslator.IntegerArrayContents, ")"),
+                new AssignmentSilvernode(
+                    new SimpleSequenceSilvernode(this.OriginalNode, new IdentifierSilvernode(temporaryHoldingVariable),
+                        ".", ArraysTranslator.IntegerArrayContents), arrayConstruction, this.OriginalNode)
+            });
             switch (context.PurityContext)
             {
                 case PurityContext.PurityNotRequired:
                 case PurityContext.Purifiable:
-                    return TranslationResult.FromSilvernode(new IdentifierSilvernode(temporaryHoldingVariable), errors).AndPrepend(
-                        new VarStatementSilvernode(temporaryHoldingVariable, SilverType.Ref, this.OriginalNode),
-                        new SimpleSequenceStatementSilvernode(this.OriginalNode, new IdentifierSilvernode(temporaryHoldingVariable), " := ", "new(",
-                        ArraysTranslator.IntegerArrayContents, ")"),
-                        new AssignmentSilvernode(new SimpleSequenceSilvernode(this.OriginalNode, new IdentifierSilvernode(temporaryHoldingVariable), ".", ArraysTranslator.IntegerArrayContents), arrayConstruction, this.OriginalNode)
-                        );
+                    return TranslationResult.FromSilvernode(new IdentifierSilvernode(temporaryHoldingVariable), errors).AndPrepend(prepend);
 
                 case PurityContext.PureOrFail:
                     return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL114_NotPureContext, "Array creation is inherently impure.");

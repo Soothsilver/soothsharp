@@ -31,8 +31,8 @@ namespace Soothsharp.Translation.Tests.Systemwide.prepend
             Seq<int> s = new Seq<int>(10, 20, 30, 40, 50, 60);
             int[] a = {10, 20, 30, 40, 50, 60};
 
-            Contract.Assert(s[mbox()] == 20);
-            Contract.Assert(a[mbox()] == 20);
+            Contract.Assert(s[mbox()] == 30);
+            Contract.Assert(a[mbox()] == 30);
         }
         int mbox()
         {

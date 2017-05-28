@@ -35,7 +35,7 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var conditionResult = this.Condition.Translate(context);
+            var conditionResult = this.Condition.Translate(context.ChangePurityContext(PurityContext.Purifiable));
             var statementResult = this.Statement.Translate(context);
             var statementBlock = ((StatementSilvernode) statementResult.Silvernode).EncloseInBlockIfNotAlready();
           
@@ -48,8 +48,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                 errors.AddRange(incrementorResult.Errors);
             }
             errors.AddRange(statementResult.Errors);
-            // TODO purifiability?
-
+            statementBlock.Statements.AddRange(conditionResult.PrependTheseSilvernodes);
             WhileSilvernode whileNode =
                 new WhileSilvernode(
                     conditionResult.Silvernode,
@@ -63,6 +62,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                 errors.AddRange(initializerResult.Errors);
                 sequence.List.Add(initializerResult.Silvernode as StatementSilvernode);
             }
+            sequence.List.AddRange(conditionResult.PrependTheseSilvernodes);
             sequence.List.Add(whileNode);
             return TranslationResult.FromSilvernode(sequence, errors);
         }

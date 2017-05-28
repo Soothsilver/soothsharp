@@ -34,7 +34,6 @@ namespace Soothsharp.Translation.Trees.CSharp
             var index = this.Index.Translate(context.ChangePurityContext(PurityContext.Purifiable));
             errors.AddRange(container.Errors);
             errors.AddRange(index.Errors);
-            // TODO purifiable
             if (accessorName == SeqTranslator.SeqAccess)
             {
                 return TranslationResult.FromSilvernode(
@@ -44,7 +43,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                         index.Silvernode,
                         "]"
                       ), errors
-                    );
+                    ).AndPrepend(container.PrependTheseSilvernodes.Concat(index.PrependTheseSilvernodes));
             }
             else
             {
@@ -55,7 +54,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                     // ASSUME READ
                     var readsilvernode = context.Process.ArraysTranslator.ArrayRead(this.OriginalNode, container.Silvernode,
                         index.Silvernode); 
-                    TranslationResult read = TranslationResult.FromSilvernode(readsilvernode, errors);
+                    TranslationResult read = TranslationResult.FromSilvernode(readsilvernode, errors).AndPrepend(container.PrependTheseSilvernodes.Concat(index.PrependTheseSilvernodes));
                     read.Arrays_Container = container;
                     read.Arrays_Index = index;
                     return read; 

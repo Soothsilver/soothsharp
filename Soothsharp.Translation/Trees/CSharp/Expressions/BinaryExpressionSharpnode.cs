@@ -29,8 +29,21 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
             string operatorName = qualifiedName == SeqTranslator.OperatorPlus ? "++" : this.Operator;
             var left = this.Left.Translate(context);
             var right = this.Right.Translate(context);
-            IEnumerable<Error> errors = CommonUtils.CombineErrors(left, right);
-
+            List<Error> errors = CommonUtils.CombineErrors(left, right).ToList();
+            if (Right is SimpleAssignmentExpressionSharpnode ||
+                Right is CompoundAssignmentExpressionSharpnode ||
+                Right is IncrementExpressionSharpnode)
+            {
+                errors.Add(new Error(Diagnostics.SSIL131_AssignmentsNotInsideExpressions,
+                    Right.OriginalNode));
+            }
+            if (Left is SimpleAssignmentExpressionSharpnode ||
+                Left is CompoundAssignmentExpressionSharpnode ||
+                Left is IncrementExpressionSharpnode)
+            {
+                errors.Add(new Error(Diagnostics.SSIL131_AssignmentsNotInsideExpressions,
+                    Left.OriginalNode));
+            }
             // Special case for Contract.Truth:
             if (this.Operator == "&&" &&
                 left.Silvernode != null && left.Silvernode.ToString().Trim() == "true")
@@ -38,6 +51,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
                 // This happens in contracts only, prepending is unnecessary
                 return TranslationResult.FromSilvernode(right.Silvernode, errors);
             }
+       
 
 
             return TranslationResult

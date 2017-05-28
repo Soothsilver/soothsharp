@@ -18,18 +18,19 @@ namespace Soothsharp.Translation
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            // TODO purifiability?
-            var conditionResult = this.Condition.Translate(context);
+            var conditionResult = this.Condition.Translate(context.ChangePurityContext(PurityContext.Purifiable));
             var statementResult = this.Statement.Translate(context);
             var statementBlock = ((StatementSilvernode)statementResult.Silvernode).EncloseInBlockIfNotAlready();
             var errors = new List<Error>();
             errors.AddRange(conditionResult.Errors);
             errors.AddRange(statementResult.Errors);
+            statementBlock.Statements.AddRange(conditionResult.PrependTheseSilvernodes);
             return TranslationResult.FromSilvernode(
                 new SimpleSequenceSilvernode(this.OriginalNode,
                 new StatementsSequenceSilvernode(statementBlock.OriginalNode,
                 statementBlock.Statements.ToArray()),
                 "\n",
+                new StatementsSequenceSilvernode(null, conditionResult.PrependTheseSilvernodes.ToArray()),
                 new WhileSilvernode(
                     conditionResult.Silvernode,
                     statementResult.VerificationConditions,

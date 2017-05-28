@@ -7,7 +7,6 @@ namespace Soothsharp.Translation.Trees.CSharp
     {
         private IncrementExpressionDirection direction;
 #pragma warning disable 414
-        // TODO makes this work as an expression
         private IncrementExpressionOrder order;
 #pragma warning restore 414
         private ExpressionSharpnode expression;

@@ -11,7 +11,7 @@ namespace Soothsharp.Translation.Tests.Systemwide.syntax
         void a()
         {
             int b = 2;
-            int c = (b++);
+            int c = (3 + b++);
             c++;
         }
     }
