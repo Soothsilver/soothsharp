@@ -58,70 +58,79 @@ namespace Soothsharp.Plugin
             context.RegisterSyntaxTreeAction(WholeTreeVerificationAnalysis);
         }
 
+        private object _mutex = new object();
+
         private void WholeTreeVerificationAnalysis(SyntaxTreeAnalysisContext treeContext)
         {
-            return; // TODO Not yet.
-            if (treeContext.Tree.GetText().ToString().Length < 10)
+            lock (_mutex)
             {
-                return;
-            }
-            var translationProcess = TranslationProcess.CreateFromSyntaxTree(treeContext.Tree);
-            var result = translationProcess.Execute();
-            foreach (var diagnostic in result.Errors)
-            {
+                if (treeContext.Tree.GetText().ToString().Length < 10)
+                {
+                    return;
+                }
+                var translationProcess = TranslationProcess.CreateFromSyntaxTree(treeContext.Tree);
+                var result = translationProcess.Execute();
+                foreach (var diagnostic in result.Errors)
+                {
 
-                if (diagnostic.Node != null)
-                {
-                    treeContext.ReportDiagnostic(Diagnostic.Create(
-                        rules[diagnostic.Diagnostic.ErrorCode], diagnostic.Node.GetLocation(), diagnostic.DiagnosticArguments)
+                    if (diagnostic.Node != null)
+                    {
+                        treeContext.ReportDiagnostic(Diagnostic.Create(
+                            rules[diagnostic.Diagnostic.ErrorCode], diagnostic.Node.GetLocation(),
+                            diagnostic.DiagnosticArguments)
                         );
+                    }
+                    else
+                    {
+                        treeContext.ReportDiagnostic(Diagnostic.Create(
+                            rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
+                        );
+                    }
                 }
-                else
+                if (!result.WasTranslationSuccessful) return; // translation errors are handled by the other method
+                if (result.Silvernode.ToString().Trim() == "") return;
+                var verifier = new CarbonNailgunBackend();
+                var verificationResult = verifier.Verify(result.Silvernode);
+                foreach (var diagnostic in verificationResult.Errors)
                 {
-                    treeContext.ReportDiagnostic(Diagnostic.Create(
-                        rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
+                    if (diagnostic.Node != null)
+                    {
+                        treeContext.ReportDiagnostic(Diagnostic.Create(
+                            rules[diagnostic.Diagnostic.ErrorCode], diagnostic.Node.GetLocation(),
+                            diagnostic.DiagnosticArguments)
                         );
-                }
-            }
-            if (!result.WasTranslationSuccessful) return; // translation errors are handled by the other method
-            if (result.Silvernode.ToString().Trim() == "") return;
-            var verifier = new CarbonBackend();
-            var verificationResult = verifier.Verify(result.Silvernode);
-            foreach (var diagnostic in verificationResult.Errors)
-            {
-                if (diagnostic.Node != null)
-                {
-                    treeContext.ReportDiagnostic(Diagnostic.Create(
-                        rules[diagnostic.Diagnostic.ErrorCode], diagnostic.Node.GetLocation(), diagnostic.DiagnosticArguments)
+                    }
+                    else
+                    {
+                        treeContext.ReportDiagnostic(Diagnostic.Create(
+                            rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
                         );
-                }
-                else
-                {
-                    treeContext.ReportDiagnostic(Diagnostic.Create(
-                        rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
-                        );
+                    }
                 }
             }
         }
         private void WholeTreeTranslationAnalysis(SyntaxTreeAnalysisContext treeContext)
         {
-
-            var translationProcess = TranslationProcess.CreateFromSyntaxTree(treeContext.Tree);
-            var result = translationProcess.Execute();
-            foreach(var diagnostic in result.Errors)
+            lock (_mutex)
             {
+                var translationProcess = TranslationProcess.CreateFromSyntaxTree(treeContext.Tree);
+                var result = translationProcess.Execute();
+                foreach (var diagnostic in result.Errors)
+                {
 
-                if (diagnostic.Node != null)
-                {
-                    treeContext.ReportDiagnostic(Diagnostic.Create(
-                        rules[diagnostic.Diagnostic.ErrorCode], diagnostic.Node.GetLocation(), diagnostic.DiagnosticArguments)
+                    if (diagnostic.Node != null)
+                    {
+                        treeContext.ReportDiagnostic(Diagnostic.Create(
+                            rules[diagnostic.Diagnostic.ErrorCode], diagnostic.Node.GetLocation(),
+                            diagnostic.DiagnosticArguments)
                         );
-                }
-                else
-                {
-                    treeContext.ReportDiagnostic(Diagnostic.Create(
-                        rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
+                    }
+                    else
+                    {
+                        treeContext.ReportDiagnostic(Diagnostic.Create(
+                            rules[diagnostic.Diagnostic.ErrorCode], null, diagnostic.DiagnosticArguments)
                         );
+                    }
                 }
             }
         }
