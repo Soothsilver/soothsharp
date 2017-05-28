@@ -25,10 +25,12 @@ namespace Soothsharp.Translation.Trees.Silver
             }
         }
 
-        protected string Tabs()
+       
+
+        protected string Tabs(int add = 0)
         {
             string tabs = "";
-            for (int i = 0; i < (this.HowManyTabsAfterEachNewline * Constants.SpacesPerIndentLevel); i++)
+            for (int i = 0; i < ((this.HowManyTabsAfterEachNewline + add) * Constants.SpacesPerIndentLevel); i++)
             {
                 tabs += " ";
             }

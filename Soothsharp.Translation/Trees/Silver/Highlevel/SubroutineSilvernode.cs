@@ -38,7 +38,7 @@ namespace Soothsharp.Translation.Trees.Silver
                     condition =>
                     {
                         if (condition is TextSilvernode) return new[] { condition };
-                        return new[] { "\t", condition };
+                        return new[] { SingleTabToSpaces(), condition };
                     }
                     ));
                 children.Add("\n");

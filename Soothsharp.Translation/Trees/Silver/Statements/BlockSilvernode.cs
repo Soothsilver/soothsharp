@@ -27,9 +27,9 @@ namespace Soothsharp.Translation.Trees.Silver
                 if (this.Statements.Count != 0)
                 {
                     yield return "{\n";
-                    yield return Tabs() + "\t";
+                    yield return Tabs(1);
 
-                    foreach (var a in this.Statements.WithSeparator<Silvernode>(new TextSilvernode("\n" + Tabs() + "\t")))
+                    foreach (var a in this.Statements.WithSeparator<Silvernode>(new TextSilvernode("\n" + Tabs(1))))
                     {
                         yield return a;
                     }

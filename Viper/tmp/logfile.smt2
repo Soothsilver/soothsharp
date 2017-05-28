@@ -1,7 +1,7 @@
 (get-info :version)
 ; (:version "4.4.0")
 ; Input file is D:\TEMP\tmp5C4E.tmp
-; Started: 2017-05-28 07:53:29
+; Started: 2017-05-28 08:28:16
 ; Silicon.buildVersion: 1.1-SNAPSHOT 0e750e485a3f default 2017/01/04 14:11:46
 ; ------------------------------------------------------------
 ; Preamble start
@@ -470,560 +470,97 @@
       ($Seq.index ($SortWrappers.$SnapTo$Seq<Int> ($Snap.first s@$)) index@1))))
   :pattern ((arrayRead s@$ array@0 index@1))
   )))
-; ---------- SeqAndArray_a ----------
+; ---------- Tabs_a ----------
 (declare-const this@4 $Ref)
-(declare-const s@5 $Seq<Int>)
-(declare-const _tmp1@6 Int)
-(declare-const _tmp2@7 Int)
+(declare-const res@5 Int)
+(declare-const b@6 Bool)
 (push) ; 1
 (push) ; 2
 (pop) ; 2
 (push) ; 2
 ; [exec]
-; _tmp1 := SeqAndArray_mbox(this)
+; b := true
+; loop at tmp5C4E.tmp@4.5
+(declare-const u@7 Int)
 (declare-const res@8 Int)
+(push) ; 3
+; Loop: Check specs well-definedness
 (declare-const $t@9 $Snap)
 (assert (= $t@9 $Snap.unit))
-; [eval] res == 2
-(assert (= res@8 2))
-; [exec]
-; _tmp2 := SeqAndArray_mbox(this)
-(declare-const res@10 Int)
-(declare-const $t@11 $Snap)
-(assert (= $t@11 $Snap.unit))
-; [eval] res == 2
-(assert (= res@10 2))
-; [exec]
-; s := Seq(1, _tmp1, _tmp2 + 4)
-; [eval] Seq(1, _tmp1, _tmp2 + 4)
-; [eval] _tmp2 + 4
-(assert (=
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@8))
-      ($Seq.singleton (+ res@10 4))))
-  3))
-(declare-const s@12 $Seq<Int>)
-(assert ($Seq.equal
-  s@12
-  ($Seq.append
-    ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@8))
-    ($Seq.singleton (+ res@10 4)))))
-; [exec]
-; assert s[0] == 1
-; [eval] s[0] == 1
-; [eval] s[0]
+(set-option :timeout 250)
+(check-sat)
+; unknown
+(pop) ; 3
 (push) ; 3
-(assert (not (= ($Seq.index s@12 0) 1)))
+; Loop: Establish loop invariant
+(pop) ; 3
+; Loop: Verify loop body
+(push) ; 3
+(assert (= $t@9 $Snap.unit))
+; [exec]
+; u := 4
+; [eval] u == 5
+(push) ; 4
+(assert (not (not (= 4 5))))
+(check-sat)
+; unsat
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+; [dead then-branch 0] 4 == 5
+(push) ; 4
+; [else-branch 0] 4 != 5
+(assert (not (= 4 5)))
+(pop) ; 4
+; [eval] !(u == 5)
+; [eval] u == 5
+(push) ; 4
+(assert (not (= 4 5)))
+(check-sat)
+; unknown
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 4
+(assert (not (not (= 4 5))))
+(check-sat)
+; unsat
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 4
+; [then-branch 1] 4 != 5
+(assert (not (= 4 5)))
+; [exec]
+; assert true
+; [exec]
+; res := 2
+; [exec]
+; label end
+(pop) ; 4
+; [dead else-branch 1] 4 == 5
+(pop) ; 3
+; Loop: Continue after loop
+(push) ; 3
+(declare-const $t@10 $Snap)
+(assert (= $t@10 $Snap.unit))
+; [eval] !b
+(assert false)
 (check-sat)
 ; unsat
 (pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(assert (= ($Seq.index s@12 0) 1))
-; [exec]
-; assert s[1] == 2
-; [eval] s[1] == 2
-; [eval] s[1]
-(push) ; 3
-(assert (not (= ($Seq.index s@12 1) 2)))
-(check-sat)
-; unsat
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(assert (= ($Seq.index s@12 1) 2))
-; [exec]
-; assert s[2] == 6
-; [eval] s[2] == 6
-; [eval] s[2]
-(push) ; 3
-(assert (not (= ($Seq.index s@12 2) 6)))
-(check-sat)
-; unsat
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(assert (= ($Seq.index s@12 2) 6))
 (pop) ; 2
 (pop) ; 1
-; ---------- SeqAndArray_b ----------
-(declare-const this@13 $Ref)
-(declare-const s2@14 $Ref)
-(declare-const _tmp4@15 Int)
-(declare-const _tmp5@16 Int)
-(declare-const _tmp3@17 $Ref)
-(push) ; 1
-(push) ; 2
-(pop) ; 2
-(push) ; 2
-; [exec]
-; _tmp4 := SeqAndArray_mbox(this)
-(declare-const res@18 Int)
-(declare-const $t@19 $Snap)
-(assert (= $t@19 $Snap.unit))
-; [eval] res == 2
-(assert (= res@18 2))
-; [exec]
-; _tmp5 := SeqAndArray_mbox(this)
-(declare-const res@20 Int)
-(declare-const $t@21 $Snap)
-(assert (= $t@21 $Snap.unit))
-; [eval] res == 2
-(assert (= res@20 2))
-; [exec]
-; _tmp3 := new(arrayContents)
-(declare-const _tmp3@22 $Ref)
-(assert (not (= _tmp3@22 $Ref.null)))
-(declare-const arrayContents@23 $Seq<Int>)
-(assert (and (not (= _tmp3@22 s2@14)) (not (= _tmp3@22 this@13))))
-; [exec]
-; _tmp3.arrayContents := Seq(1, _tmp4, _tmp5 + 4)
-; [eval] Seq(1, _tmp4, _tmp5 + 4)
-; [eval] _tmp5 + 4
-(assert (=
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-  3))
-(declare-const arrayContents@24 $Seq<Int>)
-(assert ($Seq.equal
-  arrayContents@24
-  ($Seq.append
-    ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-    ($Seq.singleton (+ res@20 4)))))
-; [exec]
-; s2 := _tmp3
-; [exec]
-; assert arrayRead(s2, 0) == 1
-; [eval] arrayRead(s2, 0) == 1
-; [eval] arrayRead(s2, 0)
-(push) ; 3
-(declare-const $k@25 $Perm)
-(assert ($Perm.isReadVar $k@25 $Perm.Write))
-(push) ; 4
-(assert (not (or (= $k@25 $Perm.No) true)))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (< $k@25 $Perm.Write))
-; [eval] |s2.arrayContents| > 0
-; [eval] |s2.arrayContents|
-(push) ; 4
-(assert (not (>
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-  0)))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (>
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-  0))
-(pop) ; 3
-; Joined path conditions
-(assert (and
-  (>
-    ($Seq.length
-      ($Seq.append
-        ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-        ($Seq.singleton (+ res@20 4))))
-    0)
-  (< $k@25 $Perm.Write)
-  ($Perm.isReadVar $k@25 $Perm.Write)))
-(push) ; 3
-(assert (not (=
-  (arrayRead ($Snap.combine
-    ($SortWrappers.$Seq<Int>To$Snap ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-    $Snap.unit) _tmp3@22 0)
-  1)))
-(check-sat)
-; unsat
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(assert (=
-  (arrayRead ($Snap.combine
-    ($SortWrappers.$Seq<Int>To$Snap ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-    $Snap.unit) _tmp3@22 0)
-  1))
-; [exec]
-; assert arrayRead(s2, 1) == 2
-; [eval] arrayRead(s2, 1) == 2
-; [eval] arrayRead(s2, 1)
-(push) ; 3
-(declare-const $k@26 $Perm)
-(assert ($Perm.isReadVar $k@26 $Perm.Write))
-(push) ; 4
-(assert (not (or (= $k@26 $Perm.No) true)))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (< $k@26 $Perm.Write))
-; [eval] |s2.arrayContents| > 1
-; [eval] |s2.arrayContents|
-(push) ; 4
-(assert (not (>
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-  1)))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (>
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-  1))
-(pop) ; 3
-; Joined path conditions
-(assert (and
-  (>
-    ($Seq.length
-      ($Seq.append
-        ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-        ($Seq.singleton (+ res@20 4))))
-    1)
-  (< $k@26 $Perm.Write)
-  ($Perm.isReadVar $k@26 $Perm.Write)))
-(push) ; 3
-(assert (not (=
-  (arrayRead ($Snap.combine
-    ($SortWrappers.$Seq<Int>To$Snap ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-    $Snap.unit) _tmp3@22 1)
-  2)))
-(check-sat)
-; unsat
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(assert (=
-  (arrayRead ($Snap.combine
-    ($SortWrappers.$Seq<Int>To$Snap ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-    $Snap.unit) _tmp3@22 1)
-  2))
-; [exec]
-; assert arrayRead(s2, 2) == 6
-; [eval] arrayRead(s2, 2) == 6
-; [eval] arrayRead(s2, 2)
-(push) ; 3
-(declare-const $k@27 $Perm)
-(assert ($Perm.isReadVar $k@27 $Perm.Write))
-(push) ; 4
-(assert (not (or (= $k@27 $Perm.No) true)))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (< $k@27 $Perm.Write))
-; [eval] |s2.arrayContents| > 2
-; [eval] |s2.arrayContents|
-(push) ; 4
-(assert (not (>
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-  2)))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (>
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-  2))
-(pop) ; 3
-; Joined path conditions
-(assert (and
-  (>
-    ($Seq.length
-      ($Seq.append
-        ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-        ($Seq.singleton (+ res@20 4))))
-    2)
-  (< $k@27 $Perm.Write)
-  ($Perm.isReadVar $k@27 $Perm.Write)))
-(push) ; 3
-(assert (not (=
-  (arrayRead ($Snap.combine
-    ($SortWrappers.$Seq<Int>To$Snap ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-    $Snap.unit) _tmp3@22 2)
-  6)))
-(check-sat)
-; unsat
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(assert (=
-  (arrayRead ($Snap.combine
-    ($SortWrappers.$Seq<Int>To$Snap ($Seq.append
-      ($Seq.append ($Seq.singleton 1) ($Seq.singleton res@18))
-      ($Seq.singleton (+ res@20 4))))
-    $Snap.unit) _tmp3@22 2)
-  6))
-(pop) ; 2
-(pop) ; 1
-; ---------- SeqAndArray_c ----------
-(declare-const this@28 $Ref)
-(declare-const s3@29 $Seq<Int>)
-(declare-const a@30 $Ref)
-(declare-const _tmp6@31 $Ref)
-(declare-const _tmp7@32 Int)
-(declare-const _tmp8@33 Int)
-(push) ; 1
-(push) ; 2
-(pop) ; 2
-(push) ; 2
-; [exec]
-; s3 := Seq(10, 20, 30, 40, 50, 60)
-; [eval] Seq(10, 20, 30, 40, 50, 60)
-(assert (=
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append
-        ($Seq.append
-          ($Seq.append
-            ($Seq.append ($Seq.singleton 10) ($Seq.singleton 20))
-            ($Seq.singleton 30))
-          ($Seq.singleton 40))
-        ($Seq.singleton 50))
-      ($Seq.singleton 60)))
-  6))
-; [exec]
-; _tmp6 := new(arrayContents)
-(declare-const _tmp6@34 $Ref)
-(assert (not (= _tmp6@34 $Ref.null)))
-(declare-const arrayContents@35 $Seq<Int>)
-(assert (and (not (= _tmp6@34 a@30)) (not (= _tmp6@34 this@28))))
-; [exec]
-; _tmp6.arrayContents := Seq(10, 20, 30, 40, 50, 60)
-; [eval] Seq(10, 20, 30, 40, 50, 60)
-; [exec]
-; a := _tmp6
-; [exec]
-; _tmp7 := SeqAndArray_mbox(this)
-(declare-const res@36 Int)
-(declare-const $t@37 $Snap)
-(assert (= $t@37 $Snap.unit))
-; [eval] res == 2
-(assert (= res@36 2))
-; [exec]
-; assert s3[_tmp7] == 30
-; [eval] s3[_tmp7] == 30
-; [eval] s3[_tmp7]
-(push) ; 3
-(assert (not (=
-  ($Seq.index
-    ($Seq.append
-      ($Seq.append
-        ($Seq.append
-          ($Seq.append
-            ($Seq.append ($Seq.singleton 10) ($Seq.singleton 20))
-            ($Seq.singleton 30))
-          ($Seq.singleton 40))
-        ($Seq.singleton 50))
-      ($Seq.singleton 60))
-    res@36)
-  30)))
-(check-sat)
-; unsat
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(assert (=
-  ($Seq.index
-    ($Seq.append
-      ($Seq.append
-        ($Seq.append
-          ($Seq.append
-            ($Seq.append ($Seq.singleton 10) ($Seq.singleton 20))
-            ($Seq.singleton 30))
-          ($Seq.singleton 40))
-        ($Seq.singleton 50))
-      ($Seq.singleton 60))
-    res@36)
-  30))
-; [exec]
-; _tmp8 := SeqAndArray_mbox(this)
-(declare-const res@38 Int)
-(declare-const $t@39 $Snap)
-(assert (= $t@39 $Snap.unit))
-; [eval] res == 2
-(assert (= res@38 2))
-; [exec]
-; assert arrayRead(a, _tmp8) == 30
-; [eval] arrayRead(a, _tmp8) == 30
-; [eval] arrayRead(a, _tmp8)
-(push) ; 3
-(declare-const $k@40 $Perm)
-(assert ($Perm.isReadVar $k@40 $Perm.Write))
-(push) ; 4
-(assert (not (or (= $k@40 $Perm.No) true)))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (< $k@40 $Perm.Write))
-; [eval] |a.arrayContents| > _tmp8
-; [eval] |a.arrayContents|
-(push) ; 4
-(assert (not (>
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append
-        ($Seq.append
-          ($Seq.append
-            ($Seq.append ($Seq.singleton 10) ($Seq.singleton 20))
-            ($Seq.singleton 30))
-          ($Seq.singleton 40))
-        ($Seq.singleton 50))
-      ($Seq.singleton 60)))
-  res@38)))
-(check-sat)
-; unsat
-(pop) ; 4
-; 0,00s
-; (get-info :all-statistics)
-(assert (>
-  ($Seq.length
-    ($Seq.append
-      ($Seq.append
-        ($Seq.append
-          ($Seq.append
-            ($Seq.append ($Seq.singleton 10) ($Seq.singleton 20))
-            ($Seq.singleton 30))
-          ($Seq.singleton 40))
-        ($Seq.singleton 50))
-      ($Seq.singleton 60)))
-  res@38))
-(pop) ; 3
-; Joined path conditions
-(assert (and
-  (>
-    ($Seq.length
-      ($Seq.append
-        ($Seq.append
-          ($Seq.append
-            ($Seq.append
-              ($Seq.append ($Seq.singleton 10) ($Seq.singleton 20))
-              ($Seq.singleton 30))
-            ($Seq.singleton 40))
-          ($Seq.singleton 50))
-        ($Seq.singleton 60)))
-    res@38)
-  (< $k@40 $Perm.Write)
-  ($Perm.isReadVar $k@40 $Perm.Write)))
-(push) ; 3
-(assert (not (=
-  (arrayRead ($Snap.combine
-    ($SortWrappers.$Seq<Int>To$Snap ($Seq.append
-      ($Seq.append
-        ($Seq.append
-          ($Seq.append
-            ($Seq.append ($Seq.singleton 10) ($Seq.singleton 20))
-            ($Seq.singleton 30))
-          ($Seq.singleton 40))
-        ($Seq.singleton 50))
-      ($Seq.singleton 60)))
-    $Snap.unit) _tmp6@34 res@38)
-  30)))
-(check-sat)
-; unsat
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(assert (=
-  (arrayRead ($Snap.combine
-    ($SortWrappers.$Seq<Int>To$Snap ($Seq.append
-      ($Seq.append
-        ($Seq.append
-          ($Seq.append
-            ($Seq.append ($Seq.singleton 10) ($Seq.singleton 20))
-            ($Seq.singleton 30))
-          ($Seq.singleton 40))
-        ($Seq.singleton 50))
-      ($Seq.singleton 60)))
-    $Snap.unit) _tmp6@34 res@38)
-  30))
-(pop) ; 2
-(pop) ; 1
-; ---------- SeqAndArray_mbox ----------
-(declare-const this@41 $Ref)
-(declare-const res@42 Int)
-(push) ; 1
-(push) ; 2
-(declare-const $t@43 $Snap)
-(assert (= $t@43 $Snap.unit))
-; [eval] res == 2
-(assert (= res@42 2))
-(pop) ; 2
-(push) ; 2
-; [exec]
-; res := 4 \ 2
-; [eval] 4 \ 2
-(push) ; 3
-(assert (not (not (= 2 0))))
-(check-sat)
-; unsat
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(declare-const res@44 Int)
-(assert (= res@44 (div 4 2)))
-; [eval] res == 2
-(push) ; 3
-(assert (not (= res@44 2)))
-(check-sat)
-; unsat
-(pop) ; 3
-; 0,00s
-; (get-info :all-statistics)
-(assert (= res@44 2))
-(pop) ; 2
-(pop) ; 1
-; ---------- SeqAndArray_init ----------
-(declare-const this@45 $Ref)
+; ---------- Tabs_init ----------
+(declare-const this@11 $Ref)
 (push) ; 1
 (push) ; 2
 (pop) ; 2
 (push) ; 2
 ; [exec]
 ; this := new(arrayContents)
-(declare-const this@46 $Ref)
-(assert (not (= this@46 $Ref.null)))
-(declare-const arrayContents@47 $Seq<Int>)
+(declare-const this@12 $Ref)
+(assert (not (= this@12 $Ref.null)))
+(declare-const arrayContents@13 $Seq<Int>)
 (pop) ; 2
 (pop) ; 1

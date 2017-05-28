@@ -68,7 +68,15 @@ namespace Soothsharp.Translation.Trees.Silver
         {
             return false;
         }
-
+        protected string SingleTabToSpaces()
+        {
+            string tab = "";
+            for (int i = 0; i < Constants.SpacesPerIndentLevel; i++)
+            {
+                tab += " ";
+            }
+            return tab;
+        }
         /// <summary>
         /// Initializes a new <see cref="Silvernode"/>. 
         /// </summary>

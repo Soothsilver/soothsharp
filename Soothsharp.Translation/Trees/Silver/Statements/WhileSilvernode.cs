@@ -40,7 +40,7 @@ namespace Soothsharp.Translation.Trees.Silver
                             if (innerCondition
  is TextSilvernode) return new[] { innerCondition
  };
-                            return new[] { "\t", innerCondition
+                            return new[] { SingleTabToSpaces(), innerCondition
  };
                         }
                         ));

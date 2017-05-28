@@ -32,7 +32,6 @@ namespace Soothsharp.Translation.Trees.CSharp
 
             var arguments = new List<Silvernode>();
             var errors = new List<Error>();
-            // TODO (elsewhere) tabs in Viper code
             var prependThese = new List<StatementSilvernode>();
             foreach (var arg in this.Arguments)
             {
