@@ -22,15 +22,16 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            // TODO prepend
             var left = this.Left.Translate(context);
-            var right = this.Right.Translate(context);
+            var right = this.Right.Translate(context.ChangePurityContext(PurityContext.Purifiable));
             IEnumerable<Error> errors = CommonUtils.CombineErrors(left, right);
-            return 
+            return
                 TranslationResult.FromSilvernode(
-                    new AssignmentSilvernode(
-                        left.Silvernode,
-                        new BinaryExpressionSilvernode(left.Silvernode, this.operation, right.Silvernode, this.OriginalNode), this.OriginalNode), errors);
+                        new AssignmentSilvernode(
+                            left.Silvernode,
+                            new BinaryExpressionSilvernode(left.Silvernode, this.operation, right.Silvernode,
+                                this.OriginalNode), this.OriginalNode), errors)
+                    .AndPrepend(right.PrependTheseSilvernodes);
 
         }
     }
