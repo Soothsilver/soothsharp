@@ -32,12 +32,15 @@ namespace Soothsharp.Translation.Trees.CSharp
 
             var arguments = new List<Silvernode>();
             var errors = new List<Error>();
-            // TODO add purifiable thingies before here
-            foreach(var arg in this.Arguments)
+            // TODO (elsewhere) prepend in calls
+            // TODO (elsewhere) tabs in Viper code
+            var prependThese = new List<StatementSilvernode>();
+            foreach (var arg in this.Arguments)
             {
                 var res = arg.Translate(context.ChangePurityContext(PurityContext.Purifiable));
                 arguments.Add(res.Silvernode);
                 errors.AddRange(res.Errors);
+                prependThese.AddRange(res.PrependTheseSilvernodes);
             }
 
             Silvernode constructorCall = new CallSilvernode(context.Process.IdentifierTranslator.GetIdentifierReferenceWithTag(classSymbol, isDefaultConstructor ? Constants.InitializerTag : Constants.ConstructorTag),
@@ -45,13 +48,16 @@ namespace Soothsharp.Translation.Trees.CSharp
                 SilverType.Ref,
                 this.OriginalNode);
 
+            prependThese.Add(new VarStatementSilvernode(identifier, SilverType.Ref, this.OriginalNode));
+            prependThese.Add(new AssignmentSilvernode(new IdentifierSilvernode(identifier), constructorCall,
+                this.OriginalNode));
+
             switch(context.PurityContext)
             {
                 case PurityContext.PurityNotRequired:
                 case PurityContext.Purifiable:
                     return TranslationResult.FromSilvernode(new IdentifierSilvernode(identifier), errors).AndPrepend(
-                        new VarStatementSilvernode(identifier, SilverType.Ref, this.OriginalNode),
-                        new AssignmentSilvernode(new IdentifierSilvernode(identifier), constructorCall, this.OriginalNode) 
+                        prependThese
                         );
 
                 case PurityContext.PureOrFail:

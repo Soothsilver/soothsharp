@@ -71,12 +71,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Syntax\Abstract\SimpleAbstractPredicate.cs" />
+    <Compile Include="Systemwide\prepend\Construction.cs" />
     <Compile Include="Systemwide\prepend\PrependIf.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Systemwide\prepend\MethodReturn.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Systemwide\prepend\SeqAndArray.cs" />
     <Compile Include="Systemwide\syntax\DoStatement.cs" />
     <Compile Include="Systemwide\syntax\BadInvariant.cs" />
     <Compile Include="Systemwide\syntax\BadRequires.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="SyntaxTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systemwide\syntax\ForLoop.cs" />
+    <Compile Include="Systemwide\syntax\Increment.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
