@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using Soothsharp.Translation.Trees.Silver;
+using System.Linq;
 
 namespace Soothsharp.Translation.Trees.CSharp.Expressions
 {
@@ -33,7 +34,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
                 b,
                 c, this.OriginalNode
                 ),
-                errors);
+                errors).AndPrepend(cres.PrependTheseSilvernodes.Concat(trueres.PrependTheseSilvernodes).Concat(falseres.PrependTheseSilvernodes));
         }
     }
 }

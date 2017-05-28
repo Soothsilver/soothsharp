@@ -26,6 +26,10 @@ namespace Soothsharp.Translation.Trees.CSharp
             foreach(var statement in this.Statements)
             {
                 var statementResult = statement.Translate(context);
+                if (statementResult.PrependTheseSilvernodes.Any())
+                {
+                    statements.AddRange(statementResult.PrependTheseSilvernodes);
+                }
                 if (statementResult.Silvernode != null)
                 {
                     if (statementResult.Silvernode.IsVerificationCondition())

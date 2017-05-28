@@ -18,9 +18,10 @@ namespace Soothsharp.Translation
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var conditionResult = this.Condition.Translate(context);
+            var conditionResult = this.Condition.Translate(context.ChangePurityContext(PurityContext.Purifiable));
             var statementResult = this.Statement.Translate(context);
             var statementBlock = ((StatementSilvernode)statementResult.Silvernode).EncloseInBlockIfNotAlready();
+            statementBlock.Statements.AddRange(conditionResult.PrependTheseSilvernodes);
             var errors = new List<Error>();
             errors.AddRange(conditionResult.Errors);
             errors.AddRange(statementResult.Errors);
@@ -31,7 +32,7 @@ namespace Soothsharp.Translation
                     statementBlock, this.OriginalNode
                     ),
                 errors
-                );
+                ).AndPrepend(conditionResult.PrependTheseSilvernodes);
         }
     }
 }

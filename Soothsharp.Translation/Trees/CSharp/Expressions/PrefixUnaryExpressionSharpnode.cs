@@ -17,7 +17,10 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
         public override TranslationResult Translate(TranslationContext context)
         {
             var left = this.Expression.Translate(context);
-            return TranslationResult.FromSilvernode(new PrefixUnaryExpressionSilvernode(this.Operator, left.Silvernode, this.OriginalNode), left.Errors);
+            return TranslationResult
+                .FromSilvernode(new PrefixUnaryExpressionSilvernode(this.Operator, left.Silvernode, this.OriginalNode),
+                    left.Errors)
+                .AndPrepend(left.PrependTheseSilvernodes);
         }
     }
 }

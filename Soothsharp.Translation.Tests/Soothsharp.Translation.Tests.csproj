@@ -71,6 +71,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Syntax\Abstract\SimpleAbstractPredicate.cs" />
+    <Compile Include="Systemwide\prepend\PrependIf.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Systemwide\prepend\MethodReturn.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Systemwide\syntax\DoStatement.cs" />
     <Compile Include="Systemwide\syntax\BadInvariant.cs" />
     <Compile Include="Systemwide\syntax\BadRequires.cs" />

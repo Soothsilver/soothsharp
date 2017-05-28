@@ -18,7 +18,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Statements
 
         public override TranslationResult Translate(TranslationContext context)
         {
-            var expr = this.Expression.Translate(context);
+            var expr = this.Expression.Translate(context.ChangePurityContext(PurityContext.Purifiable));
             var errors = new List<Error>();
             errors.AddRange(expr.Errors);
 
@@ -28,6 +28,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Statements
             }
 
             StatementsSequenceSilvernode statements = new StatementsSequenceSilvernode(this.OriginalNode);
+            statements.List.AddRange(expr.PrependTheseSilvernodes);
             statements.List.Add(
                 new AssignmentSilvernode(
                     new TextSilvernode(Constants.SilverReturnVariableName, this.OriginalNode),

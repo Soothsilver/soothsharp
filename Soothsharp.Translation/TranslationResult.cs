@@ -54,6 +54,11 @@ namespace Soothsharp.Translation
             this.PrependTheseSilvernodes = new List<StatementSilvernode>(silvernodes);
             return this;
         }
+        public TranslationResult AndPrepend(IEnumerable<StatementSilvernode> silvernodes)
+        {
+            this.PrependTheseSilvernodes = new List<StatementSilvernode>(silvernodes);
+            return this;
+        }
 
         /// <summary>
         /// Creates a translation result from the specified node and a list of errors.

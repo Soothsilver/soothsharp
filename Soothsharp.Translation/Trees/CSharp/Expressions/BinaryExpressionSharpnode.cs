@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Soothsharp.Translation.Trees.Silver;
 
@@ -34,11 +35,17 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
             if (this.Operator == "&&" &&
                 left.Silvernode != null && left.Silvernode.ToString().Trim() == "true")
             {
+                // This happens in contracts only, prepending is unnecessary
                 return TranslationResult.FromSilvernode(right.Silvernode, errors);
             }
 
 
-            return TranslationResult.FromSilvernode(new BinaryExpressionSilvernode(left.Silvernode, operatorName, right.Silvernode, this.OriginalNode), errors);
+            return TranslationResult
+                .FromSilvernode(
+                    new BinaryExpressionSilvernode(left.Silvernode, operatorName, right.Silvernode, this.OriginalNode),
+                    errors)
+                .AndPrepend(left.PrependTheseSilvernodes.Concat(right.PrependTheseSilvernodes));
+            ;
         }
     }
 }

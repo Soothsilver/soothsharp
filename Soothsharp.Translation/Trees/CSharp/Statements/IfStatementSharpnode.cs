@@ -18,7 +18,7 @@ namespace Soothsharp.Translation.Trees.CSharp
         }
         public override TranslationResult Translate(TranslationContext context)
         {
-            var conditionResult = this.Condition.Translate(context);
+            var conditionResult = this.Condition.Translate(context.ChangePurityContext(PurityContext.Purifiable));
             var thenResult = this.Then.Translate(context);
             var elseResult = this.Else?.Translate(context);
             var errors = new List<Error>();
@@ -27,11 +27,12 @@ namespace Soothsharp.Translation.Trees.CSharp
             if (elseResult != null)
                 errors.AddRange(elseResult.Errors);
 
-            return TranslationResult.FromSilvernode(new IfSilvernode(this.OriginalNode,
-                conditionResult.Silvernode,
-                thenResult.Silvernode as StatementSilvernode,
-                elseResult?.Silvernode as StatementSilvernode),
-                errors);
+            Silvernode output= new IfSilvernode(this.OriginalNode,
+                    conditionResult.Silvernode,
+                    thenResult.Silvernode as StatementSilvernode,
+                    elseResult?.Silvernode as StatementSilvernode);
+
+            return TranslationResult.FromSilvernode(output, errors).AndPrepend(conditionResult.PrependTheseSilvernodes);
         }
     }
 }

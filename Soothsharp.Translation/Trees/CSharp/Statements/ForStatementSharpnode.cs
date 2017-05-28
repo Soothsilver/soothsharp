@@ -48,7 +48,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                 errors.AddRange(incrementorResult.Errors);
             }
             errors.AddRange(statementResult.Errors);
-            // TODO add tests for declaration, initializers, incrementors
+            // TODO purifiability?
 
             WhileSilvernode whileNode =
                 new WhileSilvernode(

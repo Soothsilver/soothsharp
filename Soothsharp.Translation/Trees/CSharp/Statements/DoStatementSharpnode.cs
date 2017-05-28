@@ -18,6 +18,7 @@ namespace Soothsharp.Translation
 
         public override TranslationResult Translate(TranslationContext context)
         {
+            // TODO purifiability?
             var conditionResult = this.Condition.Translate(context);
             var statementResult = this.Statement.Translate(context);
             var statementBlock = ((StatementSilvernode)statementResult.Silvernode).EncloseInBlockIfNotAlready();
