@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace csverify_GUI.Properties
+namespace Soothsharp.Gui.Properties
 {
 
 

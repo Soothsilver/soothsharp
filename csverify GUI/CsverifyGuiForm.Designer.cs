@@ -1,4 +1,4 @@
-﻿namespace csverify_GUI
+﻿namespace Soothsharp.Gui
 {
     partial class CsverifyGuiForm
     {

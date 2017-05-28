@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace csverify_GUI
+namespace Soothsharp.Gui
 {
     /// <summary>
     /// This graphical interface form allows users to run csverify.exe on files without

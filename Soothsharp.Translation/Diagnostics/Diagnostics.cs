@@ -24,7 +24,7 @@ namespace Soothsharp.Translation
             SoothsharpDiagnostic.Create(
                 "SSIL101",
                 "The Soothsharp translator does not support elements of the syntax kind '{0}'.",
-                "A syntax node of this kind cannot be translated by the Soothsharp translator because the feature it provides is unavailable in Silver, or because it is difficult to translate. If you can use a less advanced construct, please do so.",
+                "A syntax node of this kind cannot be translated by the Soothsharp translator because the feature it provides is unavailable in Viper, or because it is difficult to translate. If you can use a less advanced construct, please do so.",
                 DiagnosticSeverity.Error);
         public static SoothsharpDiagnostic SSIL102_UnexpectedNode =
             SoothsharpDiagnostic.Create(
@@ -41,7 +41,7 @@ namespace Soothsharp.Translation
         public static SoothsharpDiagnostic SSIL104_ExceptionConstructingSilver =
             SoothsharpDiagnostic.Create(
                 "SSIL104",
-                "An exception ('{0}') occured during the construction of the Silver abstract syntax tree.",
+                "An exception ('{0}') occured during the construction of the Viper abstract syntax tree.",
                 "While this is an internal error of the translator, it mostly occurs when there is a C# syntax or semantic error in your code. Try to fix any other compiler errors and maybe this issue will be resolved.",
                 DiagnosticSeverity.Error);
         // ReSharper disable once UnusedMember.Global - kept for compatibility and future-proofing
@@ -49,19 +49,19 @@ namespace Soothsharp.Translation
             SoothsharpDiagnostic.Create(
                 "SSIL105",
                 "This feature ({0}) is not yet supported.",
-                "As the C#-to-Silver translation project is developed, we plan to allow this feature to be used in verifiable C# class files. For now, however, it is unsupported and won't work.",
+                "As the C#-to-Viper translation project is developed, we plan to allow this feature to be used in verifiable C# class files. For now, however, it is unsupported and won't work.",
                 DiagnosticSeverity.Error);
         public static SoothsharpDiagnostic SSIL106_TypeNotSupported =
             SoothsharpDiagnostic.Create(
                 "SSIL106",
-                "The type {0} is not supported in Silver.",
-                "The Silver language can only use an integer, a boolean and reference objects. Other value types besides these three cannot be translated.",
+                "The type {0} is not supported in Viper.",
+                "The Viper language can only use an integer, a boolean and reference objects. Other value types besides these three cannot be translated.",
                 DiagnosticSeverity.Error);
         public static SoothsharpDiagnostic SSIL107_ThisExpressionCannotBeStatement =
             SoothsharpDiagnostic.Create(
                 "SSIL107",
-                "This expression cannot form an expression statement in Silver.",
-                "The Silver language does not support this expression as a standalone expression in a statement, even if C# supported it.",
+                "This expression cannot form an expression statement in Viper.",
+                "The Viper language does not support this expression as a standalone expression in a statement, even if C# supported it.",
                 DiagnosticSeverity.Error);
         public static SoothsharpDiagnostic SSIL108_FeatureNotSupported =
           SoothsharpDiagnostic.Create(
@@ -72,14 +72,14 @@ namespace Soothsharp.Translation
         public static SoothsharpDiagnostic SSIL109_FeatureNotSupportedBecauseSilver =
           SoothsharpDiagnostic.Create(
               "SSIL109",
-              "This feature ({0}) is not supported by Silver.",
-              "This feature of C# cannot be meaningfully represented in Silver.",
+              "This feature ({0}) is not supported by Viper.",
+              "This feature of C# cannot be meaningfully represented in Viper.",
               DiagnosticSeverity.Error);
         public static SoothsharpDiagnostic SSIL110_InvalidSyntax =
           SoothsharpDiagnostic.Create(
               "SSIL110",
               "Syntax is invalid ({0}).",
-              "This feature of C# cannot be meaningfully represented in Silver.",
+              "This feature of C# cannot be meaningfully represented in Viper.",
               DiagnosticSeverity.Error);
         // ReSharper disable once UnusedMember.Global - kept for compatibility
         public static SoothsharpDiagnostic SSIL111_NonStatement =
@@ -104,13 +104,13 @@ namespace Soothsharp.Translation
   SoothsharpDiagnostic.Create(
       "SSIL114",
       "This ({0}) cannot be translated into a pure assertion.",
-      "In this context, C# code is forced to be translated into pure Silver assertions. However, this C# node cannot be translated in a pure way.",
+      "In this context, C# code is forced to be translated into pure Viper assertions. However, this C# node cannot be translated in a pure way.",
       DiagnosticSeverity.Error);
         public static SoothsharpDiagnostic SSIL115_ThisIntegerSizeNotSupported =
           SoothsharpDiagnostic.Create(
               "SSIL115",
               "Use System.Int32 instead of {0}.",
-              "The Silver language's integers are unbounded. To prevent confusion, use only 'System.Int32' integers, please. Your actual used type wouldn't matter anyway, since Viper does not check for overflow or underflow.",
+              "The Viper language's integers are unbounded. To prevent confusion, use only 'System.Int32' integers, please. Your actual used type wouldn't matter anyway, since Viper does not check for overflow or underflow.",
               DiagnosticSeverity.Error);
         public static SoothsharpDiagnostic SSIL116_MethodAttributeContradiction =
          SoothsharpDiagnostic.Create(
@@ -218,7 +218,7 @@ namespace Soothsharp.Translation
             SoothsharpDiagnostic.Create(
                 "SSIL201",
                 "Back-end ({0}) not found.",
-                "The back-end chosen to verify the translated Silver code was not found in PATH nor in the local directory and so the code was not verified.",
+                "The back-end chosen to verify the translated Viper code was not found in PATH nor in the local directory and so the code was not verified.",
                 DiagnosticSeverity.Warning);
 
         public static SoothsharpDiagnostic SSIL202_BackendUnknownLine =
@@ -231,8 +231,8 @@ namespace Soothsharp.Translation
         public static SoothsharpDiagnostic SSIL203_ParseError =
             SoothsharpDiagnostic.Create(
                 "SSIL203",
-                "Silver parse error: {0}",
-                "This C# code was transformed into a Silver segment that does not conform to Silver grammar and therefore the code could not be verified. This should not ordinarily happen and indicates an error in the Sootsharp transcompiler.",
+                "Viper parse error: {0}",
+                "This C# code was transformed into a Viper segment that does not conform to Viper grammar and therefore the code could not be verified. This should not ordinarily happen and indicates an error in the Sootsharp transcompiler.",
                 DiagnosticSeverity.Warning);
 
         public static SoothsharpDiagnostic SSIL204_OtherLocalizedError =

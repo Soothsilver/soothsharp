@@ -70,6 +70,9 @@ namespace Soothsharp.Plugin
                 }
                 var translationProcess = TranslationProcess.CreateFromSyntaxTree(treeContext.Tree);
                 var result = translationProcess.Execute();
+                /*
+                 * Do not double-report errors. These are already reported by WholeTreeTranslationAnalysis.
+                 * 
                 foreach (var diagnostic in result.Errors)
                 {
 
@@ -87,6 +90,7 @@ namespace Soothsharp.Plugin
                         );
                     }
                 }
+                */
                 if (!result.WasTranslationSuccessful) return; // translation errors are handled by the other method
                 if (result.Silvernode.ToString().Trim() == "") return;
                 var verifier = new CarbonNailgunBackend();
