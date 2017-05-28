@@ -1,7 +1,7 @@
 (get-info :version)
 ; (:version "4.4.0")
 ; Input file is D:\TEMP\tmp5C4E.tmp
-; Started: 2017-05-28 08:28:16
+; Started: 2017-05-28 08:41:45
 ; Silicon.buildVersion: 1.1-SNAPSHOT 0e750e485a3f default 2017/01/04 14:11:46
 ; ------------------------------------------------------------
 ; Preamble start

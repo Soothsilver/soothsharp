@@ -52,6 +52,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Soothsharp.Contracts\Soothsharp.Contracts.csproj">
+      <Project>{B2FF4360-C774-41CE-98FC-60494F6EFC60}</Project>
+      <Name>Soothsharp.Contracts</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
     <ProjectReference Include="..\..\Soothsharp.Translation\Soothsharp.Translation.csproj">
       <Project>{89DF81ED-EEE0-499D-AE23-D687FC5CADD3}</Project>
       <Name>Soothsharp.Translation</Name>

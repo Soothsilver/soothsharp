@@ -138,12 +138,12 @@ namespace Soothsharp.Translation
 
                 VerboseLog("- CONVERSION PHASE begins...");
                 Sharpnode cSharpTree;
-#if !DEBUG
+#if GLOBAL_TRY_CATCH
                 try
                 {
 #endif
                     cSharpTree = new CompilationUnitSharpnode(compilationUnit.RoslynTree.GetRoot() as CompilationUnitSyntax);
-#if !DEBUG
+#if GLOBAL_TRY_CATCH
             }
                 catch (Exception ex)
                 {
@@ -167,14 +167,14 @@ namespace Soothsharp.Translation
                 }
                 if (!skipTranslatingThisTree)
                 {
-#if !DEBUG
+#if GLOBAL_TRY_CATCH
                 try
                 {
 #endif
                     translationResult =
                         cSharpTree.Translate(TranslationContext.StartNew(this, semanticModel,
                             this.Configuration.VerifyUnmarkedItems, compilationUnit.Style));
-#if !DEBUG
+#if GLOBAL_TRY_CATCH
                 }
                 catch (Exception ex)
                 {
