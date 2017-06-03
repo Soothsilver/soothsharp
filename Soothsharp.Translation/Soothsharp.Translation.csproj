@@ -21,6 +21,8 @@
     <DefineConstants>TRACE;DEBUG;GLOBAL_TRY_CATCH</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -214,7 +216,7 @@
     <Compile Include="Trees\CSharp\UnknownSharpnode.cs" />
     <Compile Include="Trees\Silver\Statements\StatementsSequenceSilvernode.cs" />
     <Compile Include="Trees\Silver\Silvernode.cs" />
-    <Compile Include="Trees\Silver\Contracts\VerificationConditionSilvernode.cs" />
+    <Compile Include="Trees\Silver\Contracts\ContractSilvernode.cs" />
     <Compile Include="Trees\Silver\Statements\WhileSilvernode.cs" />
     <Compile Include="Backends\BackendUtils.cs" />
     <Compile Include="Backends\CarbonBackend.cs" />

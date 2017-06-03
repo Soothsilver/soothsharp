@@ -10,7 +10,7 @@ namespace Soothsharp.Translation.Trees.Silver
         private BlockSilvernode Block;
         protected TypeSilvernode ReturnType;
         protected string ReturnValueName;
-        private List<VerificationConditionSilvernode> VerificationConditions;
+        private List<ContractSilvernode> VerificationConditions;
         protected List<ParameterSilvernode> Parameters;
 
         protected SubroutineSilvernode(SyntaxNode originalNode,
@@ -18,7 +18,7 @@ namespace Soothsharp.Translation.Trees.Silver
             List<ParameterSilvernode> parameters,
             string returnValueName,
             TypeSilvernode returnType,
-            List<VerificationConditionSilvernode> verificationConditions,
+            List<ContractSilvernode> verificationConditions,
             BlockSilvernode block) : base(originalNode)
         {
             this.Identifier = identifier;

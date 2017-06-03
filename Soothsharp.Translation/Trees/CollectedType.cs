@@ -38,7 +38,7 @@ namespace Soothsharp.Translation
                 Identifier initializer = process.IdentifierTranslator.RegisterAndGetIdentifierWithTag(this.ClassSymbol,
                     Constants.InitializerTag);
 
-                var accessToAllFields = new List<VerificationConditionSilvernode>();
+                var accessToAllFields = new List<ContractSilvernode>();
                 foreach (CollectedField field in this.InstanceFields)
                 {
                     var protectedField = new SimpleSequenceSilvernode(null,

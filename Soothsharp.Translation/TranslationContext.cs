@@ -30,7 +30,14 @@ namespace Soothsharp.Translation
         /// Gets the semantic model of the C# compilation.
         /// </summary>
         public SemanticModel Semantics { get; }
+        /// <summary>
+        /// Gets or sets a value indicating whether we are within a function or a predicate. This influences what identifier should be used for the return value.
+        /// </summary>
         public bool IsFunctionOrPredicateBlock { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether the result of the translation must be an l-value for the 
+        /// translation to make sense. This is a relic of earlier code that is now unused.
+        /// </summary>
         public bool LValueNeeded { get; set; }
 
         /// <summary>

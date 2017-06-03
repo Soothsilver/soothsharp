@@ -2,7 +2,7 @@
 
 namespace Soothsharp.Translation.Trees.Silver
 {
-    class EnsuresSilvernode : VerificationConditionSilvernode
+    class EnsuresSilvernode : ContractSilvernode
     {
         private Silvernode Postcondition;
 
@@ -11,7 +11,7 @@ namespace Soothsharp.Translation.Trees.Silver
             this.Postcondition = postcondition;
         }
 
-        public override int CompareTo(VerificationConditionSilvernode other)
+        public override int CompareTo(ContractSilvernode other)
         {
             if (other.GetType() == typeof(EnsuresSilvernode))
                 return 0;

@@ -84,9 +84,6 @@ namespace Soothsharp.Translation
             Constants.SilverMethodEndLabel,
             Constants.SilverReturnVariableName,
             Constants.SilverSystemObject,
-            Constants.TypeOfFunction,
-            Constants.IsSubTypeFunction,
-            Constants.CSharpTypeDomain,
             Constants.SilverThis,
             ""
         }.Union(silverKeywords).ToList();

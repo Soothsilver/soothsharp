@@ -52,7 +52,7 @@ namespace Soothsharp.Translation.Trees.CSharp
             WhileSilvernode whileNode =
                 new WhileSilvernode(
                     conditionResult.Silvernode,
-                    statementResult.VerificationConditions,
+                    statementResult.Contracts,
                     statementBlock, this.OriginalNode
                     );
             var sequence = new StatementsSequenceSilvernode(this.OriginalNode);

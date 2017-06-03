@@ -2,7 +2,7 @@
 
 namespace Soothsharp.Translation.Trees.Silver
 {
-    class InvariantSilvernode : VerificationConditionSilvernode
+    class InvariantSilvernode : ContractSilvernode
     {
         private Silvernode Invariant;
 
@@ -11,7 +11,7 @@ namespace Soothsharp.Translation.Trees.Silver
             this.Invariant = invariant;
         }
 
-        public override int CompareTo(VerificationConditionSilvernode other)
+        public override int CompareTo(ContractSilvernode other)
         {
             if (other.GetType() == typeof(InvariantSilvernode))
                 return 0;

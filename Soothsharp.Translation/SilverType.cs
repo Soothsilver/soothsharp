@@ -3,7 +3,9 @@
 namespace Soothsharp.Translation
 {
     /// <summary>
-    /// Represents a type of the Silver language.
+    /// Represents a type of the Silver language. This needs to be a class and not an enum because
+    /// of domain types (though they are not implemented yet) and because of Seq and Set, which have
+    /// a type argument.
     /// </summary>
     public class SilverType : IEquatable<SilverType>
     {

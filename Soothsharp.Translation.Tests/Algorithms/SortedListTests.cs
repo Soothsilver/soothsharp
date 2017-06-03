@@ -13,7 +13,6 @@ namespace Soothsharp.Translation.Tests.Algorithms
         [Fact]
         public void BasicTest()
         {
-            int[] s;
             SortedList l = new SortedList();
             l.Insert(40);
             l.Insert(10);

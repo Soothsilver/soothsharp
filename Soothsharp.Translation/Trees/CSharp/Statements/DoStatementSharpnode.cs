@@ -33,7 +33,7 @@ namespace Soothsharp.Translation
                 new StatementsSequenceSilvernode(null, conditionResult.PrependTheseSilvernodes.ToArray()),
                 new WhileSilvernode(
                     conditionResult.Silvernode,
-                    statementResult.VerificationConditions,
+                    statementResult.Contracts,
                     statementBlock, null
                     )
                 ), errors

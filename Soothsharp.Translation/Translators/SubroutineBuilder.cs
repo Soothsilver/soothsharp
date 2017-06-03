@@ -137,7 +137,7 @@ namespace Soothsharp.Translation
             SilverType silverReturnType = TypeTranslator.TranslateType(this.IsConstructor ? this.ConstructorClass : this.MethodSymbol.ReturnType, null, out diagnostic);
             if (diagnostic != null) result.Errors.Add(diagnostic);
             var silTypeSilvernode = new TypeSilvernode(null, silverReturnType);
-            var silVerificationConditions = body.VerificationConditions;
+            var silVerificationConditions = body.Contracts;
             var silBlock = body.Silvernode as BlockSilvernode;
             if (silverReturnType == SilverType.Void && silverKind == SilverKind.Function)
             {

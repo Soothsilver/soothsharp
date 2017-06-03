@@ -28,7 +28,7 @@ namespace Soothsharp.Translation
             return TranslationResult.FromSilvernode(
                 new WhileSilvernode(
                     conditionResult.Silvernode,
-                    statementResult.VerificationConditions,
+                    statementResult.Contracts,
                     statementBlock, this.OriginalNode
                     ),
                 errors

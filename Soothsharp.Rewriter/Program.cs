@@ -66,7 +66,12 @@ namespace Soothsharp.Rewriter
             Console.Write(newSource.ToFullString());
         }
     }
-
+    
+    /// <summary>
+    /// This rewriter removes contracts (requires, ensures, invariant) completely and modifies
+    /// "folding" and "unfolding" so as to remove their permission part but keep the executable part.
+    /// </summary>
+    /// <seealso cref="Microsoft.CodeAnalysis.CSharp.CSharpSyntaxRewriter" />
     public class ContractsRemover : CSharpSyntaxRewriter
     {
         private readonly SemanticModel SemanticModel;
@@ -84,11 +89,15 @@ namespace Soothsharp.Rewriter
              ContractsTranslator.Unfold
         };
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContractsRemover"/> class.
+        /// </summary>
         public ContractsRemover(SemanticModel model)
         {
             SemanticModel = model;
         }
-        
+
+        /// <inheritdoc />
         public override SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
         {
             // The first argument of "unfolding" and "folding" is only relevant in Viper code, not in C#, 
@@ -104,6 +113,8 @@ namespace Soothsharp.Rewriter
 
             return base.VisitInvocationExpression(node);
         }
+
+        /// <inheritdoc />
         public override SyntaxNode VisitExpressionStatement(ExpressionStatementSyntax node)
         {
             // Contracts are removed from the syntax tree.

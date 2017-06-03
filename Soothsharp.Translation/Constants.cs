@@ -38,13 +38,12 @@ namespace Soothsharp.Translation
         /// </summary>
         public const string SilverThis = "this";
         /// <summary>
-        /// The silvername for the domain that represents C# typing system.
+        /// Tag for the default constructor or the initializer created by C# compiler.
         /// </summary>
-        public const string CSharpTypeDomain = "CSharpType";
-        public const string TypeOfFunction = "typeof";
-        public const string IsSubTypeFunction = "isSubtype";
-
         public const string InitializerTag = "init";
+        /// <summary>
+        /// Tag for a user-defined constructor.
+        /// </summary>
         public const string ConstructorTag = "ctor";
     }
 }

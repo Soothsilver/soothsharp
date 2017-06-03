@@ -27,12 +27,12 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
             List<Error> errors = CommonUtils.CombineErrors(left, right).ToList();
 
             StatementsSequenceSilvernode sequence;
-            if (left.Arrays_Container != null)
+            if (left.ArraysContainer != null)
             {
-                errors.AddRange(left.Arrays_Container.Errors);
-                errors.AddRange(left.Arrays_Index.Errors);
-                var arrayWrite = context.Process.ArraysTranslator.ArrayWrite(this.OriginalNode, left.Arrays_Container.Silvernode,
-                    left.Arrays_Index.Silvernode, right.Silvernode);
+                errors.AddRange(left.ArraysContainer.Errors);
+                errors.AddRange(left.ArraysIndex.Errors);
+                var arrayWrite = context.Process.ArraysTranslator.ArrayWrite(this.OriginalNode, left.ArraysContainer.Silvernode,
+                    left.ArraysIndex.Silvernode, right.Silvernode);
                 sequence = new StatementsSequenceSilvernode(null,
                     right.PrependTheseSilvernodes.Concat(new[] {arrayWrite}).ToArray());
             }

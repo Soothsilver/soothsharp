@@ -29,7 +29,13 @@ namespace Soothsharp.Translation
     }
     public enum CompilationUnitVerificationStyle
     {
+        /// <summary>
+        /// Methods in this compilation unit will be translated normally.
+        /// </summary>
         FullVerification,
+        /// <summary>
+        /// Methods in this compilation unit (C# file) will be translated as abstract in Viper.
+        /// </summary>
         ContractsOnly
     } 
 }

@@ -11,7 +11,7 @@ namespace Soothsharp.Translation.Trees.Silver
             List<ParameterSilvernode> parameters,
             string returnName,
             TypeSilvernode returnType, 
-            List<VerificationConditionSilvernode> verificationConditions,
+            List<ContractSilvernode> verificationConditions,
             BlockSilvernode block)
             : base(methodDeclarationSyntax,
                   identifierSilvernode,

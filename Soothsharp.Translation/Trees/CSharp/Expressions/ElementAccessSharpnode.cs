@@ -55,8 +55,8 @@ namespace Soothsharp.Translation.Trees.CSharp
                     var readsilvernode = context.Process.ArraysTranslator.ArrayRead(this.OriginalNode, container.Silvernode,
                         index.Silvernode); 
                     TranslationResult read = TranslationResult.FromSilvernode(readsilvernode, errors).AndPrepend(container.PrependTheseSilvernodes.Concat(index.PrependTheseSilvernodes));
-                    read.Arrays_Container = container;
-                    read.Arrays_Index = index;
+                    read.ArraysContainer = container;
+                    read.ArraysIndex = index;
                     return read; 
                 }
                 else

@@ -105,6 +105,10 @@ namespace Soothsharp.Translation
         {
             this.masterErrorList.Add(error);
         }
+        /// <summary>
+        /// Performs all steps of the translation, as detailed in the thesis, except for verification.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">The process was already executed once.</exception>
         public TranslationProcessResult Execute()
         {
             if (this.executed)

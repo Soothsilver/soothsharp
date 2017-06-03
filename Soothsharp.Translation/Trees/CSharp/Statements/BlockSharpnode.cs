@@ -20,7 +20,7 @@ namespace Soothsharp.Translation.Trees.CSharp
         public override TranslationResult Translate(TranslationContext context)
         {
             var statements = new List<StatementSilvernode>();
-            var verificationConditions = new List<VerificationConditionSilvernode>();
+            var verificationConditions = new List<ContractSilvernode>();
             var diagnostics = new List<Error>();
             bool inFunctionOrPredicateBlockReturnStatementAlreadyOccured = false;
             foreach(var statement in this.Statements)
@@ -34,7 +34,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                 {
                     if (statementResult.Silvernode.IsVerificationCondition())
                     {
-                        verificationConditions.Add(statementResult.Silvernode as VerificationConditionSilvernode);
+                        verificationConditions.Add(statementResult.Silvernode as ContractSilvernode);
                         if (statementResult.Silvernode is RequiresSilvernode ||
                             statementResult.Silvernode is EnsuresSilvernode)
                         {
@@ -111,7 +111,7 @@ namespace Soothsharp.Translation.Trees.CSharp
             {
                 Silvernode = block,
                 Errors = diagnostics,
-                VerificationConditions = verificationConditions
+                Contracts = verificationConditions
             };
         }
     }

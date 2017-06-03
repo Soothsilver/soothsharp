@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 // ReSharper disable InconsistentNaming
 // These names are based on error codes.
+#pragma warning disable 1591
 
 namespace Soothsharp.Translation
 {
@@ -263,7 +264,6 @@ namespace Soothsharp.Translation
         /// <summary>
         /// Gets all error descriptions that might be outputted by Soothsharp.
         /// </summary>
-        // ReSharper disable once UnusedMember.Global - kept for debugging purposes
         public static IEnumerable<SoothsharpDiagnostic> GetAllDiagnostics()
         {
             Type t = typeof(Diagnostics);

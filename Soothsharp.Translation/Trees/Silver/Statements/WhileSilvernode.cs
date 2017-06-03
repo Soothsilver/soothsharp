@@ -8,11 +8,11 @@ namespace Soothsharp.Translation.Trees.Silver
     {
         private Silvernode condition;
         private BlockSilvernode statementBlock;
-        private List<VerificationConditionSilvernode> verificationConditions;
+        private List<ContractSilvernode> verificationConditions;
 
         public WhileSilvernode(
             Silvernode condition, 
-            List<VerificationConditionSilvernode> verificationConditions, 
+            List<ContractSilvernode> verificationConditions, 
             BlockSilvernode statementBlock, 
             SyntaxNode originalNode) : base(originalNode)
         {
