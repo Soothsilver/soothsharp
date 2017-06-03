@@ -12,6 +12,7 @@ You will need Visual Studio 2015 or newer (tested on 2015 only).
 1. Clone this repository locally.
 2. Put the `Viper` directory into your `%PATH%` environment variable. The `INSTALL.txt` file in that directory gives more details.
 3. Rebuild the solution.
+    * If the fails, right-click the solution in the Solution Explorer and click "Restore NuGet packages", then try to rebuild the solution again.
 4. Run the "csverify GUI" project.
 5. You may find examples in the "Examples" project.
 
