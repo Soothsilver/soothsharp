@@ -7,7 +7,7 @@ using Soothsharp.Translation.Trees.Silver;
 namespace Soothsharp.Translation.Backends
 {
     /// <summary>
-    /// Connnects to the "silicon" backend verifier.
+    /// Connects to the "silicon" backend verifier using the batch file.
     /// </summary>
     public class SiliconBackend : IBackend
     {    
@@ -18,6 +18,7 @@ namespace Soothsharp.Translation.Backends
             File.WriteAllText(filename, silvercode);
             try
             {
+                // Find and run "silicon.bat" in PATH and catch the output
                 Process p = new Process
                 {
                     StartInfo =

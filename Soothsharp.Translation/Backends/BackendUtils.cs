@@ -17,6 +17,7 @@ namespace Soothsharp.Translation.Backends
 
         static BackendUtils()
         {
+            // These lines can be output by the verifier, but they are not errors.
             harmlessLines.Add(new Regex("Silicon finished in .* seconds."));
             harmlessLines.Add(new Regex("carbon finished in .* seconds."));
             harmlessLines.Add(new Regex(@"^\W*$"));
@@ -29,6 +30,11 @@ namespace Soothsharp.Translation.Backends
             harmlessLines.Add(new Regex("The following errors were found:"));
         }
 
+        /// <summary>
+        /// Converts the standard output of a backend verifier to a list of verification errors.
+        /// </summary>
+        /// <param name="backendToolResult">The output of the verifier.</param>
+        /// <param name="originalCode">The master silvernode tree that was passed to the verifier.</param>
         public static List<Error> ConvertErrorMessages(string backendToolResult, Silvernode originalCode)
         {
             List<Error> errors = new List<Error>();
@@ -41,6 +47,7 @@ namespace Soothsharp.Translation.Backends
                 }
                 if (line.Contains("Parse error"))
                 {
+                    // Parse error has different format, special case.
                     Match m = regexParseError.Match(line);
                     if (m.Success)
                     {
@@ -84,12 +91,12 @@ namespace Soothsharp.Translation.Backends
                 string codefile = m.Groups[1].Value;
                 string lineString = m.Groups[2].Value;
                 string columnString = m.Groups[3].Value;
-                int line = Int32.Parse(lineString);
-                int column = Int32.Parse(columnString);
-                // tut, tut, here we must do something smart.
+                int line = Int32.Parse(lineString); // < Silver line
+                int column = Int32.Parse(columnString); // < Silver column
+
                 string silvercode = originalCode.ToString();
                 string[] lines = silvercode.Split('\n');
-                int position = 0;
+                int position = 0; // < Let's count the position from the start of the text
                 for (int i = 0; i < line-1; i++)
                 {
                     position += lines[i].Length + 1;
