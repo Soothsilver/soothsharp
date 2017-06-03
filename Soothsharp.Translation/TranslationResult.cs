@@ -32,7 +32,7 @@ namespace Soothsharp.Translation
         /// <summary>
         /// Gets a list of errors that triggered during the translation.
         /// </summary>
-        public List<Error> Errors { get; } = new List<Error>();
+        public List<Error> Errors { get; set; } = new List<Error>();
 
         /// <summary>
         /// If this <see cref="TranslationResult"/> is a result of a sharpnode that's being purified, then this will contain the silvernodes
