@@ -57,6 +57,7 @@ namespace Soothsharp.Translation.Trees.Silver
         }
         protected override void OptimizePost()
         {
+            // Removes the "goto end ; label end" sequence at the end if it's possible.
             BlockSilvernode block = this.Children.FirstOrDefault(s => s is BlockSilvernode) as BlockSilvernode;
             if (block != null)
             {

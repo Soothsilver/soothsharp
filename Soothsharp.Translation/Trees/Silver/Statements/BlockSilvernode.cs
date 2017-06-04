@@ -47,6 +47,8 @@ namespace Soothsharp.Translation.Trees.Silver
 
         protected override void OptimizePre()
         {
+            // Removes excessive levels of nesting.
+
             for(int i = 0; i < this.Statements.Count; i++)
             {
                 StatementSilvernode thisStatement = this.Statements[i];

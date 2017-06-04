@@ -25,8 +25,11 @@ namespace Soothsharp.Translation.Trees.Silver
             }
         }
 
-       
 
+        /// <summary>
+        /// Creates the proper number of spaces that should be added before this silvernode so that
+        /// the resulting Viper code is properly indented.
+        /// </summary>
         protected string Tabs(int add = 0)
         {
             string tabs = "";

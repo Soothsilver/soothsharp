@@ -10,6 +10,10 @@ namespace Soothsharp.Translation.Trees.Silver
 
         }
 
+        /// <summary>
+        /// Contract silvernodes are order in as "requires &lt; ensures" so that preconditions
+        /// are before postcondition, regardless of their order in C# source code.
+        /// </summary>
         public abstract int CompareTo(ContractSilvernode other);
 
         public override bool IsVerificationCondition()
