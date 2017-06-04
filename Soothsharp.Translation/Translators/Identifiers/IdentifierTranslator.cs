@@ -16,6 +16,7 @@ namespace Soothsharp.Translation
         {
             this.process = process;
         }
+        // These words are Viper keywords, and so they can't be used as identifiers directly.
         private static string[] silverKeywords = new[]
         {
             "import",
@@ -88,6 +89,10 @@ namespace Soothsharp.Translation
             ""
         }.Union(silverKeywords).ToList();
 
+        /// <summary>
+        /// Silverizes the specified identifier (see thesis) by removing characters invalid in Viper.
+        /// </summary>
+        /// <param name="identifier">The identifier to remove invalid characters from.</param>
         private static string Silverize(string identifier)
         {
             char[] charArray = identifier.Replace('.', '_').ToCharArray();
@@ -98,10 +103,23 @@ namespace Soothsharp.Translation
             return new string(updatedArray);
         }
 
-        public Identifier RegisterAndGetIdentifier(ISymbol method)
+        /// <summary>
+        /// Adds a new identifier to the identifier database that corresponds to a C# symbol, and returns it.
+        /// It is guaranteed to be distinct from other identifiers.
+        /// </summary>
+        /// <param name="symbol">The symbol to register as a Viper identifier.</param>
+        public Identifier RegisterAndGetIdentifier(ISymbol symbol)
         {
-            return RegisterAndGetIdentifierWithTag(method, "");
+            return RegisterAndGetIdentifierWithTag(symbol, "");
         }
+        /// <summary>
+        /// Adds a new identifier to the identifier database that corresponds to a C# symbol,
+        /// adds a tag, and returns the identifier.
+        /// It is guaranteed to be distinct from other identifiers.
+        /// </summary>
+        /// <param name="classSymbol">The class symbol.</param>
+        /// <param name="tag">The tag.</param>
+        /// <returns></returns>
         public Identifier RegisterAndGetIdentifierWithTag(ISymbol classSymbol, string tag)
         {
             var taggedSymbol = new TaggedSymbol(classSymbol, tag);
@@ -110,34 +128,54 @@ namespace Soothsharp.Translation
             return identifier;
         }
 
-        public Identifier GetIdentifierReference(ISymbol method)
+        /// <summary>
+        /// Gets the identifier that corresponds to a C# symbol. If it doesn't exist, it is created.
+        /// </summary>
+        /// <param name="symbol">The symbol.</param>
+        public Identifier GetIdentifierReference(ISymbol symbol)
         {
-            return GetIdentifierReferenceWithTag(method, "");
+            return GetIdentifierReferenceWithTag(symbol, "");
         }
-        public Identifier GetIdentifierReferenceWithTag(ISymbol method, string tag)
+
+        /// <summary>
+        /// Gets the identifier that corresponds to a C# symbol and tag. If it doesn't exist, it is created.
+        /// </summary>
+        /// <param name="symbol">The symbol.</param>
+        /// <param name="tag">The tag.</param>
+        public Identifier GetIdentifierReferenceWithTag(ISymbol symbol, string tag)
         {
-            var taggedSymbol = new TaggedSymbol(method, tag);
+            var taggedSymbol = new TaggedSymbol(symbol, tag);
             if (this.references.ContainsKey(taggedSymbol))
             {
                 return this.references[taggedSymbol];
             }
             Identifier reference = new Identifier(taggedSymbol);
-            this.references.Add(taggedSymbol, reference);
+            this.references.Add(taggedSymbol, reference); 
             return reference;
         }
 
 
         private int temporaryIdentifiersRegisteredCount;
+
+        /// <summary>
+        /// Registers a new unique identifier, used for temporary variables needed by Viper. Guaranteed to 
+        /// be distinct from other identifiers.
+        /// </summary>
         public Identifier RegisterNewUniqueIdentifier()
         {
             this.temporaryIdentifiersRegisteredCount++;
             return RegisterAndGetIdentifierWithTag(null, "tmp" + this.temporaryIdentifiersRegisteredCount);
         }
 
+        /// <summary>
+        /// Performs the name assignment phase, as per the thesis.
+        /// </summary>
         public void AssignTrueNames()
         {
+            // First, for declarations:
             foreach (var kvp in this.registeredGlobalSymbols)
             {
+                // Determine the base silvername.
                 ISymbol symbol = kvp.Value.Symbol.Symbol;
                 string baseSilverName = "";
                 if (symbol != null)
@@ -153,6 +191,8 @@ namespace Soothsharp.Translation
                     baseSilverName += "_" + kvp.Key.Tag;
                 }
                 string silverName = baseSilverName;
+
+                // Add a number to the end to maintain uniqueness of identifiers.
                 int i = 2;
                 while (this.usedSilverIdentifiers.Contains(silverName))
                 {
@@ -162,6 +202,8 @@ namespace Soothsharp.Translation
                 this.usedSilverIdentifiers.Add(silverName);
                 kvp.Value.Silvername = silverName;
             }
+
+            // Second, use declarations in references:
             foreach (var kvp in this.references)
             {
                 if (this.registeredGlobalSymbols.ContainsKey(kvp.Key))

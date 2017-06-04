@@ -8,6 +8,9 @@ using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation.Translators
 {
+    /// <summary>
+    /// Groups functionality related to translating C# arrays.
+    /// </summary>
     public class ArraysTranslator
     {
         public const string IntegerArrayRead = "arrayRead";
@@ -29,11 +32,23 @@ function {IntegerArrayRead}(array : Ref, index : Int) : Int
         public bool ArraysWereUsed { get; set; } = true;
         public const string ArrayLength = nameof(System) + "." + nameof(Array) + "." + nameof(Array.Length);
 
+        /// <summary>
+        /// Generates the Viper text that should be appended to all files that make use of arrays.
+        /// </summary>
+        /// <returns></returns>
         public Silvernode GenerateGlobalSilvernode()
         {
             return new TextSilvernode(IntegerArrayGlobalSilvertext);
         }
 
+        /// <summary>
+        /// Creates Viper text that changes an element of an arrray.
+        /// </summary>
+        /// <param name="originalNode">The Roslyn node that represents an array write. </param>
+        /// <param name="container">The array.</param>
+        /// <param name="index">The index.</param>
+        /// <param name="value">The new value of container[index].</param>
+        /// <returns></returns>
         public SimpleSequenceStatementSilvernode ArrayWrite(SyntaxNode originalNode, Silvernode container, Silvernode index, Silvernode value)
         {
             return new SimpleSequenceStatementSilvernode(originalNode,
@@ -46,6 +61,13 @@ function {IntegerArrayRead}(array : Ref, index : Int) : Int
                 ")");
         }
 
+        /// <summary>
+        /// Creates Viper text that reads an element of an array.
+        /// </summary>
+        /// <param name="originalNode">The Roslyn node that represents an array read.</param>
+        /// <param name="containerSilvernode">The array.</param>
+        /// <param name="indexSilvernode">The index.</param>
+        /// <returns></returns>
         public Silvernode ArrayRead(SyntaxNode originalNode, Silvernode containerSilvernode, Silvernode indexSilvernode)
         {
             return new SimpleSequenceSilvernode(originalNode,
