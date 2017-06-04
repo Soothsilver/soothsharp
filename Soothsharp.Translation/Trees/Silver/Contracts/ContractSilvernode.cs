@@ -16,7 +16,7 @@ namespace Soothsharp.Translation.Trees.Silver
         /// </summary>
         public abstract int CompareTo(ContractSilvernode other);
 
-        public override bool IsVerificationCondition()
+        public override bool IsContract()
         {
             return true;
         }

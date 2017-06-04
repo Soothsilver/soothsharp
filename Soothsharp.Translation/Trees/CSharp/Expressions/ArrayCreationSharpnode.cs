@@ -46,6 +46,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
 
         public override TranslationResult Translate(TranslationContext context)
         {
+            // see thesis for details
+
             if (error != null)
             {
                 return TranslationResult.Error(error);

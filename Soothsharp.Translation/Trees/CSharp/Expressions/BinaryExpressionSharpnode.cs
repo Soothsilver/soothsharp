@@ -30,6 +30,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
             var left = this.Left.Translate(context);
             var right = this.Right.Translate(context);
             List<Error> errors = CommonUtils.CombineErrors(left, right).ToList();
+
+            // Impure expressions cause error
             if (Right is SimpleAssignmentExpressionSharpnode ||
                 Right is CompoundAssignmentExpressionSharpnode ||
                 Right is IncrementExpressionSharpnode)
@@ -44,6 +46,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Expressions
                 errors.Add(new Error(Diagnostics.SSIL131_AssignmentsNotInsideExpressions,
                     Left.OriginalNode));
             }
+
             // Special case for Contract.Truth:
             if (this.Operator == "&&" &&
                 left.Silvernode != null && left.Silvernode.ToString().Trim() == "true")

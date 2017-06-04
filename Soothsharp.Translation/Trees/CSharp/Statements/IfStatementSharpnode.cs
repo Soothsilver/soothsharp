@@ -18,9 +18,12 @@ namespace Soothsharp.Translation.Trees.CSharp
         }
         public override TranslationResult Translate(TranslationContext context)
         {
+            // Translate parts
             var conditionResult = this.Condition.Translate(context.ChangePurityContext(PurityContext.Purifiable));
             var thenResult = this.Then.Translate(context);
             var elseResult = this.Else?.Translate(context);
+
+            // Put them together
             var errors = new List<Error>();
             errors.AddRange(conditionResult.Errors);
             errors.AddRange(thenResult.Errors);

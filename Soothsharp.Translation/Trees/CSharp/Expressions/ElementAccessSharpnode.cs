@@ -26,6 +26,8 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         public override TranslationResult Translate(TranslationContext context)
         {
+            // see thesis for details
+
             SymbolInfo symbolInfo = context.Semantics.GetSymbolInfo(this.eaes);
             ISymbol symbol = symbolInfo.Symbol;
             string accessorName = symbol?.GetQualifiedName();
@@ -51,7 +53,8 @@ namespace Soothsharp.Translation.Trees.CSharp
                 var t = typeInfo.Type;
                 if (t.Kind == SymbolKind.ArrayType)
                 {
-                    // ASSUME READ
+                    // Let's assume that this is an array read.
+                    // If this is an array write, the parent will usee ArraysContainer and ArraysIndex instead
                     var readsilvernode = context.Process.ArraysTranslator.ArrayRead(this.OriginalNode, container.Silvernode,
                         index.Silvernode); 
                     TranslationResult read = TranslationResult.FromSilvernode(readsilvernode, errors).AndPrepend(container.PrependTheseSilvernodes.Concat(index.PrependTheseSilvernodes));
@@ -61,7 +64,6 @@ namespace Soothsharp.Translation.Trees.CSharp
                 }
                 else
                 {
-                    //      if (ssContainer as IExpressionSym
                     return TranslationResult.Error(this.OriginalNode,
                         Diagnostics.SSIL128_IndexersAreOnlyForSeqsAndArrays);
                 }

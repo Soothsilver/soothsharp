@@ -64,7 +64,7 @@ namespace Soothsharp.Translation.Trees.Silver
         /// <summary>
         /// Returns a value that indicates whether this silvernode represents a contract ("requires", "ensures" or "invariant").
         /// </summary>
-        public virtual bool IsVerificationCondition()
+        public virtual bool IsContract()
         {
             return false;
         }

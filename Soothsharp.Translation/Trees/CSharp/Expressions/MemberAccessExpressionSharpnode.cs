@@ -24,6 +24,8 @@ namespace Soothsharp.Translation
         {
             SymbolInfo symbolInfo = context.Semantics.GetSymbolInfo(this.Expression);
             ISymbol symbol = symbolInfo.Symbol;
+
+            // Special cases first:
             TranslationResult contractResult = context.Process.ContractsTranslator.TranslateIdentifierAsContract(symbol, this.Expression, context);
             if (contractResult != null) return contractResult;
             TranslationResult constantResult =
@@ -47,6 +49,7 @@ namespace Soothsharp.Translation
                    );
             }
 
+            // Normal case:
             Identifier lastIdentifier = context.Process.IdentifierTranslator.GetIdentifierReference(symbol);
 
             errors.AddRange(container.Errors);

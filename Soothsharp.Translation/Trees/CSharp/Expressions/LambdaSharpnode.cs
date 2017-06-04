@@ -11,6 +11,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 namespace Soothsharp.Translation.Trees.CSharp
 {
+    /// <summary>
+    /// Lambda expressions are only permitted within ForAll and Exists calls.
+    /// </summary>
     class LambdaSharpnode : ExpressionSharpnode
     {
         private Error errorneousResult;
@@ -23,6 +26,7 @@ namespace Soothsharp.Translation.Trees.CSharp
 
         public LambdaSharpnode(ParenthesizedLambdaExpressionSyntax syntax) : base(syntax)
         {
+            // We only allow for a single kind of lambda expressions: those that fit ForAll and Exists.
            if (syntax.ParameterList.Parameters.Count != 1)
            {
                this.errorneousResult = new Error(
@@ -66,6 +70,7 @@ namespace Soothsharp.Translation.Trees.CSharp
             return TranslationResult.Error(this.OriginalNode,
                 Diagnostics.SSIL127_LambdasOnlyInContracts);
         }
+
 
         public bool PrepareForInsertionIntoQuantifier(TranslationContext context)
         {

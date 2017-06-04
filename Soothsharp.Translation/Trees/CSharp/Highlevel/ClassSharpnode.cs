@@ -34,6 +34,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
         public override TranslationResult Translate(TranslationContext context)
         {
             var classSymbol = context.Semantics.GetDeclaredSymbol(this.OriginalNode as ClassDeclarationSyntax);
+
+            // Should translate at all?
             var attributes = classSymbol.GetAttributes();            
             switch (VerificationSettings.ShouldVerify(attributes, context.VerifyUnmarkedItems))
             {
@@ -43,6 +45,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
                     return TranslationResult.Error(this.OriginalNode,
                         Diagnostics.SSIL113_VerificationSettingsContradiction);
             }
+
+            // Combine all members
             return CommonUtils.GetHighlevelSequence(this.children.Select(child => child.Translate(context)));
         }
 
@@ -51,6 +55,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
 
 
             var classSymbol = semantics.GetDeclaredSymbol(this.OriginalNode as ClassDeclarationSyntax);
+
+            // Should translate at all?
             var attributes = classSymbol.GetAttributes();
             switch (VerificationSettings.ShouldVerify(attributes, translationProcess.Configuration.VerifyUnmarkedItems))
             {
@@ -64,6 +70,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Highlevel
             this.TypeIfCollected = translationProcess.AddToCollectedTypes(this, semantics);
             foreach (Sharpnode node in this.children)
             {
+                // Collect fields
                 if (node is FieldDeclarationSharpnode)
                 {
                     FieldDeclarationSharpnode fieldDeclaration = (FieldDeclarationSharpnode)node;

@@ -20,21 +20,27 @@ namespace Soothsharp.Translation.Trees.CSharp
         public override TranslationResult Translate(TranslationContext context)
         {
             var statements = new List<StatementSilvernode>();
-            var verificationConditions = new List<ContractSilvernode>();
+            var contracts = new List<ContractSilvernode>();
             var diagnostics = new List<Error>();
             bool inFunctionOrPredicateBlockReturnStatementAlreadyOccured = false;
+
+
             foreach(var statement in this.Statements)
             {
                 var statementResult = statement.Translate(context);
+
+                // Prepending statements (part 1)
                 if (statementResult.PrependTheseSilvernodes.Any())
                 {
                     statements.AddRange(statementResult.PrependTheseSilvernodes);
                 }
+
                 if (statementResult.Silvernode != null)
                 {
-                    if (statementResult.Silvernode.IsVerificationCondition())
+                    // Report an error is a contract is in an invalid block
+                    if (statementResult.Silvernode.IsContract())
                     {
-                        verificationConditions.Add(statementResult.Silvernode as ContractSilvernode);
+                        contracts.Add(statementResult.Silvernode as ContractSilvernode);
                         if (statementResult.Silvernode is RequiresSilvernode ||
                             statementResult.Silvernode is EnsuresSilvernode)
                         {
@@ -69,6 +75,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                     }
                     else
                     {
+                        // Translate body
                         if (context.IsFunctionOrPredicateBlock)
                         {
 
@@ -106,12 +113,12 @@ namespace Soothsharp.Translation.Trees.CSharp
                 diagnostics.AddRange(statementResult.Errors);
             }
             BlockSilvernode block = new BlockSilvernode(this.BlockSyntax, statements);
-            verificationConditions.Sort();
+            contracts.Sort();
             return new TranslationResult
             {
                 Silvernode = block,
                 Errors = diagnostics,
-                Contracts = verificationConditions
+                Contracts = contracts
             };
         }
     }

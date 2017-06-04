@@ -25,12 +25,15 @@ namespace Soothsharp.Translation
         public override TranslationResult Translate(TranslationContext context)
         {
             ISymbol symbol = GetIdentifierSymbol(context);
+
+            // Special case translations first:
             TranslationResult contractResult = context.Process.ContractsTranslator.TranslateIdentifierAsContract(symbol, this.IdentifierName, context);
             if (contractResult != null) return contractResult;
             TranslationResult constantResult =
                 context.Process.ConstantsTranslator.TranslateIdentifierAsConstant(symbol, this.IdentifierName);
             if (constantResult != null) return constantResult;
 
+            // Normal translation:
             var identifierNode = new IdentifierSilvernode(context.Process.IdentifierTranslator.GetIdentifierReference(symbol));
             if (symbol.ContainingSymbol.Kind == SymbolKind.Method)
             {

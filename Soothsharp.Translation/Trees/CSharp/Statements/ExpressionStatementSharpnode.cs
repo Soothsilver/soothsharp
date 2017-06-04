@@ -20,7 +20,7 @@ namespace Soothsharp.Translation.Trees.CSharp
         public override TranslationResult Translate(TranslationContext context)
         {
             var exResult = this.Expression.Translate(context);
-            if (exResult.Silvernode.IsVerificationCondition())
+            if (exResult.Silvernode.IsContract())
             {
                 return exResult;
             }

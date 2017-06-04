@@ -18,8 +18,11 @@ namespace Soothsharp.Translation
 
         public override TranslationResult Translate(TranslationContext context)
         {
+            // Translate parts
             var conditionResult = this.Condition.Translate(context.ChangePurityContext(PurityContext.Purifiable));
             var statementResult = this.Statement.Translate(context);
+
+            // Put them together
             var statementBlock = ((StatementSilvernode)statementResult.Silvernode).EncloseInBlockIfNotAlready();
             statementBlock.Statements.AddRange(conditionResult.PrependTheseSilvernodes);
             var errors = new List<Error>();

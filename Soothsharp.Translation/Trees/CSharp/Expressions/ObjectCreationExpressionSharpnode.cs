@@ -23,6 +23,7 @@ namespace Soothsharp.Translation.Trees.CSharp
             var classSymbol = constructorSymbol.ContainingType;
             bool isDefaultConstructor = constructorSymbol.IsImplicitlyDeclared;
 
+            // Special case:
             if (classSymbol.GetQualifiedName() == SeqTranslator.SeqClassWithoutEndDot)
             {
                 return SeqTranslator.Constructor(this.Arguments, context, classSymbol.TypeArguments[0], this.OriginalNode);
@@ -30,6 +31,7 @@ namespace Soothsharp.Translation.Trees.CSharp
 
             var identifier = context.Process.IdentifierTranslator.RegisterNewUniqueIdentifier();
 
+            // Normal case: As method call
             var arguments = new List<Silvernode>();
             var errors = new List<Error>();
             var prependThese = new List<StatementSilvernode>();

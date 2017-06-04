@@ -40,6 +40,10 @@ namespace Soothsharp.Translation.Trees.Silver
             return tabs;
         }
 
+        /// <summary>
+        /// Unless this is a <see cref="BlockSilvernode"/>, returns a Viper block that contains this statement.
+        /// If this is already a block, it returns itself.
+        /// </summary>
         public virtual BlockSilvernode EncloseInBlockIfNotAlready()
         {
             return new BlockSilvernode(null, new List<StatementSilvernode> {this});
