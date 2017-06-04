@@ -4,6 +4,12 @@ using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation
 {
+    /// <summary>
+    /// Represents a C# class that is to be used in Viper. 
+    /// 
+    /// To translate a class, we must put its fields into Viper code and we must create an initializer (which is also the default constructor,
+    /// if no constructor was defined).
+    /// </summary>
     public class CollectedType
     {
         private ISymbol ClassSymbol;
@@ -16,11 +22,16 @@ namespace Soothsharp.Translation
             this._isStatic = isStatic;
         }
 
+        /// <summary>
+        /// Generates the Viper text that contains fields and the initializer of this class.
+        /// </summary>
+        /// <param name="process">The TranslationProcess.</param>
         public Silvernode GenerateGlobalSilvernode(TranslationProcess process)
         {
 
             var node = new SimpleSequenceSilvernode(null);
 
+            // Translate fields
             foreach (CollectedField field in this.InstanceFields)
             {
                 node.List.Add("field ");
@@ -33,11 +44,13 @@ namespace Soothsharp.Translation
                 }
             }
 
+            // Translate the initializer/default constructor
             if (!this._isStatic)
             {
                 Identifier initializer = process.IdentifierTranslator.RegisterAndGetIdentifierWithTag(this.ClassSymbol,
                     Constants.InitializerTag);
 
+                // The initializer gives write access to all fields
                 var accessToAllFields = new List<ContractSilvernode>();
                 foreach (CollectedField field in this.InstanceFields)
                 {

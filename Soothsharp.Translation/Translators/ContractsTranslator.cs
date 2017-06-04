@@ -6,6 +6,9 @@ using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation
 {
+    /// <summary>
+    /// Groups functionality related to translating the class <see cref="Contract"/>. 
+    /// </summary>
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class ContractsTranslator
     {
@@ -22,7 +25,7 @@ namespace Soothsharp.Translation
         public const string ContractInhale = ContractsClass + nameof(Contract.Inhale);
         public const string ContractExhale = ContractsClass + nameof(Contract.Exhale);
         private const string ContractIntResult = ContractsClass + nameof(Contract.IntegerResult);
-        public const string ContractTruth = ContractsClass + nameof(Contract.Truth);
+        private const string ContractTruth = ContractsClass + nameof(Contract.Truth);
         public const string Result = ContractsClass + nameof(Contract.Result);
         public const string Fold = ContractsClass + nameof(Contract.Fold);
         public const string Unfold = ContractsClass + nameof(Contract.Unfold);
@@ -54,7 +57,13 @@ namespace Soothsharp.Translation
         public const string AbstractAttribute = ContractsNamespace + nameof(Contracts.AbstractAttribute);
         public const string SignatureOnlyAttribute = ContractsNamespace + nameof(Contracts.SignatureOnlyAttribute);
 
-
+        /// <summary>
+        /// If the symbol corresponds to a known member of the <see cref="Contract"/> class, it is translated
+        /// into Viper, otherwise null is returned. 
+        /// </summary>
+        /// <param name="symbol">The C# symbol of a possible property of Contract.</param>
+        /// <param name="originalNode">The Roslyn node that is being translated.</param>
+        /// <param name="context">The context.</param>
         public TranslationResult TranslateIdentifierAsContract(ISymbol symbol, SyntaxNode originalNode, TranslationContext context)
         {
             string silvertext = null;

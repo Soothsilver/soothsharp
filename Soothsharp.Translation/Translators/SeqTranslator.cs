@@ -10,6 +10,9 @@ using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation
 {
+    /// <summary>
+    /// Groups functionality related to translating the <see cref="Seq{T}"/> class to Viper sequences. 
+    /// </summary>
     internal static class SeqTranslator
     {
         private const string CONTRACTS_NAMESPACE = nameof(Soothsharp) + "." + nameof(Contracts) + ".";
@@ -29,6 +32,7 @@ namespace Soothsharp.Translation
             var silvernodes = new List<Silvernode>();
             var errors = new List<Error>();
             List<StatementSilvernode> prepend = new List<Trees.Silver.StatementSilvernode>();
+            // Translate initial members
             foreach (var arg in arguments)
             {
                 var res = arg.Translate(context.ChangePurityContext(PurityContext.Purifiable));
@@ -39,6 +43,7 @@ namespace Soothsharp.Translation
             Silvernode result;
             if (arguments.Count == 0)
             {
+                // No arguments = use the Seq[Int] construction
                 Error err;
                 SilverType silverType = TypeTranslator.TranslateType(typeArgument, null, out err);
                 if (err != null) errors.Add(err);
@@ -48,13 +53,14 @@ namespace Soothsharp.Translation
             }
             else
             {
+                // Some arguments - use the Seq construction with type inference
                 // ReSharper disable once UseObjectOrCollectionInitializer
                 List<Silvernode> args = new List<Silvernode>();
                 args.Add("Seq(");
                 for (int i = 0; i < silvernodes.Count; i++)
                 {
                     args.Add(silvernodes[i]);
-                    if (i != silvernodes.Count - 1)
+                    if (i != silvernodes. Count - 1)
                     {
                         args.Add(", ");
                     }

@@ -1,5 +1,8 @@
 ﻿namespace Soothsharp.Translation
 {
+    /// <summary>
+    /// Represents a field of a C# class that is to be translated as a Viper field.
+    /// </summary>
     public class CollectedField
     {
         public Identifier Name;

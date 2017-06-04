@@ -10,6 +10,12 @@ namespace Soothsharp.Translation.Trees
     /// </summary>
     static class CommonUtils
     {
+        /// <summary>
+        /// Gets a silvernode that combines the silvernodes of all elements of <paramref name="results"/>. They are separated by
+        /// newlines. Errors are combined as well.
+        /// </summary>
+        /// <param name="results">The results to merge, separated by newlines.</param>
+        /// <param name="parent">The Roslyn node that represents this grouping of results.</param>
         public static TranslationResult GetHighlevelSequence(IEnumerable<TranslationResult> results, SyntaxNode parent = null)
         {
             TranslationResult result = new TranslationResult();
@@ -26,6 +32,10 @@ namespace Soothsharp.Translation.Trees
             return result;
         }
 
+        /// <summary>
+        /// Combines the errors from all the arguments and returns them.
+        /// </summary>
+        /// <param name="results">TranslationResult instances that may contain errors.</param>
         internal static IEnumerable<Error> CombineErrors(params TranslationResult[] results)
         {
            return results.SelectMany((result) => result.Errors);

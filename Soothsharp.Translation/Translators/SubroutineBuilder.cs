@@ -7,6 +7,11 @@ using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation
 {
+    /// <summary>
+    /// An instance of this class represents a C# method or constructor in the process of being translated. 
+    /// The result of the translation may be a method, a function or a predicate. This class groups functionality
+    /// common to translating both methods and constructors.
+    /// </summary>
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     class SubroutineBuilder
     {
@@ -18,6 +23,16 @@ namespace Soothsharp.Translation
         private readonly INamedTypeSymbol ConstructorClass;
         private readonly SyntaxNode OriginalNode;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubroutineBuilder"/> class.
+        /// </summary>
+        /// <param name="symbol">The symbol of the method or constructor that's being translated.</param>
+        /// <param name="isConstructor">True if a constructor is being translated, false otherwise.</param>
+        /// <param name="constructorClass">If this translates a constructor, then this is the class that's being constructed, otherwise this is null.</param>
+        /// <param name="parameters">The parameters of the method or constructor.</param>
+        /// <param name="body">The body.</param>
+        /// <param name="context">The context.</param>
+        /// <param name="originalNode">The Roslyn node.</param>
         public SubroutineBuilder(
             IMethodSymbol symbol,
             bool isConstructor,
@@ -38,6 +53,9 @@ namespace Soothsharp.Translation
         }
 
 
+        /// <summary>
+        /// Translates the method or constructor.
+        /// </summary>
         public TranslationResult TranslateSelf()
         {
             Identifier identifier = GetSubroutineIdentifier();
@@ -45,6 +63,7 @@ namespace Soothsharp.Translation
             TranslationResult result = new TranslationResult();
             bool isAbstract = false;
 
+            // Determine whether it should be translated at all.
             var attributes = this.MethodSymbol.GetAttributes();
             switch (VerificationSettings.ShouldVerify(attributes, this.Context.VerifyUnmarkedItems)) {
                 case VerificationSetting.DoNotVerify:
@@ -56,6 +75,8 @@ namespace Soothsharp.Translation
                 default:
                     throw new InvalidOperationException("Nonexistent verification settings.");
             }
+
+            // Determine whether it will result in a predicate, function or method, and whether it's abstract.
             foreach (var attribute in attributes)
             {
                 switch (attribute.AttributeClass.GetQualifiedName())
@@ -96,6 +117,8 @@ namespace Soothsharp.Translation
             {
                 isAbstract = true;
             }
+
+            // Translate the method body
             TranslationContext bodyContext = this.Context;
             if (silverKind == SilverKind.Function || silverKind == SilverKind.Predicate)
             {
@@ -108,6 +131,7 @@ namespace Soothsharp.Translation
             TranslationResult body = this.BodySharpnode.Translate(bodyContext);
             result.Errors.AddRange(body.Errors);
 
+            // Translate parameters
             var silverParameters = new List<ParameterSilvernode>();
             if (!this.IsConstructor && !this.MethodSymbol.IsStatic)
             {
@@ -132,13 +156,14 @@ namespace Soothsharp.Translation
             {
                 silReturnValueName = "result"; // "result" is a Silver keyword
             }
-
             Error diagnostic;
             SilverType silverReturnType = TypeTranslator.TranslateType(this.IsConstructor ? this.ConstructorClass : this.MethodSymbol.ReturnType, null, out diagnostic);
             if (diagnostic != null) result.Errors.Add(diagnostic);
             var silTypeSilvernode = new TypeSilvernode(null, silverReturnType);
             var silVerificationConditions = body.Contracts;
             var silBlock = body.Silvernode as BlockSilvernode;
+
+            // Error checking
             if (silverReturnType == SilverType.Void && silverKind == SilverKind.Function)
             {
                 return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL118_FunctionsMustHaveAReturnType);
@@ -147,14 +172,20 @@ namespace Soothsharp.Translation
             {
                 return TranslationResult.Error(this.OriginalNode, Diagnostics.SSIL119_PredicateMustBeBool);
             }
+
+            // Constructors first need to call the initializer
             if (this.IsConstructor)
             {
                 silBlock.Prepend(new AssignmentSilvernode(Constants.SilverThis, new CallSilvernode(this.Context.Process.IdentifierTranslator.GetIdentifierReferenceWithTag(this.ConstructorClass, Constants.InitializerTag), new List<Silvernode>(), SilverType.Ref, null), null));
             }
+
+            // Methods need "label end" at the end; this may be removed by optimization further in the translation process
             if (silverKind == SilverKind.Method)
             {
                 silBlock.Add(new LabelSilvernode(Constants.SilverMethodEndLabel, null));
             }
+
+            // Put it all together
             switch (silverKind)
             {
                 case SilverKind.Method:

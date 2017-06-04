@@ -107,11 +107,13 @@ namespace Soothsharp.Translation
       "This ({0}) cannot be translated into a pure assertion.",
       "In this context, C# code is forced to be translated into pure Viper assertions. However, this C# node cannot be translated in a pure way.",
       DiagnosticSeverity.Error);
+        
+        // This error no longer ever triggers -- all integers are now converted to Int, without regard to their size in C#
         public static SoothsharpDiagnostic SSIL115_ThisIntegerSizeNotSupported =
           SoothsharpDiagnostic.Create(
               "SSIL115",
-              "Use System.Int32 instead of {0}.",
-              "The Viper language's integers are unbounded. To prevent confusion, use only 'System.Int32' integers, please. Your actual used type wouldn't matter anyway, since Viper does not check for overflow or underflow.",
+              "[deprecated error] Use System.Int32 instead of {0}.",
+              "[no longer true] The Viper language's integers are unbounded. To prevent confusion, use only 'System.Int32' integers, please. Your actual used type wouldn't matter anyway, since Viper does not check for overflow or underflow.",
               DiagnosticSeverity.Error);
         public static SoothsharpDiagnostic SSIL116_MethodAttributeContradiction =
          SoothsharpDiagnostic.Create(

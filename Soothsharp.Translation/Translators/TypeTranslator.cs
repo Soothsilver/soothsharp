@@ -2,6 +2,9 @@
 
 namespace Soothsharp.Translation
 {
+    /// <summary>
+    /// Contains the <see cref="TranslateType(ITypeSymbol, SyntaxNode, out Error)"/> method which converts C# types to Viper types.
+    /// </summary>
     static class TypeTranslator
     {
         /// <summary>
@@ -22,6 +25,13 @@ namespace Soothsharp.Translation
             switch(typeSymbol.GetQualifiedName())
             {
                 case "System.Int32":
+                case "System.Byte":
+                case "System.SByte":
+                case "System.Int16":
+                case "System.UInt16":
+                case "System.UInt32":
+                case "System.Int64":
+                case "System.UInt64":
                     return SilverType.Int;
                 case "System.Boolean":
                     return SilverType.Bool;
@@ -29,15 +39,7 @@ namespace Soothsharp.Translation
                 case "System.Double":
                 case "System.Decimal":
                 case "System.Char":
-                case "System.Byte":
                     error = new Error(Diagnostics.SSIL106_TypeNotSupported, where, typeSymbol.GetQualifiedName());
-                    return SilverType.Error;
-                case "System.Int16":
-                case "System.UInt16":
-                case "System.UInt32":
-                case "System.Int64":
-                case "System.UInt64":
-                    error = new Error(Diagnostics.SSIL115_ThisIntegerSizeNotSupported, where, typeSymbol.GetQualifiedName());
                     return SilverType.Error;
                 case ContractsTranslator.PermissionType:
                     return SilverType.Perm;
