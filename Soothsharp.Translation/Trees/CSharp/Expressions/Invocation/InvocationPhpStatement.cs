@@ -8,6 +8,14 @@ using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation.Trees.CSharp.Invocation
 {
+    /// <summary>
+    /// Translates methods into statements such as 'assert [something]' or 'inhale [something]'.
+    /// </summary>
+    /// <remarks>
+    /// This class is named "PhpStaement" because these statements remind me of PHP's echo and print, in that they
+    /// don't use parentheses.
+    /// </remarks>
+    /// <seealso cref="Soothsharp.Translation.Trees.CSharp.Invocation.InvocationTranslation" />
     class InvocationPhpStatement : InvocationTranslation
     {
         private string _keyword;

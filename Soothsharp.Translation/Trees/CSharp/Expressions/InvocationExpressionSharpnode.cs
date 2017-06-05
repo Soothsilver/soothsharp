@@ -11,6 +11,9 @@ using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation.Trees.CSharp
 {
+    /// <summary>
+    /// Represents an invocation expression syntax node. An invocation expression is a method call.
+    /// </summary>
     public class InvocationExpressionSharpnode : ExpressionSharpnode
     {
         private ExpressionSyntax MethodGroup;
@@ -27,8 +30,10 @@ namespace Soothsharp.Translation.Trees.CSharp
             }
         }
 
+
         public override TranslationResult Translate(TranslationContext context)
         {
+            // Get symbol from semantic analysis
             var method = context.Semantics.GetSymbolInfo(this.MethodGroup);
             var methodSymbol = method.Symbol as IMethodSymbol;
             if (methodSymbol == null)
@@ -38,6 +43,10 @@ namespace Soothsharp.Translation.Trees.CSharp
             }
             var methodName = methodSymbol.GetQualifiedName();
 
+            // There are many special cases where we don't want to translate a method call as a Viper method or function call
+            // Each case is a subclass of InvocationTranslation. See InvocationTranslation for details.
+            // These special cases all concern invocation targets within Soothsharp.Contracts and are translated into
+            // keyworded Viper constructs
             InvocationTranslation translationStyle;
             switch (methodName)
             {
@@ -45,7 +54,7 @@ namespace Soothsharp.Translation.Trees.CSharp
                 case ContractsTranslator.ContractEnsures:
                 case ContractsTranslator.ContractRequires:
                 case ContractsTranslator.ContractInvariant:
-                    translationStyle = new InvocationVerificationCondition(methodName);
+                    translationStyle = new InvocationContract(methodName);
                     break;
                 case ContractsTranslator.Implication:
                     translationStyle = new InvocationImplicationEquivalence("==>", this.MethodGroup);
@@ -115,16 +124,21 @@ namespace Soothsharp.Translation.Trees.CSharp
                     translationStyle = new InvocationFoldingUnfolding(false);
                     break;
                 default:
+                    // Standard case
                     translationStyle = new InvocationStandardMethod(this.MethodGroup, this.methodGroupSharpnode, method);
                     break;
             }
 
+            // Perform the translation
             translationStyle.Run(this.Arguments, this.OriginalNode, context);
+
+            // Get the result
             Silvernode silvernode = translationStyle.Silvernode;
 
             TranslationResult result = TranslationResult.FromSilvernode(silvernode,
                 translationStyle.Errors).AndPrepend(translationStyle.Prependors.ToArray());
 
+            // Maybe prepending is required.
             translationStyle.PostprocessPurity(result, context);
             return result;
         }

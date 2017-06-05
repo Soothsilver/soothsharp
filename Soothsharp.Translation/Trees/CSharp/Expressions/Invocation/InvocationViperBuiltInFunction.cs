@@ -8,6 +8,10 @@ using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation.Trees.CSharp.Invocation
 {
+    /// <summary>
+    /// Translates into Viper built-in functions that have parentheses, such as acc.
+    /// </summary>
+    /// <seealso cref="Soothsharp.Translation.Trees.CSharp.Invocation.InvocationSubroutine" />
     class InvocationViperBuiltInFunction : InvocationSubroutine
     {
         private string _keyword;

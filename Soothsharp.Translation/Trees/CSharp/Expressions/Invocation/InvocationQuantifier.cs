@@ -8,6 +8,11 @@ using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation.Trees.CSharp.Invocation
 {
+    /// <summary>
+    /// Translates <see cref="Contracts.Contract.ForAll(Func{int, bool})"/>
+    /// and <see cref="Contracts.Contract.Exists(Func{int, bool})"/>.  
+    /// </summary>
+    /// <seealso cref="Soothsharp.Translation.Trees.CSharp.Invocation.InvocationTranslation" />
     class InvocationQuantifier : InvocationTranslation
     {
         private QuantifierKind kind;
@@ -20,6 +25,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
         public override void Run(List<ExpressionSharpnode> arguments, SyntaxNode originalNode, TranslationContext context)
         {
             
+            // Error checking
             int numArguments = arguments.Count;
             if (numArguments != 1)
             {
@@ -35,7 +41,10 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
                       originalNode));
                 this.Silvernode = new ErrorSilvernode(originalNode);
                 return;
+
             }
+
+            // Use the lambda expression to create the Viper code
             LambdaSharpnode lambda = (LambdaSharpnode)arguments[0];
             if (lambda.PrepareForInsertionIntoQuantifier(context))
             {

@@ -4,19 +4,19 @@ using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation.Trees.CSharp.Invocation
 {
-    class InvocationVerificationCondition : InvocationTranslation
+    class InvocationContract : InvocationTranslation
     {
         private readonly string _methodName;
 
-        public InvocationVerificationCondition(string methodName)
+        public InvocationContract(string methodName)
         {
             this._methodName = methodName;
         }
 
         public override void Run(List<ExpressionSharpnode> arguments, SyntaxNode originalNode, TranslationContext context)
         {
-            // TODO (future) This might still fail perhaps. More checks are required?
-            var conditionResult = arguments[0].Translate(context.ChangePurityContext(PurityContext.PurityNotRequired));
+            // Contracts must be pure expressions
+            var conditionResult = arguments[0].Translate(context.ChangePurityContext(PurityContext.PureOrFail));
             Silvernode result;
             switch (this._methodName)
             {

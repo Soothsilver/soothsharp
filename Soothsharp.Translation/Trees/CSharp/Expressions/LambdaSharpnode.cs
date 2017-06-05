@@ -72,6 +72,11 @@ namespace Soothsharp.Translation.Trees.CSharp
         }
 
 
+        /// <summary>
+        /// Prepares for insertion into quantifier.
+        /// Returns true if this lambda expression is valid for translation inside a ForAll or Exists call; false otherwise.
+        /// </summary>
+        /// <param name="context">The context.</param>
         public bool PrepareForInsertionIntoQuantifier(TranslationContext context)
         {
             if (this.errorneousResult != null)
@@ -79,6 +84,8 @@ namespace Soothsharp.Translation.Trees.CSharp
                 this.failedResult = TranslationResult.Error(this.errorneousResult.Node, this.errorneousResult.Diagnostic, this.errorneousResult.DiagnosticArguments);
                 return false;
             }
+
+            // Translate the single parameter's type
             var parameterSymbol = context.Semantics.GetDeclaredSymbol(this.parameter.ParameterSyntax);
             this.VariableIdentifier = context.Process.IdentifierTranslator.RegisterAndGetIdentifier(parameterSymbol);
             this.VariableSilverType = TypeTranslator.TranslateType(parameterSymbol.Type, this.parameter.OriginalNode,
@@ -88,6 +95,8 @@ namespace Soothsharp.Translation.Trees.CSharp
                 this.failedResult = TranslationResult.Error(this.errorneousResult.Node, this.errorneousResult.Diagnostic, this.errorneousResult.DiagnosticArguments);
                 return false;
             }
+
+            // Translate the lambda's body
             TranslationResult res = this.body.Translate(context.ChangePurityContext(PurityContext.PureOrFail));
             if (res.WasTranslationSuccessful)
             {
@@ -98,6 +107,8 @@ namespace Soothsharp.Translation.Trees.CSharp
                 this.failedResult = res;
                 return false;
             }
+
+            // Nothing went wrong.
             return true;
         }
 

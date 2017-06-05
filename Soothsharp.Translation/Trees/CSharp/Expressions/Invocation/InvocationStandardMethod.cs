@@ -10,6 +10,10 @@ using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation.Trees.CSharp.Invocation
 {
+    /// <summary>
+    /// The normal case of translating a method call - into a Viper method call, function call or predicate call.
+    /// </summary>
+    /// <seealso cref="Soothsharp.Translation.Trees.CSharp.Invocation.InvocationSubroutine" />
     class InvocationStandardMethod : InvocationSubroutine
     {
         private readonly ExpressionSyntax methodGroup;
@@ -25,11 +29,15 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
 
         public override void Run(List<ExpressionSharpnode> arguments, SyntaxNode originalNode, TranslationContext context)
         {
+            // Get the symbol
             var methodSymbol = this._method.Symbol as IMethodSymbol;
             var identifier = context.Process.IdentifierTranslator.GetIdentifierReference(this._method.Symbol as IMethodSymbol);
             IMethodSymbol theMethod = (this._method.Symbol as IMethodSymbol);
+
+            // Determine purity
             this.Impure = !(ContractsTranslator.IsMethodPureOrPredicate(theMethod));
 
+            // Add the receiver
             if (!theMethod.IsStatic)
             {
                 if (this.methodGroupSharpnode is IdentifierExpressionSharpnode)
@@ -45,13 +53,19 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
                     this.Errors.Add(new Error(Diagnostics.SSIL102_UnexpectedNode, this.methodGroup, this.methodGroup.Kind()));
                 }
             }
+
+            // Determine return type
             Error error;
             this.SilverType = TypeTranslator.TranslateType(methodSymbol.ReturnType, this.methodGroup, out error);
             if (error != null)
             {
                 this.Errors.Add(error);
             }
+
+            // Translate arguments
             var expressions = ConvertToSilver(arguments, context);
+
+            // Put it together
             this.Silvernode = new CallSilvernode(
                       identifier,
                       expressions, this.SilverType,

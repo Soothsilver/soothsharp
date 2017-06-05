@@ -28,6 +28,8 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
         {
             AddReceiverToList(arguments);
             var expressions = ConvertToSilver(arguments, context);
+
+            // Determine what argument corresponds to what action - there are three scenarios
             Silvernode dropAmount = "";
             Silvernode takeAmount = "";
             if (this._doTake && this._doDrop)

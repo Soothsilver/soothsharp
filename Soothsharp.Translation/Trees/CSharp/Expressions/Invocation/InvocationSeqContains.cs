@@ -22,9 +22,9 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
             AddReceiverToList(arguments);
             var expressions = ConvertToSilver(arguments, context);
             this.Silvernode = new SimpleSequenceSilvernode(originalNode,
-                expressions[1],
+                expressions[1], // the element of the sequence
                 " in ",
-                expressions[0]);
+                expressions[0]); // the sequence (previously the receiver)
         }
     }
 }

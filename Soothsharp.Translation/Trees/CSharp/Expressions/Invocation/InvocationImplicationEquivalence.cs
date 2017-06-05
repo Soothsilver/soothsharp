@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Soothsharp.Contracts;
 using Soothsharp.Translation.Trees.CSharp.Invocation;
 using Soothsharp.Translation.Trees.Silver;
 
 namespace Soothsharp.Translation.Trees.CSharp.Invocation
 {
+    /// <summary>
+    /// Translates <see cref="Soothsharp.Contracts.StaticExtension.Implies(bool, bool)"/>
+    /// and <see cref="StaticExtension.EquivalentTo(bool, bool)"/>.  
+    /// </summary>
+    /// <seealso cref="Soothsharp.Translation.Trees.CSharp.Invocation.InvocationTranslation" />
     class InvocationImplicationEquivalence : InvocationTranslation
     {
         private readonly string _operator;
@@ -13,7 +19,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
 
         public InvocationImplicationEquivalence(string @operator, ExpressionSyntax methodGroup)
         {
-            this._operator = @operator;
+            this._operator = @operator; // either "==>" or "<==>"
             this.MethodGroup = methodGroup;
         }
 
@@ -32,6 +38,7 @@ namespace Soothsharp.Translation.Trees.CSharp.Invocation
                     rightExpressionResult.Silvernode,
                     originalNode
                     );
+
                 this.Errors.AddRange(leftExpressionResult.Errors);
                 this.Errors.AddRange(rightExpressionResult.Errors);
                 this.Prependors.AddRange(leftExpressionResult.PrependTheseSilvernodes);
