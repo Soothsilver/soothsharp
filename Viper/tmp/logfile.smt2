@@ -1,7 +1,7 @@
 (get-info :version)
 ; (:version "4.4.0")
-; Input file is D:\TEMP\tmp5C4E.tmp
-; Started: 2017-05-28 08:41:45
+; Input file is D:\TEMP\tmpE590.tmp
+; Started: 2017-06-17 11:29:39
 ; Silicon.buildVersion: 1.1-SNAPSHOT 0e750e485a3f default 2017/01/04 14:11:46
 ; ------------------------------------------------------------
 ; Preamble start
@@ -470,97 +470,1527 @@
       ($Seq.index ($SortWrappers.$SnapTo$Seq<Int> ($Snap.first s@$)) index@1))))
   :pattern ((arrayRead s@$ array@0 index@1))
   )))
-; ---------- Tabs_a ----------
-(declare-const this@4 $Ref)
-(declare-const res@5 Int)
-(declare-const b@6 Bool)
+; ---------- SeqUtils_ArrayToSeq ----------
+(declare-const array@4 $Ref)
+(declare-const res@5 $Seq<Int>)
+(declare-const result2@6 $Seq<Int>)
+(declare-const ind@7 Int)
 (push) ; 1
+(assert (not (= array@4 $Ref.null)))
+(declare-const $t@8 $Seq<Int>)
 (push) ; 2
+(declare-const $t@9 $Snap)
+(declare-const $t@10 $Seq<Int>)
+(assert (= $t@9 ($Snap.combine ($SortWrappers.$Seq<Int>To$Snap $t@10) $Snap.unit)))
+; [eval] |res| == |array.arrayContents|
+; [eval] |res|
+; [eval] |array.arrayContents|
+(assert (= ($Seq.length res@5) ($Seq.length $t@10)))
+; [eval] (forall i: Int :: 0 <= i && i < |array.arrayContents| ==> arrayRead(array, i) == res[i])
+(declare-const i@11 Int)
+(push) ; 3
+; [eval] 0 <= i && i < |array.arrayContents| ==> arrayRead(array, i) == res[i]
+; [eval] 0 <= i && i < |array.arrayContents|
+; [eval] 0 <= i
+; [eval] 0 <= i ==> i < |array.arrayContents|
+; [eval] 0 <= i
+(push) ; 4
+(set-option :timeout 250)
+(push) ; 5
+(assert (not (not (<= 0 i@11))))
+(check-sat)
+; unknown
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 5
+(assert (not (<= 0 i@11)))
+(check-sat)
+; unknown
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 5
+; [then-branch 0] 0 <= i@11
+(assert (<= 0 i@11))
+; [eval] i < |array.arrayContents|
+; [eval] |array.arrayContents|
+(pop) ; 5
+(push) ; 5
+; [else-branch 0] !0 <= i@11
+(assert (not (<= 0 i@11)))
+(pop) ; 5
+(pop) ; 4
+; Joined path conditions
+; Joined path conditions
+(push) ; 4
+(push) ; 5
+(assert (not (not (and (<= 0 i@11) (implies (<= 0 i@11) (< i@11 ($Seq.length $t@10)))))))
+(check-sat)
+; unknown
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 5
+(assert (not (and (<= 0 i@11) (implies (<= 0 i@11) (< i@11 ($Seq.length $t@10))))))
+(check-sat)
+; unknown
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 5
+; [then-branch 1] 0 <= i@11 && 0 <= i@11 ==> i@11 < |$t@10|
+(assert (and (<= 0 i@11) (implies (<= 0 i@11) (< i@11 ($Seq.length $t@10)))))
+; [eval] arrayRead(array, i) == res[i]
+; [eval] arrayRead(array, i)
+(push) ; 6
+(declare-const $k@12 $Perm)
+(assert ($Perm.isReadVar $k@12 $Perm.Write))
+(set-option :timeout 0)
+(push) ; 7
+(assert (not (or (= $k@12 $Perm.No) true)))
+(check-sat)
+; unsat
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(assert (< $k@12 $Perm.Write))
+; [eval] |array.arrayContents| > i
+; [eval] |array.arrayContents|
+(push) ; 7
+(assert (not (> ($Seq.length $t@10) i@11)))
+(check-sat)
+; unsat
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(assert (> ($Seq.length $t@10) i@11))
+(pop) ; 6
+; Joined path conditions
+(assert (and
+  (> ($Seq.length $t@10) i@11)
+  (< $k@12 $Perm.Write)
+  ($Perm.isReadVar $k@12 $Perm.Write)))
+; [eval] res[i]
+(pop) ; 5
+(push) ; 5
+; [else-branch 1] !0 <= i@11 && 0 <= i@11 ==> i@11 < |$t@10|
+(assert (not (and (<= 0 i@11) (implies (<= 0 i@11) (< i@11 ($Seq.length $t@10))))))
+(pop) ; 5
+(pop) ; 4
+; Joined path conditions
+(assert (implies
+  (and (<= 0 i@11) (implies (<= 0 i@11) (< i@11 ($Seq.length $t@10))))
+  (and
+    (and
+      (> ($Seq.length $t@10) i@11)
+      (< $k@12 $Perm.Write)
+      ($Perm.isReadVar $k@12 $Perm.Write))
+    (and (<= 0 i@11) (implies (<= 0 i@11) (< i@11 ($Seq.length $t@10)))))))
+; Joined path conditions
+(declare-const s@13 $Snap)
+(pop) ; 3
+; Nested auxiliary terms
+(assert (forall ((i@11 Int)) (!
+  (implies
+    (and (<= 0 i@11) (implies (<= 0 i@11) (< i@11 ($Seq.length $t@10))))
+    (and
+      (and
+        (> ($Seq.length $t@10) i@11)
+        (< $k@12 $Perm.Write)
+        ($Perm.isReadVar $k@12 $Perm.Write))
+      (and (<= 0 i@11) (implies (<= 0 i@11) (< i@11 ($Seq.length $t@10))))))
+  :pattern (($Seq.index res@5 i@11))
+  :qid |prog.l5-aux|)))
+(assert (forall ((i@11 Int) (s@13 $Snap)) (!
+  (implies
+    (and (<= 0 i@11) (implies (<= 0 i@11) (< i@11 ($Seq.length $t@10))))
+    (and
+      (and
+        (> ($Seq.length $t@10) i@11)
+        (< $k@12 $Perm.Write)
+        ($Perm.isReadVar $k@12 $Perm.Write))
+      (and (<= 0 i@11) (implies (<= 0 i@11) (< i@11 ($Seq.length $t@10))))))
+  :pattern ((arrayRead%limited s@13 array@4 i@11))
+  :qid |prog.l5-aux|)))
+(assert (and
+  (forall ((i@11 Int)) (!
+    (implies
+      (and (<= 0 i@11) (implies (<= 0 i@11) (< i@11 ($Seq.length $t@10))))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@10)
+          $Snap.unit) array@4 i@11)
+        ($Seq.index res@5 i@11)))
+    :pattern ((arrayRead%limited ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@10)
+      $Snap.unit) array@4 i@11))
+    :qid |prog.l5|))
+  (forall ((i@11 Int)) (!
+    (implies
+      (and (<= 0 i@11) (implies (<= 0 i@11) (< i@11 ($Seq.length $t@10))))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@10)
+          $Snap.unit) array@4 i@11)
+        ($Seq.index res@5 i@11)))
+    :pattern (($Seq.index res@5 i@11))
+    :qid |prog.l5|))))
 (pop) ; 2
 (push) ; 2
-; [exec]
-; b := true
-; loop at tmp5C4E.tmp@4.5
-(declare-const u@7 Int)
-(declare-const res@8 Int)
+; [eval] |array.arrayContents| == 0
+; [eval] |array.arrayContents|
+(set-option :timeout 250)
 (push) ; 3
+(assert (not (not (= ($Seq.length $t@8) 0))))
+(check-sat)
+; unknown
+(pop) ; 3
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 3
+(assert (not (= ($Seq.length $t@8) 0)))
+(check-sat)
+; unknown
+(pop) ; 3
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 3
+; [then-branch 2] |$t@8| == 0
+(assert (= ($Seq.length $t@8) 0))
+; [exec]
+; res := Seq[Int]()
+; [eval] Seq[Int]()
+; [exec]
+; label end
+; [eval] |res| == |array.arrayContents|
+; [eval] |res|
+; [eval] |array.arrayContents|
+(set-option :timeout 0)
+(push) ; 4
+(assert (not (= ($Seq.length $Seq.empty<Int>) ($Seq.length $t@8))))
+(check-sat)
+; unsat
+(pop) ; 4
+; 0,00s
+; (get-info :all-statistics)
+(assert (= ($Seq.length $Seq.empty<Int>) ($Seq.length $t@8)))
+; [eval] (forall i: Int :: 0 <= i && i < |array.arrayContents| ==> arrayRead(array, i) == res[i])
+(declare-const i@14 Int)
+(push) ; 4
+; [eval] 0 <= i && i < |array.arrayContents| ==> arrayRead(array, i) == res[i]
+; [eval] 0 <= i && i < |array.arrayContents|
+; [eval] 0 <= i
+; [eval] 0 <= i ==> i < |array.arrayContents|
+; [eval] 0 <= i
+(push) ; 5
+(set-option :timeout 250)
+(push) ; 6
+(assert (not (not (<= 0 i@14))))
+(check-sat)
+; unknown
+(pop) ; 6
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 6
+(assert (not (<= 0 i@14)))
+(check-sat)
+; unknown
+(pop) ; 6
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 6
+; [then-branch 3] 0 <= i@14
+(assert (<= 0 i@14))
+; [eval] i < |array.arrayContents|
+; [eval] |array.arrayContents|
+(pop) ; 6
+(push) ; 6
+; [else-branch 3] !0 <= i@14
+(assert (not (<= 0 i@14)))
+(pop) ; 6
+(pop) ; 5
+; Joined path conditions
+; Joined path conditions
+(push) ; 5
+(push) ; 6
+(assert (not (not (and (<= 0 i@14) (implies (<= 0 i@14) (< i@14 ($Seq.length $t@8)))))))
+(check-sat)
+; unsat
+(pop) ; 6
+; 0,00s
+; (get-info :all-statistics)
+; [dead then-branch 4] 0 <= i@14 && 0 <= i@14 ==> i@14 < |$t@8|
+(push) ; 6
+; [else-branch 4] !0 <= i@14 && 0 <= i@14 ==> i@14 < |$t@8|
+(assert (not (and (<= 0 i@14) (implies (<= 0 i@14) (< i@14 ($Seq.length $t@8))))))
+(pop) ; 6
+(pop) ; 5
+; Joined path conditions
+; [eval] arrayRead(array, i)
+(push) ; 5
+(declare-const $k@15 $Perm)
+(assert ($Perm.isReadVar $k@15 $Perm.Write))
+(set-option :timeout 0)
+(push) ; 6
+(assert (not (or (= $k@15 $Perm.No) true)))
+(check-sat)
+; unsat
+(pop) ; 6
+; 0,00s
+; (get-info :all-statistics)
+(assert (< $k@15 $Perm.Write))
+; [eval] |array.arrayContents| > i
+; [eval] |array.arrayContents|
+(push) ; 6
+(assert (not (> ($Seq.length $t@8) i@14)))
+(check-sat)
+; unknown
+(pop) ; 6
+; 0,00s
+; (get-info :all-statistics)
+; [eval] |array.arrayContents| > i
+; [eval] |array.arrayContents|
+(push) ; 6
+(assert (not (> ($Seq.length $t@8) i@14)))
+(check-sat)
+; unknown
+(pop) ; 6
+; 0,00s
+; (get-info :all-statistics)
+(pop) ; 5
+; [eval] res[i]
+(pop) ; 4
+; Nested auxiliary terms
+(pop) ; 3
+(push) ; 3
+; [else-branch 2] |$t@8| != 0
+(assert (not (= ($Seq.length $t@8) 0)))
+(pop) ; 3
+; [eval] !(|array.arrayContents| == 0)
+; [eval] |array.arrayContents| == 0
+; [eval] |array.arrayContents|
+(set-option :timeout 250)
+(push) ; 3
+(assert (not (= ($Seq.length $t@8) 0)))
+(check-sat)
+; unknown
+(pop) ; 3
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 3
+(assert (not (not (= ($Seq.length $t@8) 0))))
+(check-sat)
+; unknown
+(pop) ; 3
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 3
+; [then-branch 5] |$t@8| != 0
+(assert (not (= ($Seq.length $t@8) 0)))
+; [exec]
+; result2 := Seq(arrayRead(array, 0))
+; [eval] Seq(arrayRead(array, 0))
+; [eval] arrayRead(array, 0)
+(push) ; 4
+(declare-const $k@16 $Perm)
+(assert ($Perm.isReadVar $k@16 $Perm.Write))
+(set-option :timeout 0)
+(push) ; 5
+(assert (not (or (= $k@16 $Perm.No) true)))
+(check-sat)
+; unsat
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(assert (< $k@16 $Perm.Write))
+; [eval] |array.arrayContents| > 0
+; [eval] |array.arrayContents|
+(push) ; 5
+(assert (not (> ($Seq.length $t@8) 0)))
+(check-sat)
+; unsat
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(assert (> ($Seq.length $t@8) 0))
+(pop) ; 4
+; Joined path conditions
+(assert (and
+  (> ($Seq.length $t@8) 0)
+  (< $k@16 $Perm.Write)
+  ($Perm.isReadVar $k@16 $Perm.Write)))
+(assert (=
+  ($Seq.length
+    ($Seq.singleton (arrayRead ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@8)
+      $Snap.unit) array@4 0)))
+  1))
+; [exec]
+; ind := 1
+; loop at tmpE590.tmp@15.5
+(declare-const ind@17 Int)
+(declare-const result2@18 $Seq<Int>)
+(push) ; 4
 ; Loop: Check specs well-definedness
-(declare-const $t@9 $Snap)
-(assert (= $t@9 $Snap.unit))
+(declare-const $t@19 $Snap)
+(declare-const $t@20 $Seq<Int>)
+(assert (= $t@19 ($Snap.combine ($SortWrappers.$Seq<Int>To$Snap $t@20) $Snap.unit)))
+; [eval] |result2| == ind
+; [eval] |result2|
+(assert (= ($Seq.length result2@18) ind@17))
+; [eval] |array.arrayContents| >= ind
+; [eval] |array.arrayContents|
+(assert (>= ($Seq.length $t@20) ind@17))
+; [eval] (forall i2: Int :: 0 <= i2 && i2 < ind ==> arrayRead(array, i2) == result2[i2])
+(declare-const i2@21 Int)
+(push) ; 5
+; [eval] 0 <= i2 && i2 < ind ==> arrayRead(array, i2) == result2[i2]
+; [eval] 0 <= i2 && i2 < ind
+; [eval] 0 <= i2
+; [eval] 0 <= i2 ==> i2 < ind
+; [eval] 0 <= i2
+(push) ; 6
+(set-option :timeout 250)
+(push) ; 7
+(assert (not (not (<= 0 i2@21))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+(assert (not (<= 0 i2@21)))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+; [then-branch 6] 0 <= i2@21
+(assert (<= 0 i2@21))
+; [eval] i2 < ind
+(pop) ; 7
+(push) ; 7
+; [else-branch 6] !0 <= i2@21
+(assert (not (<= 0 i2@21)))
+(pop) ; 7
+(pop) ; 6
+; Joined path conditions
+; Joined path conditions
+(push) ; 6
+(push) ; 7
+(assert (not (not (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17))))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+(assert (not (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+; [then-branch 7] 0 <= i2@21 && 0 <= i2@21 ==> i2@21 < ind@17
+(assert (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17))))
+; [eval] arrayRead(array, i2) == result2[i2]
+; [eval] arrayRead(array, i2)
+(push) ; 8
+(declare-const $k@22 $Perm)
+(assert ($Perm.isReadVar $k@22 $Perm.Write))
+(set-option :timeout 0)
+(push) ; 9
+(assert (not (or (= $k@22 $Perm.No) true)))
+(check-sat)
+; unsat
+(pop) ; 9
+; 0,00s
+; (get-info :all-statistics)
+(assert (< $k@22 $Perm.Write))
+; [eval] |array.arrayContents| > i2
+; [eval] |array.arrayContents|
+(push) ; 9
+(assert (not (> ($Seq.length $t@20) i2@21)))
+(check-sat)
+; unsat
+(pop) ; 9
+; 0,00s
+; (get-info :all-statistics)
+(assert (> ($Seq.length $t@20) i2@21))
+(pop) ; 8
+; Joined path conditions
+(assert (and
+  (> ($Seq.length $t@20) i2@21)
+  (< $k@22 $Perm.Write)
+  ($Perm.isReadVar $k@22 $Perm.Write)))
+; [eval] result2[i2]
+(pop) ; 7
+(push) ; 7
+; [else-branch 7] !0 <= i2@21 && 0 <= i2@21 ==> i2@21 < ind@17
+(assert (not (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))))
+(pop) ; 7
+(pop) ; 6
+; Joined path conditions
+(assert (implies
+  (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))
+  (and
+    (and
+      (> ($Seq.length $t@20) i2@21)
+      (< $k@22 $Perm.Write)
+      ($Perm.isReadVar $k@22 $Perm.Write))
+    (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17))))))
+; Joined path conditions
+(declare-const s@23 $Snap)
+(pop) ; 5
+; Nested auxiliary terms
+(assert (forall ((i2@21 Int)) (!
+  (implies
+    (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))
+    (and
+      (and
+        (> ($Seq.length $t@20) i2@21)
+        (< $k@22 $Perm.Write)
+        ($Perm.isReadVar $k@22 $Perm.Write))
+      (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))))
+  :pattern (($Seq.index result2@18 i2@21))
+  :qid |prog.l19-aux|)))
+(assert (forall ((i2@21 Int) (s@23 $Snap)) (!
+  (implies
+    (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))
+    (and
+      (and
+        (> ($Seq.length $t@20) i2@21)
+        (< $k@22 $Perm.Write)
+        ($Perm.isReadVar $k@22 $Perm.Write))
+      (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))))
+  :pattern ((arrayRead%limited s@23 array@4 i2@21))
+  :qid |prog.l19-aux|)))
+(assert (and
+  (forall ((i2@21 Int)) (!
+    (implies
+      (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@20)
+          $Snap.unit) array@4 i2@21)
+        ($Seq.index result2@18 i2@21)))
+    :pattern ((arrayRead%limited ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@20)
+      $Snap.unit) array@4 i2@21))
+    :qid |prog.l19|))
+  (forall ((i2@21 Int)) (!
+    (implies
+      (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@20)
+          $Snap.unit) array@4 i2@21)
+        ($Seq.index result2@18 i2@21)))
+    :pattern (($Seq.index result2@18 i2@21))
+    :qid |prog.l19|))))
+(declare-const $t@24 $Snap)
+(assert (= $t@24 $Snap.unit))
+; [eval] ind != |array.arrayContents|
+; [eval] |array.arrayContents|
+(assert (not (= ind@17 ($Seq.length $t@20))))
 (set-option :timeout 250)
 (check-sat)
 ; unknown
-(pop) ; 3
-(push) ; 3
-; Loop: Establish loop invariant
-(pop) ; 3
-; Loop: Verify loop body
-(push) ; 3
-(assert (= $t@9 $Snap.unit))
-; [exec]
-; u := 4
-; [eval] u == 5
+(pop) ; 4
 (push) ; 4
-(assert (not (not (= 4 5))))
+; Loop: Establish loop invariant
+; [eval] |result2| == ind
+; [eval] |result2|
+; [eval] |array.arrayContents| >= ind
+; [eval] |array.arrayContents|
+(set-option :timeout 0)
+(push) ; 5
+(assert (not (>= ($Seq.length $t@8) 1)))
 (check-sat)
 ; unsat
-(pop) ; 4
+(pop) ; 5
 ; 0,00s
 ; (get-info :all-statistics)
-; [dead then-branch 0] 4 == 5
-(push) ; 4
-; [else-branch 0] 4 != 5
-(assert (not (= 4 5)))
-(pop) ; 4
-; [eval] !(u == 5)
-; [eval] u == 5
-(push) ; 4
-(assert (not (= 4 5)))
+(assert (>= ($Seq.length $t@8) 1))
+; [eval] (forall i2: Int :: 0 <= i2 && i2 < ind ==> arrayRead(array, i2) == result2[i2])
+(declare-const i2@25 Int)
+(push) ; 5
+; [eval] 0 <= i2 && i2 < ind ==> arrayRead(array, i2) == result2[i2]
+; [eval] 0 <= i2 && i2 < ind
+; [eval] 0 <= i2
+; [eval] 0 <= i2 ==> i2 < ind
+; [eval] 0 <= i2
+(push) ; 6
+(set-option :timeout 250)
+(push) ; 7
+(assert (not (not (<= 0 i2@25))))
 (check-sat)
 ; unknown
-(pop) ; 4
+(pop) ; 7
 ; 0,00s
 ; (get-info :all-statistics)
-(push) ; 4
-(assert (not (not (= 4 5))))
+(push) ; 7
+(assert (not (<= 0 i2@25)))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+; [then-branch 8] 0 <= i2@25
+(assert (<= 0 i2@25))
+; [eval] i2 < ind
+(pop) ; 7
+(push) ; 7
+; [else-branch 8] !0 <= i2@25
+(assert (not (<= 0 i2@25)))
+(pop) ; 7
+(pop) ; 6
+; Joined path conditions
+; Joined path conditions
+(push) ; 6
+(push) ; 7
+(assert (not (not (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1))))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+(assert (not (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+; [then-branch 9] 0 <= i2@25 && 0 <= i2@25 ==> i2@25 < 1
+(assert (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1))))
+; [eval] arrayRead(array, i2) == result2[i2]
+; [eval] arrayRead(array, i2)
+(push) ; 8
+(declare-const $k@26 $Perm)
+(assert ($Perm.isReadVar $k@26 $Perm.Write))
+(set-option :timeout 0)
+(push) ; 9
+(assert (not (or (= $k@26 $Perm.No) true)))
 (check-sat)
 ; unsat
-(pop) ; 4
+(pop) ; 9
 ; 0,00s
 ; (get-info :all-statistics)
+(assert (< $k@26 $Perm.Write))
+; [eval] |array.arrayContents| > i2
+; [eval] |array.arrayContents|
+(push) ; 9
+(assert (not (> ($Seq.length $t@8) i2@25)))
+(check-sat)
+; unsat
+(pop) ; 9
+; 0,00s
+; (get-info :all-statistics)
+(assert (> ($Seq.length $t@8) i2@25))
+(pop) ; 8
+; Joined path conditions
+(assert (and
+  (> ($Seq.length $t@8) i2@25)
+  (< $k@26 $Perm.Write)
+  ($Perm.isReadVar $k@26 $Perm.Write)))
+; [eval] result2[i2]
+(pop) ; 7
+(push) ; 7
+; [else-branch 9] !0 <= i2@25 && 0 <= i2@25 ==> i2@25 < 1
+(assert (not (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))))
+(pop) ; 7
+(pop) ; 6
+; Joined path conditions
+(assert (implies
+  (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))
+  (and
+    (and
+      (> ($Seq.length $t@8) i2@25)
+      (< $k@26 $Perm.Write)
+      ($Perm.isReadVar $k@26 $Perm.Write))
+    (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1))))))
+; Joined path conditions
+(declare-const s@27 $Snap)
+(declare-const s@28 $Snap)
+(pop) ; 5
+; Nested auxiliary terms
+(assert (forall ((i2@25 Int) (s@28 $Snap)) (!
+  (implies
+    (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))
+    (and
+      (and
+        (> ($Seq.length $t@8) i2@25)
+        (< $k@26 $Perm.Write)
+        ($Perm.isReadVar $k@26 $Perm.Write))
+      (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))))
+  :pattern (($Seq.index ($Seq.singleton (arrayRead s@28 array@4 0)) i2@25))
+  :qid |prog.l19-aux|)))
+(assert (forall ((i2@25 Int) (s@27 $Snap)) (!
+  (implies
+    (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))
+    (and
+      (and
+        (> ($Seq.length $t@8) i2@25)
+        (< $k@26 $Perm.Write)
+        ($Perm.isReadVar $k@26 $Perm.Write))
+      (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))))
+  :pattern ((arrayRead%limited s@27 array@4 i2@25))
+  :qid |prog.l19-aux|)))
+(push) ; 5
+(assert (not (and
+  (forall ((i2@25 Int)) (!
+    (implies
+      (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@8)
+          $Snap.unit) array@4 i2@25)
+        ($Seq.index
+          ($Seq.singleton (arrayRead ($Snap.combine
+            ($SortWrappers.$Seq<Int>To$Snap $t@8)
+            $Snap.unit) array@4 0))
+          i2@25)))
+    :pattern ((arrayRead%limited ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@8)
+      $Snap.unit) array@4 i2@25))
+    :qid |prog.l19|))
+  (forall ((i2@25 Int)) (!
+    (implies
+      (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@8)
+          $Snap.unit) array@4 i2@25)
+        ($Seq.index
+          ($Seq.singleton (arrayRead ($Snap.combine
+            ($SortWrappers.$Seq<Int>To$Snap $t@8)
+            $Snap.unit) array@4 0))
+          i2@25)))
+    :pattern (($Seq.index
+      ($Seq.singleton (arrayRead ($Snap.combine
+        ($SortWrappers.$Seq<Int>To$Snap $t@8)
+        $Snap.unit) array@4 0))
+      i2@25))
+    :qid |prog.l19|)))))
+(check-sat)
+; unsat
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(assert (and
+  (forall ((i2@25 Int)) (!
+    (implies
+      (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@8)
+          $Snap.unit) array@4 i2@25)
+        ($Seq.index
+          ($Seq.singleton (arrayRead ($Snap.combine
+            ($SortWrappers.$Seq<Int>To$Snap $t@8)
+            $Snap.unit) array@4 0))
+          i2@25)))
+    :pattern ((arrayRead%limited ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@8)
+      $Snap.unit) array@4 i2@25))
+    :qid |prog.l19|))
+  (forall ((i2@25 Int)) (!
+    (implies
+      (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@8)
+          $Snap.unit) array@4 i2@25)
+        ($Seq.index
+          ($Seq.singleton (arrayRead ($Snap.combine
+            ($SortWrappers.$Seq<Int>To$Snap $t@8)
+            $Snap.unit) array@4 0))
+          i2@25)))
+    :pattern (($Seq.index
+      ($Seq.singleton (arrayRead ($Snap.combine
+        ($SortWrappers.$Seq<Int>To$Snap $t@8)
+        $Snap.unit) array@4 0))
+      i2@25))
+    :qid |prog.l19|))))
+(pop) ; 4
+; Loop: Verify loop body
 (push) ; 4
-; [then-branch 1] 4 != 5
-(assert (not (= 4 5)))
+(assert (not (= ind@17 ($Seq.length $t@20))))
+(assert (= $t@24 $Snap.unit))
+(assert (and
+  (forall ((i2@21 Int)) (!
+    (implies
+      (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@20)
+          $Snap.unit) array@4 i2@21)
+        ($Seq.index result2@18 i2@21)))
+    :pattern ((arrayRead%limited ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@20)
+      $Snap.unit) array@4 i2@21))
+    :qid |prog.l19|))
+  (forall ((i2@21 Int)) (!
+    (implies
+      (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@20)
+          $Snap.unit) array@4 i2@21)
+        ($Seq.index result2@18 i2@21)))
+    :pattern (($Seq.index result2@18 i2@21))
+    :qid |prog.l19|))))
+(assert (forall ((i2@21 Int) (s@23 $Snap)) (!
+  (implies
+    (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))
+    (and
+      (and
+        (> ($Seq.length $t@20) i2@21)
+        (< $k@22 $Perm.Write)
+        ($Perm.isReadVar $k@22 $Perm.Write))
+      (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))))
+  :pattern ((arrayRead%limited s@23 array@4 i2@21))
+  :qid |prog.l19-aux|)))
+(assert (forall ((i2@21 Int)) (!
+  (implies
+    (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))
+    (and
+      (and
+        (> ($Seq.length $t@20) i2@21)
+        (< $k@22 $Perm.Write)
+        ($Perm.isReadVar $k@22 $Perm.Write))
+      (and (<= 0 i2@21) (implies (<= 0 i2@21) (< i2@21 ind@17)))))
+  :pattern (($Seq.index result2@18 i2@21))
+  :qid |prog.l19-aux|)))
+(assert (>= ($Seq.length $t@20) ind@17))
+(assert (= ($Seq.length result2@18) ind@17))
+(assert (= $t@19 ($Snap.combine ($SortWrappers.$Seq<Int>To$Snap $t@20) $Snap.unit)))
 ; [exec]
-; assert true
+; result2 := result2 ++ Seq(arrayRead(array, ind))
+; [eval] result2 ++ Seq(arrayRead(array, ind))
+; [eval] Seq(arrayRead(array, ind))
+; [eval] arrayRead(array, ind)
+(push) ; 5
+(declare-const $k@29 $Perm)
+(assert ($Perm.isReadVar $k@29 $Perm.Write))
+(push) ; 6
+(assert (not (or (= $k@29 $Perm.No) true)))
+(check-sat)
+; unsat
+(pop) ; 6
+; 0,00s
+; (get-info :all-statistics)
+(assert (< $k@29 $Perm.Write))
+; [eval] |array.arrayContents| > ind
+; [eval] |array.arrayContents|
+(push) ; 6
+(assert (not (> ($Seq.length $t@20) ind@17)))
+(check-sat)
+; unsat
+(pop) ; 6
+; 0,00s
+; (get-info :all-statistics)
+(assert (> ($Seq.length $t@20) ind@17))
+(pop) ; 5
+; Joined path conditions
+(assert (and
+  (> ($Seq.length $t@20) ind@17)
+  (< $k@29 $Perm.Write)
+  ($Perm.isReadVar $k@29 $Perm.Write)))
+(assert (=
+  ($Seq.length
+    ($Seq.singleton (arrayRead ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@20)
+      $Snap.unit) array@4 ind@17)))
+  1))
 ; [exec]
-; res := 2
+; ind := ind + 1
+; [eval] ind + 1
+(declare-const ind@30 Int)
+(assert (= ind@30 (+ ind@17 1)))
+; [eval] |result2| == ind
+; [eval] |result2|
+(push) ; 5
+(assert (not (=
+  ($Seq.length
+    ($Seq.append
+      result2@18
+      ($Seq.singleton (arrayRead ($Snap.combine
+        ($SortWrappers.$Seq<Int>To$Snap $t@20)
+        $Snap.unit) array@4 ind@17))))
+  ind@30)))
+(check-sat)
+; unsat
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(assert (=
+  ($Seq.length
+    ($Seq.append
+      result2@18
+      ($Seq.singleton (arrayRead ($Snap.combine
+        ($SortWrappers.$Seq<Int>To$Snap $t@20)
+        $Snap.unit) array@4 ind@17))))
+  ind@30))
+; [eval] |array.arrayContents| >= ind
+; [eval] |array.arrayContents|
+(push) ; 5
+(assert (not (>= ($Seq.length $t@20) ind@30)))
+(check-sat)
+; unsat
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(assert (>= ($Seq.length $t@20) ind@30))
+; [eval] (forall i2: Int :: 0 <= i2 && i2 < ind ==> arrayRead(array, i2) == result2[i2])
+(declare-const i2@31 Int)
+(push) ; 5
+; [eval] 0 <= i2 && i2 < ind ==> arrayRead(array, i2) == result2[i2]
+; [eval] 0 <= i2 && i2 < ind
+; [eval] 0 <= i2
+; [eval] 0 <= i2 ==> i2 < ind
+; [eval] 0 <= i2
+(push) ; 6
+(set-option :timeout 250)
+(push) ; 7
+(assert (not (not (<= 0 i2@31))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+(assert (not (<= 0 i2@31)))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+; [then-branch 10] 0 <= i2@31
+(assert (<= 0 i2@31))
+; [eval] i2 < ind
+(pop) ; 7
+(push) ; 7
+; [else-branch 10] !0 <= i2@31
+(assert (not (<= 0 i2@31)))
+(pop) ; 7
+(pop) ; 6
+; Joined path conditions
+; Joined path conditions
+(push) ; 6
+(push) ; 7
+(assert (not (not (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30))))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+(assert (not (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30)))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+; [then-branch 11] 0 <= i2@31 && 0 <= i2@31 ==> i2@31 < ind@30
+(assert (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30))))
+; [eval] arrayRead(array, i2) == result2[i2]
+; [eval] arrayRead(array, i2)
+(push) ; 8
+(declare-const $k@32 $Perm)
+(assert ($Perm.isReadVar $k@32 $Perm.Write))
+(set-option :timeout 0)
+(push) ; 9
+(assert (not (or (= $k@32 $Perm.No) true)))
+(check-sat)
+; unsat
+(pop) ; 9
+; 0,00s
+; (get-info :all-statistics)
+(assert (< $k@32 $Perm.Write))
+; [eval] |array.arrayContents| > i2
+; [eval] |array.arrayContents|
+(push) ; 9
+(assert (not (> ($Seq.length $t@20) i2@31)))
+(check-sat)
+; unsat
+(pop) ; 9
+; 0,00s
+; (get-info :all-statistics)
+(assert (> ($Seq.length $t@20) i2@31))
+(pop) ; 8
+; Joined path conditions
+(assert (and
+  (> ($Seq.length $t@20) i2@31)
+  (< $k@32 $Perm.Write)
+  ($Perm.isReadVar $k@32 $Perm.Write)))
+; [eval] result2[i2]
+(pop) ; 7
+(push) ; 7
+; [else-branch 11] !0 <= i2@31 && 0 <= i2@31 ==> i2@31 < ind@30
+(assert (not (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30)))))
+(pop) ; 7
+(pop) ; 6
+; Joined path conditions
+(assert (implies
+  (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30)))
+  (and
+    (and
+      (> ($Seq.length $t@20) i2@31)
+      (< $k@32 $Perm.Write)
+      ($Perm.isReadVar $k@32 $Perm.Write))
+    (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30))))))
+; Joined path conditions
+(declare-const s@33 $Snap)
+(declare-const s@34 $Snap)
+(pop) ; 5
+; Nested auxiliary terms
+(assert (forall ((i2@31 Int) (s@34 $Snap)) (!
+  (implies
+    (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30)))
+    (and
+      (and
+        (> ($Seq.length $t@20) i2@31)
+        (< $k@32 $Perm.Write)
+        ($Perm.isReadVar $k@32 $Perm.Write))
+      (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30)))))
+  :pattern (($Seq.index
+    ($Seq.append result2@18 ($Seq.singleton (arrayRead s@34 array@4 ind@17)))
+    i2@31))
+  :qid |prog.l19-aux|)))
+(assert (forall ((i2@31 Int) (s@33 $Snap)) (!
+  (implies
+    (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30)))
+    (and
+      (and
+        (> ($Seq.length $t@20) i2@31)
+        (< $k@32 $Perm.Write)
+        ($Perm.isReadVar $k@32 $Perm.Write))
+      (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30)))))
+  :pattern ((arrayRead%limited s@33 array@4 i2@31))
+  :qid |prog.l19-aux|)))
+(push) ; 5
+(assert (not (and
+  (forall ((i2@31 Int)) (!
+    (implies
+      (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@20)
+          $Snap.unit) array@4 i2@31)
+        ($Seq.index
+          ($Seq.append
+            result2@18
+            ($Seq.singleton (arrayRead ($Snap.combine
+              ($SortWrappers.$Seq<Int>To$Snap $t@20)
+              $Snap.unit) array@4 ind@17)))
+          i2@31)))
+    :pattern ((arrayRead%limited ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@20)
+      $Snap.unit) array@4 i2@31))
+    :qid |prog.l19|))
+  (forall ((i2@31 Int)) (!
+    (implies
+      (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@20)
+          $Snap.unit) array@4 i2@31)
+        ($Seq.index
+          ($Seq.append
+            result2@18
+            ($Seq.singleton (arrayRead ($Snap.combine
+              ($SortWrappers.$Seq<Int>To$Snap $t@20)
+              $Snap.unit) array@4 ind@17)))
+          i2@31)))
+    :pattern (($Seq.index
+      ($Seq.append
+        result2@18
+        ($Seq.singleton (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@20)
+          $Snap.unit) array@4 ind@17)))
+      i2@31))
+    :qid |prog.l19|)))))
+(check-sat)
+; unsat
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(assert (and
+  (forall ((i2@31 Int)) (!
+    (implies
+      (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@20)
+          $Snap.unit) array@4 i2@31)
+        ($Seq.index
+          ($Seq.append
+            result2@18
+            ($Seq.singleton (arrayRead ($Snap.combine
+              ($SortWrappers.$Seq<Int>To$Snap $t@20)
+              $Snap.unit) array@4 ind@17)))
+          i2@31)))
+    :pattern ((arrayRead%limited ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@20)
+      $Snap.unit) array@4 i2@31))
+    :qid |prog.l19|))
+  (forall ((i2@31 Int)) (!
+    (implies
+      (and (<= 0 i2@31) (implies (<= 0 i2@31) (< i2@31 ind@30)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@20)
+          $Snap.unit) array@4 i2@31)
+        ($Seq.index
+          ($Seq.append
+            result2@18
+            ($Seq.singleton (arrayRead ($Snap.combine
+              ($SortWrappers.$Seq<Int>To$Snap $t@20)
+              $Snap.unit) array@4 ind@17)))
+          i2@31)))
+    :pattern (($Seq.index
+      ($Seq.append
+        result2@18
+        ($Seq.singleton (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@20)
+          $Snap.unit) array@4 ind@17)))
+      i2@31))
+    :qid |prog.l19|))))
+(pop) ; 4
+; Loop: Continue after loop
+(push) ; 4
+(assert (and
+  (forall ((i2@25 Int)) (!
+    (implies
+      (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@8)
+          $Snap.unit) array@4 i2@25)
+        ($Seq.index
+          ($Seq.singleton (arrayRead ($Snap.combine
+            ($SortWrappers.$Seq<Int>To$Snap $t@8)
+            $Snap.unit) array@4 0))
+          i2@25)))
+    :pattern ((arrayRead%limited ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@8)
+      $Snap.unit) array@4 i2@25))
+    :qid |prog.l19|))
+  (forall ((i2@25 Int)) (!
+    (implies
+      (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@8)
+          $Snap.unit) array@4 i2@25)
+        ($Seq.index
+          ($Seq.singleton (arrayRead ($Snap.combine
+            ($SortWrappers.$Seq<Int>To$Snap $t@8)
+            $Snap.unit) array@4 0))
+          i2@25)))
+    :pattern (($Seq.index
+      ($Seq.singleton (arrayRead ($Snap.combine
+        ($SortWrappers.$Seq<Int>To$Snap $t@8)
+        $Snap.unit) array@4 0))
+      i2@25))
+    :qid |prog.l19|))))
+(assert (forall ((i2@25 Int) (s@27 $Snap)) (!
+  (implies
+    (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))
+    (and
+      (and
+        (> ($Seq.length $t@8) i2@25)
+        (< $k@26 $Perm.Write)
+        ($Perm.isReadVar $k@26 $Perm.Write))
+      (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))))
+  :pattern ((arrayRead%limited s@27 array@4 i2@25))
+  :qid |prog.l19-aux|)))
+(assert (forall ((i2@25 Int) (s@28 $Snap)) (!
+  (implies
+    (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))
+    (and
+      (and
+        (> ($Seq.length $t@8) i2@25)
+        (< $k@26 $Perm.Write)
+        ($Perm.isReadVar $k@26 $Perm.Write))
+      (and (<= 0 i2@25) (implies (<= 0 i2@25) (< i2@25 1)))))
+  :pattern (($Seq.index ($Seq.singleton (arrayRead s@28 array@4 0)) i2@25))
+  :qid |prog.l19-aux|)))
+(assert (>= ($Seq.length $t@8) 1))
+(declare-const $t@35 $Snap)
+(declare-const $t@36 $Seq<Int>)
+(assert (= $t@35 ($Snap.combine ($SortWrappers.$Seq<Int>To$Snap $t@36) $Snap.unit)))
+; [eval] |result2| == ind
+; [eval] |result2|
+(assert (= ($Seq.length result2@18) ind@17))
+; [eval] |array.arrayContents| >= ind
+; [eval] |array.arrayContents|
+(assert (>= ($Seq.length $t@36) ind@17))
+; [eval] (forall i2: Int :: 0 <= i2 && i2 < ind ==> arrayRead(array, i2) == result2[i2])
+(declare-const i2@37 Int)
+(push) ; 5
+; [eval] 0 <= i2 && i2 < ind ==> arrayRead(array, i2) == result2[i2]
+; [eval] 0 <= i2 && i2 < ind
+; [eval] 0 <= i2
+; [eval] 0 <= i2 ==> i2 < ind
+; [eval] 0 <= i2
+(push) ; 6
+(set-option :timeout 250)
+(push) ; 7
+(assert (not (not (<= 0 i2@37))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+(assert (not (<= 0 i2@37)))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+; [then-branch 12] 0 <= i2@37
+(assert (<= 0 i2@37))
+; [eval] i2 < ind
+(pop) ; 7
+(push) ; 7
+; [else-branch 12] !0 <= i2@37
+(assert (not (<= 0 i2@37)))
+(pop) ; 7
+(pop) ; 6
+; Joined path conditions
+; Joined path conditions
+(push) ; 6
+(push) ; 7
+(assert (not (not (and (<= 0 i2@37) (implies (<= 0 i2@37) (< i2@37 ind@17))))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+(assert (not (and (<= 0 i2@37) (implies (<= 0 i2@37) (< i2@37 ind@17)))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+; [then-branch 13] 0 <= i2@37 && 0 <= i2@37 ==> i2@37 < ind@17
+(assert (and (<= 0 i2@37) (implies (<= 0 i2@37) (< i2@37 ind@17))))
+; [eval] arrayRead(array, i2) == result2[i2]
+; [eval] arrayRead(array, i2)
+(push) ; 8
+(declare-const $k@38 $Perm)
+(assert ($Perm.isReadVar $k@38 $Perm.Write))
+(set-option :timeout 0)
+(push) ; 9
+(assert (not (or (= $k@38 $Perm.No) true)))
+(check-sat)
+; unsat
+(pop) ; 9
+; 0,00s
+; (get-info :all-statistics)
+(assert (< $k@38 $Perm.Write))
+; [eval] |array.arrayContents| > i2
+; [eval] |array.arrayContents|
+(push) ; 9
+(assert (not (> ($Seq.length $t@36) i2@37)))
+(check-sat)
+; unsat
+(pop) ; 9
+; 0,00s
+; (get-info :all-statistics)
+(assert (> ($Seq.length $t@36) i2@37))
+(pop) ; 8
+; Joined path conditions
+(assert (and
+  (> ($Seq.length $t@36) i2@37)
+  (< $k@38 $Perm.Write)
+  ($Perm.isReadVar $k@38 $Perm.Write)))
+; [eval] result2[i2]
+(pop) ; 7
+(push) ; 7
+; [else-branch 13] !0 <= i2@37 && 0 <= i2@37 ==> i2@37 < ind@17
+(assert (not (and (<= 0 i2@37) (implies (<= 0 i2@37) (< i2@37 ind@17)))))
+(pop) ; 7
+(pop) ; 6
+; Joined path conditions
+(assert (implies
+  (and (<= 0 i2@37) (implies (<= 0 i2@37) (< i2@37 ind@17)))
+  (and
+    (and
+      (> ($Seq.length $t@36) i2@37)
+      (< $k@38 $Perm.Write)
+      ($Perm.isReadVar $k@38 $Perm.Write))
+    (and (<= 0 i2@37) (implies (<= 0 i2@37) (< i2@37 ind@17))))))
+; Joined path conditions
+(declare-const s@39 $Snap)
+(pop) ; 5
+; Nested auxiliary terms
+(assert (forall ((i2@37 Int)) (!
+  (implies
+    (and (<= 0 i2@37) (implies (<= 0 i2@37) (< i2@37 ind@17)))
+    (and
+      (and
+        (> ($Seq.length $t@36) i2@37)
+        (< $k@38 $Perm.Write)
+        ($Perm.isReadVar $k@38 $Perm.Write))
+      (and (<= 0 i2@37) (implies (<= 0 i2@37) (< i2@37 ind@17)))))
+  :pattern (($Seq.index result2@18 i2@37))
+  :qid |prog.l19-aux|)))
+(assert (forall ((i2@37 Int) (s@39 $Snap)) (!
+  (implies
+    (and (<= 0 i2@37) (implies (<= 0 i2@37) (< i2@37 ind@17)))
+    (and
+      (and
+        (> ($Seq.length $t@36) i2@37)
+        (< $k@38 $Perm.Write)
+        ($Perm.isReadVar $k@38 $Perm.Write))
+      (and (<= 0 i2@37) (implies (<= 0 i2@37) (< i2@37 ind@17)))))
+  :pattern ((arrayRead%limited s@39 array@4 i2@37))
+  :qid |prog.l19-aux|)))
+(assert (and
+  (forall ((i2@37 Int)) (!
+    (implies
+      (and (<= 0 i2@37) (implies (<= 0 i2@37) (< i2@37 ind@17)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@36)
+          $Snap.unit) array@4 i2@37)
+        ($Seq.index result2@18 i2@37)))
+    :pattern ((arrayRead%limited ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@36)
+      $Snap.unit) array@4 i2@37))
+    :qid |prog.l19|))
+  (forall ((i2@37 Int)) (!
+    (implies
+      (and (<= 0 i2@37) (implies (<= 0 i2@37) (< i2@37 ind@17)))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@36)
+          $Snap.unit) array@4 i2@37)
+        ($Seq.index result2@18 i2@37)))
+    :pattern (($Seq.index result2@18 i2@37))
+    :qid |prog.l19|))))
+; [eval] !(ind != |array.arrayContents|)
+; [eval] ind != |array.arrayContents|
+; [eval] |array.arrayContents|
+(assert (= ind@17 ($Seq.length $t@36)))
+(set-option :timeout 250)
+(check-sat)
+; unknown
+; [exec]
+; res := result2
 ; [exec]
 ; label end
-(pop) ; 4
-; [dead else-branch 1] 4 == 5
-(pop) ; 3
-; Loop: Continue after loop
-(push) ; 3
-(declare-const $t@10 $Snap)
-(assert (= $t@10 $Snap.unit))
-; [eval] !b
-(assert false)
+; [eval] |res| == |array.arrayContents|
+; [eval] |res|
+; [eval] |array.arrayContents|
+(set-option :timeout 0)
+(push) ; 5
+(assert (not (= ($Seq.length result2@18) ($Seq.length $t@36))))
 (check-sat)
 ; unsat
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(assert (= ($Seq.length result2@18) ($Seq.length $t@36)))
+; [eval] (forall i: Int :: 0 <= i && i < |array.arrayContents| ==> arrayRead(array, i) == res[i])
+(declare-const i@40 Int)
+(push) ; 5
+; [eval] 0 <= i && i < |array.arrayContents| ==> arrayRead(array, i) == res[i]
+; [eval] 0 <= i && i < |array.arrayContents|
+; [eval] 0 <= i
+; [eval] 0 <= i ==> i < |array.arrayContents|
+; [eval] 0 <= i
+(push) ; 6
+(set-option :timeout 250)
+(push) ; 7
+(assert (not (not (<= 0 i@40))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+(assert (not (<= 0 i@40)))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+; [then-branch 14] 0 <= i@40
+(assert (<= 0 i@40))
+; [eval] i < |array.arrayContents|
+; [eval] |array.arrayContents|
+(pop) ; 7
+(push) ; 7
+; [else-branch 14] !0 <= i@40
+(assert (not (<= 0 i@40)))
+(pop) ; 7
+(pop) ; 6
+; Joined path conditions
+; Joined path conditions
+(push) ; 6
+(push) ; 7
+(assert (not (not (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36)))))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+(assert (not (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36))))))
+(check-sat)
+; unknown
+(pop) ; 7
+; 0,00s
+; (get-info :all-statistics)
+(push) ; 7
+; [then-branch 15] 0 <= i@40 && 0 <= i@40 ==> i@40 < |$t@36|
+(assert (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36)))))
+; [eval] arrayRead(array, i) == res[i]
+; [eval] arrayRead(array, i)
+(push) ; 8
+(declare-const $k@41 $Perm)
+(assert ($Perm.isReadVar $k@41 $Perm.Write))
+(set-option :timeout 0)
+(push) ; 9
+(assert (not (or (= $k@41 $Perm.No) true)))
+(check-sat)
+; unsat
+(pop) ; 9
+; 0,00s
+; (get-info :all-statistics)
+(assert (< $k@41 $Perm.Write))
+; [eval] |array.arrayContents| > i
+; [eval] |array.arrayContents|
+(push) ; 9
+(assert (not (> ($Seq.length $t@36) i@40)))
+(check-sat)
+; unsat
+(pop) ; 9
+; 0,00s
+; (get-info :all-statistics)
+(assert (> ($Seq.length $t@36) i@40))
+(pop) ; 8
+; Joined path conditions
+(assert (and
+  (> ($Seq.length $t@36) i@40)
+  (< $k@41 $Perm.Write)
+  ($Perm.isReadVar $k@41 $Perm.Write)))
+; [eval] res[i]
+(pop) ; 7
+(push) ; 7
+; [else-branch 15] !0 <= i@40 && 0 <= i@40 ==> i@40 < |$t@36|
+(assert (not (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36))))))
+(pop) ; 7
+(pop) ; 6
+; Joined path conditions
+(assert (implies
+  (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36))))
+  (and
+    (and
+      (> ($Seq.length $t@36) i@40)
+      (< $k@41 $Perm.Write)
+      ($Perm.isReadVar $k@41 $Perm.Write))
+    (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36)))))))
+; Joined path conditions
+(declare-const s@42 $Snap)
+(pop) ; 5
+; Nested auxiliary terms
+(assert (forall ((i@40 Int)) (!
+  (implies
+    (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36))))
+    (and
+      (and
+        (> ($Seq.length $t@36) i@40)
+        (< $k@41 $Perm.Write)
+        ($Perm.isReadVar $k@41 $Perm.Write))
+      (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36))))))
+  :pattern (($Seq.index result2@18 i@40))
+  :qid |prog.l5-aux|)))
+(assert (forall ((i@40 Int) (s@42 $Snap)) (!
+  (implies
+    (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36))))
+    (and
+      (and
+        (> ($Seq.length $t@36) i@40)
+        (< $k@41 $Perm.Write)
+        ($Perm.isReadVar $k@41 $Perm.Write))
+      (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36))))))
+  :pattern ((arrayRead%limited s@42 array@4 i@40))
+  :qid |prog.l5-aux|)))
+(push) ; 5
+(assert (not (and
+  (forall ((i@40 Int)) (!
+    (implies
+      (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36))))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@36)
+          $Snap.unit) array@4 i@40)
+        ($Seq.index result2@18 i@40)))
+    :pattern ((arrayRead%limited ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@36)
+      $Snap.unit) array@4 i@40))
+    :qid |prog.l5|))
+  (forall ((i@40 Int)) (!
+    (implies
+      (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36))))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@36)
+          $Snap.unit) array@4 i@40)
+        ($Seq.index result2@18 i@40)))
+    :pattern (($Seq.index result2@18 i@40))
+    :qid |prog.l5|)))))
+(check-sat)
+; unsat
+(pop) ; 5
+; 0,00s
+; (get-info :all-statistics)
+(assert (and
+  (forall ((i@40 Int)) (!
+    (implies
+      (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36))))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@36)
+          $Snap.unit) array@4 i@40)
+        ($Seq.index result2@18 i@40)))
+    :pattern ((arrayRead%limited ($Snap.combine
+      ($SortWrappers.$Seq<Int>To$Snap $t@36)
+      $Snap.unit) array@4 i@40))
+    :qid |prog.l5|))
+  (forall ((i@40 Int)) (!
+    (implies
+      (and (<= 0 i@40) (implies (<= 0 i@40) (< i@40 ($Seq.length $t@36))))
+      (=
+        (arrayRead ($Snap.combine
+          ($SortWrappers.$Seq<Int>To$Snap $t@36)
+          $Snap.unit) array@4 i@40)
+        ($Seq.index result2@18 i@40)))
+    :pattern (($Seq.index result2@18 i@40))
+    :qid |prog.l5|))))
+(pop) ; 4
 (pop) ; 3
-(pop) ; 2
-(pop) ; 1
-; ---------- Tabs_init ----------
-(declare-const this@11 $Ref)
-(push) ; 1
-(push) ; 2
-(pop) ; 2
-(push) ; 2
-; [exec]
-; this := new(arrayContents)
-(declare-const this@12 $Ref)
-(assert (not (= this@12 $Ref.null)))
-(declare-const arrayContents@13 $Seq<Int>)
+(push) ; 3
+; [else-branch 5] |$t@8| == 0
+(assert (= ($Seq.length $t@8) 0))
+(pop) ; 3
 (pop) ; 2
 (pop) ; 1

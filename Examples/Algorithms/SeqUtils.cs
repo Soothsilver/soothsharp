@@ -34,6 +34,7 @@ namespace Soothsharp.Examples.Algorithms
             {
                 Contract.Invariant(AccArray(array));
                 Contract.Invariant(result.Length == ind);
+                Contract.Invariant(array.Length >= ind);
                 Contract.Invariant(ForAll((i) => (0 <= i && i < ind).Implies(array[i] == result[i])));
 
                 result = result + new Seq<int>(array[ind]);
