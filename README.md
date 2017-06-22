@@ -13,7 +13,7 @@ You will need Visual Studio 2015 or newer (tested on 2015 only).
 2. Put the `Viper` directory into your `%PATH%` environment variable. The `INSTALL.txt` file in that directory gives more details.
 3. Install additional programs required by the Viper tools.
     1. Install Java.
-    2. Install Z3 4.4.0 and put the path to `z3.exe` in an environment variable named `Z3_EXE`.
+    2. Install Z3 4.4.0 and put the path to `z3.exe` in an environment variable named `Z3_EXE`. Alternatively, you may put `z3.exe` and all associated files into a directory in your `%PATH%` variable.
     3. Install Boogie by building it from source and putting the path to `boogie.exe` in an environment variable named `BOOGIE_EXE`. This is only required for the Carbon backend.
     4. After setting environment variables, you may need to restart Visual Studio and any command-line windows you use for the changes to take effect. 
 4. Rebuild the solution.
