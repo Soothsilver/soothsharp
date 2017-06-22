@@ -2,3 +2,5 @@ This folder contains the Silicon and Carbon verifiers, in bytecode form, along w
 
 Add this folder to your PATH environment variable. The translator will expect this files to be found in PATH, it is not sufficient for them to be in the verifier's directory.
 
+These verifiers need additional programs to be installed (Java, Z3, Boogie). See the main thesis file for details.
+
