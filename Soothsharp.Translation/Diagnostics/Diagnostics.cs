@@ -245,6 +245,13 @@ namespace Soothsharp.Translation
             "",
             DiagnosticSeverity.Warning);
 
+        public static SoothsharpDiagnostic SSIL205_NoErrorsFoundLineNotFound =
+       SoothsharpDiagnostic.Create(
+           "SSIL205",
+           "Verification failed for an unknown reason.",
+           "The verifier did not return any errors but it did not certify that the code is correct. This may happen if you don't have Java, Z3 or Boogie installed or if the verifier is set up incorrectly.",
+           DiagnosticSeverity.Warning);
+
         // ****************************** 300 Internal Errors
         public static SoothsharpDiagnostic SSIL301_InternalLocalizedError =
             SoothsharpDiagnostic.Create(

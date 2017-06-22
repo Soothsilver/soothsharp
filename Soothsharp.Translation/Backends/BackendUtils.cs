@@ -38,12 +38,16 @@ namespace Soothsharp.Translation.Backends
         public static List<Error> ConvertErrorMessages(string backendToolResult, Silvernode originalCode)
         {
             List<Error> errors = new List<Error>();
-
+            bool noErrorsFoundLineFound = false;
             foreach (string line in backendToolResult.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries))
             {
                 foreach (Regex r in harmlessLines)
                 {
                     if (r.IsMatch(line)) goto nextline;
+                }
+                if (line.ToLower().Contains("no errors found"))
+                {
+                    noErrorsFoundLineFound = true;
                 }
                 if (line.Contains("Parse error"))
                 {
@@ -77,6 +81,10 @@ namespace Soothsharp.Translation.Backends
                     }
                 }
                 nextline:;
+            }
+            if (!noErrorsFoundLineFound && errors.Count == 0)
+            {
+                errors.Add(new Error(Diagnostics.SSIL205_NoErrorsFoundLineNotFound, null));
             }
 
             return errors;
