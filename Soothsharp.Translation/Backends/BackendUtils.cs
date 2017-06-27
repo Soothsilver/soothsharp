@@ -25,7 +25,6 @@ namespace Soothsharp.Translation.Backends
             harmlessLines.Add(new Regex("Silicon 1.1-SNAPSHOT .*"));
             harmlessLines.Add(new Regex(@"\(c\) 2013 ETH Zurich .*"));
             harmlessLines.Add(new Regex("carbon 1.0.*"));
-            harmlessLines.Add(new Regex("No errors found."));
             harmlessLines.Add(new Regex("might not work with Z3 version 4.4.1"));
             harmlessLines.Add(new Regex("The following errors were found:"));
         }
@@ -48,6 +47,7 @@ namespace Soothsharp.Translation.Backends
                 if (line.ToLower().Contains("no errors found"))
                 {
                     noErrorsFoundLineFound = true;
+                    goto nextline;
                 }
                 if (line.Contains("Parse error"))
                 {
